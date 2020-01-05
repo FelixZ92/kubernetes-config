@@ -28,11 +28,10 @@ spec:
       create: true
     rbac:
       create: true
-      pspEnabled: true
+      pspEnabled: false
     secretName: "sealed-secrets-key"
     crd:
-      create: true
-      keep: true
+      create: false
     networkPolicy: false
     securityContext:
       runAsUser: 1001
