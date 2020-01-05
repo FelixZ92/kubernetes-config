@@ -1,0 +1,43 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: nfs-client-provisioner
+  namespace: nfs-client-provisioner
+  annotations:
+    fluxcd.io/automated: "false"
+    fluxcd.io/tag.chart-image: semver:~v3.1
+spec:
+  releaseName: nfs-client-provisioner
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    name: nfs-client-provisioner
+    version: 1.2.8
+  values:
+    replicaCount: 1
+    image:
+      repository: quay.io/external_storage/nfs-client-provisionerv3.1.0-k8s1.11"{{ deployments.persistence.nfs.version }}"
+    nfs:
+      server: 192.168.0.1
+      path: /export/k8s-local
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+    storageClass:
+      create: true
+      defaultClass: true
+      name: nfs-client
+      allowVolumeExpansion: true
+      reclaimPolicy: Delete
+      archiveOnDelete: true
+    rbac:
+      create: true
+    podSecurityPolicy:
+      enabled: true
+    serviceAccount:
+      create: true
+    priorityClassName: infrastructure-critical
