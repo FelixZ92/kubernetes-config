@@ -1,0 +1,38 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: sealed-secrets
+  namespace: sealed-secrets
+  annotations:
+    fluxcd.io/automated: "false"
+    fluxcd.io/tag.chart-image: semver:~v0.9
+spec:
+  releaseName: sealed-secrets
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    name: sealed-secrets
+    version: 1.6.1
+  values:
+    image:
+      repository: quay.io/bitnami/sealed-secrets-controller
+      tag: v0.9.6
+      pullPolicy: IfNotPresent
+    resources: {}
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
+    controller:
+      create: true
+    serviceAccount:
+      create: true
+    rbac:
+      create: true
+      pspEnabled: true
+    secretName: "sealed-secrets-key"
+    crd:
+      create: true
+      keep: true
+    networkPolicy: false
+    securityContext:
+      runAsUser: 1001
