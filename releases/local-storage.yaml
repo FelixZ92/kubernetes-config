@@ -1,0 +1,25 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: local-storage
+  namespace: local-storage
+  annotations:
+    fluxcd.io/automated: "false"
+    fluxcd.io/tag.chart-image: semver:~v3.1
+spec:
+  releaseName: local-storage
+  chart:
+    repository: https://felixz92.gitlab.io/charts
+    name: local-storage
+    version: 0.1.0
+  values:
+    classes:
+      - name: local-storage
+        hostDir: /mnt
+        volumeMode: Filesystem
+        fsType: ext4
+        blockCleanerCommand:
+        storageClass: true
+    nodeSelector:
+      storage: local
