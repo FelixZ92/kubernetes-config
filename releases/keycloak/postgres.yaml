@@ -7,7 +7,7 @@ spec:
   volume:
     size: 1Gi
     storageClass: nfs-client
-  numberOfInstances: 1
+  numberOfInstances: 2
   users:
     # database owner
     test:
