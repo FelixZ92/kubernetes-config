@@ -1,0 +1,17 @@
+# TODO: this needs authentication!
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: ambassador
+  name: ambassador-system
+  namespace: ambassador-system
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /foo/
+            backend:
+              serviceName: ambassador-system
+              servicePort: admin
