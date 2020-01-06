@@ -12,7 +12,7 @@ spec:
   chart:
     repository: https://felixz92.gitlab.io/charts
     name: traefik
-    version: 0.2.0
+    version: 0.2.1
   values:
     image:
       repository: traefik
