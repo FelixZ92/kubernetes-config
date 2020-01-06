@@ -8,7 +8,7 @@ metadata:
     fluxcd.io/automated: "false"
 #    fluxcd.io/tag.chart-image: semver:~v3.1
 spec:
-  releaseName: keycloakkeycloak
+  releaseName: keycloak
   chart:
     repository: https://felixz92.gitlab.io/charts
     name: keycloak
