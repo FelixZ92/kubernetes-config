@@ -10,7 +10,7 @@ metadata:
 spec:
   releaseName: traefik-system
   chart:
-    repository: https://kubernetes-charts.storage.googleapis.com/
+    repository: https://felixz92.gitlab.io/charts
     name: traefik
     version: 0.2.0
   values:
