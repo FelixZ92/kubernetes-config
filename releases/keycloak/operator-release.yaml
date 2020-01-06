@@ -1,0 +1,31 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: local-storage
+  namespace: local-storage
+  annotations:
+    fluxcd.io/automated: "false"
+#    fluxcd.io/tag.chart-image: semver:~v3.1
+spec:
+  releaseName: local-storage
+  chart:
+    repository: https://felixz92.gitlab.io/charts
+    name: keycloak-operator
+    version: 0.1.0
+  values:
+    replicaCount: 1
+    image:
+      repository: quay.io/keycloak/keycloak-operator
+      pullPolicy: IfNotPresent
+    imagePullSecrets: []
+    nameOverride: ""
+    fullnameOverride: ""
+    serviceAccount:
+      create: true
+    podSecurityContext: {}
+    securityContext: {}
+    resources: {}
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
