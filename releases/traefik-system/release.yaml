@@ -1,0 +1,68 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: traefik-system
+  namespace: traefik-system
+  annotations:
+    fluxcd.io/automated: "false"
+    fluxcd.io/tag.chart-image: semver:~v2.0
+spec:
+  releaseName: traefik-system
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    name: traefik
+    version: 0.2.0
+  values:
+    image:
+      repository: traefik
+      tag: v2.0
+      pullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 200m
+        memory: 384Mi
+      requests:
+        cpu: 25m
+        memory: 128Mi
+    deployment:
+      annotations:
+        sidecar.jaegertracing.io/inject: "true"
+    nodeSelector:
+      app.kubernetes.io/ingress: traefik-system
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
+        add:
+          - NET_BIND_SERVICE
+    priorityClassName: infrastructure-critical
+    acme:
+      enabled: true
+      email: sysadmin@zippelf.com
+      staging: true
+    kubernetes:
+      namespaces:
+        - default
+        - kube-system
+        - keycloak
+        - monitoring
+        - logging
+        - traefik-system
+        - kubernetes-dashboard
+      ingressClass: traefik-system
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: traefik-system
+      hosts:
+        - host: traefik-system.192.168.0.14.xip.io
+          paths:
+            - "/"
+    persistence:
+      enabled: true
+      storageClass: "nfs-client"
+      accessModes:
+        - ReadWriteOnce
+      size: 3Gi
+      annotations: {}
