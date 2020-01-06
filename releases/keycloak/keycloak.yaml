@@ -1,0 +1,25 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: keycloak
+  annotations:
+    fluxcd.io/automated: "false"
+#    fluxcd.io/tag.chart-image: semver:~v3.1
+spec:
+  releaseName: keycloakkeycloak
+  chart:
+    repository: https://felixz92.gitlab.io/charts
+    name: keycloak
+    version: 0.1.0
+  values:
+    replicaCount: 1
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: traefik-system
+      hosts:
+        - host: keycloak.192.168.0.14.xip.io
+          paths:
+            - "/"
