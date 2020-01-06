@@ -9,9 +9,9 @@ metadata:
   namespace: ambassador-system
 spec:
   rules:
-    - http:
+    - host: ambassador.192.168.0.14.xip.io
+      http:
         paths:
-          - path: /foo/
-            backend:
+          - backend: ambassador-system
               serviceName: ambassador-system
               servicePort: 8877
