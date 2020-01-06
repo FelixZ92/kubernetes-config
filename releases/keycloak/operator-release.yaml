@@ -2,13 +2,13 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: local-storage
-  namespace: local-storage
+  name: keycloak-operator
+  namespace: keycloak
   annotations:
     fluxcd.io/automated: "false"
 #    fluxcd.io/tag.chart-image: semver:~v3.1
 spec:
-  releaseName: local-storage
+  releaseName: keycloak-operator
   chart:
     repository: https://felixz92.gitlab.io/charts
     name: keycloak-operator
