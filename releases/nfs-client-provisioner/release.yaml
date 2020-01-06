@@ -38,7 +38,7 @@ spec:
     rbac:
       create: true
     podSecurityPolicy:
-      enabled: true
+      enabled: false
     serviceAccount:
       create: true
     priorityClassName: infrastructure-critical
