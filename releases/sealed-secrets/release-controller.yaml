@@ -18,10 +18,13 @@ spec:
       repository: quay.io/bitnami/sealed-secrets-controller
       tag: v0.9.6
       pullPolicy: IfNotPresent
-    resources: {}
-    nodeSelector: {}
-    tolerations: []
-    affinity: {}
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
     controller:
       create: true
     serviceAccount:
