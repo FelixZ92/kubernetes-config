@@ -12,6 +12,6 @@ spec:
     - host: ambassador.192.168.0.14.xip.io
       http:
         paths:
-          - backend: ambassador-system
+          - backend:
               serviceName: ambassador-system
               servicePort: 8877
