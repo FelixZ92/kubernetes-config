@@ -43,8 +43,8 @@ spec:
         runAsNonRoot: true
       basepath: ""
       username: keycloak
-      password: "" # TODO create sealed secret for this
-      existingSecret: "keycloak-admin"
+      password: "123456" # TODO create sealed secret for this
+      existingSecret: ""
       existingSecretKey: password
       nodeSelector: {}
       priorityClassName: infrastructure-critical
