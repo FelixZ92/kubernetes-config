@@ -1,11 +1,12 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: another-minimal-cluster-schubidu
+  name: another-minimal-cluster-schubidu-dupidu
 spec:
   teamId: "another"
   volume:
-    size: 1Gi
+    size: 2Gi
+    storageClass: local-storage
   numberOfInstances: 2
   users:
     # database owner
