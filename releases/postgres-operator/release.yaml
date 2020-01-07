@@ -19,6 +19,16 @@ spec:
       repository: acid/postgres-operator
       tag: v1.3.1
       pullPolicy: "IfNotPresent"
+
+      # Optionally specify an array of imagePullSecrets.
+      # Secrets must be manually created in the namespace.
+      # ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+      # imagePullSecrets:
+      # - name: myRegistryKeySecretName
+
+    podAnnotations: {}
+    podLabels: {}
+
     configTarget: "OperatorConfigurationCRD"
 
     # general top-level configuration parameters
@@ -27,18 +37,26 @@ spec:
       enable_crd_validation: true
       # start any new database pod without limitations on shm memory
       enable_shm_volume: true
-      # etcd connection string for Patroni. Empty uses K8s-native DCS. # TODO etcd operator + etcd cluster!
+      # etcd connection string for Patroni. Empty uses K8s-native DCS.
       etcd_host: ""
       # Spilo docker image
       docker_image: registry.opensource.zalan.do/acid/spilo-cdp-12:1.6-p16
       # max number of instances in Postgres cluster. -1 = no limit
-      min_instances: 1
+      min_instances: -1
       # min number of instances in Postgres cluster. -1 = no limit
-      max_instances: 3
+      max_instances: -1
       # period between consecutive repair requests
       repair_period: 5m
       # period between consecutive sync requests
       resync_period: 30m
+      # can prevent certain cases of memory overcommitment
+      # set_memory_request_to_limit: false
+
+      # map of sidecar names to docker images
+      # sidecar_docker_images
+      #  example: "exampleimage:exampletag"
+
+      # number of routines the operator spawns to process requests concurrently
       workers: 4
 
     # parameters describing Postgres users
@@ -50,12 +68,17 @@ spec:
 
     configKubernetes:
       # default DNS domain of K8s cluster where operator is running
-      cluster_domain: dev.local
+      cluster_domain: cluster.local
       # additional labels assigned to the cluster objects
       cluster_labels:
-        app.kubernetes.io/name: spilo
+        application: spilo
       # label assigned to Kubernetes objects created by the operator
       cluster_name_label: cluster-name
+      # additional annotations to add to every database pod
+      # custom_pod_annotations:
+      #   keya: valuea
+      #   keyb: valueb
+
       # enables initContainers to run actions before Spilo is started
       enable_init_containers: true
       # toggles pod anti affinity on the Postgres pods
@@ -64,6 +87,24 @@ spec:
       enable_pod_disruption_budget: true
       # enables sidecar containers to run alongside Spilo in the same pod
       enable_sidecars: true
+      # name of the secret containing infrastructure roles names and passwords
+      # infrastructure_roles_secret_name: postgresql-infrastructure-roles
+
+      # list of labels that can be inherited from the cluster manifest
+      # inherited_labels:
+      # - application
+      # - environment
+
+      # timeout for successful migration of master pods from unschedulable node
+      # master_pod_move_timeout: 20m
+
+      # set of labels that a running and active node should possess to be considered ready
+      # node_readiness_label:
+      #   status: ready
+
+      # name of the secret containing the OAuth2 token to pass to the teams API
+      # oauth_token_secret_name: postgresql-operator
+
       # defines the template for PDB (Pod Disruption Budget) names
       pdb_name_format: "postgres-{cluster}-pdb"
       # override topology key for pod anti affinity
@@ -90,13 +131,29 @@ spec:
     # configure resource requests for the Postgres pods
     configPostgresPodResources:
       # CPU limits for the postgres containers
-      default_cpu_limit: "300m"
+      default_cpu_limit: "3"
       # cpu request value for the postgres containers
       default_cpu_request: 100m
       # memory limits for the postgres containers
       default_memory_limit: 1Gi
       # memory request value for the postgres containers
       default_memory_request: 100Mi
+
+    # timeouts related to some operator actions
+    configTimeouts:
+      # timeout when waiting for the Postgres pods to be deleted
+      pod_deletion_wait_timeout: 10m
+      # timeout when waiting for pod role and cluster labels
+      pod_label_wait_timeout: 10m
+      # interval between consecutive attempts waiting for postgresql CRD to be created
+      ready_wait_interval: 3s
+      # timeout for the complete postgres CRD creation
+      ready_wait_timeout: 30s
+      # interval to wait between consecutive attempts to check for some K8s resources
+      resource_check_interval: 3s
+      # timeout when waiting for the presence of a certain K8s resource (e.g. Sts, PDB)
+      resource_check_timeout: 10m
+
     # configure behavior of load balancers
     configLoadBalancer:
       # DNS zone for cluster DNS name when load balancer is configured for cluster
@@ -197,6 +254,23 @@ spec:
       # URL of the Teams API service
       # teams_api_url: http://fake-teams-api.default.svc.cluster.local
 
+    # Scalyr is a log management tool that Zalando uses as a sidecar
+    configScalyr:
+      # API key for the Scalyr sidecar
+      # scalyr_api_key: ""
+
+      # Docker image for the Scalyr sidecar
+      # scalyr_image: ""
+
+      # CPU limit value for the Scalyr sidecar
+      scalyr_cpu_limit: "1"
+      # CPU rquest value for the Scalyr sidecar
+      scalyr_cpu_request: 100m
+      # Memory limit value for the Scalyr sidecar
+      scalyr_memory_limit: 1Gi
+      # Memory request value for the Scalyr sidecar
+      scalyr_memory_request: 50Mi
+
     rbac:
       # Specifies whether RBAC resources should be created
       create: true
@@ -212,7 +286,7 @@ spec:
       # If not set and create is true, a name is generated using the fullname template
       name:
 
-    priorityClassName: "infrastructure-critical"
+        priorityClassName: "infrastructure-critical"
 
     resources: {}
       # limits:
