@@ -58,7 +58,6 @@ spec:
           memory: 1024Mi
 
       podDisruptionBudget:
-        maxUnavailable: 1
         minAvailable: 1
 
       persistence:
