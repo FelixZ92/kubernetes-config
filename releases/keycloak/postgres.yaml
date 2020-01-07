@@ -1,7 +1,7 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: another-minimal-cluster
+  name: another-minimal-cluster-schubidu
 spec:
   teamId: "another"
   volume:
