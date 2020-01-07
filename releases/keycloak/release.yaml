@@ -44,7 +44,7 @@ spec:
       basepath: ""
       username: keycloak
       password: "" # TODO create sealed secret for this
-      existingSecret: ""
+      existingSecret: "keycloak-admin"
       existingSecretKey: password
       nodeSelector: {}
       priorityClassName: infrastructure-critical
