@@ -1,0 +1,59 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https-keycloak
+  namespace: keycloak
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/instance: keycloak
+  annotations:
+spec:
+  redirectScheme:
+    scheme: https
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik-system
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/instance: keycloak
+  name: keycloak-keycloak-secure
+  namespace: keycloak
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`keycloak.192.168.0.14.xip.io`)
+      kind: Rule
+      services:
+        - name: keycloak-http
+          port: 80
+      middlewares:
+        - name: redirect-https-keycloak
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik-system
+  labels:
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/instance: keycloak
+  name: keycloak-keycloak
+  namespace: keycloak
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`keycloak.192.168.0.14.xip.io`)
+      kind: Rule
+      services:
+        - name: keycloak-http
+          port: 80
+  tls:
+    certResolver: default
+    options: {}

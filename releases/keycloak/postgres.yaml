@@ -1,24 +1,28 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: another-minimal-cluster-schubidu-dupidu
+  name: identity-pg
+  namespace: keycloak
+  labels:
+    app.kubernetes.io/name: spilo
+    app.kubernetes.io/instance: identity-pg
 spec:
-  teamId: "another"
+  teamId: "identity"
   volume:
     size: 2Gi
     storageClass: local-storage
-  numberOfInstances: 2
+  numberOfInstances: 1
   users:
     # database owner
-    zalando:
+    keycloak:
       - superuser
       - createdb
 
     # role for application foo
-    foo_user: # or 'foo_user: []'
+    keycloak_user: # or 'foo_user: []'
 
   #databases: name->owner
   databases:
-    foo: zalando
+    keycloak: keycloak
   postgresql:
     version: "11"
