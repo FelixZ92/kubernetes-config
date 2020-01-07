@@ -19,9 +19,14 @@ gen-sealed-secret:
 	kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 		--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 		 < ./tmp/$(SECRET_NAME).json > ./tmp/$(SECRET_NAME)-sealed.json
+	cat ./tmp/$(SECRET_NAME)-sealed.json | yq . -y > ./tmp/$(SECRET_NAME)-sealed.yaml
 	echo "Copy to desired location"
 
 gen-secret/check:
+	jq --version foo >/dev/null 2>&1 || { echo >&2 "I require jq but it's not installed.  Aborting."; exit 1; }
+	yq --version foo >/dev/null 2>&1 || { echo >&2 "I require yq but it's not installed.  Aborting."; exit 1; }
+	kubectl version foo >/dev/null 2>&1 || { echo >&2 "I require kubectl but it's not installed.  Aborting."; exit 1; }
+	kubeseal --version foo >/dev/null 2>&1 || { echo >&2 "I require kubeseal but it's not installed.  Aborting."; exit 1; }
 	if test -z $(NAMESPACE) ; then echo "NAMESPACE not set"; exit 1; fi
 	if test -z $(SECRET_NAME) ; then echo "SECRET_NAME not set"; exit 1; fi
 	if test -z $(SECRET_KEY) ; then echo "SECRET_KEY not set"; exit 1; fi
