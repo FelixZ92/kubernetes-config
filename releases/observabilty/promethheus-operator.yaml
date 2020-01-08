@@ -2,7 +2,7 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: loki-stack
+  name: prometheus-operator
   namespace: observabilty
   annotations:
     fluxcd.io/automated: "false"
