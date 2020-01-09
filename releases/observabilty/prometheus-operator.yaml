@@ -84,9 +84,22 @@ spec:
         path: /
         hosts:
           - "grafana.192.168.0.14.xip.io"
-      plugins: []
+      plugins:
         - grafana-piechart-panel
         - grafana-clock-panel
+      additionalDataSources: []
+      # - name: prometheus-sample
+      #   access: proxy
+      #   basicAuth: true
+      #   basicAuthPassword: pass
+      #   basicAuthUser: daco
+      #   editable: false
+      #   jsonData:
+      #       tlsSkipVerify: true
+      #   orgId: 1
+      #   type: prometheus
+      #   url: https://prometheus.svc:9090
+      #   version: 1
     ## Component scraping the kubelet and kubelet-hosted cAdvisor
     ##
     kubelet:
@@ -101,11 +114,9 @@ spec:
       ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints:
-      # {% for host in groups['controlplane'] %}
-      #     - {{ hostvars[host]['ip'] }}
-      # {% endfor %}
-      # - 10.141.4.23
-      # - 10.141.4.24
+        - node1
+        - node2
+        - node3
 
       ## If using kubeControllerManager.endpoints only the port and targetPort are used
       ##
@@ -118,7 +129,7 @@ spec:
     ## Component scraping coreDns. Use either this or kubeDns
     ##
     coreDns:
-      enabled: false
+      enabled: true
       service:
         port: 9153
         targetPort: 9153
@@ -128,7 +139,7 @@ spec:
     ## Component scraping kubeDns. Use either this or coreDns
     ##
     kubeDns:
-      enabled: true
+      enabled: false
       service:
         selector:
           k8s-app: kube-dns
@@ -141,11 +152,9 @@ spec:
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints:
-      # {% for host in groups['controlplane'] %}
-      #     - {{ hostvars[host]['ip'] }}
-      # {% endfor %}
-      # - 10.141.4.23
-      # - 10.141.4.24
+        - node1
+        - node2
+        - node3
 
       ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
       ##
@@ -175,11 +184,9 @@ spec:
       ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints:
-      # {% for host in groups['controlplane'] %}
-      #     - {{ hostvars[host]['ip'] }}
-      # {% endfor %}
-      # - 10.141.4.23
-      # - 10.141.4.24
+        - node1
+        - node2
+        - node3
 
       ## If using kubeScheduler.endpoints only the port and targetPort are used
       ##
