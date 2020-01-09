@@ -48,10 +48,10 @@ spec:
         routePrefix: /
         resources:
           requests:
-            memory: "400Mi"
+            memory: "200Mi"
             cpu: "100m"
           limits:
-            memory: "600Mi"
+            memory: "300Mi"
             cpu: "200m"
 
     ## Using default values from https://github.com/helm/charts/blob/master/stable/grafana/values.yaml
@@ -283,10 +283,10 @@ spec:
         logFormat: logfmt
         resources:
           requests:
-            memory: "1000Mi"
+            memory: "250Mi"
             cpu: "200m"
           limits:
-            memory: "2000Mi"
+            memory: "250Mi"
             cpu: "400m"
 
         storageSpec:
