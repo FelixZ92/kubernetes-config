@@ -75,7 +75,7 @@ spec:
         insecureSkipVerify: false
       persistence:
         enabled: true
-        storageClassName: nfs-client
+        storageClassName: local-storage
         size: 2700Mi
       ingress:
         enabled: false
