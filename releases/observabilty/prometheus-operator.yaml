@@ -114,9 +114,9 @@ spec:
       ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints:
-        - node1
-        - node2
-        - node3
+        - 192.168.0.11
+        - 192.168.0.12
+        - 192.168.0.13
 
       ## If using kubeControllerManager.endpoints only the port and targetPort are used
       ##
@@ -152,9 +152,9 @@ spec:
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints:
-        - node1
-        - node2
-        - node3
+        - 192.168.0.11
+        - 192.168.0.12
+        - 192.168.0.13
 
       ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
       ##
@@ -184,9 +184,9 @@ spec:
       ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints:
-        - node1
-        - node2
-        - node3
+        - 192.168.0.11
+        - 192.168.0.12
+        - 192.168.0.13
 
       ## If using kubeScheduler.endpoints only the port and targetPort are used
       ##
