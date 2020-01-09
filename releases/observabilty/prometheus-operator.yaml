@@ -84,7 +84,9 @@ spec:
         path: /
         hosts:
           - "grafana.192.168.0.14.xip.io"
-
+      plugins: []
+        - grafana-piechart-panel
+        - grafana-clock-panel
     ## Component scraping the kubelet and kubelet-hosted cAdvisor
     ##
     kubelet:
