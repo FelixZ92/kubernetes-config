@@ -42,7 +42,7 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: 2959Mi
+                  storage: 2700Mi
 
         externalUrl: "https://alertmanager.192.168.0.14.xip.io"
         routePrefix: /
@@ -296,7 +296,7 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: 2959Mi
+                  storage: 2700Mi
 
 
       additionalServiceMonitors: []
