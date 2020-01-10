@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://felixz92.gitlab.io/charts
     name: grafana-operator
-    version: 0.2.2
+    version: 0.3.0
   values:
     grafana-operator:
       resources:
