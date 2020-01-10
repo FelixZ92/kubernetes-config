@@ -25,3 +25,22 @@ spec:
         create: true
       grafana:
         create: false
+    grafanaDataSources:
+      - resourceNamePostfix: prometheus-datasource
+        spec:
+          name: prometheus.yaml
+          datasources:
+            - name: Prometheus
+              type: prometheus
+              access: proxy
+              url: http://monitoring-prometheus-oper-prometheus:9090
+              isDefault: true
+#      - resourceNamePostfix: loki-datasource
+#        spec:
+#          name: loki.yaml
+#          datasources:
+#            - name: Loki
+#              type: loki
+#              access: proxy
+#              url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
+#              version: 1
