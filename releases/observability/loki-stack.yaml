@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://felixz92.gitlab.io/charts
     name: loki-stack
-    version: 0.1.2
+    version: 0.1.3
   values:
     loki:
       enabled: true
