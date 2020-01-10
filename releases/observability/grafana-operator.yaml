@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://felixz92.gitlab.io/charts
     name: grafana-operator
-    version: 0.2.1
+    version: 0.2.2
   values:
     grafana-operator:
       resources:
@@ -23,8 +23,8 @@ spec:
         memory: 128Mi
       serviceMonitor:
         create: true
-      grafana:
-        create: false
+    grafana:
+      create: true
     grafanaDataSources:
       - resourceNamePostfix: prometheus-datasource
         spec:
