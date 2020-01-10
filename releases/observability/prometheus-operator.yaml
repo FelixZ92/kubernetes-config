@@ -246,6 +246,36 @@ spec:
         - effect: NoExecute
           operator: Exists
 
+    prometheusOperator:
+      enabled: false
+      admissionWebhooks:
+        enabled: false
+      createCustomResource: false
+      serviceAccount:
+        create: true
+      kubeletService:
+        enabled: true
+        namespace: kube-system
+      resources:
+        limits:
+          cpu: 200m
+          memory: 200Mi
+        requests:
+          cpu: 100m
+          memory: 100Mi
+      image:
+        repository: quay.io/coreos/prometheus-operator
+        tag: v0.34.0
+      configmapReloadImage:
+        repository: quay.io/coreos/configmap-reload
+        tag: v0.0.1
+      prometheusConfigReloaderImage:
+        repository: quay.io/coreos/prometheus-config-reloader
+        tag: v0.34.0
+      hyperkubeImage:
+        repository: k8s.gcr.io/hyperkube
+        tag: v1.12.1
+
     prometheus:
       enabled: true
       serviceAccount:
