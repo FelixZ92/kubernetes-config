@@ -156,5 +156,5 @@ spec:
           secretName: realm-admin-credentials
           secretKey: password
         clientSecret:
-          secretName: secret
+          secretName: traefik-dashboard-client
           secretKey: clientSecret
