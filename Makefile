@@ -11,12 +11,18 @@ endif
 gen-secret/uuid: gen-secret/check-vars gen-secret/assert-tmp-dir
 	uuidgen -r | tr -d '\n' > ./tmp/$(NAMESPACE)_$(SECRET_NAME).tmp
 
+gen-secret/urandom: gen-secret/check-vars gen-secret/assert-tmp-dir
+	@< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${PASSWORD_LENGTH} > ./tmp/$(NAMESPACE)_$(SECRET_NAME).tmp
+
+gen-secret/manuel: gen-secret/check-vars gen-secret/assert-tmp-dir
+	@if test -z $(PASSWORD) ; then echo "PASSWORD not set"; exit 1; fi
+	@echo $(PASSWORD) > ./tmp/$(NAMESPACE)_$(SECRET_NAME).tmp
+
 gen-sealed-secret/uuid: gen-secret/uuid gen-kube-secret gen-sealed-secret
 
 gen-sealed-secret/urandom: gen-secret/urandom gen-kube-secret gen-sealed-secret
 
-gen-secret/urandom: gen-secret/check-vars gen-secret/assert-tmp-dir
-	@< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${PASSWORD_LENGTH} > ./tmp/$(NAMESPACE)_$(SECRET_NAME).tmp
+gen-sealed-secret/manuel: gen-secret/manuel gen-kube-secret gen-sealed-secret
 
 gen-kube-secret: gen-secret/check-bin
 	@kubectl -n $(NAMESPACE) create secret generic $(SECRET_NAME) --dry-run --from-file=$(SECRET_KEY)=./tmp/$(NAMESPACE)_$(SECRET_NAME).tmp -o json > ./tmp/$(SECRET_NAME).json
@@ -65,7 +71,15 @@ rotate-secret/urandom:
 
 rotate-secret/uuid:
 	@if test -z $(KUBE_MANIFEST) ; then echo "KUBE_MANIFEST not set"; exit 1; fi
-	@make gen-sealed-secret/urandom NAMESPACE=${NAMESPACE} \
+	@make gen-sealed-secret/uuid NAMESPACE=${NAMESPACE} \
+		SECRET_NAME=${SECRET_NAME} \
+		SECRET_KEY=${SECRET_KEY}
+	@mv ./tmp/$(SECRET_NAME)-sealed.yaml $(KUBE_MANIFEST)
+	@echo "Commit changes to apply the rotated secret"
+
+rotate-secret/manuel:
+	@if test -z $(KUBE_MANIFEST) ; then echo "KUBE_MANIFEST not set"; exit 1; fi
+	@make gen-sealed-secret/manuel NAMESPACE=${NAMESPACE} \
 		SECRET_NAME=${SECRET_NAME} \
 		SECRET_KEY=${SECRET_KEY}
 	@mv ./tmp/$(SECRET_NAME)-sealed.yaml $(KUBE_MANIFEST)

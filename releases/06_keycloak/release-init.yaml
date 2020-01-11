@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://felixz92.gitlab.io/charts
     name: keycloak-init
-    version: 0.2.1
+    version: 0.3.2
   values:
     # Default values for keycloak-init.
     # This is a YAML-formatted file.
@@ -1507,6 +1507,8 @@ spec:
               }
             groups:
               - cluster-admins
+            password:
+              secretName: cluster-admin-credentials
           - name: cluster-user
             definition: |
               {
@@ -1524,6 +1526,8 @@ spec:
               }
             groups:
               - cluster-users
+            password:
+              secretName: cluster-user-credentials
           - name: realm-admin
             definition: |
               {
@@ -1541,6 +1545,8 @@ spec:
               }
             groups:
               - realm-admins
+            password:
+              secretName: realm-admin-credentials
 
     resources: {}
       # We usually recommend not to specify default resources and to leave this as a conscious
