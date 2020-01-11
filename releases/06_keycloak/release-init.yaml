@@ -1481,7 +1481,7 @@ spec:
                 "path" : "/realm-admins",
                 "attributes" : { },
                 "realmRoles" : [ ],
-                "clientRoles" : { "realm-admin" },
+                "clientRoles" : { "realm-management" : ["realm-admin"] },
                 "subGroups" : [ ],
                 "access" : {
                   "view" : true,
