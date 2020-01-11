@@ -150,7 +150,6 @@ spec:
               "access.token.claim": "true"
             }
           }
-
         userName: realm-admin
         passwordSecret:
           secretName: realm-admin-credentials
