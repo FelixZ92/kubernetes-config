@@ -27,7 +27,7 @@ spec:
     fullnameOverride: ""
 
     keycloak:
-      endpoint: http://keycloak-http.keycloak.svc
+      endpoint: http://keycloak-http.keycloak.svc/auth
       realm: master
       username: keycloak
       secret:

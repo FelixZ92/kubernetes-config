@@ -77,7 +77,7 @@ spec:
           memory: 64Mi
 
       keycloak:
-        endpoint: http://keycloak-http.keycloak.svc
+        endpoint: http://keycloak-http.keycloak.svc/auth
         realm: k8s-dev
         clientScope: k8s-cluster
         clientDefinition: |
