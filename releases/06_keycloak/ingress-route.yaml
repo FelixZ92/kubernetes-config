@@ -7,7 +7,6 @@ metadata:
   labels:
     app.kubernetes.io/name: keycloak
     app.kubernetes.io/instance: keycloak
-  annotations:
 spec:
   redirectScheme:
     scheme: https
