@@ -74,7 +74,7 @@ spec:
           memory: 128Mi
         requests:
           cpu: 10m
-        memory: 64Mi
+          memory: 64Mi
 
       keycloak:
         endpoint: http://keycloak-http.keycloak.svc
