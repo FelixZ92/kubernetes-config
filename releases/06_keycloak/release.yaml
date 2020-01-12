@@ -48,10 +48,10 @@ spec:
       extraEnv: |
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
-        - name: KEYCLOAK_LOGLEVEL
-          value: All
-        - name: WILDFLY_LOGLEVEL
-          value: DEBUG
+#        - name: KEYCLOAK_LOGLEVEL
+#          value: All
+#        - name: WILDFLY_LOGLEVEL
+#          value: DEBUG
       nodeSelector: {}
       priorityClassName: infrastructure-critical
       tolerations: []
