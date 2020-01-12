@@ -45,6 +45,11 @@ spec:
       password: "" # TODO create sealed secret for this
       existingSecret: "keycloak-admin"
       existingSecretKey: password
+      extraEnv: |
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        - name: KEYCLOAK_LOGLEVEL
+          value: DEBUG
       nodeSelector: {}
       priorityClassName: infrastructure-critical
       tolerations: []
