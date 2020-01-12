@@ -49,6 +49,8 @@ spec:
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
         - name: KEYCLOAK_LOGLEVEL
+          value: All
+        - name: WILDFLY_LOGLEVEL
           value: DEBUG
       nodeSelector: {}
       priorityClassName: infrastructure-critical
