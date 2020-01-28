@@ -48,7 +48,7 @@ spec:
 apiVersion: getambassador.io/v2
 kind: Filter
 metadata:
-  name: keycloak_filter
+  name: keycloak
   namespace: default
 spec:
   OAuth2:
@@ -68,7 +68,7 @@ spec:
     - host: "*"
       path: /foo/
       filters:
-        - name: keycloak_filter # Enter the Filter name from above
+        - name: keycloak # Enter the Filter name from above
           arguments:
             scopes:
               - "offline_access"
