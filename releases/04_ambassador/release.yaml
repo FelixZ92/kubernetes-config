@@ -50,7 +50,7 @@ spec:
       type: NodePort
       port: 8877
       # NodePort used if type is NodePort
-      nodePort: 38877
+      nodePort: 30877
 
     ambassadorConfig: ""
 
