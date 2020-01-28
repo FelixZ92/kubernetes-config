@@ -14,15 +14,8 @@ spec:
     name: ambassador
     version: 6.1.0
   values:
-    ---
     replicaCount: 1
     daemonSet: false
-
-    podDisruptionBudget: {}
-
-    # namespace:
-    # name: default
-
     image:
       repository: quay.io/datawire/aes
       tag: 1.0.0
