@@ -35,3 +35,11 @@ spec:
           image: datawire/hello-world:latest
           ports:
             - containerPort: 8000   # Application port
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: test-ingress
+spec:
+  prefix: /foo/
+  service: hello:80
