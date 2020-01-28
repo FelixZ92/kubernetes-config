@@ -43,3 +43,32 @@ metadata:
 spec:
   prefix: /foo/
   service: hello:80
+---
+---
+apiVersion: getambassador.io/v2
+kind: Filter
+metadata:
+  name: keycloak_filter
+  namespace: default
+spec:
+  OAuth2:
+    authorizationURL: https://keycloak.192.168.0.14.xip.io/auth/realms/example-realm
+    clientURL: https://192.168.0.13:30443/foo/
+    audience: ambassador-test
+    clientID: ambassador-test
+    secret: 35d938a0-3fb7-41f4-a5c6-95fb77266f3c
+---
+apiVersion: getambassador.io/v2
+kind: FilterPolicy
+metadata:
+  name: httpbin-policy
+  namespace: default
+spec:
+  rules:
+    - host: "*"
+      path: /foo/
+      filters:
+        - name: keycloak_filter # Enter the Filter name from above
+          arguments:
+            scopes:
+              - "offline_access"
