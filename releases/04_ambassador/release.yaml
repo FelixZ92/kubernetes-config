@@ -1,0 +1,158 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: ambassador
+  namespace: ambassador
+  annotations:
+    fluxcd.io/automated: "false"
+#    fluxcd.io/tag.chart-image: semver:~v1.3
+spec:
+  releaseName: ambassador
+  chart:
+    repository: https://getambassador.io
+    name: ambassador
+    version: 6.1.0
+  values:
+    ---
+    replicaCount: 1
+    daemonSet: false
+
+    podDisruptionBudget: {}
+
+    # namespace:
+    # name: default
+
+    image:
+      repository: quay.io/datawire/aes
+      tag: 1.0.0
+      pullPolicy: IfNotPresent
+
+    dnsPolicy: "ClusterFirst"
+    hostNetwork: false
+
+    service:
+      type: NodePort
+
+      # Note that target http ports need to match your ambassador configurations service_port
+      # https://www.getambassador.io/reference/modules/#the-ambassador-module
+      ports:
+        - name: http
+          port: 80
+          targetPort: 8080
+          # protocol: TCP
+          nodePort: 30080
+        - name: https
+          port: 443
+          targetPort: 8443
+          # protocol: TCP
+          nodePort: 30443
+          # TCPMapping_Port
+          # port: 2222
+          # targetPort: 2222
+          # protocol: TCP
+          # nodePort: 30222
+    adminService:
+      create: true
+      type: NodePort
+      port: 8877
+      # NodePort used if type is NodePort
+      nodePort: 38877
+
+    ambassadorConfig: ""
+
+    crds:
+      enabled: true
+      create: true
+      keep: true
+
+    # The Ambassador Edge Stack is free for limited use without a license key.
+    # Go to https://{ambassador-host}/edge_stack/admin/#dashboard to register
+    # for a community license key.
+
+    enableAES: true
+
+    # Set createSecret: false is installing multiple releases of The Ambassador
+    # Edge Stack in the same namespace.
+    licenseKey:
+      value:
+      createSecret: true
+      secretName:
+
+
+    # The Ambassador Edge Stack uses a redis instance for managing authentication,
+    # rate limiting, and sharing minor configuration details between pods for
+    # centralized management. These values configure the redis instance that ships
+    # by default with The Ambassador Edge Stack.
+    #
+    # URL of your redis instance. Defaults to redis instance created below.
+    redisURL:
+    # Ambassador ships with a basic redis instance. Configure the deployment with the options below.
+    redis:
+      create: true
+      # Annotations for Ambassador Pro's redis instance.
+      annotations:
+        deployment:
+          {}
+        service:
+          {}
+      resources: {}
+      # If you want to specify resources, uncomment the following
+      # lines and remove the curly braces after 'resources:'.
+      # These are placeholder values and must be tuned.
+      #   limits:
+      #     cpu: 100m
+      #     memory: 256Mi
+      #   requests:
+      #     cpu: 50m
+      #     memory: 128Mi
+      nodeSelector: {}
+
+    authService:
+      create: true
+      # Set additional configuration options. See https://www.getambassador.io/reference/services/auth-service for more information
+      optional_configurations:
+      # include_body:
+      #   max_bytes: 4096
+      #   allow_partial: true
+      # status_on_error:
+      #   code: 403
+      # failure_mode_allow: false
+      # retry_policy:
+      #   retry_on: "5xx"
+      #   num_retries: 2
+      # add_linkerd_headers: true
+      # timeout_ms: 30000
+
+    rateLimit:
+      create: true
+
+    # DEPRECATED: Ambassador now exposes the /metrics endpoint in Envoy.
+    # DEPRECATED: See https://www.getambassador.io/user-guide/monitoring#deployment for more information on how to use the /metrics endpoint
+    #
+    # DEPRECATED: Enabling the prometheus exporter creates a sidecar and configures ambassador to use it
+    prometheusExporter:
+      enabled: false
+      repository: prom/statsd-exporter
+      tag: v0.8.1
+      pullPolicy: IfNotPresent
+      resources: {}
+      # If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      #   limits:
+      #     cpu: 100m
+      #     memory: 256Mi
+      #   requests:
+      #     cpu: 50m
+      #     memory: 128Mi
+      # You can configure the statsd exporter to modify the behavior of mappings and other features.
+      # See documentation: https://github.com/prometheus/statsd_exporter/tree/v0.8.1#metric-mapping-and-configuration
+      # Uncomment the following line if you wish to specify a custom configuration:
+      # configuration: |
+      #   ---
+      #   mappings:
+      #   - match: 'envoy.cluster.*.upstream_cx_connect_ms'
+      #     name: "envoy_cluster_upstream_cx_connect_time"
+      #     timer_type: 'histogram'
+      #     labels:
+      #       cluster_name: "$1"
