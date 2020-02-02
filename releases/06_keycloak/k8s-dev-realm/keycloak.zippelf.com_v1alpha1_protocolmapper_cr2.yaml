@@ -1,10 +1,10 @@
 apiVersion: keycloak.zippelf.com/v1alpha1
 kind: ProtocolMapper
 metadata:
-  name: example-protocolmapper
+  name: example-protocolmapper2
 spec:
   realm: k8s-dev
-  clientScope: k8s-cluster
+  clientScope: k8s-cluster-test
   data: |
     {
       "name": "test-client1-audience",
