@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://felixz92.gitlab.io/keycloak-admin-cli-operator
     name: keycloak-admin-cli-operator
-    version: 0.1.5
+    version: 0.1.6
   values:
     replicaCount: 1
     image:
