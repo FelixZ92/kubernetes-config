@@ -1,0 +1,41 @@
+apiVersion: keycloak.zippelf.com/v1alpha1
+kind: UserGroup
+metadata:
+  name: example-usergroup
+spec:
+  realm: k8s-dev
+  data: |
+    {
+      "name": "cluster-users",
+      "path": "/cluster-users",
+      "attributes": { },
+      "realmRoles": [ ],
+      "clientRoles": { },
+      "subGroups": [ ],
+      "access": {
+        "view": true,
+        "manage": true,
+        "manageMembership": true
+      }
+    }
+---
+apiVersion: keycloak.zippelf.com/v1alpha1
+kind: UserGroup
+metadata:
+  name: example-usergroup
+spec:
+  realm: k8s-dev
+  data: |
+    {
+      "name": "blub",
+      "path": "/blub",
+      "attributes": { },
+      "realmRoles": [ ],
+      "clientRoles": { },
+      "subGroups": [ ],
+      "access": {
+        "view": true,
+        "manage": true,
+        "manageMembership": true
+      }
+    }

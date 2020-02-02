@@ -1,0 +1,19 @@
+apiVersion: keycloak.zippelf.com/v1alpha1
+kind: ProtocolMapper
+metadata:
+  name: example-protocolmapper
+spec:
+  realm: k8s-dev
+  clientScope: k8s-cluster
+  data: |
+    {
+      "name": "test-client1-audience",
+      "protocol": "openid-connect",
+      "protocolMapper": "oidc-audience-mapper",
+      "consentRequired": false,
+      "config": {
+        "included.client.audience": "test-client1",
+        "id.token.claim": "true",
+        "access.token.claim": "true"
+      }
+    }

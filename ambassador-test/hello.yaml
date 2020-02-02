@@ -52,7 +52,7 @@ metadata:
   namespace: default
 spec:
   OAuth2:
-    authorizationURL: http://192.168.0.1:8080/auth/realms/example-realm
+    authorizationURL: http://192.168.0.1:8080/auth/realms/k8s-dev
     clientURL: https://192.168.0.13:30443/foo/
     audience: ambassador-test
     clientID: ambassador-test

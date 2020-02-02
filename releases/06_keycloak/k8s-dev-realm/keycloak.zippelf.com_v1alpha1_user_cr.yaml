@@ -1,0 +1,22 @@
+apiVersion: keycloak.zippelf.com/v1alpha1
+kind: User
+metadata:
+  name: example-user
+spec:
+  realm: k8s-dev
+  groups:
+    - cluster-users
+  data: |
+    {
+      "username": "example-user",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "foo",
+      "lastName": "bar",
+      "email": "example@me.com",
+      "attributes": {
+        "locale": [
+          "de"
+        ]
+      }
+    }
