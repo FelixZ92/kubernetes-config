@@ -35,9 +35,9 @@ gen-sealed-secret:
 	@echo "You can copy ./tmp/$(SECRET_NAME)-sealed.yaml to desired location within this repository and commit it"
 
 gen-secret/check-vars:
-	@if test -z $(NAMESPACE) ; then echo "NAMESPACE not set"; exit 1; fi
-	@if test -z $(SECRET_NAME) ; then echo "SECRET_NAME not set"; exit 1; fi
-	@if test -z $(SECRET_KEY) ; then echo "SECRET_KEY not set"; exit 1; fi
+	if test -z $(NAMESPACE) ; then echo "NAMESPACE not set"; exit 1; fi
+	if test -z $(SECRET_NAME) ; then echo "SECRET_NAME not set"; exit 1; fi
+	if test -z $(SECRET_KEY) ; then echo "SECRET_KEY not set"; exit 1; fi
 
 gen-secret/check-bin:
 	@jq --version foo >/dev/null 2>&1 || { echo >&2 "I require jq but it's not installed.  Aborting."; exit 1; }
@@ -86,7 +86,14 @@ rotate-secret/manuel:
 	@echo "Commit changes to apply the rotated secret"
 
 rotate-all:
-	@make rotate-secret/urandom KUBE_MANIFEST=./test-secrets/secret1-sealed.yaml
-	@make rotate-secret/urandom KUBE_MANIFEST=./test-secrets/secret2-sealed.yaml
-	@make rotate-secret/urandom KUBE_MANIFEST=./test-secrets/secret3-sealed.yaml
-	@make rotate-secret/urandom KUBE_MANIFEST=./test-secrets/secret4-sealed.yaml
+#	@make rotate-secret/urandom KUBE_MANIFEST=./test-secrets/secret1-sealed.yaml
+#	@make rotate-secret/urandom KUBE_MANIFEST=./test-secrets/secret2-sealed.yaml
+#	@make rotate-secret/urandom KUBE_MANIFEST=./test-secrets/secret3-sealed.yaml
+#	@make rotate-secret/urandom KUBE_MANIFEST=./test-secrets/secret4-sealed.yaml
+	@make rotate-secret/urandom KUBE_MANIFEST=./releases/06_keycloak/keycloak-admin-sealed-secret.yaml
+	@make rotate-secret/urandom KUBE_MANIFEST=./releases/06_keycloak/cluster-user-credentials-sealed.yaml
+	@make rotate-secret/urandom KUBE_MANIFEST=./releases/06_keycloak/cluster-admin-credentials-sealed.yaml
+	@make rotate-secret/urandom KUBE_MANIFEST=./releases/06_keycloak/realm-admin-credentials-sealed.yaml
+	@make rotate-secret/uuid KUBE_MANIFEST=./releases/04_traefik-system/traefik-dashboard-client-sealed.yaml
+	@git commit -am "Rotate secrets"
+	@git push
