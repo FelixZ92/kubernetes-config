@@ -97,3 +97,4 @@ rotate-all:
 	@make rotate-secret/uuid KUBE_MANIFEST=./releases/04_traefik-system/traefik-dashboard-client-sealed.yaml
 	@git commit -am "Rotate secrets"
 	@git push
+	@fluxctl  --k8s-fwd-ns fluxcd sync
