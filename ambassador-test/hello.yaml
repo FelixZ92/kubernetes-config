@@ -44,7 +44,6 @@ spec:
   prefix: /foo/
   service: hello:80
 ---
----
 apiVersion: getambassador.io/v2
 kind: Filter
 metadata:
