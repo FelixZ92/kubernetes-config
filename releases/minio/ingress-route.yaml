@@ -29,8 +29,8 @@ spec:
     - match: Host(`minio.192.168.0.14.xip.io`)
       kind: Rule
       services:
-        - name: minio-http
-          port: 80
+        - name: minio
+          port: 9000
       middlewares:
         - name: redirect-https-minio
 ---
@@ -51,8 +51,8 @@ spec:
     - match: Host(`minio.192.168.0.14.xip.io`)
       kind: Rule
       services:
-        - name: minio-http
-          port: 80
+        - name: minio
+          port: 9000
   tls:
     certResolver: default
     options: {}
