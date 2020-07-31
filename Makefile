@@ -2,7 +2,6 @@ PASSWORD_LENGTH = 32
 SEALED_SECRETS_CONTROLLER_NAME=sealed-secrets
 SEALED_SECRETS_CONTROLLER_NAMESPACE=sealed-secrets
 
-KUBECONFIG=/home/fz/local_cluster.yml
 ifdef KUBE_MANIFEST
 NAMESPACE = $(shell cat ${KUBE_MANIFEST} | yq  -r .metadata.namespace)
 SECRET_NAME = $(shell cat ${KUBE_MANIFEST} | yq  -r .metadata.name)
