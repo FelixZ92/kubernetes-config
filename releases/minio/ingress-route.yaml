@@ -31,8 +31,8 @@ spec:
       services:
         - name: minio
           port: 9000
-      middlewares:
-        - name: redirect-https-minio
+#      middlewares:
+#        - name: redirect-https-minio
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
