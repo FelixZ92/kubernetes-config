@@ -1,0 +1,5 @@
+bases:
+  - ../base
+
+patchesStrategicMerge:
+  - sealed-secrets-repo-path.yaml

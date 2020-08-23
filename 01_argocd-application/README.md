@@ -1,0 +1,1 @@
+This is the only directory that is not monitored by argocd - due to possible infinite reconciliation loop

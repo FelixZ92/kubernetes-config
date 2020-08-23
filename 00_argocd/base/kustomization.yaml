@@ -1,0 +1,3 @@
+bases:
+  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=master
+namespace: argocd

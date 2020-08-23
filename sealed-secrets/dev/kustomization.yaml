@@ -1,0 +1,6 @@
+bases:
+  - ../base
+
+images:
+  - name: quay.io/bitnami/sealed-secrets-controller
+    newTag: v0.12.5
