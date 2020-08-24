@@ -5,11 +5,8 @@ metadata:
 spec:
   description: infrastructure
   destinations:
-  - namespace: argocd
+  - namespace: *
     server: https://kubernetes.default.svc
-  - namespace: infrastructure
-    server: https://kubernetes.default.svc
-  orphanedResources:
     warn: true
   sourceRepos:
   - '*'
