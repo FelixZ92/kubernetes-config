@@ -5,9 +5,8 @@ metadata:
 spec:
   description: infrastructure
   destinations:
-  - namespace: *
+  - namespace: "*"
     server: https://kubernetes.default.svc
     warn: true
   sourceRepos:
   - '*'
-
