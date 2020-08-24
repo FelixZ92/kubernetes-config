@@ -4,4 +4,4 @@ metadata:
   name: ambassador
 spec:
   source:
-    path: ambassador/dev
+    path: aes-operator/dev
