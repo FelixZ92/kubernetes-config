@@ -16,6 +16,8 @@ spec:
       name: ambassador
     crds:
       enabled: true
+    rbac:
+      enabled: true
     service:
       ports:
         - name: http
