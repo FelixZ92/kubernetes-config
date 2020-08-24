@@ -1,0 +1,6 @@
+resources:
+  - https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator-crds.yaml
+  - https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator.yaml
+  - ambassador.yaml
+
+namespace: ambassador

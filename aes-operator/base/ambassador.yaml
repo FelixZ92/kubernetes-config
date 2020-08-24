@@ -1,0 +1,22 @@
+apiVersion: getambassador.io/v2
+kind: AmbassadorInstallation
+metadata:
+  name: ambassador
+spec:
+  version: "1.*"
+  helmValues:
+    image:
+      pullPolicy: Always
+    metrics:
+      serviceMonitor:
+        enabled: false
+    adminService:
+      nodePort: true
+    namespace:
+      name: ambassador
+    service:
+      ports:
+        - name: http
+          port: 80
+          targetPort: 8080
+      type: NodePort

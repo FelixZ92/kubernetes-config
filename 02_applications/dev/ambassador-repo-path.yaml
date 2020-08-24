@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ambassador
+spec:
+  source:
+    path: ambassador/dev
