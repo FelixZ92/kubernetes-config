@@ -1,4 +1,4 @@
 namespace: argocd
 resources:
-  - 01_appproject-infrastructure.yaml
-  - 02-application-argocd.yaml
+  - appproject-infrastructure.yaml
+  - application-argocd.yaml
