@@ -7,6 +7,8 @@ spec:
   destinations:
   - namespace: argocd
     server: https://kubernetes.default.svc
+  - namespace: infrastructure
+    server: https://kubernetes.default.svc
   orphanedResources:
     warn: true
   sourceRepos:
