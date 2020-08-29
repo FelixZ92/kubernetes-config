@@ -27,4 +27,4 @@ spec:
           targetPort: 8080
       type: ClusterIP
     nodeSelector:
-      node.kubernetes.io/ingress=traefik-system
+      node.kubernetes.io/ingress: traefik-system
