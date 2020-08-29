@@ -18,9 +18,13 @@ spec:
       enabled: true
     rbac:
       enabled: true
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
     service:
       ports:
         - name: http
           port: 80
           targetPort: 8080
-      type: NodePort
+      type: ClusterIP
+    nodeSelector:
+      node.kubernetes.io/ingress=traefik-system
