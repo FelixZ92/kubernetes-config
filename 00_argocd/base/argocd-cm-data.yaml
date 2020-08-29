@@ -7,3 +7,6 @@ data:
     - type: helm
       url: https://releases.rancher.com/server-charts/stable
       name: rancher
+    - type: helm
+      url: https://kubernetes-charts.storage.googleapis.com
+      name: stable
