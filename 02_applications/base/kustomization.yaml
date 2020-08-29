@@ -2,3 +2,5 @@ resources:
   - namespace.yaml
   - sealed-secrets.yaml
   - ambassador.yaml
+
+namespace: argocd
