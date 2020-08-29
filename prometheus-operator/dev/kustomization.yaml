@@ -1,0 +1,6 @@
+bases:
+  - ../base
+
+patchesStrategicMerge:
+  - alertmanager-patch.yaml
+  - prometheus-patch.yaml

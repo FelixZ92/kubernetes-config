@@ -4,3 +4,7 @@ namespace: argocd
 
 patchesStrategicMerge:
   - argocd-cm-data.yaml
+
+images:
+  - name: argoproj/argocd
+    newTag: v1.7.2

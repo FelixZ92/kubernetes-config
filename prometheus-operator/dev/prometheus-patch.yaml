@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: k8s
+  namespace: monitoring
+spec:
+  externalUrl: "https://prometheus.192.168.0.15.xip.io:8443"
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2700Mi
+        storageClassName: local-path
+  resources:
+    requests:
+      memory: 750Mi
+      cpu: 200m
+    limits:
+      memory: 750Mi
+      cpu: 400m
