@@ -1,9 +1,0 @@
-bases:
-  - ../base
-
-images:
-  - name: docker.io/datawire/ambassador-operator
-    newTag: v1.2.9
-
-patchesStrategicMerge:
-  - ambassador-replica-patch.yaml
