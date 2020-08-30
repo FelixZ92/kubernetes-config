@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+spec:
+  destination:
+    namespace: traefik
+    server: https://kubernetes.default.svc
+  project: infrastructure
+  source:
+    chart: traefik
+    helm:
+      values: |
+        image:
+          tag: 2.2.8
+
+        ingressRoute:
+          dashboard:
+            enabled: false
+
+        logs:
+          general:
+            level: ERROR
+          access:
+            enabled: false
+            filters: {}
+            fields:
+              general:
+                defaultmode: keep
+                names: {}
+              headers:
+                defaultmode: drop
+                names: {}
+
+        additionalArguments: []
+        #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
+        #  - "--log.level=DEBUG"
+
+
+        # Configure ports
+        ports:
+          web:
+            port: 8000
+            expose: true
+            exposedPort: 80
+            hostPort: 80
+            protocol: TCP
+            # redirectTo: websecure
+          websecure:
+            port: 8443
+            expose: true
+            exposedPort: 443
+            hostPort: 443
+            protocol: TCP
+
+        service:
+          enabled: true
+          type: ClusterIP
+
+        hostNetwork: false
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "50Mi"
+          limits:
+            cpu: "300m"
+          memory: "150Mi"
+
+        nodeSelector:
+          node.kubernetes.io/ingress: ambassador-edge-stack
+
+        priorityClassName: ""
+        securityContext:
+          capabilities:
+            drop: [ALL]
+          readOnlyRootFilesystem: true
+          runAsGroup: 65532
+          runAsNonRoot: true
+          runAsUser: 65532
+
+        podSecurityContext:
+          fsGroup: 65532
+    repoURL: https://containous.github.io/traefik-helm-chart
+    targetRevision: 9.1.0
+  syncPolicy:
+    automated:
+      selfHeal: true

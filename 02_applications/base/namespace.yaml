@@ -3,3 +3,8 @@ kind: Namespace
 metadata:
   name: sealed-secrets
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: traefik
+---

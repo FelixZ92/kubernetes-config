@@ -2,5 +2,5 @@ resources:
   - namespace.yaml
   - sealed-secrets.yaml
   - cert-manager.yaml
-
+  - traefik.yaml
 namespace: argocd
