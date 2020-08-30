@@ -20,9 +20,9 @@ spec:
 
         logs:
           general:
-            level: DEBUG
+            level: INFO
           access:
-            enabled: false
+            enabled: true
             filters: {}
             fields:
               general:
