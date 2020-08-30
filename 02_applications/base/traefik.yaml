@@ -65,7 +65,7 @@ spec:
             memory: "50Mi"
           limits:
             cpu: "300m"
-          memory: "150Mi"
+            memory: "150Mi"
 
         nodeSelector:
           node.kubernetes.io/ingress: ambassador-edge-stack
