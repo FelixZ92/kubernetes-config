@@ -3,3 +3,4 @@ bases:
 
 resources:
   - dev-ca-secret-sealed.json
+  - dev-ca-clusterissuer.yaml
