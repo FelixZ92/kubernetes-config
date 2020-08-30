@@ -9,12 +9,15 @@ spec:
         - name: rancher
           volumeMounts:
             # Pass CA cert into rancher for private CA
-            - mountPath: /etc/rancher/ssl/cacerts.pem
+            - mountPath: /etc/rancher/ssl/
               name: tls-ca-volume
-              subPath: cacerts.pem
+#              subPath: cacerts.pem
               readOnly: true
       volumes:
         - name: tls-ca-volume
           secret:
             defaultMode: 0400
             secretName: tls-ca
+            items:
+              - key: tls.crt
+                path: cacerts.pem
