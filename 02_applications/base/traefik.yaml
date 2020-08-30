@@ -20,7 +20,7 @@ spec:
 
         logs:
           general:
-            level: ERROR
+            level: DEBUG
           access:
             enabled: false
             filters: {}
