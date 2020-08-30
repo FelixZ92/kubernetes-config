@@ -10,3 +10,6 @@ data:
     - type: helm
       url: https://kubernetes-charts.storage.googleapis.com
       name: stable
+    - type: helm
+      url: https://containous.github.io/traefik-helm-chart
+      name: traefik
