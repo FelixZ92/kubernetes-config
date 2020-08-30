@@ -1,7 +1,6 @@
 resources:
   - namespace.yaml
   - sealed-secrets.yaml
-  - ambassador.yaml
   - cert-manager.yaml
 
 namespace: argocd
