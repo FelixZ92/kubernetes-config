@@ -110,11 +110,36 @@ blub:
 # kudos to Sébastien Dubois (https://itnext.io/deploying-tls-certificates-for-local-development-and-production-using-kubernetes-cert-manager-9ab46abdd569)
 # workaround with tee as long kubectl is installed with snapcraft: https://bugs.launchpad.net/ubuntu/+source/snapd/+bug/1849753
 generate-local-ca:
-	@rm -rf "$(CA_CERTS_FOLDER)" && mkdir -p "$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)" && mkdir -p $(CURRENT_DIR)/tmp
+	@rm -rf "$(CA_CERTS_FOLDER)" && \
+		mkdir -p "$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)" && \
+		mkdir -p $(CURRENT_DIR)/tmp
+
 	@CAROOT=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV) mkcert -install
-	@kubectl -n cert-manager create secret tls dev-ca-secret --key=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA-key.pem \
-		--cert=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA.pem --dry-run=client -o json | sudo tee $(CURRENT_DIR)/tmp/dev-ca-secret.json
+
+	@kubectl -n cert-manager create secret tls dev-ca-secret \
+		--key=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA-key.pem \
+		--cert=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA.pem \
+		--dry-run=client -o json \
+		| sudo tee $(CURRENT_DIR)/tmp/dev-ca-secret.json
+
+	@kubectl -n cattle-system create secret tls tls-ca \
+		--key=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA-key.pem \
+		--cert=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA.pem \
+		--dry-run=client -o json \
+		| sudo tee $(CURRENT_DIR)/tmp/tls-ca.json
+
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
-			 < $(CURRENT_DIR)/tmp/dev-ca-secret.json > $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json
-	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json && git commit -m "Update dev CA" && git push
+			 < $(CURRENT_DIR)/tmp/dev-ca-secret.json \
+			 > $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json
+
+	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
+			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
+			 < $(CURRENT_DIR)/tmp/tls-ca.json \
+			 > $(CURRENT_DIR)/rancher/dev/tls-ca.json
+
+	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json \
+		$(CURRENT_DIR)/rancher/dev/tls-ca.json && \
+		git commit -m "Update dev CA" && \
+		git push
+

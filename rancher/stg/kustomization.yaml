@@ -1,0 +1,5 @@
+bases:
+  - ../base
+
+patchesStrategicMerge:
+  - rancher-public-ca-patch.yaml

@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: rancher
+spec:
+  template:
+    spec:
+      containers:
+        - name: rancher
+          volumeMounts:
+            # Pass CA cert into rancher for private CA
+            - mountPath: /etc/rancher/ssl/cacerts.pem
+              name: tls-ca-volume
+              subPath: cacerts.pem
+              readOnly: true
+      volumes:
+        - name: tls-ca-volume
+          secret:
+            defaultMode: 0400
+            secretName: tls-ca

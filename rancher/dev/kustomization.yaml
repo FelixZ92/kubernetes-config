@@ -1,0 +1,11 @@
+bases:
+  - ../base
+
+resources:
+  - tls-ca.json
+  - certificate.yaml
+
+patchesStrategicMerge:
+  - rancher-private-ca-mount-patch.yaml
+
+namespace: cattle-system
