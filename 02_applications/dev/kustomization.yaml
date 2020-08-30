@@ -3,5 +3,4 @@ bases:
 
 patchesStrategicMerge:
   - sealed-secrets-repo-path.yaml
-  - ambassador-repo-path.yaml
   - cert-manager-repo-path.yaml
