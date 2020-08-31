@@ -107,6 +107,11 @@ blub:
 	kubectl version foo
 	kubectl version foo >/dev/null 2>&1 || { echo >&2 "I require kubectl but it's not installed.  Aborting."; exit 1; }
 
+
+create-grafana-secret:
+	@kubectl -n monitoring --dry-run=client create secret generic grafana-admin-user \
+		--from-literal=username=admin --from-literal=password=$(gopass clusters/dev/grafana)
+
 # kudos to Sébastien Dubois (https://itnext.io/deploying-tls-certificates-for-local-development-and-production-using-kubernetes-cert-manager-9ab46abdd569)
 # workaround with tee as long kubectl is installed with snapcraft: https://bugs.launchpad.net/ubuntu/+source/snapd/+bug/1849753
 generate-local-ca:
