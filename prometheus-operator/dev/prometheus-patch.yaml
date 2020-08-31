@@ -1,9 +1,18 @@
+---
+# Source: prometheus-operator/templates/prometheus/prometheus.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: k8s
+  name: prometheus-operator-prometheus
   namespace: monitoring
+  labels:
+    app: prometheus-operator-prometheus
+
+    chart: prometheus-operator-9.3.1
+    release: "prometheus-operator"
+    heritage: "Helm"
 spec:
+  replicas: 2
   externalUrl: "https://prometheus.192.168.0.15.xip.io:8443"
   storage:
     volumeClaimTemplate:
@@ -14,10 +23,3 @@ spec:
           requests:
             storage: 2700Mi
         storageClassName: local-path
-  resources:
-    requests:
-      memory: 750Mi
-      cpu: 200m
-    limits:
-      memory: 750Mi
-      cpu: 400m

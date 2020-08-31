@@ -1,10 +1,13 @@
+---
+# Source: prometheus-operator/templates/alertmanager/alertmanager.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
 metadata:
-  name: main
+  name: prometheus-operator-alertmanager
   namespace: monitoring
 spec:
-  externalUrl: "https://alertmanager.192.168.0.15.xip.io:8443"
+  replicas: 2
+  externalUrl: "https://alertmanager.192.168.0.15.xip.io"
   storage:
     volumeClaimTemplate:
       spec:
@@ -14,10 +17,3 @@ spec:
           requests:
             storage: 2700Mi
         storageClassName: local-path
-  resources:
-    limits:
-      cpu: 200m
-      memory: 300Mi
-    requests:
-      cpu: 100m
-      memory: 200Mi

@@ -1,6 +1,7 @@
-bases:
-  - ../base
+resources:
+  - ../base/
 
 patchesStrategicMerge:
+  - endpoint-patches.yaml
   - alertmanager-patch.yaml
   - prometheus-patch.yaml

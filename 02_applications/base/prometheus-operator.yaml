@@ -10,6 +10,7 @@ spec:
   source:
     chart: prometheus-operator
     helm:
+      # TODO: kube proxy, scheduler and controller manager run as they normally would
       values: |
         defaultRules:
           create: true

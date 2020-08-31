@@ -13,3 +13,11 @@ data:
     - type: helm
       url: https://containous.github.io/traefik-helm-chart
       name: traefik
+  configManagementPlugins: |
+    - name: kustomized-helm
+      init:
+        command: ["/bin/sh", "-c"]
+        args: ["helm dependency up ."]
+      generate:
+        command: [sh, -c]
+        args: ["helm template $ARGOCD_APP_NAME . --namespace $ARGOCD_APP_NAMESPACE > base/all.yaml && kustomize build $ENVIRONMENT"]

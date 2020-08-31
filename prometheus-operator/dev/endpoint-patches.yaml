@@ -1,0 +1,50 @@
+# Source: prometheus-operator/templates/exporters/kube-controller-manager/endpoints.yaml
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: prometheus-operator-kube-controller-manager
+  namespace: kube-system
+subsets:
+  - addresses:
+      - ip: 192.168.0.11
+      - ip: 192.168.0.12
+      - ip: 192.168.0.13
+    ports:
+      - name: http-metrics
+        port: 10252
+        protocol: TCP
+---
+# Source: prometheus-operator/templates/exporters/kube-controller-manager/endpoints.yaml
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: prometheus-operator-kube-scheduler
+  namespace: kube-system
+subsets:
+  - addresses:
+      - ip: 192.168.0.11
+      - ip: 192.168.0.12
+      - ip: 192.168.0.13
+    ports:
+      - name: http-metrics
+        port: 10251
+        protocol: TCP
+---
+# Source: prometheus-operator/templates/exporters/kube-proxy/endpoints.yaml
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: prometheus-operator-kube-proxy
+  namespace: kube-system
+subsets:
+  - addresses:
+      - ip: 192.168.0.11
+      - ip: 192.168.0.12
+      - ip: 192.168.0.13
+      - ip: 192.168.0.14
+      - ip: 192.168.0.15
+    ports:
+      - name: http-metrics
+        port: 10249
+        protocol: TCP
+
