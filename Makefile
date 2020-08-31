@@ -109,8 +109,17 @@ blub:
 
 
 create-grafana-secret:
+	if [ -z "$(GRAFANA_PASSWORD)" ]; then echo "GRAFANA_PASSWORD not set, exit"; exit 1; fi
 	@kubectl -n monitoring --dry-run=client create secret generic grafana-admin-user \
-		--from-literal=username=admin --from-literal=password=$(gopass clusters/dev/grafana)
+		--from-literal=username=admin --from-literal=password="$(GRAFANA_PASSWORD)" -o json \
+		|  sudo tee $(CURRENT_DIR)/tmp/grafana-admin-user.json
+	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
+			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
+			 < $(CURRENT_DIR)/tmp/grafana-admin-user.json \
+			 > $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json
+	@git add $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json && \
+		git commit -m "Re-encrypt grafana secret" && \
+		git push
 
 # kudos to Sébastien Dubois (https://itnext.io/deploying-tls-certificates-for-local-development-and-production-using-kubernetes-cert-manager-9ab46abdd569)
 # workaround with tee as long kubectl is installed with snapcraft: https://bugs.launchpad.net/ubuntu/+source/snapd/+bug/1849753
