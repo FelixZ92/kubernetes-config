@@ -4,7 +4,10 @@
   "metadata": {
     "name": "grafana-admin-user",
     "namespace": "monitoring",
-    "creationTimestamp": null
+    "creationTimestamp": null,
+    "annotations": {
+      "argocd.argoproj.io/sync-options": "SkipDryRunOnMissingResource=true"
+    }
   },
   "spec": {
     "template": {
