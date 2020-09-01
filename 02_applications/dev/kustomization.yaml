@@ -1,9 +1,6 @@
 bases:
   - ../base
 
-resources:
-  - ../../prometheus-operator/dev/grafana-admin-user-sealed.json
-
 patchesStrategicMerge:
   - sealed-secrets-repo-path.yaml
   - cert-manager-repo-path.yaml
