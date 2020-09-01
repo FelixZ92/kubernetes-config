@@ -117,7 +117,7 @@ create-grafana-secret:
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/grafana-admin-user.json \
 			 > $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json
-	@git add $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json && \
+	@git add $(CURRENT_DIR)/prometheus-operator/dev/grafana-admin-user-sealed.json && \
 		git commit -m "Re-encrypt grafana secret" && \
 		git push
 
