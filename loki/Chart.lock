@@ -1,0 +1,6 @@
+dependencies:
+- name: loki
+  repository: https://grafana.github.io/loki/charts
+  version: 0.31.0
+digest: sha256:e1266adb28d8aa1a035fbb9bced2142d062c48bacb6c0e125d8ed49e1211b182
+generated: "2020-09-03T00:39:34.825804251+02:00"

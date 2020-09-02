@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+spec:
+  source:
+    plugin:
+      name: kustomized-helm
+      env:
+        - name: ENVIRONMENT
+          value: dev

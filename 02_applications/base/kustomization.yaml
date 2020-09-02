@@ -4,4 +4,5 @@ resources:
   - cert-manager.yaml
   - traefik.yaml
   - prometheus-operator.yaml
+  - loki.yaml
 namespace: argocd
