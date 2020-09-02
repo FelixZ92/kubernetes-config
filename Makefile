@@ -112,11 +112,11 @@ create-grafana-secret:
 	if [ -z "$(GRAFANA_PASSWORD)" ]; then echo "GRAFANA_PASSWORD not set, exit"; exit 1; fi
 	@kubectl -n monitoring --dry-run=client create secret generic grafana-admin-user \
 		--from-literal=username=admin --from-literal=password="$(GRAFANA_PASSWORD)" -o json \
-		|  sudo tee $(CURRENT_DIR)/tmp/grafana-admin-user.json
+		> $(CURRENT_DIR)/tmp/grafana-admin-user.json
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/grafana-admin-user.json \
-			 > $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json
+			 > $(CURRENT_DIR)/prometheus-operator/dev/grafana-admin-user-sealed.json
 	@git add $(CURRENT_DIR)/prometheus-operator/dev/grafana-admin-user-sealed.json && \
 		git commit -m "Re-encrypt grafana secret" && \
 		git push
@@ -130,30 +130,18 @@ generate-local-ca:
 
 	@CAROOT=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV) mkcert -install
 
+update-local-ca-secrets:
 	@kubectl -n cert-manager create secret tls dev-ca-secret \
 		--key=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA-key.pem \
 		--cert=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA.pem \
 		--dry-run=client -o json \
-		| sudo tee $(CURRENT_DIR)/tmp/dev-ca-secret.json
-
-	@kubectl -n cattle-system create secret tls tls-ca \
-		--key=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA-key.pem \
-		--cert=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA.pem \
-		--dry-run=client -o json \
-		| sudo tee $(CURRENT_DIR)/tmp/tls-ca.json
+		> $(CURRENT_DIR)/tmp/dev-ca-secret.json
 
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/dev-ca-secret.json \
 			 > $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json
 
-	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
-			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
-			 < $(CURRENT_DIR)/tmp/tls-ca.json \
-			 > $(CURRENT_DIR)/rancher/dev/tls-ca.json
-
-	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json \
-		$(CURRENT_DIR)/rancher/dev/tls-ca.json && \
+	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json && Z\
 		git commit -m "Update dev CA" && \
 		git push
-
