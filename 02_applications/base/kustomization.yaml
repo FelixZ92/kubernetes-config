@@ -3,5 +3,5 @@ resources:
   - sealed-secrets.yaml
   - cert-manager.yaml
   - traefik.yaml
-#  - prometheus-operator.yaml
+  - prometheus-operator.yaml
 namespace: argocd
