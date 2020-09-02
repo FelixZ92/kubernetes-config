@@ -4,4 +4,4 @@ bases:
 patchesStrategicMerge:
   - sealed-secrets-repo-path.yaml
   - cert-manager-repo-path.yaml
-  - prometheus-operator-env-patch.yaml
+#  - prometheus-operator-env-patch.yaml
