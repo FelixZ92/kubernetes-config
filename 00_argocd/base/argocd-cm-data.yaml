@@ -13,6 +13,9 @@ data:
     - type: helm
       url: https://containous.github.io/traefik-helm-chart
       name: traefik
+    - type: helm
+      url: https://grafana.github.io/loki/charts
+      name: loki
   configManagementPlugins: |
     - name: kustomized-helm
       init:
