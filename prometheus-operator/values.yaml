@@ -46,13 +46,17 @@ prometheus-operator:
         group_wait: 30s
         group_interval: 5m
         repeat_interval: 12h
-        receiver: 'null'
+        receiver: 'slack'
         routes:
           - match:
               alertname: Watchdog
             receiver: 'null'
       receivers:
-        - name: 'null'
+        - name: 'slack'
+          slack_configs:
+            - api_url: https://hooks.slack.com/services/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
+              channel: '#alerts'
+              send_resolved: true
 
     ingress:
       enabled: false
