@@ -5,4 +5,5 @@ resources:
   - traefik.yaml
   - prometheus-operator.yaml
   - loki.yaml
+  - promtail.yaml
 namespace: argocd

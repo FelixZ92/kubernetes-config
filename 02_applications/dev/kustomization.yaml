@@ -6,3 +6,4 @@ patchesStrategicMerge:
   - cert-manager-repo-path.yaml
   - prometheus-operator-env-patch.yaml
   - loki-env-patch.yaml
+  - promtail-env-patch.yaml
