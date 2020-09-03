@@ -1,0 +1,9 @@
+apiVersion: v2
+name: promtail
+version: 0.24.0
+appVersion: v1.6.0
+description: "Responsible for gathering logs and sending them to Loki"
+dependencies:
+  - name: promtail
+    version: 0.24.0
+    repository: https://grafana.github.io/loki/charts
