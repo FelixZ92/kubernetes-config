@@ -4,7 +4,6 @@ bases:
 # secrets used in PreSync hooks need to be applied here due to sync stages - otherwise we'll land in an infinite sync loop
 resources:
   - grafana-admin-user-sealed.json
-  - dev-ca-secret-sealed.json
 
 patchesStrategicMerge:
   - sealed-secrets-repo-path.yaml
@@ -12,3 +11,4 @@ patchesStrategicMerge:
   - prometheus-operator-env-patch.yaml
   - loki-env-patch.yaml
   - promtail-env-patch.yaml
+  - certificate-authority-repo-path.yaml

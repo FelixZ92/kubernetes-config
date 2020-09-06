@@ -116,8 +116,8 @@ create-grafana-secret:
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/grafana-admin-user.json \
-			 > $(CURRENT_DIR)/prometheus-operator/dev/grafana-admin-user-sealed.json
-	@git add $(CURRENT_DIR)/prometheus-operator/dev/grafana-admin-user-sealed.json && \
+			 > $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json
+	@git add $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json && \
 		git commit -m "Re-encrypt grafana secret" && \
 		git push
 
@@ -139,8 +139,8 @@ update-local-ca-secrets:
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/dev-ca-secret.json \
-			 > $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json
+			 > $(CURRENT_DIR)/02_applications/dev/dev-ca-secret-sealed.json
 
-	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json && \
+	@git add $(CURRENT_DIR)/02_applications/dev/dev-ca-secret-sealed.json && \
 		git commit -m "Update dev CA" && \
 		git push

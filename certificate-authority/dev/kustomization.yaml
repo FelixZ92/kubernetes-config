@@ -1,0 +1,12 @@
+resources:
+  - dev-ca-clusterissuer.yaml
+  - dev-ca-secret-sealed.json
+
+patchesJson6902:
+  - target:
+      group: batch
+      kind: Job
+      name: check-local-ca-
+      version: v1
+      namespace: kube-system
+    path: patches/check-local-ca-generate-name.yaml

@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: certificate-authority
+spec:
+  source:
+    path: certificate-authority/dev
