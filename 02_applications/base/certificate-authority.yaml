@@ -21,6 +21,5 @@ spec:
     - group:  cert-manager.io
       kind: ClusterIssuer
       name: dev-ca-clusterissuer
-      namespace: cert-manager
       jsonPointers:
         - /status
