@@ -2,7 +2,6 @@ bases:
   - ../base
 
 resources:
-  - dev-ca-secret-sealed.json
   - dev-ca-clusterissuer.yaml
   - presync-hook-check-local-ca.yaml
 

@@ -1,6 +1,6 @@
 PASSWORD_LENGTH = 32
 SEALED_SECRETS_CONTROLLER_NAME=sealed-secrets-controller
-SEALED_SECRETS_CONTROLLER_NAMESPACE=sealed-secrets
+SEALED_SECRETS_CONTROLLER_NAMESPACE=kube-system
 
 CURRENT_DIR=$(shell pwd)
 CA_CERTS_FOLDER=$(CURRENT_DIR)/.certs
@@ -127,7 +127,6 @@ generate-local-ca:
 	@rm -rf "$(CA_CERTS_FOLDER)" && \
 		mkdir -p "$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)" && \
 		mkdir -p $(CURRENT_DIR)/tmp
-
 	@CAROOT=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV) mkcert -install
 
 update-local-ca-secrets:
@@ -142,6 +141,6 @@ update-local-ca-secrets:
 			 < $(CURRENT_DIR)/tmp/dev-ca-secret.json \
 			 > $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json
 
-	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json && Z\
+	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json && \
 		git commit -m "Update dev CA" && \
 		git push
