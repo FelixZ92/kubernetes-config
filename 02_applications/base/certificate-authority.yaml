@@ -25,3 +25,4 @@ spec:
         - /status
         - /metadata
         - /spec
+        - /
