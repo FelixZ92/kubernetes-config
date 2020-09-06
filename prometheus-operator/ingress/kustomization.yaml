@@ -1,0 +1,7 @@
+resources:
+  - ingressroute-prometheus.yaml
+namespace: monitoring
+
+commonAnnotations:
+  annotations:
+    argocd.argoproj.io/sync-wave="4"

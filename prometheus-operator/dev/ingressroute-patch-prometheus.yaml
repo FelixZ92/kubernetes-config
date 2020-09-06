@@ -1,0 +1,26 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus
+spec:
+  routes:
+    - match: Host(`prometheus.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: prometheus-operator-prometheus
+          port: 9090
+      middlewares:
+        - name: redirect-https-prometheus
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-tls
+spec:
+  routes:
+    - match: Host(`prometheus.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: prometheus-operator-prometheus
+          port: 9090
