@@ -1,5 +1,7 @@
 bases:
   - ../base
+resources:
+  - dev-ca-secret-sealed.json
 #
 #patchesJson6902:
 #  - target:
