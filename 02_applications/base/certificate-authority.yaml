@@ -25,4 +25,5 @@ spec:
         - /status
         - /metadata
         - /spec
-        - /
+        - /apiVersion
+        - /kind
