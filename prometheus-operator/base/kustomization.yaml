@@ -1,4 +1,4 @@
 resources:
   - ../crds
+  - presync-hook-check-grafana-password.yaml
   - all.yaml
-

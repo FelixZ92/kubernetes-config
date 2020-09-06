@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: check-local-ca-
+  namespace: kube-system
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+spec:
+  template:
+    spec:
+      containers:
+        - name: check-local-ca
+          image: registry.gitlab.com/felixz92/kubectl-git
+          command:
+            - "kubectl"
+            - "-n"
+            - "cert-manager"
+            - "get"
+            - "secret"
+            - "dev-ca-secret"
+      restartPolicy: Never
+      serviceAccountName: deploy-argocd
+  backoffLimit: 2
