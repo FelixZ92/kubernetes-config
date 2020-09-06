@@ -6,4 +6,6 @@ patchesStrategicMerge:
   - alertmanager-patch.yaml
   - prometheus-patch.yaml
   - ingressroute-patch-prometheus.yaml
+  - ingressroute-patch-alertmanager.yaml
+  - ingressroute-patch-grafana.yaml
   - certificates-patch.yaml

@@ -1,5 +1,7 @@
 resources:
   - ingressroute-prometheus.yaml
+  - ingressroute-alertmanager.yaml
+  - ingressroute-grafana.yaml
 namespace: monitoring
 
 commonAnnotations:
