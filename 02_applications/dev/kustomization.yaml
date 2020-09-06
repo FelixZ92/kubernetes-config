@@ -2,7 +2,7 @@ bases:
   - ../base
 
 # secrets used in PreSync hooks need to be applied here due to sync stages - otherwise we'll land in an infinite sync loop
-resources:s
+resources:
   - grafana-admin-user-sealed.json
   - dev-ca-secret-sealed.json
 
