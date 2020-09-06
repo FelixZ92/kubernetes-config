@@ -2,3 +2,12 @@ resources:
   - ../crds
   - presync-hook-check-grafana-password.yaml
   - all.yaml
+
+patchesJson6902:
+  - target:
+      group: batch
+      kind: Job
+      name: check-grafana-password-
+      version: v1
+      namespace: kube-system
+    path: patches/check-grafana-password-generate-name.yaml
