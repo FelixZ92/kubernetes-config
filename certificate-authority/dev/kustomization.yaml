@@ -1,6 +1,7 @@
 resources:
   - dev-ca-clusterissuer.yaml
   - dev-ca-secret-sealed.json
+  - presync-hook-check-local-ca.yaml
 
 patchesJson6902:
   - target:
