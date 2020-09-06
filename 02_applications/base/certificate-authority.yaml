@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: certificate-authority
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   destination:
     namespace: cert-manager
