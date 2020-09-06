@@ -2,6 +2,7 @@ resources:
   - ../crds
   - presync-hook-check-grafana-password.yaml
   - all.yaml
+  - certificate.yaml
   - ../ingress
 
 patchesJson6902:
