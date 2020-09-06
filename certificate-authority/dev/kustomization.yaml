@@ -1,5 +1,5 @@
 resources:
-  - dev-ca-clusterissuer.yaml
+  - ca-clusterissuer.yaml
   - presync-hook-check-local-ca.yaml
 
 patchesJson6902:

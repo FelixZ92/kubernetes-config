@@ -1,5 +1,6 @@
 resources:
   - ingressroute-prometheus.yaml
+  - certificate.yaml
 namespace: monitoring
 
 commonAnnotations:
