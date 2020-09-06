@@ -4,3 +4,13 @@ bases:
 resources:
   - dev-ca-secret-sealed.json
   - dev-ca-clusterissuer.yaml
+  - presync-hook-check-local-ca.yaml
+
+patchesJson6902:
+  - target:
+      group: batch
+      kind: Job
+      name: check-local-ca-
+      version: v1
+      namespace: kube-system
+    path: patches/check-local-ca-generate-name.yaml

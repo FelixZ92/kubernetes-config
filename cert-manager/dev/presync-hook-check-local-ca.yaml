@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: check-local-ca-
+  name: check-local-ca-
   namespace: kube-system
   annotations:
     argocd.argoproj.io/hook: PreSync
