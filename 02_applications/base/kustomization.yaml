@@ -2,7 +2,7 @@ resources:
   - namespace.yaml
   - sealed-secrets.yaml
   - cert-manager.yaml
-  - certificate-authority.yaml
+#  - certificate-authority.yaml
   - traefik.yaml
   - prometheus-operator.yaml
   - loki.yaml
