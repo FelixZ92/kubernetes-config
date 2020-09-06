@@ -17,13 +17,13 @@ spec:
     automated:
       prune: false
       selfHeal: true
-  ignoreDifferences:
-    - group:  cert-manager.io
-      kind: ClusterIssuer
-      name: dev-ca-clusterissuer
-      jsonPointers:
-        - /status
-        - /metadata
-        - /spec
-        - /apiVersion
-        - /kind
+#  ignoreDifferences:
+#    - group:  cert-manager.io
+#      kind: ClusterIssuer
+#      name: dev-ca-clusterissuer
+#      jsonPointers:
+#        - /status
+#        - /metadata
+#        - /spec
+#        - /apiVersion
+#        - /kind
