@@ -52,6 +52,7 @@ prometheus-operator:
               alertname: Watchdog
             receiver: 'null'
       receivers:
+        - name: 'null'
         - name: 'slack'
           slack_configs:
             - api_url: https://hooks.slack.com/services/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
