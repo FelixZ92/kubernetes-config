@@ -3,6 +3,8 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: redirect-https-prometheus
+  annotations:
+    argocd.argoproj.io/hook: Skip
 spec:
   redirectScheme:
     scheme: https
