@@ -1,0 +1,26 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alertmanager
+spec:
+  routes:
+    - match: Host(`alertmanager.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: prometheus-operator-alertmanager
+          port: 9093
+      middlewares:
+        - name: redirect-https-alertmanager
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alertmanager-tls
+spec:
+  routes:
+    - match: Host(`alertmanager.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: prometheus-operator-alertmanager
+          port: 9093

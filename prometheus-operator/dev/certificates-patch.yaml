@@ -3,6 +3,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: prometheus-tls-certificate
+  namespace: monitoring
 spec:
   dnsNames:
     - prometheus.192.168.0.15.xip.io
@@ -11,6 +12,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: alertmanager-tls-certificate
+  namespace: monitoring
 spec:
   dnsNames:
     - alertmanager.192.168.0.15.xip.io
@@ -19,6 +21,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: grafana-tls-certificate
+  namespace: monitoring
 spec:
   dnsNames:
     - alertmanager.192.168.0.15.xip.io

@@ -1,0 +1,26 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+spec:
+  routes:
+    - match: Host(`grafana.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: prometheus-operator-grafana
+          port: 80
+      middlewares:
+        - name: redirect-https-grafana
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-tls
+spec:
+  routes:
+    - match: Host(`grafana.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: prometheus-operator-grafana
+          port: 80
