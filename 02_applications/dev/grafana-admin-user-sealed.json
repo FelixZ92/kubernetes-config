@@ -1,0 +1,22 @@
+{
+  "kind": "SealedSecret",
+  "apiVersion": "bitnami.com/v1alpha1",
+  "metadata": {
+    "name": "grafana-admin-user",
+    "namespace": "monitoring",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "name": "grafana-admin-user",
+        "namespace": "monitoring",
+        "creationTimestamp": null
+      }
+    },
+    "encryptedData": {
+      "password": "AgAEnaGrBWeDs5Sz4XRxsHg/ItOzwRkZgrcMcVsYswMdw6mtTKLzSCZItdyJIFP6ELJQyTek4nzDRTAo99A6kndkECIYXFS9PcbEQDPiMuc8y9gArv1raAuqJmGgXwxCdvDNrFVVXedMKrwbY28FsgNFYE8gU51708FQWkHKRlNouusKc7xfmVb0QPwaZJscSixhTFO7lTpoifKxPZTZ+QH5EJFdZS5+CROthMY/yojACWNX+/w0li6ZP4cdBT3kK/09ljFqHlMehhpmRPpi8ppT7IOkzFybU2KGlEfSmDo7K2i8tWrzxQSuSqnE0xYIF8G3hzWYG05BwqeWdBtNbwqXnGZTV2kKSuoSaCzLhdl2jwbJUSAjS+DyTlGavpm4G4bBnNAN1bCRPVlaSa1+JGzkGvTdVQGOffdgwOVCe5kdgMSEi2xAdPejkB5xEs5jddlgnKCidiHuv4kLMzUs+6XzzStSc2IZdtt7YMN7C5L1iIVBvTffG4bVN0ksq6Ekw00WgIJIqXbx+w/Wn95a+UVpSETAya8Elru24M3lBAHSlZEL4giBRcGVK23PiRz8fz8iyVkDxNfVLASVJ8pqQuoxtxnmEDvbnKDCHOL/AabMn4CtjYp3SaMz3gnh0JrQcJ9igx50WTnAiQOQgtgCdoarOiRAmF3RKYIP5yx4LP/62EAebRpAKBN1MMrpoLfPRIcKueWX8zlspNCdgDlrazc8tbtUvrAkO0k3yd+/cWVJ6Q==",
+      "username": "AgBgwJ5bqgq3lliA2nCHyXNMR+rSnpeM+mkAX24kmqBCvnRbuDDzm9ir9BBC+xQNBcYauaKDZwjtit1jZqyFwYYtAj2GGJ8Kl7YFnaGFckNZQ8DW3O4hXxlGWFqee7VUJK/MIv8y/NwjY+glJ7dmaAiaCW1TeWDmAdgwhfzGmtqvaufwH4GYn+EGLxYellbZx1BI+O8vUaMtq232VEDwtORyfAKPe1YI/tS6LT4HFDsgkzoakM52B9Jk3Qm23Uh6pJvnhO++fWixTamYuZ1iR7XVmri3bC/yioFHqbdWnR/V+duJcZyGWGRGFwkRuR/y5RmG2zG7vMpRFpDJmodKrafGvgDyn+hfFr79aAAVATHPRKGlaMSwb6MYHLNEn4gPHY0bn+C7i7S+haG0vTPrOsPVnL9fYK0woW3auzecxTD3ry43IMOY/epVfhPlSgJIbrlFZcMg7PvAKelVSH27/uskwsIuqYmHUeDRkWdcfnPpzsnUTQl8ZE1NmlZI4YG1f9/iQbTpKRFAwmqJpiLuUNkBmrS0n0oUPeHqIiDTokZhC5OSR2fKDOGZLE+BuEKZyPoeiZtfx9k+ZyUrCKoLV7gTIKb+/O4uX7YjKwnByT3vlBDoh0o1pTPmzHLmA0VAckMwIse4V9zaJhh8+IDP5DB7xy79c1xTN1u+CG7P2O/NJaLSDRwZxSIUe8/fMG7jyZ3wq1v6zA=="
+    }
+  }
+}
