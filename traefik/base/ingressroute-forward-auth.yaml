@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: alertmanager
+  name: forward-auth
 spec:
   entryPoints:
     - web
@@ -10,7 +10,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: alertmanager-tls
+  name: forward-auth-tls
 spec:
   entryPoints:
     - websecure

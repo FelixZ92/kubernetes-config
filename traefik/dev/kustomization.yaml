@@ -5,6 +5,9 @@ resources:
   - oidc-secret.json
   - signing-secret-sealed.json
 
+patchesStrategicMerge:
+  - ingressroute-patch-forward-auth.yaml
+
 configMapGenerator:
   - name: traefik-oidc-config-
     behavior: merge
