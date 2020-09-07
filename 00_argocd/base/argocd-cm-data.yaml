@@ -23,4 +23,4 @@ data:
         args: ["helm dependency up ."]
       generate:
         command: [sh, -c]
-        args: ["helm template $ARGOCD_APP_NAME . --namespace $ARGOCD_APP_NAMESPACE > base/all.yaml && kustomize build $ENVIRONMENT"]
+        args: ["helm template $ARGOCD_APP_NAME . --namespace $ARGOCD_APP_NAMESPACE $ADDITIONAL_HELM_ARGS > base/all.yaml && kustomize build $ENVIRONMENT"]
