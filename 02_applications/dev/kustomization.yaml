@@ -12,3 +12,4 @@ patchesStrategicMerge:
   - loki-env-patch.yaml
   - promtail-env-patch.yaml
   - certificate-authority-repo-path.yaml
+  - traefik-env-patch.yaml

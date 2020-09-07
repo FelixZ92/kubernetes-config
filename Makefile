@@ -115,13 +115,13 @@ blub:
 create-oidc-secret:
 	@if [ -z "$(OIDC_SECRET)" ]; then echo "OIDC_SECRET not set, exit"; exit 1; fi
 	@if [ -z "$(OIDC_CLIENT_ID)" ]; then echo "OIDC_CLIENT_ID not set, exit"; exit 1; fi
-	@kubectl -n monitoring --dry-run=client create secret generic oidc-secret \
+	@kubectl -n traefik --dry-run=client create secret generic oidc-secret \
 		--from-literal=clientid="$(OIDC_CLIENT_ID)" --from-literal=secret="$(OIDC_SECRET)" -o json \
 		> $(CURRENT_DIR)/tmp/oidc-secret.json
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/oidc-secret.json \
-			 > $(CURRENT_DIR)/prometheus-operator/dev/oidc-secret.json
+			 > $(CURRENT_DIR)/traefik/dev/oidc-secret.json
 #	@git add $(CURRENT_DIR)/prometheus-operator/dev/oidc-secret.json && \
 #		git commit -m "Re-encrypt oidc secret" && \
 #		git push

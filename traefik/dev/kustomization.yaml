@@ -1,0 +1,9 @@
+bases:
+  - ../base
+
+configMapGenerator:
+  - name: traefik-oidc-config-
+    behavior: merge
+    literals:
+      - COOKIE_DOMAIN=192.168.0.15.xip.io
+      - AUTH_HOST=auth.192.168.0.15.xip.io

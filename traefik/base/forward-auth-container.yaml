@@ -13,3 +13,28 @@ spec:
         - name: forward-auth
           image: thomseddon/traefik-forward-auth:2
           imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4181
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: traefik-oidc-config-
+          env:
+            - name: PROVIDERS_OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: clientid
+                  name: oidc-secret
+            - name: PROVIDERS_OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: secret
+                  name: oidc-secret
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsGroup: 65532
+            runAsNonRoot: true
+            runAsUser: 65532
