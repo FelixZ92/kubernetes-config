@@ -15,6 +15,7 @@ endif
 GRAFANA_PASSWORD := $(shell gopass clusters/dev/grafana)
 OIDC_SECRET := $(shell gopass clusters/dev/oidc/secret)
 OIDC_CLIENT_ID := $(shell gopass clusters/dev/oidc/clientid)
+OIDC_NAMESPACES = monitoring traefik
 
 gen-secret/uuid: gen-secret/check-vars gen-secret/assert-tmp-dir
 	uuidgen -r | tr -d '\n' > ./tmp/$(NAMESPACE)_$(SECRET_NAME).tmp
@@ -112,30 +113,42 @@ blub:
 	kubectl version foo
 	kubectl version foo >/dev/null 2>&1 || { echo >&2 "I require kubectl but it's not installed.  Aborting."; exit 1; }
 
+test:
+	for n in $(OIDC_NAMESPACES); do \
+		echo $$n ; \
+	done
+
 create-oidc-secret:
 	@if [ -z "$(OIDC_SECRET)" ]; then echo "OIDC_SECRET not set, exit"; exit 1; fi
 	@if [ -z "$(OIDC_CLIENT_ID)" ]; then echo "OIDC_CLIENT_ID not set, exit"; exit 1; fi
-	@kubectl -n traefik --dry-run=client create secret generic oidc-secret \
-		--from-literal=clientid="$(OIDC_CLIENT_ID)" --from-literal=secret="$(OIDC_SECRET)" -o json \
-		> $(CURRENT_DIR)/tmp/oidc-secret.json
-	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
-			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
-			 < $(CURRENT_DIR)/tmp/oidc-secret.json \
-			 > $(CURRENT_DIR)/02_applications/dev/secrets/oidc-secret.json
-	@git add $(CURRENT_DIR)/02_applications/dev/secrets/oidc-secret.json && \
-		git commit -m "Re-encrypt oidc secret" && \
-		git push
+	for n in $(OIDC_NAMESPACES); do \
+		echo $$n ; \
+		kubectl -n $$n --dry-run=client create secret generic oidc-secret \
+			--from-literal=clientid="$(OIDC_CLIENT_ID)" --from-literal=secret="$(OIDC_SECRET)" -o json \
+			> $(CURRENT_DIR)/tmp/$$n-oidc-secret.json ; \
+		kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
+				--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
+				 < $(CURRENT_DIR)/tmp/$$n-oidc-secret.json \
+				 > $(CURRENT_DIR)/02_applications/dev/secrets/$$n-oidc-secret.json ; \
+		git add $(CURRENT_DIR)/02_applications/dev/secrets/$$n-oidc-secret.json ; \
+	done
+#	@git commit -m "Re-encrypt oidc secret" && \
+#		git push
 
 create-signing-secret:
-	openssl rand -hex 16 | tr -d '\n' > ./tmp/traefik-signing-secret.tmp
-	@kubectl -n traefik create secret generic oidc-signing-secret --dry-run=client --from-file=secret=./tmp/traefik-signing-secret.tmp -o json > ./tmp/traefik-signing-secret.json
-	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
-    			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
-    			 < $(CURRENT_DIR)/tmp/traefik-signing-secret.json \
-    			 > $(CURRENT_DIR)/02_applications/dev/secrets/signing-secret-sealed.json
-	@git add $(CURRENT_DIR)/02_applications/dev/secrets/signing-secret-sealed.json && \
-		git commit -m "Re-encrypt grafana secret" && \
-		git push
+	openssl rand -hex 16 | tr -d '\n' > ./tmp/signing-secret.tmp
+	for n in $(OIDC_NAMESPACES); do \
+		kubectl -n $$n create secret generic oidc-signing-secret --dry-run=client \
+			--from-file=secret=./tmp/signing-secret.tmp -o json > ./tmp/$$n-signing-secret.json ; \
+		kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
+					--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
+					 < $(CURRENT_DIR)/tmp/$$n-signing-secret.json \
+					 > $(CURRENT_DIR)/02_applications/dev/secrets/$$n-signing-secret-sealed.json ; \
+		git add $(CURRENT_DIR)/02_applications/dev/secrets/$$n-signing-secret-sealed.json ; \
+	done
+	@#git commit -m "Re-encrypt grafana secret" && \
+#	@git push
+
 
 create-grafana-secret:
 	if [ -z "$(GRAFANA_PASSWORD)" ]; then echo "GRAFANA_PASSWORD not set, exit"; exit 1; fi
