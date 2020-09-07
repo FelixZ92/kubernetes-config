@@ -14,7 +14,7 @@ configMapGenerator:
     literals:
       - PROVIDERS_OIDC_ISSUER_URL=https://gitlab.com
       - DEFAULT_PROVIDER=oidc
-      - LOGLEVEL=debug
+      - LOGLEVEL=trace
 
 patchesStrategicMerge:
   - forward-auth-container.yaml
