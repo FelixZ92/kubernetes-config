@@ -16,6 +16,7 @@ spec:
           ports:
             - containerPort: 4181
               protocol: TCP
+              name: forward-auth
           envFrom:
             - configMapRef:
                 name: traefik-oidc-config-
