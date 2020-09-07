@@ -4,7 +4,5 @@ kind: Certificate
 metadata:
   name: forward-auth-tls-certificate
 spec:
-  secretName: tls-forward-auth-ingress
-  issuerRef:
-    name: ca-clusterissuer
-    kind: ClusterIssuer
+  dnsNames:
+    - auth.192.168.0.15.xip.io
