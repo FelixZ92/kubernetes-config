@@ -1,5 +1,6 @@
 resources:
   - ../base/
+  - oidc-secret.json
 
 patchesStrategicMerge:
   - endpoint-patches.yaml

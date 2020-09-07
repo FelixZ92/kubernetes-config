@@ -24,4 +24,4 @@ metadata:
   namespace: monitoring
 spec:
   dnsNames:
-    - alertmanager.192.168.0.15.xip.io
+    - grafana.192.168.0.15.xip.io
