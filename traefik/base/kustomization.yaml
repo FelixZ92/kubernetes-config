@@ -1,6 +1,8 @@
 resources:
   - all.yaml
 
+namespace: traefik
+
 configMapGenerator:
   - name: traefik-oidc-config-
     literals:
