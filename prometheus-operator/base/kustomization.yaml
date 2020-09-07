@@ -1,6 +1,8 @@
 resources:
   - ../crds
-  - presync-hook-check-grafana-password.yaml
+  - hooks/presync-hook-check-grafana-password.yaml
+  - hooks/presync-hook-check-oidc-secret.yaml
+  - hooks/presync-hook-check-signing-secret.yaml
   - all.yaml
   - certificates.yaml
   - ../ingress
@@ -9,7 +11,21 @@ patchesJson6902:
   - target:
       group: batch
       kind: Job
+      name: check-oidc-signing-secret-
+      version: v1
+      namespace: kube-system
+    path: patches/check-signing-secret-generate-name.yaml
+  - target:
+      group: batch
+      kind: Job
       name: check-grafana-password-
       version: v1
       namespace: kube-system
     path: patches/check-grafana-password-generate-name.yaml
+  - target:
+      group: batch
+      kind: Job
+      name: check-oidc-secret-
+      version: v1
+      namespace: kube-system
+    path: patches/check-oidc-secret-generate-name.yaml
