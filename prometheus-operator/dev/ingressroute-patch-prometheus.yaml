@@ -11,7 +11,7 @@ spec:
         - name: prometheus-operator-prometheus
           port: 9090
       middlewares:
-        - name: redirect-https-prometheus
+        - name: redirect-https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute

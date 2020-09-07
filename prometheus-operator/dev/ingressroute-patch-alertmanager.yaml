@@ -11,7 +11,7 @@ spec:
         - name: prometheus-operator-alertmanager
           port: 9093
       middlewares:
-        - name: redirect-https-alertmanager
+        - name: redirect-https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute

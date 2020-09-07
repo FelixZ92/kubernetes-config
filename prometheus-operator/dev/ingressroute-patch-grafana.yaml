@@ -11,7 +11,7 @@ spec:
         - name: prometheus-operator-grafana
           port: 80
       middlewares:
-        - name: redirect-https-grafana
+        - name: redirect-https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
