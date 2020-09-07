@@ -1,8 +1,6 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
-  annotations:
-    argocd.argoproj.io/hook: Skip
   name: ca-clusterissuer
 spec:
   ca:
