@@ -1,6 +1,9 @@
 bases:
   - ../base
 
+resources:
+  - oidc-secret.json
+
 configMapGenerator:
   - name: traefik-oidc-config-
     behavior: merge
