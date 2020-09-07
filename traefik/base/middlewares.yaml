@@ -7,3 +7,13 @@ spec:
   redirectScheme:
     scheme: https
     permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-forward-auth
+spec:
+  forwardAuth:
+    address: http://127.0.0.1:4181
+    authResponseHeaders:
+      - X-Forwarded-User
