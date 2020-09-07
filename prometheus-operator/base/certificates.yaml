@@ -4,8 +4,6 @@ kind: Certificate
 metadata:
   name: prometheus-tls-certificate
   namespace: monitoring
-  annotations:
-    argocd.argoproj.io/hook: Skip
 spec:
   secretName: tls-prometheus-ingress
   issuerRef:
@@ -17,8 +15,6 @@ kind: Certificate
 metadata:
   name: alertmanager-tls-certificate
   namespace: monitoring
-  annotations:
-    argocd.argoproj.io/hook: Skip
 spec:
   secretName: tls-prometheus-ingress
   issuerRef:
@@ -30,8 +26,6 @@ kind: Certificate
 metadata:
   name: grafana-tls-certificate
   namespace: monitoring
-  annotations:
-    argocd.argoproj.io/hook: Skip
 spec:
   secretName: tls-prometheus-ingress
   issuerRef:
