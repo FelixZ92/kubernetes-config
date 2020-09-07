@@ -121,10 +121,10 @@ create-oidc-secret:
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/oidc-secret.json \
-			 > $(CURRENT_DIR)/traefik/dev/oidc-secret.json
-#	@git add $(CURRENT_DIR)/prometheus-operator/dev/oidc-secret.json && \
-#		git commit -m "Re-encrypt oidc secret" && \
-#		git push
+			 > $(CURRENT_DIR)/02_applications/dev/secrets/oidc-secret.json
+	@git add $(CURRENT_DIR)/02_applications/dev/secrets/oidc-secret.json && \
+		git commit -m "Re-encrypt oidc secret" && \
+		git push
 
 create-signing-secret:
 	openssl rand -hex 16 | tr -d '\n' > ./tmp/traefik-signing-secret.tmp
@@ -145,8 +145,8 @@ create-grafana-secret:
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/grafana-admin-user.json \
-			 > $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json
-	@git add $(CURRENT_DIR)/02_applications/dev/grafana-admin-user-sealed.json && \
+			 > $(CURRENT_DIR)/02_applications/dev/secrets/grafana-admin-user-sealed.json
+	@git add $(CURRENT_DIR)/02_applications/dev/secrets/grafana-admin-user-sealed.json && \
 		git commit -m "Re-encrypt grafana secret" && \
 		git push
 
