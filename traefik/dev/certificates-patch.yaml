@@ -1,0 +1,16 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: forward-auth-tls-certificate
+spec:
+  dnsNames:
+    - auth.192.168.0.15.xip.io
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: traefik-dashboard-tls-certificate
+spec:
+  dnsNames:
+    - traefik.192.168.0.15.xip.io

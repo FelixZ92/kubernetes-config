@@ -1,0 +1,28 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  routes:
+    - match: Host(`traefik.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: traefik-dashboard
+          port: 9000
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard-tls
+spec:
+  routes:
+    - match: Host(`traefik.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: traefik-dashboard
+          port: 9000
+      middlewares:
+        - name: traefik-forward-auth

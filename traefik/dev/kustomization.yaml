@@ -7,7 +7,8 @@ resources:
 
 patchesStrategicMerge:
   - ingressroute-patch-forward-auth.yaml
-  - forward-auth-certificate-patch.yaml
+  - certificates-patch.yaml
+  - ingressroute-patch-dashboard.yaml
 
 configMapGenerator:
   - name: traefik-oidc-config-

@@ -1,9 +1,11 @@
 resources:
   - all.yaml
   - middlewares.yaml
-  - forward-auth-certificate.yaml
+  - certificates.yaml
   - forward-auth-service.yaml
   - ingressroute-forward-auth.yaml
+  - dashboard-service.yaml
+  - ingressroute-dashboard.yaml
 
 namespace: traefik
 
