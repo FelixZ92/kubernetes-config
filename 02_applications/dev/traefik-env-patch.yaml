@@ -9,3 +9,5 @@ spec:
       env:
         - name: ENVIRONMENT
           value: dev
+        - name: ADDITIONAL_HELM_ARGS
+          value: "--include-crds"
