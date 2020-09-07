@@ -3,6 +3,7 @@ bases:
 
 resources:
   - oidc-secret.json
+  - signing-secret-sealed.json
 
 configMapGenerator:
   - name: traefik-oidc-config-

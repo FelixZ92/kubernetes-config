@@ -126,6 +126,14 @@ create-oidc-secret:
 #		git commit -m "Re-encrypt oidc secret" && \
 #		git push
 
+create-signing-secret:
+	openssl rand -hex 16 | tr -d '\n' > ./tmp/traefik-signing-secret.tmp
+	@kubectl -n traefik create secret generic oidc-signing-secret --dry-run=client --from-file=secret=./tmp/traefik-signing-secret.tmp -o json > ./tmp/traefik-signing-secret.json
+	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
+    			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
+    			 < $(CURRENT_DIR)/tmp/traefik-signing-secret.json \
+    			 > $(CURRENT_DIR)/traefik/dev/signing-secret-sealed.json
+
 create-grafana-secret:
 	if [ -z "$(GRAFANA_PASSWORD)" ]; then echo "GRAFANA_PASSWORD not set, exit"; exit 1; fi
 	@kubectl -n monitoring --dry-run=client create secret generic grafana-admin-user \

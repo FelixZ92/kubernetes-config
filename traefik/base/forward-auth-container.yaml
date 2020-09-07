@@ -30,6 +30,11 @@ spec:
                 secretKeyRef:
                   key: secret
                   name: oidc-secret
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: secret
+                  name: oidc-signing-secret
           securityContext:
             capabilities:
               drop:

@@ -16,7 +16,7 @@ metadata:
   name: alertmanager-tls-certificate
   namespace: monitoring
 spec:
-  secretName: tls-prometheus-ingress
+  secretName: tls-alertmanager-ingress
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer
@@ -27,7 +27,7 @@ metadata:
   name: grafana-tls-certificate
   namespace: monitoring
 spec:
-  secretName: tls-prometheus-ingress
+  secretName: tls-grafana-ingress
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer
