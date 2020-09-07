@@ -12,7 +12,7 @@ SECRET_NAME = $(shell cat ${KUBE_MANIFEST} | yq  -r .metadata.name)
 SECRET_KEY = $(shell cat ${KUBE_MANIFEST} | yq  -r '.spec.encryptedData | to_entries[].key')
 endif
 
-GRAFANA_SECRET := $(shell gopass clusters/dev/grafana)
+GRAFANA_PASSWORD := $(shell gopass clusters/dev/grafana)
 OIDC_SECRET := $(shell gopass clusters/dev/oidc/secret)
 OIDC_CLIENT_ID := $(shell gopass clusters/dev/oidc/clientid)
 
@@ -107,7 +107,7 @@ rotate-all:
 	@git push
 	@fluxctl  --k8s-fwd-ns fluxcd sync
 test2:
-	echo "$(GRAFANA_SECRET)"
+	echo "$(GRAFANA_PASSWORD)"
 blub:
 	kubectl version foo
 	kubectl version foo >/dev/null 2>&1 || { echo >&2 "I require kubectl but it's not installed.  Aborting."; exit 1; }
@@ -132,7 +132,10 @@ create-signing-secret:
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
     			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
     			 < $(CURRENT_DIR)/tmp/traefik-signing-secret.json \
-    			 > $(CURRENT_DIR)/traefik/dev/signing-secret-sealed.json
+    			 > $(CURRENT_DIR)/02_applications/dev/secrets/signing-secret-sealed.json
+	@git add $(CURRENT_DIR)/02_applications/dev/secrets/signing-secret-sealed.json && \
+		git commit -m "Re-encrypt grafana secret" && \
+		git push
 
 create-grafana-secret:
 	if [ -z "$(GRAFANA_PASSWORD)" ]; then echo "GRAFANA_PASSWORD not set, exit"; exit 1; fi
@@ -165,7 +168,7 @@ update-local-ca-secrets:
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/dev-ca-secret.json \
-			 > $(CURRENT_DIR)/certificate-authority/dev/dev-ca-secret-sealed.json
+			 > $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json
 
 	@git add $(CURRENT_DIR)/certificate-authority/dev/dev-ca-secret-sealed.json && \
 		git commit -m "Update dev CA" && \
