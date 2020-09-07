@@ -2,19 +2,14 @@ resources:
   - all.yaml
   - middlewares.yaml
   - certificates.yaml
-  - forward-auth-service.yaml
-  - ingressroute-forward-auth.yaml
   - dashboard-service.yaml
   - ingressroute-dashboard.yaml
 
 namespace: traefik
-
-configMapGenerator:
-  - name: traefik-oidc-config-
-    literals:
-      - PROVIDERS_OIDC_ISSUER_URL=https://gitlab.com
-      - DEFAULT_PROVIDER=oidc
-      - LOGLEVEL=trace
-
-patchesStrategicMerge:
-  - forward-auth-container.yaml
+#
+#configMapGenerator:
+#  - name: traefik-oidc-config-
+#    literals:
+#      - PROVIDERS_OIDC_ISSUER_URL=https://gitlab.com
+#      - DEFAULT_PROVIDER=oidc
+#      - LOGLEVEL=trace
