@@ -1,6 +1,0 @@
-resources:
-  - clusterRoleBinding.yaml
-  - deployment.yaml
-  - service.yaml
-  - serviceAccount.yaml
-  - ingressroute.yaml

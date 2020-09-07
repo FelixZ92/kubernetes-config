@@ -1,6 +1,0 @@
-bases:
-  - ../base
-
-patchesStrategicMerge:
-  - rancher-public-ca-patch.yaml
-  - ingressroute-patch.yaml
