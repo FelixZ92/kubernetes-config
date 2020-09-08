@@ -10,7 +10,6 @@ spec:
   teamId: "identity"
   volume:
     size: 2Gi
-    storageClass: local-storage
   numberOfInstances: 1
   users:
 #    # database owner
