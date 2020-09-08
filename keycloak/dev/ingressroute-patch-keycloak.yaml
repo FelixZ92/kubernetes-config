@@ -9,7 +9,7 @@ spec:
       kind: Rule
       services:
         - name: keycloak
-          port: 8443
+          port: 8080
       middlewares:
         - name: redirect-https
 ---
@@ -23,5 +23,4 @@ spec:
       kind: Rule
       services:
         - name: keycloak
-          port: 8443
-          scheme: https
+          port: 8080

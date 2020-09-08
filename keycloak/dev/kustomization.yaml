@@ -3,4 +3,4 @@ resources:
 
 patchesStrategicMerge:
   - certificates-patch.yaml
-  - ingressroute-patch-dashboard.yaml
+  - ingressroute-patch-keycloak.yaml
