@@ -24,5 +24,3 @@ spec:
       services:
         - name: traefik-dashboard
           port: 9000
-      middlewares:
-        - name: traefik-forward-auth
