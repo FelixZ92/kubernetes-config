@@ -7,4 +7,5 @@ resources:
   - prometheus-operator.yaml
   - loki.yaml
   - promtail.yaml
+  - keycloak.yaml
 namespace: argocd

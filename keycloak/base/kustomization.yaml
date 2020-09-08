@@ -1,0 +1,8 @@
+resources:
+  - ../crds
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.2/deploy/service_account.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.2/deploy/role.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.2/deploy/role_binding.yaml
+  - https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.2/deploy/operator.yaml
+
+namespace: keycloak
