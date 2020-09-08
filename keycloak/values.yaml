@@ -29,7 +29,7 @@ keycloak:   # The number of replicas to create
   # Additional environment variables for Keycloak
   extraEnv: |
     - name: PROXY_ADDRESS_FORWARDING
-      value: true
+      value: "true"
     - name: DB_VENDOR
       value: postgres
     - name: DB_ADDR
