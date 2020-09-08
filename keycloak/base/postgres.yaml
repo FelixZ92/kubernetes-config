@@ -12,12 +12,12 @@ spec:
     size: 2Gi
   numberOfInstances: 1
   users:
-#    # database owner
-#    keycloak:
-#      - superuser
-#      - createdb
+    # database owner
+    keycloak:
+      - superuser
+      - createdb
     # role for application foo
-    keycloak: []
+    keycloak_user: []
 
   databases:
     keycloak: keycloak
