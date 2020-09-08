@@ -24,3 +24,4 @@ spec:
       services:
         - name: keycloak
           port: 8443
+          scheme: https
