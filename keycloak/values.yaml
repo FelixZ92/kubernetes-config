@@ -219,9 +219,9 @@ keycloak:   # The number of replicas to create
           message: RH SSO database in namespace {{ $labels.namespace }} is not available
             for the last 5 minutes.
         expr: |
-          '(1 - absent(kube_pod_status_ready{namespace="keycloak", condition="true"}
+          (1 - absent(kube_pod_status_ready{namespace="keycloak", condition="true"}
           * on (pod) group_left (label_component) kube_pod_labels{label_component="database",
-          namespace="keycloak"})) == 0 '
+          namespace="keycloak"})) == 0
         for: 5m
         labels:
           severity: critical
