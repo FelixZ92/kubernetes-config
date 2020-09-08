@@ -12,11 +12,16 @@ SECRET_NAME = $(shell cat ${KUBE_MANIFEST} | yq  -r .metadata.name)
 SECRET_KEY = $(shell cat ${KUBE_MANIFEST} | yq  -r '.spec.encryptedData | to_entries[].key')
 endif
 
-GRAFANA_PASSWORD := $(shell gopass clusters/dev/grafana)
-OIDC_SECRET := $(shell gopass clusters/dev/oidc/secret)
-OIDC_CLIENT_ID := $(shell gopass clusters/dev/oidc/clientid)
+ENVIRONMENT=dev
+KEYCLOAK_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/keycloak/admin)
+GRAFANA_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/grafana)
+OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
+OIDC_CLIENT_ID := $(shell gopass clusters/$(ENVIRONMENT)/oidc/clientid)
+
 OIDC_NAMESPACES = monitoring traefik
 
+echo-keycloak:
+	echo $(KEYCLOAK_PASSWORD)
 gen-secret/uuid: gen-secret/check-vars gen-secret/assert-tmp-dir
 	uuidgen -r | tr -d '\n' > ./tmp/$(NAMESPACE)_$(SECRET_NAME).tmp
 
@@ -129,8 +134,8 @@ create-oidc-secret:
 		kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 				--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 				 < $(CURRENT_DIR)/tmp/$$n-oidc-secret.json \
-				 > $(CURRENT_DIR)/02_applications/dev/secrets/$$n-oidc-secret.json ; \
-		git add $(CURRENT_DIR)/02_applications/dev/secrets/$$n-oidc-secret.json ; \
+				 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-oidc-secret.json ; \
+		git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-oidc-secret.json ; \
 	done
 #	@git commit -m "Re-encrypt oidc secret" && \
 #		git push
@@ -143,12 +148,24 @@ create-signing-secret:
 		kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 					--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 					 < $(CURRENT_DIR)/tmp/$$n-signing-secret.json \
-					 > $(CURRENT_DIR)/02_applications/dev/secrets/$$n-signing-secret-sealed.json ; \
-		git add $(CURRENT_DIR)/02_applications/dev/secrets/$$n-signing-secret-sealed.json ; \
+					 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-signing-secret-sealed.json ; \
+		git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-signing-secret-sealed.json ; \
 	done
 	@#git commit -m "Re-encrypt grafana secret" && \
 #	@git push
 
+create-keycloak-admin-secret:
+	if [ -z "$(KEYCLOAK_PASSWORD)" ]; then echo "KEYCLOAK_PASSWORD not set, exit"; exit 1; fi
+	@kubectl -n keycloak --dry-run=client create secret generic keycloak-admin-user \
+		--from-literal=username=keycloak --from-literal=password="$(KEYCLOAK_PASSWORD)" -o json \
+		> $(CURRENT_DIR)/tmp/keycloak-admin-user.json
+	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
+			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
+			 < $(CURRENT_DIR)/tmp/keycloak-admin-user.json \
+			 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/keycloak-admin-user-sealed.json
+	@git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/keycloak-admin-user-sealed.json && \
+		git commit -m "Re-encrypt grafana secret" && \
+		git push
 
 create-grafana-secret:
 	if [ -z "$(GRAFANA_PASSWORD)" ]; then echo "GRAFANA_PASSWORD not set, exit"; exit 1; fi
@@ -158,8 +175,8 @@ create-grafana-secret:
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/grafana-admin-user.json \
-			 > $(CURRENT_DIR)/02_applications/dev/secrets/grafana-admin-user-sealed.json
-	@git add $(CURRENT_DIR)/02_applications/dev/secrets/grafana-admin-user-sealed.json && \
+			 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/grafana-admin-user-sealed.json
+	@git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/grafana-admin-user-sealed.json && \
 		git commit -m "Re-encrypt grafana secret" && \
 		git push
 
