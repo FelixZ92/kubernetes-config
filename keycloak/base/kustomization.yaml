@@ -1,4 +1,5 @@
 resources:
+  - postgres.yaml
   - all.yaml
   - certificates.yaml
   - middlewares.yaml
