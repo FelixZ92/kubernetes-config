@@ -17,7 +17,7 @@ spec:
 #      - superuser
 #      - createdb
     # role for application foo
-    keycloak_user: []
+    keycloak: []
 
   databases:
     keycloak: keycloak
