@@ -9,5 +9,6 @@ resources:
   - middlewares.yaml
   - http-service.yaml
   - ingressroute-keycloak.yaml
+  - realm.yaml
 
 namespace: keycloak
