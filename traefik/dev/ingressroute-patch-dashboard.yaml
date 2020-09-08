@@ -8,8 +8,8 @@ spec:
     - match: Host(`traefik.192.168.0.15.xip.io`)
       kind: Rule
       services:
-        - name: traefik-dashboard
-          port: 9000
+        - name: api@internal
+          kind: TraefikService
       middlewares:
         - name: redirect-https
 ---
@@ -22,5 +22,5 @@ spec:
     - match: Host(`traefik.192.168.0.15.xip.io`)
       kind: Rule
       services:
-        - name: traefik-dashboard
-          port: 9000
+        - name: api@internal
+          kind: TraefikService
