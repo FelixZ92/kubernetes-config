@@ -13,5 +13,6 @@ kind: Middleware
 metadata:
   name: forward-proto-header
 spec:
-  sslProxyHeaders:
-    X-Forwarded-Proto: https
+  headers:
+    sslProxyHeaders:
+      X-Forwarded-Proto: https
