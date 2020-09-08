@@ -1,0 +1,26 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: keycloak
+spec:
+  routes:
+    - match: Host(`keycloak.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: keycloak
+          port: 8443
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: keycloak-tls
+spec:
+  routes:
+    - match: Host(`keycloak.192.168.0.15.xip.io`)
+      kind: Rule
+      services:
+        - name: keycloak
+          port: 8443
