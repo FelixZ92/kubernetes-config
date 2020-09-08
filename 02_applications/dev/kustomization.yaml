@@ -17,4 +17,4 @@ patchesStrategicMerge:
   - promtail-env-patch.yaml
   - certificate-authority-repo-path.yaml
   - traefik-env-patch.yaml
-  - keycloak-repo-path.yaml
+#  - keycloak-repo-path.yaml
