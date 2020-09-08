@@ -1,0 +1,2 @@
+resources:
+  - presync-hook-check-keycloak-password.yaml
