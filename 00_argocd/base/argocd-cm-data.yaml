@@ -22,6 +22,9 @@ data:
     - type: helm
       url: https://raw.githubusercontent.com/zalando/postgres-operator/master/charts/postgres-operator-ui
       name: postgres-operator-ui
+    - type: helm
+      url: https://codecentric.github.io/helm-charts
+      name: codecentric
   configManagementPlugins: |
     - name: kustomized-helm
       init:
