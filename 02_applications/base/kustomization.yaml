@@ -9,4 +9,5 @@ resources:
   - promtail.yaml
   - keycloak.yaml
   - postgres-operator.yaml
+  - postgres-operator-ui.yaml
 namespace: argocd

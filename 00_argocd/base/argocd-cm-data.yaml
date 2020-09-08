@@ -19,6 +19,9 @@ data:
     - type: helm
       url: https://raw.githubusercontent.com/zalando/postgres-operator/master/charts/postgres-operator
       name: postgres-operator
+    - type: helm
+      url: https://raw.githubusercontent.com/zalando/postgres-operator/master/charts/postgres-operator-ui
+      name: postgres-operator-ui
   configManagementPlugins: |
     - name: kustomized-helm
       init:
