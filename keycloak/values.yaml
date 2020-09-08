@@ -93,10 +93,10 @@ keycloak:   # The number of replicas to create
     - emptyDir: {}
       name: keycloak-extensions
 
-  # Add additional volumes mounts, e. g. for custom themes
-  extraVolumeMounts: |
-    - mountPath: /opt/jboss/keycloak/providers
-      name: keycloak-extensions
+#  # Add additional volumes mounts, e. g. for custom themes
+#  extraVolumeMounts: |
+#    - mountPath: /opt/jboss/keycloak/providers
+#      name: keycloak-extensions
 
   # Add additional ports, e. g. for admin console or exposing JGroups ports
   extraPorts: []
