@@ -8,6 +8,7 @@ resources:
   - secrets/traefik-oidc-secret.json
   - secrets/traefik-signing-secret-sealed.json
   - secrets/monitoring-signing-secret-sealed.json
+  - secrets/keycloak-admin-user-sealed.json
 
 patchesStrategicMerge:
   - sealed-secrets-repo-path.yaml
