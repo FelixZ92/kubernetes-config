@@ -8,4 +8,5 @@ resources:
   - loki.yaml
   - promtail.yaml
   - keycloak.yaml
+  - postgres-operator.yaml
 namespace: argocd
