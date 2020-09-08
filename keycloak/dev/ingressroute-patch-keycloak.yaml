@@ -24,5 +24,3 @@ spec:
       services:
         - name: keycloak-http
           port: 80
-#      middlewares:
-#        - name: forward-proto-header
