@@ -4,4 +4,8 @@ metadata:
   name: keycloak
 spec:
   source:
-    path: keycloak/dev
+    plugin:
+      name: kustomized-helm
+      env:
+        - name: ENVIRONMENT
+          value: dev

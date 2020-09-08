@@ -13,6 +13,13 @@ spec:
     path: keycloak/base
     repoURL: https://gitlab.com/FelixZ92/k8s-dev.git
     targetRevision: master
+    plugin:
+      name: kustomized-helm
+      env:
+        - name: ENVIRONMENT
+          value: base
+        - name: ADDITIONAL_HELM_ARGS
+          value: "--include-crds"
   syncPolicy:
     automated:
       prune: false

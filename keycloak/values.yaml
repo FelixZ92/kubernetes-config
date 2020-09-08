@@ -1,0 +1,248 @@
+keycloak:   # The number of replicas to create
+  replicas: 1
+
+  # Additional init containers, e. g. for providing custom themes
+  extraInitContainers: |
+    - env:
+      - name: KEYCLOAK_EXTENSIONS
+        value: https://github.com/aerogear/keycloak-metrics-spi/releases/download/1.0.4/keycloak-metrics-spi-1.0.4.jar
+      image: quay.io/keycloak/keycloak-init-container:master
+      imagePullPolicy: Always
+      name: extensions-init
+      volumeMounts:
+      - mountPath: /opt/extensions
+        name: keycloak-extensions
+
+
+  # Additional sidecar containers, e. g. for a database proxy, such as Google's cloudsql-proxy
+  extraContainers: ""
+
+  # Termination grace period in seconds for Keycloak shutdown. Clusters with a large cache might need to extend this to give Infinispan more time to rebalance
+  terminationGracePeriodSeconds: 60
+
+  ## Overrides the default entrypoint of the Keycloak container
+  command: []
+
+  ## Overrides the default args for the Keycloak container
+  args: []
+
+  # Additional environment variables for Keycloak
+  extraEnv: |
+    - name: DB_VENDOR
+      value: postgres
+    - name: DB_ADDR
+      value: identity-pg
+    - name: DB_PORT
+      value: "5432"
+    - name: DB_DATABASE
+      value: keycloak
+    - name: DB_USER
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: "keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do"
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: "keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do"
+    - name: KEYCLOAK_USER
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: "keycloak-admin-user"
+    - name: KEYCLOAK_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: "keycloak-admin-user"
+
+  # - name: KEYCLOAK_LOGLEVEL
+  #   value: DEBUG
+  # - name: WILDFLY_LOGLEVEL
+  #   value: DEBUG
+  # - name: CACHE_OWNERS_COUNT
+  #   value: "2"
+  # - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
+  #   value: "2"
+
+  #  Pod priority class name
+  priorityClassName: ""
+
+  # Pod resource requests and limits
+  resources:
+     requests:
+       cpu: "500m"
+       memory: "1024Mi"
+     limits:
+       cpu: "500m"
+       memory: "1024Mi"
+
+  # Startup scripts to run before Keycloak starts up
+  startupScripts:
+    # WildFly CLI script for configuring the node-identifier
+    keycloak.cli: |
+      {{- .Files.Get "scripts/keycloak.cli" }}
+    # mystartup.sh: |
+    #   #!/bin/sh
+    #
+    # echo 'Hello from my custom startup script!'
+
+  # Add additional volumes, e. g. for custom themes
+  extraVolumes: |
+    - emptyDir: {}
+      name: keycloak-extensions
+
+  # Add additional volumes mounts, e. g. for custom themes
+  extraVolumeMounts: |
+    - mountPath: /opt/jboss/keycloak/providers
+      name: keycloak-extensions
+
+  # Add additional ports, e. g. for admin console or exposing JGroups ports
+  extraPorts: []
+
+  # Pod disruption budget
+  podDisruptionBudget: {}
+  #  maxUnavailable: 1
+  #  minAvailable: 1
+
+  # Configuration for secrets that should be created
+  secrets: {}
+    # mysecret:
+    #   annotations: {}
+    #   labels: {}
+    #   stringData: {}
+  #   data: {}
+
+  postgresql:
+    enabled: false
+
+  serviceMonitor:
+    enabled: true
+
+  prometheusRule:
+    enabled: true
+    rules:
+      - alert: KeycloakJavaHeapThresholdExceeded
+        annotations:
+          message: '{{ printf "%0.0f" $value }}% heap usage of {{ $labels.area }} in
+            pod {{$labels.pod }}, namespace {{ $labels.namespace }}.'
+        expr: |
+          100 * jvm_memory_bytes_used{area="heap",namespace="keycloak"} / jvm_memory_bytes_max{area="heap",namespace="keycloak"} > 90
+        for: 1m
+        labels:
+          severity: warning
+      - alert: KeycloakJavaNonHeapThresholdExceeded
+        annotations:
+          message: '{{ printf "%0.0f" $value }}% nonheap usage of {{ $labels.area }}
+            in pod {{ $labels.pod }}, namespace {{ $labels.namespace }}.'
+        expr: |
+          100 * jvm_memory_bytes_used{area="nonheap",namespace="keycloak"} / jvm_memory_bytes_max{area="nonheap",namespace="keycloak"} > 90
+        for: 1m
+        labels:
+          severity: warning
+      - alert: KeycloakJavaGCTimePerMinuteScavenge
+        annotations:
+          message: Amount of time per minute spent on garbage collection of {{ $labels.area
+            }} in pod {{ $labels.pod }}, namespace {{ $labels.namespace }} exceeds 90%.
+            This could indicate that the available heap memory is insufficient.
+        expr: |
+          increase(jvm_gc_collection_seconds_sum{gc="PS Scavenge",namespace="keycloak"}[1m]) > 1 * 60 * 0.9
+        for: 1m
+        labels:
+          severity: warning
+      - alert: KeycloakJavaGCTimePerMinuteMarkSweep
+        annotations:
+          message: Amount of time per minute spent on garbage collection of {{ $labels.area
+            }} in pod {{ $labels.pod }}, namespace {{ $labels.namespace }} exceeds 90%.
+            This could indicate that the available heap memory is insufficient.
+        expr: |
+          increase(jvm_gc_collection_seconds_sum{gc="PS MarkSweep",namespace="keycloak"}[1m]) > 1 * 60 * 0.9
+        for: 1m
+        labels:
+          severity: warning
+      - alert: KeycloakJavaDeadlockedThreads
+        annotations:
+          message: Number of threads in deadlock state of {{ $labels.area }} in pod
+            {{ $labels.pod }}, namespace {{ $labels.namespace }}
+        expr: |
+          jvm_threads_deadlocked{namespace="keycloak"} > 0
+        for: 1m
+        labels:
+          severity: warning
+      - alert: KeycloakLoginFailedThresholdExceeded
+        annotations:
+          message: More than 50 failed login attempts for realm {{ $labels.realm }},
+            provider {{ $labels.provider }}, namespace {{ $labels.namespace }} over
+            the last 5 minutes. (Rate of {{ printf "%0f" $value }})
+        expr: rate(keycloak_failed_login_attempts{namespace="keycloak"}[5m]) * 300 >
+          50
+        for: 5m
+        labels:
+          severity: warning
+      - alert: KeycloakInstanceNotAvailable
+        annotations:
+          message: Keycloak instance in namespace {{ $labels.namespace }} has not been
+            available for the last 5 minutes.
+        expr: |
+          (1 - absent(kube_pod_status_ready{namespace="keycloak", condition="true"}
+          * on (pod) group_left (label_component) kube_pod_labels{label_component="keycloak",
+          namespace="keycloak"})) == 0
+        for: 5m
+        labels:
+          severity: critical
+      - alert: KeycloakAPIRequestDuration90PercThresholdExceeded
+        annotations:
+          message: More than 10% the RH SSO API endpoints in namespace {{ $labels.namespace
+            }} are taking longer than 1s for the last 5 minutes.
+        expr: |
+          (sum(rate(keycloak_request_duration_bucket{le="1000.0", namespace="keycloak"}[5m]))
+          by (job) / sum(rate(keycloak_request_duration_count{namespace="keycloak"}[5m]))
+          by (job)) < 0.90
+        for: 5m
+        labels:
+          severity: warning
+      - alert: KeycloakAPIRequestDuration99.5PercThresholdExceeded
+        annotations:
+          message: More than 0.5% of the RH SSO API endpoints in namespace {{ $labels.namespace
+            }} are taking longer than 10s for the last 5 minutes.
+        expr: |
+          (sum(rate(keycloak_request_duration_bucket{le="10000.0", namespace="keycloak"}[5m]))
+          by (job) / sum(rate(keycloak_request_duration_count{namespace="keycloak"}[5m]))
+          by (job) / sum(rate(keycloak_request_duration_count{namespace="keycloak"}[5m]))
+          by (job)) < 0.995
+        for: 5m
+        labels:
+          severity: warning
+      - alert: KeycloakDatabaseNotAvailable
+        annotations:
+          message: RH SSO database in namespace {{ $labels.namespace }} is not available
+            for the last 5 minutes.
+        expr: |
+          '(1 - absent(kube_pod_status_ready{namespace="keycloak", condition="true"}
+          * on (pod) group_left (label_component) kube_pod_labels{label_component="database",
+          namespace="keycloak"})) == 0 '
+        for: 5m
+        labels:
+          severity: critical
+    # - alert: keycloak-IngressHigh5xxRate
+    #   annotations:
+    #     message: The percentage of 5xx errors for keycloak over the last 5 minutes is over 1%.
+    #   expr: |
+    #     (
+    #       sum(
+    #         rate(
+    #           nginx_ingress_controller_response_duration_seconds_count{exported_namespace="mynamespace",ingress="mynamespace-keycloak",status=~"5[0-9]{2}"}[1m]
+    #         )
+    #       )
+    #       /
+    #       sum(
+    #         rate(
+    #           nginx_ingress_controller_response_duration_seconds_count{exported_namespace="mynamespace",ingress="mynamespace-keycloak"}[1m]
+    #         )
+    #       )
+    #     ) * 100 > 1
+    #   for: 5m
+    #   labels:
+    #     severity: warning
+

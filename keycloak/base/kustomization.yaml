@@ -1,5 +1,5 @@
 resources:
-#  - all.yaml
+  - all.yaml
   - certificates.yaml
   - middlewares.yaml
   - ingressroute-keycloak.yaml
