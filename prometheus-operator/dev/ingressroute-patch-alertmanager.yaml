@@ -24,5 +24,3 @@ spec:
       services:
         - name: prometheus-operator-alertmanager
           port: 9093
-      middlewares:
-        - name: traefik-forward-auth
