@@ -1,4 +1,5 @@
 resources:
+  - presync-hook-check-keycloak-password.yaml
   - postgres.yaml
   - all.yaml
   - certificates.yaml

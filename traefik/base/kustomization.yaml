@@ -2,7 +2,6 @@ resources:
   - all.yaml
   - middlewares.yaml
   - certificates.yaml
-  - dashboard-service.yaml
   - ingressroute-dashboard.yaml
 
 namespace: traefik
