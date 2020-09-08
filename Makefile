@@ -137,8 +137,8 @@ create-oidc-secret:
 				 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-oidc-secret.json ; \
 		git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-oidc-secret.json ; \
 	done
-#	@git commit -m "Re-encrypt oidc secret" && \
-#		git push
+	@git commit -m "Re-encrypt oidc secret" && \
+	@git push
 
 create-signing-secret:
 	openssl rand -hex 16 | tr -d '\n' > ./tmp/signing-secret.tmp
@@ -164,7 +164,7 @@ create-keycloak-admin-secret:
 			 < $(CURRENT_DIR)/tmp/keycloak-admin-user.json \
 			 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/keycloak-admin-user-sealed.json
 	@git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/keycloak-admin-user-sealed.json && \
-		git commit -m "Re-encrypt grafana secret" && \
+		git commit -m "Re-encrypt keycloak secret" && \
 		git push
 
 create-grafana-secret:
@@ -200,6 +200,6 @@ update-local-ca-secrets:
 			 < $(CURRENT_DIR)/tmp/dev-ca-secret.json \
 			 > $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json
 
-	@git add $(CURRENT_DIR)/certificate-authority/dev/dev-ca-secret-sealed.json && \
+	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json && \
 		git commit -m "Update dev CA" && \
 		git push
