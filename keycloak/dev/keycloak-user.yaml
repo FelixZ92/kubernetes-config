@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-user-config
+data:
+  definition.json: |
+    {
+      "username": "cluster-user",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "felix",
+      "lastName": "zippel",
+      "email": "contact@zippelf.com",
+      "attributes": {
+        "locale": [
+          "de"
+        ]
+      }
+    }
+  groups: |
+    cluster-users
