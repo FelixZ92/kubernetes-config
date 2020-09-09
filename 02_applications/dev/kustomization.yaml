@@ -7,6 +7,7 @@ resources:
   - secrets/argocd-signing-secret-sealed.json
   - secrets/grafana-admin-user-sealed.json
   - secrets/keycloak-admin-user-sealed.json
+  - secrets/keycloak-oidc-secret.json
   - secrets/monitoring-oidc-secret.json
   - secrets/monitoring-signing-secret-sealed.json
   - secrets/postgres-operator-oidc-secret.json
