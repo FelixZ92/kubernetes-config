@@ -203,3 +203,20 @@ update-local-ca-secrets:
 	@git add $(CURRENT_DIR)/cert-manager/dev/dev-ca-secret-sealed.json && \
 		git commit -m "Update dev CA" && \
 		git push
+
+create-local-ca-secrets:
+	for n in $(OIDC_NAMESPACES); do \
+		echo $$n ; \
+		kubectl -n $$n create secret tls dev-ca-secret \
+				--key=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA-key.pem \
+        		--cert=$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)/rootCA.pem \
+        		--dry-run=client -o json \
+        		> $(CURRENT_DIR)/tmp/$$n-dev-ca-secret.json ; \
+		kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
+		    	--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
+		    	 < $(CURRENT_DIR)/tmp/$$n-dev-ca-secret.json \
+		    	 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-dev-ca-secret-sealed.json ; \
+		git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-dev-ca-secret-sealed.json ; \
+	done
+#	git commit -m "Re-encrypt oidc secret" && \
+#	git push
