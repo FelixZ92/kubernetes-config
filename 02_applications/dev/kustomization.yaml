@@ -3,12 +3,16 @@ bases:
 
 # secrets used in PreSync hooks need to be applied here due to sync stages - otherwise we'll land in an infinite sync loop
 resources:
+  - secrets/argocd-oidc-secret.json
+  - secrets/argocd-signing-secret-sealed.json
   - secrets/grafana-admin-user-sealed.json
+  - secrets/keycloak-admin-user-sealed.json
   - secrets/monitoring-oidc-secret.json
+  - secrets/monitoring-signing-secret-sealed.json
+  - secrets/postgres-operator-oidc-secret.json
+  - secrets/postgres-operator-signing-secret-sealed.json
   - secrets/traefik-oidc-secret.json
   - secrets/traefik-signing-secret-sealed.json
-  - secrets/monitoring-signing-secret-sealed.json
-  - secrets/keycloak-admin-user-sealed.json
 
 patchesStrategicMerge:
   - sealed-secrets-repo-path.yaml

@@ -16,9 +16,9 @@ ENVIRONMENT=dev
 KEYCLOAK_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/keycloak/admin)
 GRAFANA_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/grafana)
 OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
-OIDC_CLIENT_ID := $(shell gopass clusters/$(ENVIRONMENT)/oidc/clientid)
+OIDC_CLIENT_ID = k8s
 
-OIDC_NAMESPACES = monitoring traefik
+OIDC_NAMESPACES = monitoring traefik postgres-operator argocd
 
 echo-keycloak:
 	echo $(KEYCLOAK_PASSWORD)
@@ -137,22 +137,22 @@ create-oidc-secret:
 				 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-oidc-secret.json ; \
 		git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-oidc-secret.json ; \
 	done
-	@git commit -m "Re-encrypt oidc secret" && \
-	@git push
+	git commit -m "Re-encrypt oidc secret" && \
+	git push
 
 create-signing-secret:
-	openssl rand -hex 16 | tr -d '\n' > ./tmp/signing-secret.tmp
-	for n in $(OIDC_NAMESPACES); do \
+	@for n in $(OIDC_NAMESPACES); do \
+  		openssl rand -hex 16 | tr -d '\n' > ./tmp/$$n-signing-secret.tmp ; \
 		kubectl -n $$n create secret generic oidc-signing-secret --dry-run=client \
-			--from-file=secret=./tmp/signing-secret.tmp -o json > ./tmp/$$n-signing-secret.json ; \
+			--from-file=secret=./tmp/$$n-signing-secret.tmp -o json > ./tmp/$$n-signing-secret.json ; \
 		kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 					--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 					 < $(CURRENT_DIR)/tmp/$$n-signing-secret.json \
 					 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-signing-secret-sealed.json ; \
 		git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-signing-secret-sealed.json ; \
-	done
-	@#git commit -m "Re-encrypt grafana secret" && \
-#	@git push
+	done ;
+	git commit -m "Re-encrypt grafana secret" && \
+	git push
 
 create-keycloak-admin-secret:
 	if [ -z "$(KEYCLOAK_PASSWORD)" ]; then echo "KEYCLOAK_PASSWORD not set, exit"; exit 1; fi

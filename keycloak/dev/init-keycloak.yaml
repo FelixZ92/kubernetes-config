@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: keycloak
+  name: init-keycloak-realm
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  parallelism: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: keycloak-init
+          image: registry.gitlab.com/felixz92/keycloak-init
+          env:
+            - name: KEYCLOAK_ENDPOINT
+              value: http://keycloak-http/auth
+            - name: KEYCLOAK_REALM
+              value: master
+            - name: KEYCLOAK_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: keycloak-admin-user
+            - name: KEYCLOAK_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: keycloak-admin-user
+          volumeMounts: # TODO client scope + client extra!
+            - mountPath: /definitions/realms/k8s/realm
+              name: realm-config
+            - mountPath: /definitions/realms/k8s/users/cluster-user
+              name: cluster-user-config
+            - mountPath: /definitions/realms/k8s/users/cluster-admin
+              name: cluster-admin-user-config
+      volumes:
+        - name: realm-config
+          configMap:
+            name: realm-config
+        - name: cluster-user-config
+          configMap:
+            name: cluster-user-config
+        - name: cluster-admin-user-config
+          configMap:
+            name: cluster-admin-user-config
