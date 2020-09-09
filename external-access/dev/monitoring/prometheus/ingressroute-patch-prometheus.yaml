@@ -8,8 +8,8 @@ spec:
     - match: Host(`prometheus.192.168.0.15.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-operator-prometheus
-          port: 9090
+        - name: prometheus-louketo-proxy
+          port: 3000
       middlewares:
         - name: redirect-https
 ---
@@ -22,5 +22,5 @@ spec:
     - match: Host(`prometheus.192.168.0.15.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-operator-prometheus
-          port: 9090
+        - name: prometheus-louketo-proxy
+          port: 3000
