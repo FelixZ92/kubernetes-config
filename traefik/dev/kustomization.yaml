@@ -2,8 +2,8 @@ bases:
   - ../base
 
 patchesStrategicMerge:
-  - certificates-patch.yaml
-  - ingressroute-patch-dashboard.yaml
+  - ../../external-access/dev/traefik/certificates-patch.yaml
+  - ../../external-access/dev/traefik/ingressroute-patch-dashboard.yaml
 
 #configMapGenerator:
 #  - name: traefik-oidc-config-

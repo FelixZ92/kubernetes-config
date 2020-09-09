@@ -1,0 +1,6 @@
+resources:
+  - ../../base/traefik
+
+patchesStrategicMerge:
+  - certificates-patch.yaml
+  - ingressroute-patch-dashboard.yaml

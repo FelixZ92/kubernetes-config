@@ -1,0 +1,10 @@
+resources:
+  - certificates.yaml
+  - middlewares.yaml
+  - ingressroute-dashboard.yaml
+
+namespace: traefik
+
+commonAnnotations:
+  annotations:
+    argocd.argoproj.io/sync-wave="4"
