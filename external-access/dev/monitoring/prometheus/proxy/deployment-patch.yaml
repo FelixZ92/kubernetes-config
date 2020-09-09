@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: louketo-proxy
+spec:
+  template:
+    spec:
+      volumes:
+        - name: ssl
+          secret:
+            secretName: dev-ca-secret
+            items:
+              - key: tls.crt
+                path: tls.crt
+      containers:
+        - name: gatekeeper
+          volumeMounts:
+            - mountPath: /etc/dev-ca
+              name: ssl

@@ -218,5 +218,5 @@ create-local-ca-secrets:
 		    	 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-dev-ca-secret-sealed.json ; \
 		git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-dev-ca-secret-sealed.json ; \
 	done
-#	git commit -m "Re-encrypt oidc secret" && \
-#	git push
+	git commit -m "Re-encrypt oidc secret" && \
+	git push
