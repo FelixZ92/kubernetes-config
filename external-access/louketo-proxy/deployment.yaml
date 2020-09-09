@@ -19,7 +19,7 @@ spec:
           args:
             - --discovery-url=http://keycloak-http.keycloak.svc.cluster.local/auth/realms/k8s
             - --enable-default-deny=false
-            - --resources=uri=/*|groups=cluster-admins,cluster-readonly-users
+            - --resources="uri=/*|groups=cluster-admins,cluster-readonly-users"
             - --listen=:3000
             - --encryption-key=$(ENCRYPTION_KEY)
             - --client-id=$(CLIENT_ID)
