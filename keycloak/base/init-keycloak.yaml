@@ -14,6 +14,7 @@ spec:
       containers:
         - name: keycloak-init
           image: registry.gitlab.com/felixz92/keycloak-init
+          imagePullPolicy: Always
           env:
             - name: KEYCLOAK_ENDPOINT
               value: http://keycloak-http/auth
@@ -32,10 +33,16 @@ spec:
           volumeMounts: # TODO client scope + client extra!
             - mountPath: /definitions/realms/k8s/realm
               name: realm-config
+            - mountPath: /definitions/realms/k8s/client-scopes
+              name: k8s-client-scope
             - mountPath: /definitions/realms/k8s/users/cluster-user
               name: cluster-user-config
             - mountPath: /definitions/realms/k8s/users/cluster-admin
               name: cluster-admin-user-config
+            - mountPath: /definitions/realms/k8s/clients/k8s/definition
+              name: k8s-client-config
+            - mountPath: /definitions/realms/k8s/clients/k8s/secret
+              name: k8s-client-secret
       volumes:
         - name: realm-config
           configMap:
@@ -46,3 +53,15 @@ spec:
         - name: cluster-admin-user-config
           configMap:
             name: cluster-admin-user-config
+        - name: k8s-client-scope
+          configMap:
+            name: k8s-client-scope
+        - name: k8s-client-config
+          configMap:
+            name: k8s-client-config
+        - name: k8s-client-secret
+          secret:
+            items:
+              - key: secret
+                path: secret
+            secretName: oidc-secret
