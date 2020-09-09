@@ -12,3 +12,4 @@ configMapGenerator:
     literals:
       - REDIRECTION_URL=https://prometheus.192.168.0.15.xip.io
       - UPSTREAM_URL=http://prometheus-operator-prometheus:9090
+      - DISCOVERY_URL=https://keycloak.192.168.0.15.xip.io/auth/realms/k8s
