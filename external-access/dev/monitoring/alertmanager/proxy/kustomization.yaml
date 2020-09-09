@@ -6,10 +6,13 @@ namePrefix: alertmanager-
 commonLabels:
   app.kubernetes.io/instance: louketo-proxy-alertmanager
 
-configMapGenerator:
-  - name: louketo-proxy-config
-    behavior: replace
-    literals:
-      - REDIRECTION_URL=https://alertmanager.192.168.0.15.xip.io
-      - UPSTREAM_URL=http://prometheus-operator-alertmanager:9093
-      - DISCOVERY_URL=https://keycloak.192.168.0.15.xip.io/auth/realms/k8s
+patchesStrategicMerge:
+  - configmap-patch.yaml
+
+#configMapGenerator:
+#  - name: louketo-proxy-config
+#    behavior: replace
+#    literals:
+#      - REDIRECTION_URL=https://alertmanager.192.168.0.15.xip.io
+#      - UPSTREAM_URL=http://prometheus-operator-alertmanager:9093
+#      - DISCOVERY_URL=https://keycloak.192.168.0.15.xip.io/auth/realms/k8s

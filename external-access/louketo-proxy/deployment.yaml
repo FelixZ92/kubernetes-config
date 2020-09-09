@@ -12,24 +12,22 @@ spec:
     metadata:
       labels:
     spec:
+      volumes:
+        - name: config
+          configMap:
+            name: louketo-proxy-config
       containers:
         - name: gatekeeper
           image: quay.io/louketo/louketo-proxy
           imagePullPolicy: Always
           args:
-            - --discovery-url=$(DISCOVERY_URL)
             - --enable-default-deny=false
             - --resources=uri=/*
             - --listen=:3000
             - --encryption-key=$(ENCRYPTION_KEY)
             - --client-id=$(CLIENT_ID)
             - --client-secret=$(CLIENT_SECRET)
-            - --redirection-url=$(REDIRECTION_URL)
-            - --upstream-url=$(UPSTREAM_URL)
-          envFrom:
-            - configMapRef:
-                name: louketo-proxy-config
-                optional: false
+            - --config=/etc/gatekeeper/config.yaml
           env:
             - name: CLIENT_ID
               valueFrom:
@@ -46,6 +44,9 @@ spec:
                 secretKeyRef:
                   key: secret
                   name: oidc-signing-secret
+          volumeMounts:
+            - mountPath: /etc/gatekeeper
+              name: config
           ports:
             - containerPort: 3000
               name: proxy
