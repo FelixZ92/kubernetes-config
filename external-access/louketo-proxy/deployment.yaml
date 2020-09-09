@@ -17,7 +17,7 @@ spec:
           image: quay.io/louketo/louketo-proxy
           imagePullPolicy: Always
           args:
-            - --discovery-url=http://keycloak-http.keycloak.svc.cluster.local/auth/realms/k8s
+            - --discovery-url=$(DISCOVERY_URL)
             - --enable-default-deny=false
             - --resources=uri=/*
             - --listen=:3000
