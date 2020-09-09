@@ -1,8 +1,6 @@
-resources:
-  - ../../base/monitoring
+namespace: monitoring
 
-patchesStrategicMerge:
-  - certificates-patch.yaml
-  - ingressroute-patch-grafana.yaml
-  - ingressroute-patch-alertmanager.yaml
-  - ingressroute-patch-prometheus.yaml
+resources:
+  - alertmanager
+  - prometheus
+  - grafana

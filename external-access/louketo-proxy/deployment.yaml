@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: louketo-proxy
+  labels:
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+  template:
+    metadata:
+      labels:
+    spec:
+      containers:
+        - name: gatekeeper
+          image: quay.io/louketo/louketo-proxy
+          imagePullPolicy: Always
+          args:
+            - --discovery-url=http://keycloak-http.keycloak.svc.cluster.local/auth/realms/k8s
+            - --enable-default-deny=false
+            - --resources=uri=/*|groups=cluster-admins,cluster-readonly-users
+            - --listen=:3000
+            - --encryption-key=$(ENCRYPTION_KEY)
+            - --client-id=$(CLIENT_ID)
+            - --client-secret=$(CLIENT_SECRET)
+            - --redirection-url=$(REDIRECTION_URL)
+            - --upstream-url=$(UPSTREAM_URL)
+          envFrom:
+            - configMapRef:
+                name: louketo-proxy-config
+                optional: false
+          env:
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: clientid
+                  name: oidc-secret
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: secret
+                  name: oidc-secret
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret
+                  name: oidc-signing-secret
+          ports:
+            - containerPort: 3000
+              name: proxy
+              protocol: TCP
+      restartPolicy: Always

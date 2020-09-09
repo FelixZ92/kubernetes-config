@@ -1,0 +1,12 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+
+commonLabels:
+  app.kubernetes.io/name: louketo-proxy
+
+configMapGenerator:
+  - name: louketo-proxy-config
+    literals:
+      - REDIRECTION_URL=https://whoami.192.168.0.15.xip.io
+      - UPSTREAM_URL=http://localhost:80

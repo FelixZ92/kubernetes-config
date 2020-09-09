@@ -1,0 +1,5 @@
+resources:
+  - ../../../base/monitoring/grafana
+patchesStrategicMerge:
+  - certificate-patch-grafana.yaml
+  - ingressroute-patch-grafana.yaml

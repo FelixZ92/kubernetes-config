@@ -1,0 +1,7 @@
+resources:
+  - ../../../base/monitoring/prometheus
+  - proxy
+
+patchesStrategicMerge:
+  - certificate-patch-prometheus.yaml
+  - ingressroute-patch-prometheus.yaml

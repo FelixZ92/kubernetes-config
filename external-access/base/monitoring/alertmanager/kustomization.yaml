@@ -1,0 +1,3 @@
+resources:
+  - certificate-alertmanager.yaml
+  - ingressroute-alertmanager.yaml

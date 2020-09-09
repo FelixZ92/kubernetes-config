@@ -1,9 +1,8 @@
 resources:
-  - certificates.yaml
+  - prometheus/
   - middlewares.yaml
-  - ingressroute-prometheus.yaml
-  - ingressroute-alertmanager.yaml
-  - ingressroute-grafana.yaml
+  - alertmanager/
+  - grafana/
 
 namespace: monitoring
 
