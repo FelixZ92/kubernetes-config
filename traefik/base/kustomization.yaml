@@ -1,8 +1,5 @@
 resources:
   - all.yaml
-  - ../../external-access/base/traefik/middlewares.yaml
-  - ../../external-access/base/traefik/certificates.yaml
-  - ../../external-access/base/traefik/ingressroute-dashboard.yaml
 
 namespace: traefik
 #
