@@ -1,11 +1,4 @@
 resources:
-  - prometheus/
   - middlewares.yaml
-  - alertmanager/
-  - grafana/
 
 namespace: monitoring
-
-commonAnnotations:
-  annotations:
-    argocd.argoproj.io/sync-wave="4"
