@@ -24,3 +24,4 @@ patchesStrategicMerge:
   - certificate-authority-repo-path.yaml
   - traefik-env-patch.yaml
   - keycloak-repo-path.yaml
+  - external-access-repo-path.yaml

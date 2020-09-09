@@ -1,4 +1,5 @@
 resources:
+  - certificates.yaml
   - middlewares.yaml
   - ingressroute-prometheus.yaml
   - ingressroute-alertmanager.yaml

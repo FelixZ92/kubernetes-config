@@ -1,0 +1,8 @@
+resources:
+  - ../../base/monitoring
+
+patchesStrategicMerge:
+  - certificates-patch.yaml
+  - ingressroute-patch-grafana.yaml
+  - ingressroute-patch-alertmanager.yaml
+  - ingressroute-patch-prometheus.yaml

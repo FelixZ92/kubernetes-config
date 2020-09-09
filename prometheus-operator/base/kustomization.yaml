@@ -1,8 +1,4 @@
 resources:
   - hooks/presync-hook-check-grafana-password.yaml
-  - hooks/presync-hook-check-oidc-secret.yaml
-  - hooks/presync-hook-check-signing-secret.yaml
   - ../crds
   - all.yaml
-  - certificates.yaml
-  - ../ingress
