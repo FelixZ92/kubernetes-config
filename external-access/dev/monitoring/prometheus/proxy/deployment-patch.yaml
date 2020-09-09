@@ -9,9 +9,6 @@ spec:
         - name: ssl
           secret:
             secretName: dev-ca-secret
-            items:
-              - key: tls.crt
-                path: tls.crt
       containers:
         - name: gatekeeper
           volumeMounts:
