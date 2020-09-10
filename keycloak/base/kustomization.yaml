@@ -4,6 +4,7 @@ resources:
   - certificates.yaml
   - middlewares.yaml
   - ingressroute-keycloak.yaml
+  - keycloak-groups.yaml
   - keycloak-user.yaml
   - realm-config.yaml
   - init-keycloak.yaml
