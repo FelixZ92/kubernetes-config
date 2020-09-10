@@ -10,6 +10,7 @@ data:
     upstream-url: http://prometheus-operator-alertmanager:9090
     resources:
     - uri: /*
-      groups:
-      - cluster-admins
-      - cluster-readonly-users
+      roles:
+        - k8s:cluster-admin
+        - k8s:cluster-readonly
+
