@@ -8,7 +8,6 @@ commonLabels:
 
 patchesStrategicMerge:
   - configmap-patch.yaml
-  - deployment-patch.yaml
 
 #configMapGenerator:
 #  - name: louketo-proxy-config

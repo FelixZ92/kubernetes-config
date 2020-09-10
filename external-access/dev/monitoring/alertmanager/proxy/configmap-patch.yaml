@@ -4,7 +4,7 @@ metadata:
   name: louketo-proxy-config
 data:
   config.yaml: |
-    tls-ca-certificate: /etc/dev-ca/tls.crt
+    skip-openid-provider-tls-verify: true
     discovery-url: https://keycloak.192.168.0.15.xip.io/auth/realms/k8s
     redirection-url: https://alertmanager.192.168.0.15.xip.io
     upstream-url: http://prometheus-operator-alertmanager:9090
