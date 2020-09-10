@@ -8,8 +8,8 @@ spec:
     - match: Host(`alertmanager.192.168.0.15.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-operator-alertmanager
-          port: 9093
+        - name: prometheus-louketo-proxy
+          port: 3000
       middlewares:
         - name: redirect-https
 ---
@@ -22,5 +22,5 @@ spec:
     - match: Host(`alertmanager.192.168.0.15.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-operator-alertmanager
-          port: 9093
+        - name: prometheus-louketo-proxy
+          port: 3000
