@@ -1,4 +1,2 @@
 resources:
   - monitoring
-  - argocd-apps
-

@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-access-traefik
+spec:
+  source:
+    path: external-access/external-access-traefik/dev
