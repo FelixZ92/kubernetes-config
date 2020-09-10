@@ -1,7 +1,0 @@
-resources:
-  - ../../../base/monitoring/alertmanager
-  - proxy
-
-patchesStrategicMerge:
-  - certificate-patch-alertmanager.yaml
-  - ingressroute-patch-alertmanager.yaml

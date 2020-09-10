@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-access-alertmanager
+spec:
+  source:
+    path: external-access/external-access-alertmanager/dev

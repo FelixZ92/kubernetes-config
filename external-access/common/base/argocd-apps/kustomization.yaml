@@ -1,0 +1,6 @@
+resources:
+  - external-access-grafana.yaml
+  - external-access-prometheus.yaml
+  - external-access-alertmanager.yaml
+
+namespace: argocd

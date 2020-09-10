@@ -1,0 +1,12 @@
+resources:
+  - ../base
+
+namespace: monitoring
+
+patchesStrategicMerge:
+  - certificate-patch-grafana.yaml
+  - ingressroute-patch-grafana.yaml
+
+commonAnnotations:
+  annotations:
+    argocd.argoproj.io/sync-wave="4"

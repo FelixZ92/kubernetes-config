@@ -1,7 +1,13 @@
 resources:
-  - ../../../base/monitoring/prometheus
+  - ../base
   - proxy
+
+namespace: monitoring
 
 patchesStrategicMerge:
   - certificate-patch-prometheus.yaml
   - ingressroute-patch-prometheus.yaml
+
+commonAnnotations:
+  annotations:
+    argocd.argoproj.io/sync-wave="4"

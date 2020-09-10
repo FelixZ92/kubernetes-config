@@ -1,10 +1,12 @@
 resources:
-  - certificates.yaml
-  - middlewares.yaml
-  - ingressroute-dashboard.yaml
+  - ../base
 
 namespace: traefik
 
 commonAnnotations:
   annotations:
     argocd.argoproj.io/sync-wave="4"
+
+patchesStrategicMerge:
+  - certificates-patch.yaml
+  - ingressroute-patch-dashboard.yaml

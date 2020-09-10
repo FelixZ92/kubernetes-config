@@ -1,10 +1,7 @@
 resources:
-  - ../../../../louketo-proxy
+  - ../../../common/louketo-proxy
 
 namePrefix: alertmanager-
-
-commonLabels:
-  app.kubernetes.io/instance: louketo-proxy-alertmanager
 
 patchesStrategicMerge:
   - configmap-patch.yaml

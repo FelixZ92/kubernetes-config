@@ -1,0 +1,7 @@
+resources:
+  - ../../base/argocd-apps
+
+patchesStrategicMerge:
+  - external-access-alertmanager-repo-path.yaml
+  - external-access-prometheus-repo-path.yaml
+  - external-access-grafana-repo-path.yaml

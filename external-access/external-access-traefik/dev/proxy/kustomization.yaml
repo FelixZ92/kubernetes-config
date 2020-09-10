@@ -1,10 +1,7 @@
 resources:
-  - ../../../louketo-proxy
+  - ../../../common/louketo-proxy
 
 namePrefix: traefik-
-
-commonLabels:
-  app.kubernetes.io/instance: louketo-proxy-traefik
 
 patchesStrategicMerge:
   - configmap-patch.yaml

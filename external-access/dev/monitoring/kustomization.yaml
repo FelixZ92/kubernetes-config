@@ -1,7 +1,0 @@
-namespace: monitoring
-
-resources:
-  - ../../base/monitoring
-  - alertmanager
-  - prometheus
-  - grafana
