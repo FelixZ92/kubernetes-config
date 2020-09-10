@@ -8,7 +8,7 @@ spec:
     - match: Host(`alertmanager.192.168.0.15.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-louketo-proxy
+        - name: alertmanager-louketo-proxy
           port: 3000
       middlewares:
         - name: redirect-https
@@ -22,5 +22,5 @@ spec:
     - match: Host(`alertmanager.192.168.0.15.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-louketo-proxy
+        - name: alertmanager-louketo-proxy
           port: 3000
