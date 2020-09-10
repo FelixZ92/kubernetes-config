@@ -3,6 +3,10 @@ resources:
 
 namePrefix: alertmanager-
 
+# workaround for argocd since it does not apply those labels on selectors
+commonLabels:
+  app.kubernetes.io/instance: external-access-alertmanager
+
 patchesStrategicMerge:
   - configmap-patch.yaml
 

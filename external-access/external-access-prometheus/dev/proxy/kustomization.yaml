@@ -6,6 +6,10 @@ namePrefix: prometheus-
 patchesStrategicMerge:
   - configmap-patch.yaml
 
+# workaround for argocd since it does not apply those labels on selectors
+commonLabels:
+  app.kubernetes.io/instance: external-access-prometheus
+
 #configMapGenerator:
 #  - name: louketo-proxy-config
 #    behavior: replace
