@@ -39,6 +39,8 @@ spec:
               name: cluster-user-config
             - mountPath: /definitions/realms/k8s/users/cluster-admin
               name: cluster-admin-user-config
+            - mountPath: /definitions/realms/k8s/groups
+              name: keycloak-group-config
             - mountPath: /definitions/realms/k8s/clients/k8s/definition
               name: k8s-client-config
             - mountPath: /definitions/realms/k8s/clients/k8s/secret
@@ -59,9 +61,13 @@ spec:
         - name: k8s-client-config
           configMap:
             name: k8s-client-config
+        - name: keycloak-group-config
+          configMap:
+            name: keycloak-group-config
         - name: k8s-client-secret
           secret:
             items:
               - key: secret
                 path: secret
             secretName: oidc-secret
+  keycloak-group-config

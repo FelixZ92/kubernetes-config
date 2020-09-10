@@ -51,12 +51,15 @@ data:
           "role_list",
           "roles",
           "k8s",
-          "email"
+          "email",
+          "microprofile-jwt"
       ],
       "optionalClientScopes": [
           "address",
           "phone",
-          "offline_access",
-          "microprofile-jwt"
+          "offline_access"
       ]
     }
+  roles: |
+    cluster-admin
+    cluster-readonly

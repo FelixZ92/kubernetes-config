@@ -114,14 +114,15 @@ data:
         {
           "name": "groups",
           "protocol": "openid-connect",
-          "protocolMapper": "oidc-group-membership-mapper",
+          "protocolMapper": "oidc-usermodel-client-role-mapper",
           "consentRequired": false,
           "config": {
-            "full.path": "true",
+            "multivalued": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "groups",
-            "userinfo.token.claim": "true"
+            "userinfo.token.claim": "true",
+            "usermodel.clientRoleMapping.clientId": "k8s"
           }
         },
         {

@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-group-config
+data:
+  cluster-readonly-users.json: |
+    {
+      "name": "cluster-readonly-users",
+      "path": "/cluster-readonly-users",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {
+        "k8s": [
+          "cluster-readonly"
+        ]
+      }
+    }
+  cluster-admin.json: |
+    {
+      "name": "cluster-admins",
+      "path": "/cluster-admins",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {
+        "k8s": [
+          "cluster-admin"
+        ]
+      }
+    }
