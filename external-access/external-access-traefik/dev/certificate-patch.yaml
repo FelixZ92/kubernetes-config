@@ -3,7 +3,6 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: infra-tls-certificate
-  namespace: monitoring
 spec:
   dnsNames:
     - infra.192.168.0.15.xip.io
