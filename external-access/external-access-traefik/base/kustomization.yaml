@@ -13,3 +13,5 @@ configMapGenerator:
     literals:
       - QUARKUS_HTTP_PORT=8080
       - QUARKUS_LOG_LEVEL=DEBUG
+      - SMALLRYE_JWT_TOKEN_HEADER=Cookie
+      - SMALLRYE_JWT_TOKEN_COOKIE=kc-access
