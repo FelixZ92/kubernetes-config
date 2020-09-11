@@ -9,6 +9,6 @@ resources:
 configMapGenerator:
   - name: forward-auth-config
     literals:
-      - PROVIDERS_OIDC_ISSUER_URL=https://gitlab.com
+      - PROVIDERS_OIDC_ISSUER_URL=https://keycloak.192.168.0.15.xip.io
       - DEFAULT_PROVIDER=oidc
       - LOGLEVEL=trace

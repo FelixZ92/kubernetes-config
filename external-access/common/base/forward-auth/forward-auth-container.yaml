@@ -24,7 +24,7 @@ spec:
               name: forward-auth
           envFrom:
             - configMapRef:
-                name: traefik-oidc-config-
+                name: forward-auth-config
           env:
             - name: PROVIDERS_OIDC_CLIENT_ID
               valueFrom:
