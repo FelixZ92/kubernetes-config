@@ -27,3 +27,12 @@ spec:
     address: http://forward-auth.traefik.svc:4181
     authResponseHeaders:
       - X-Forwarded-User
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /traefik

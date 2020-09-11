@@ -13,7 +13,7 @@ metadata:
     heritage: "Helm"
 spec:
   replicas: 2
-  externalUrl: "https://prometheus.192.168.0.15.xip.io:8443"
+  externalUrl: "https://infra.192.168.0.15.xip.io/prometheus"
   storage:
     volumeClaimTemplate:
       spec:

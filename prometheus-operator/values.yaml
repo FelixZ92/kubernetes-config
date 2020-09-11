@@ -95,7 +95,9 @@ prometheus-operator:
   ##
   grafana:
     enabled: true
-
+    grafana.ini:
+      server:
+        root_url: https://infra.192.168.0.15/grafana # this host can be localhost
     ## Deploy default dashboards.
     ##
     defaultDashboardsEnabled: true
