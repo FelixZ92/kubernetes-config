@@ -26,3 +26,41 @@ spec:
           kind: TraefikService
 #      middlewares:
 #        - name: forward-auth-bouncer-admin
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard-path
+spec:
+  routes:
+    - match: Host(`infra.192.168.0.15.xip.io`) && (PathPrefix(`/traefik/api`) || PathPrefix(`/traefik/dashboard`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard-tls-path
+spec:
+  routes:
+    - match: Host(`infra.192.168.0.15.xip.io`) && (PathPrefix(`/traefik/api`) || PathPrefix(`/traefik/dashboard`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+      middlewares:
+        - name: traefik-stripprefix
+#        - name: forward-auth-bouncer-admin
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /traefik

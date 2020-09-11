@@ -1,4 +1,4 @@
 resources:
   - argocd-apps
   - ../base
-  - forward-auth
+#  - forward-auth
