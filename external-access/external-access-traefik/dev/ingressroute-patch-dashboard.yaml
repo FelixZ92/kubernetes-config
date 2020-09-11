@@ -5,34 +5,6 @@ metadata:
   name: dashboard
 spec:
   routes:
-    - match: Host(`traefik.192.168.0.15.xip.io`)
-      kind: Rule
-      services:
-        - name: api@internal
-          kind: TraefikService
-      middlewares:
-        - name: redirect-https
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: dashboard-tls
-spec:
-  routes:
-    - match: Host(`traefik.192.168.0.15.xip.io`)
-      kind: Rule
-      services:
-        - name: api@internal
-          kind: TraefikService
-#      middlewares:
-#        - name: forward-auth-bouncer-admin
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: dashboard-path
-spec:
-  routes:
     - match: Host(`infra.192.168.0.15.xip.io`) && (PathPrefix(`/traefik/`) || Headers(`Referer`, `https://infra.192.168.0.15.xip.io/traefik/dashboard/`))
       kind: Rule
       services:
@@ -44,7 +16,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: dashboard-tls-path
+  name: dashboard-tls
 spec:
   routes:
     - match: Host(`infra.192.168.0.15.xip.io`) && (PathPrefix(`/traefik/`) || Headers(`Referer`, `https://infra.192.168.0.15.xip.io/traefik/dashboard/`))

@@ -15,23 +15,4 @@ spec:
   entryPoints:
     - websecure
   tls:
-    secretName: tls-traefik-dashboard-ingress
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: dashboard-path
-spec:
-  entryPoints:
-    - web
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: dashboard-tls-path
-spec:
-  entryPoints:
-    - websecure
-  tls:
-    secretName: tls-traefik-dashboard-ingress
+    secretName: tls-infra-ingress
