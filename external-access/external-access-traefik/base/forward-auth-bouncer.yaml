@@ -9,6 +9,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: forward-auth-bouncer
   replicas: 1
+  revisionHistoryLimit: 1
   template:
     metadata:
       labels:
