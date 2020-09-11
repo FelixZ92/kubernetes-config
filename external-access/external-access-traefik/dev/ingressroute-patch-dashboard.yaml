@@ -33,7 +33,7 @@ metadata:
   name: dashboard-path
 spec:
   routes:
-    - match: Host(`infra.192.168.0.15.xip.io`) && (PathPrefix(`/traefik/api`) || PathPrefix(`/traefik/dashboard`))
+    - match: Host(`infra.192.168.0.15.xip.io`) && (PathPrefix(`/traefik/`) || Headers(`Referer`, `https://infra.192.168.0.15.xip.io/traefik/dashboard/`))
       kind: Rule
       services:
         - name: api@internal
@@ -47,7 +47,7 @@ metadata:
   name: dashboard-tls-path
 spec:
   routes:
-    - match: Host(`infra.192.168.0.15.xip.io`) && (PathPrefix(`/traefik/api`) || PathPrefix(`/traefik/dashboard`))
+    - match: Host(`infra.192.168.0.15.xip.io`) && (PathPrefix(`/traefik/`) || Headers(`Referer`, `https://infra.192.168.0.15.xip.io/traefik/dashboard/`))
       kind: Rule
       services:
         - name: api@internal
