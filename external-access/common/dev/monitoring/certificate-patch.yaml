@@ -2,8 +2,8 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: grafana-tls-certificate
+  name: alertmanager-tls-certificate
   namespace: monitoring
 spec:
   dnsNames:
-    - grafana.192.168.0.15.xip.io
+    - infra.192.168.0.15.xip.io

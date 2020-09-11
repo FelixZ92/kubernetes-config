@@ -1,3 +1,2 @@
 resources:
-  - certificate-grafana.yaml
   - ingressroute-grafana.yaml

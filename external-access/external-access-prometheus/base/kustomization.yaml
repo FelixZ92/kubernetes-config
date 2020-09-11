@@ -1,3 +1,2 @@
 resources:
-  - certificate-prometheus.yaml
   - ingressroute-prometheus.yaml

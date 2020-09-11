@@ -3,7 +3,6 @@ commonLabels:
   app.kubernetes.io/instance: external-access-traefik
 
 resources:
-  - certificate.yaml
   - middlewares.yaml
   - ingressroute-dashboard.yaml
   - forward-auth-bouncer.yaml

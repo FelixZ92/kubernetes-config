@@ -6,7 +6,6 @@ namespace: monitoring
 
 patchesStrategicMerge:
   - ingressroute-patch-alertmanager.yaml
-  - certificate-patch-alertmanager.yaml
 
 commonAnnotations:
   annotations:

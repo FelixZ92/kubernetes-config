@@ -2,10 +2,10 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: prometheus-tls-certificate
+  name: infra-tls-certificate
   namespace: monitoring
 spec:
-  secretName: tls-prometheus-ingress
+  secretName: tls-infra-ingress
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer

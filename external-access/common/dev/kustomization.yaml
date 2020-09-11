@@ -1,4 +1,4 @@
 resources:
   - argocd-apps
-  - ../base
+  - monitoring
 #  - forward-auth

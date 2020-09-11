@@ -4,7 +4,6 @@ resources:
 namespace: monitoring
 
 patchesStrategicMerge:
-  - certificate-patch-grafana.yaml
   - ingressroute-patch-grafana.yaml
 
 commonAnnotations:
