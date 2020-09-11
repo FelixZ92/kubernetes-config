@@ -55,12 +55,3 @@ spec:
       middlewares:
         - name: traefik-stripprefix
 #        - name: forward-auth-bouncer-admin
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: traefik-stripprefix
-spec:
-  stripPrefix:
-    prefixes:
-      - /traefik
