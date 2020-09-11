@@ -1,0 +1,18 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: forward-auth
+spec:
+  entryPoints:
+    - web
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: forward-auth-tls
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: tls-forward-auth-ingress

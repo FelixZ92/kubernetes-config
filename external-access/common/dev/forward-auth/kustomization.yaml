@@ -1,0 +1,13 @@
+resources:
+  - ../../base/forward-auth
+
+patchesStrategicMerge:
+  - certificate-patch.yaml
+  - ingressroute-patch.yaml
+
+configMapGenerator:
+  - name: forward-auth-config
+    behavior: merge
+    literals:
+      - COOKIE_DOMAIN=192.168.0.15.xip.io
+      - AUTH_HOST=auth.192.168.0.15.xip.io

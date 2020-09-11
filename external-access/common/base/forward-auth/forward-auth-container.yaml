@@ -1,13 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: traefik
+  name: forward-auth
   labels:
-    app.kubernetes.io/name: traefik
-    app.kubernetes.io/instance: traefik
+    app.kubernetes.io/name: forward-auth
 spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: forward-auth
   replicas: 1
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: forward-auth
     spec:
       containers:
         - name: forward-auth

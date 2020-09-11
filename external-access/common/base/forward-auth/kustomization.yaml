@@ -1,0 +1,14 @@
+namespace: traefik
+
+resources:
+  - certificate.yaml
+  - ingressroute.yaml
+  - service.yaml
+  - forward-auth-container.yaml
+
+configMapGenerator:
+  - name: forward-auth-config
+    literals:
+      - PROVIDERS_OIDC_ISSUER_URL=https://gitlab.com
+      - DEFAULT_PROVIDER=oidc
+      - LOGLEVEL=trace
