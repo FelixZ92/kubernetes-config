@@ -7,3 +7,13 @@ spec:
   redirectScheme:
     scheme: https
     permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: forward-auth-bouncer-admin
+spec:
+  forwardAuth:
+    address: http://forward-auth-bouncer.traefik.svc.cluster.local/auth/admin
+    authResponseHeaders:
+      - X-Forwarded-User
