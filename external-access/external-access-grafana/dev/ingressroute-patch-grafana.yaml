@@ -24,3 +24,5 @@ spec:
       services:
         - name: prometheus-operator-grafana
           port: 80
+      middlewares:
+        - name: monitoring-stripprefix

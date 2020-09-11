@@ -24,3 +24,5 @@ spec:
       services:
         - name: alertmanager-louketo-proxy
           port: 3000
+      middlewares:
+        - name: monitoring-stripprefix
