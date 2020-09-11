@@ -10,3 +10,11 @@ commonAnnotations:
 patchesStrategicMerge:
   - certificates-patch.yaml
   - ingressroute-patch-dashboard.yaml
+
+configMapGenerator:
+  - name: forward-auth-config
+    behavior: merge
+    literals:
+      - MP_JWT_VERIFY_PUBLICKEY_LOCATION=http://keycloak-http.keycloak.svc/auth/realms/k8s/protocol/openid-connect/certs
+      - MP_JWT_VERIFY_ISSUER=https://keycloak.192.168.0.15.xip.io/auth/realms/k8s
+

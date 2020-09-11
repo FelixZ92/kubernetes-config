@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forward-auth-bouncer
+  labels:
+    app.kubernetes.io/name: forward-auth-bouncer
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: forward-auth-bouncer
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: forward-auth-bouncer
+          image: registry.gitlab.com/felixz92/forward-auth-bouncer:v0.1.4
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          envFrom:
+            - configMapRef:
+                name: forward-auth-config
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsGroup: 65532
+            runAsNonRoot: true
+            runAsUser: 65532

@@ -1,4 +1,15 @@
+# workaround for argocd since it does not apply those labels on selectors
+commonLabels:
+  app.kubernetes.io/instance: external-access-traefik
+
 resources:
   - certificate.yaml
   - middlewares.yaml
   - ingressroute-dashboard.yaml
+  - forward-auth-bouncer.yaml
+
+configMapGenerator:
+  - name: forward-auth-config
+    literals:
+      - QUARKUS_HTTP_PORT=8080
+      - QUARKUS_LOG_LEVEL=WARN
