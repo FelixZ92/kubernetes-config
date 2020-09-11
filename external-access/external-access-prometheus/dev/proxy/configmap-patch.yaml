@@ -9,7 +9,7 @@ data:
     redirection-url: https://prometheus.192.168.0.15.xip.io
     upstream-url: http://prometheus-operator-prometheus:9090
     response-headers:
-      - X-Permitted-Cross-Domains: 'whoami.192.168.0.15.xip.io'
+      X-Permitted-Cross-Domains: 'whoami.192.168.0.15.xip.io'
     resources:
     - uri: /*
       roles:
