@@ -6,7 +6,7 @@ data:
   config.yaml: |
     skip-openid-provider-tls-verify: true
     discovery-url: https://keycloak.192.168.0.15.xip.io/auth/realms/k8s
-    redirection-url: https://infra.192.168.0.15.xip.io/alertmanager/
+    redirection-url: https://infra.192.168.0.15.xip.io/alertmanager
     upstream-url: http://prometheus-operator-alertmanager:9093
     resources:
     - uri: /*
