@@ -44,7 +44,7 @@ spec:
   selector:
     app.kubernetes.io/name: forward-auth-bouncer
   ports:
-    - port: 8080
+    - port: 80
       name: http
       protocol: TCP
       targetPort: http
