@@ -9,6 +9,7 @@ commonAnnotations:
 
 patchesStrategicMerge:
   - ingressroute-patch-dashboard.yaml
+  - certificate-patch.yaml
 
 configMapGenerator:
   - name: forward-auth-config

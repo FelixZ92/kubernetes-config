@@ -6,6 +6,7 @@ resources:
   - middlewares.yaml
   - ingressroute-dashboard.yaml
   - forward-auth-bouncer.yaml
+  - certificate.yaml
 
 configMapGenerator:
   - name: forward-auth-config
