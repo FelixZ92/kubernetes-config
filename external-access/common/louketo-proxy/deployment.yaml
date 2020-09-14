@@ -22,7 +22,7 @@ spec:
           image: quay.io/louketo/louketo-proxy
           imagePullPolicy: Always
           args:
-            - --enable-default-deny=true
+            - --enable-default-deny=false
             - --listen=:3000
             - --encryption-key=$(ENCRYPTION_KEY)
             - --client-id=$(CLIENT_ID)

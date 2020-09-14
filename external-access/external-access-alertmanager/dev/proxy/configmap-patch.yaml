@@ -10,7 +10,7 @@ data:
     base-uri: /alertmanager
     upstream-url: http://prometheus-operator-alertmanager:9093
     resources:
-    - uri: /*
+    - uri: /alertmanager/api/*
       roles:
         - k8s:cluster-admin
         - k8s:cluster-readonly
