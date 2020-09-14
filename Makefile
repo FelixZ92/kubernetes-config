@@ -204,6 +204,8 @@ update-local-ca-secrets:
 		git commit -m "Update dev CA" && \
 		git push
 
+update-secrets: create-grafana-secret create-keycloak-admin-secret create-oidc-secret create-signing-secret update-local-ca-secrets
+
 create-local-ca-secrets:
 	for n in $(OIDC_NAMESPACES); do \
 		echo $$n ; \
