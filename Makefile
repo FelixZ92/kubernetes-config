@@ -222,3 +222,5 @@ create-local-ca-secrets:
 	done
 	git commit -m "Re-encrypt oidc secret" && \
 	git push
+
+bootstrap-cluster: update-secrets
