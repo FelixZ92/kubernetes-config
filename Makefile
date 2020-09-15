@@ -224,6 +224,7 @@ create-local-ca-secrets:
 	git push
 
 bootstrap-cluster: update-secrets
+	kustomize build ./longhorn/base/ | kubectl apply -f -
 	kustomize build ./00_argocd/dev/ | kubectl apply -f -
 	kustomize build ./01_argocd-application/dev/ | kubectl apply -f -
 	kustomize build ./02_applications/dev/ | kubectl apply -f -
