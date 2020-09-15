@@ -11,4 +11,5 @@ resources:
   - postgres-operator.yaml
   - postgres-operator-ui.yaml
   - external-access.yaml
+  - secret-check-sa.yaml
 namespace: argocd

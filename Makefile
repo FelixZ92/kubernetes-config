@@ -223,4 +223,10 @@ create-local-ca-secrets:
 	git commit -m "Re-encrypt oidc secret" && \
 	git push
 
-bootstrap-cluster: update-secrets
+bootstrap-cluster: #update-secrets
+	#kubectl create ns argocd
+	kustomize build ./00_argocd/dev/ | kubectl apply -f -
+	kustomize build ./01_argocd-application/dev/ | kubectl apply -f -
+	kustomize build ./02_applications/dev/ | kubectl apply -f -
+
+# TODO: service accounts for deploy hooks
