@@ -6,6 +6,7 @@ namespace: monitoring
 
 patchesStrategicMerge:
   - ingressroute-patch-prometheus.yaml
+  - certificate-patch.yaml
 
 commonAnnotations:
   annotations:

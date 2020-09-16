@@ -7,7 +7,7 @@ metadata:
   namespace: monitoring
 spec:
   replicas: 2
-  externalUrl: "https://infra.192.168.0.13.xip.io/alertmanager"
+  externalUrl: "https://alertmanager.192.168.0.13.xip.io"
   storage:
     volumeClaimTemplate:
       spec:

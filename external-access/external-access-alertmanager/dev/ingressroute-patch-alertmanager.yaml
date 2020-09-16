@@ -5,7 +5,7 @@ metadata:
   name: alertmanager
 spec:
   routes:
-    - match: Host(`infra.192.168.0.13.xip.io`) && PathPrefix(`/alertmanager/`)
+    - match: Host(`alertmanager.192.168.0.13.xip.io`)
       kind: Rule
       services:
         - name: alertmanager-louketo-proxy
@@ -19,10 +19,8 @@ metadata:
   name: alertmanager-tls
 spec:
   routes:
-    - match: Host(`infra.192.168.0.13.xip.io`) && PathPrefix(`/alertmanager/`)
+    - match: Host(`alertmanager.192.168.0.13.xip.io`)
       kind: Rule
       services:
         - name: alertmanager-louketo-proxy
           port: 3000
-#      middlewares:
-#        - name: monitoring-stripprefix

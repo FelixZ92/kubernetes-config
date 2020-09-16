@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: dashboard-tls-certificate
+  name: grafana-tls-certificate
 spec:
   dnsNames:
-    - traefik.192.168.0.13.xip.io
+    - grafana.192.168.0.13.xip.io

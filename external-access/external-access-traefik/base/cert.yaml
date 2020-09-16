@@ -4,5 +4,7 @@ kind: Certificate
 metadata:
   name: dashboard-tls-certificate
 spec:
-  dnsNames:
-    - traefik.192.168.0.13.xip.io
+  secretName: tls-dashboard-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer

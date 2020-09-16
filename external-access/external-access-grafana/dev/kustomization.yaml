@@ -5,6 +5,7 @@ namespace: monitoring
 
 patchesStrategicMerge:
   - ingressroute-patch-grafana.yaml
+  - certificate-patch.yaml
 
 commonAnnotations:
   annotations:
