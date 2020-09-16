@@ -12,5 +12,5 @@ postgres-operator-ui:
     # UI and operator API. Insert the service name of the operator API here!
     operatorApiUrl: "http://postgres-operator:8080"
     operatorClusterNameLabel: "cluster-name"
-    resourcesVisible: "False"
+    resourcesVisible: "True"
     targetNamespace: "\"*\""
