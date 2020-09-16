@@ -11,12 +11,12 @@ data:
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-          "https://alertmanager.192.168.0.15.xip.io/oauth/callback",
-          "https://prometheus.192.168.0.15.xip.io/oauth/callback",
-          "https://argocd.192.168.0.15.xip.io/oauth/callback",
-          "https://traefik.192.168.0.15.xip.io/oauth/callback",
-          "https://grafana.192.168.0.15.xip.io/oauth/callback",
-          "https://infra.192.168.0.15.xip.io/*"
+          "https://alertmanager.192.168.0.13.xip.io/oauth/callback",
+          "https://prometheus.192.168.0.13.xip.io/oauth/callback",
+          "https://argocd.192.168.0.13.xip.io/oauth/callback",
+          "https://traefik.192.168.0.13.xip.io/oauth/callback",
+          "https://grafana.192.168.0.13.xip.io/oauth/callback",
+          "https://infra.192.168.0.13.xip.io/*"
       ],
       "webOrigins": [],
       "notBefore": 0,

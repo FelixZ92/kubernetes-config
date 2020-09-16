@@ -5,7 +5,7 @@ metadata:
   name: prometheus
 spec:
   routes:
-    - match: Host(`infra.192.168.0.15.xip.io`) && PathPrefix(`/prometheus/`)
+    - match: Host(`infra.192.168.0.13.xip.io`) && PathPrefix(`/prometheus/`)
       kind: Rule
       services:
         - name: prometheus-louketo-proxy
@@ -19,7 +19,7 @@ metadata:
   name: prometheus-tls
 spec:
   routes:
-    - match: Host(`infra.192.168.0.15.xip.io`) && PathPrefix(`/prometheus/`)
+    - match: Host(`infra.192.168.0.13.xip.io`) && PathPrefix(`/prometheus/`)
       kind: Rule
       services:
         - name: prometheus-louketo-proxy
