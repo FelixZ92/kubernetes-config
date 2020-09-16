@@ -1,13 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: louketo-proxy-config
+  name: louketo-proxy-rules
 data:
   config.yaml: |
-    redirection-url: http://127.0.0.1:3000
-    upstream-url: http://127.0.0.1:80
     resources:
     - uri: /*
-      groups:
-      - cluster-admins
-      - cluster-readonly-users
+      roles:
+        - k8s:cluster-admin
+        - k8s:cluster-readonly

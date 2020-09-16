@@ -6,8 +6,9 @@ resources:
 commonLabels:
   app.kubernetes.io/name: louketo-proxy
 
-#configMapGenerator:
-#  - name: louketo-proxy-config
-#    literals:
-#      - REDIRECTION_URL=https://whoami.192.168.0.13.xip.io
-#      - UPSTREAM_URL=http://localhost:80
+configMapGenerator:
+  - name: louketo-proxy-config
+    literals:
+      - REDIRECTION_URL=https://whoami.192.168.0.13.xip.io
+      - UPSTREAM_URL=http://localhost:80
+      - SKIP_OPENID_PROVIDER_TLS_VERIFY=false
