@@ -11,7 +11,7 @@ data:
     oauth-uri: /prometheus/oauth
     upstream-url: http://prometheus-operator-prometheus:9090
     resources:
-    - uri: /prometheus/*
+    - uri: /*
       roles:
         - k8s:cluster-admin
         - k8s:cluster-readonly

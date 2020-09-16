@@ -11,7 +11,7 @@ data:
     oauth-uri: /alertmanager/oauth
     upstream-url: http://prometheus-operator-alertmanager:9093
     resources:
-    - uri: /alertmanager/*
+    - uri: /*
       roles:
         - k8s:cluster-admin
         - k8s:cluster-readonly
