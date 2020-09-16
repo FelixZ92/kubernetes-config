@@ -6,6 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: spilo
     app.kubernetes.io/instance: identity-pg
+    team: identity
 spec:
   teamId: "identity"
   volume:
