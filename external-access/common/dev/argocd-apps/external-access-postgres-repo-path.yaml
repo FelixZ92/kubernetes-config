@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-access-alertmanager
+  name: external-access-postgres
 spec:
   source:
     path: external-access/external-access-postgres-operator/dev
