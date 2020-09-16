@@ -1,4 +1,4 @@
 resources:
-  - ingressroute-postgres.yaml
+  - ingressroute-longhorn.yaml
   - cert.yaml
   - middlewares.yaml

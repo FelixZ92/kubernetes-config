@@ -1,0 +1,13 @@
+resources:
+  - ../base
+  - proxy
+
+namespace: longhorn-system
+
+patchesStrategicMerge:
+  - ingressroute-patch-longhorn.yaml
+  - certificate-patch.yaml
+
+commonAnnotations:
+  annotations:
+    argocd.argoproj.io/sync-wave="4"
