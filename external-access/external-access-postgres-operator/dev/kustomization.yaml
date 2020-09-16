@@ -2,7 +2,7 @@ resources:
   - ../base
   - proxy
 
-namespace: monitoring
+namespace: postgres-operator
 
 patchesStrategicMerge:
   - ingressroute-patch-postgres.yaml
