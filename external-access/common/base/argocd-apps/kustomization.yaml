@@ -4,5 +4,6 @@ resources:
   - external-access-alertmanager.yaml
   - external-access-traefik.yaml
   - external-access-postgres.yaml
+  - external-access-longhorn.yaml
 
 namespace: argocd
