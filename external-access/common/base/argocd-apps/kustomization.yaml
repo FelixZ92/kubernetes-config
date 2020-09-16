@@ -3,5 +3,6 @@ resources:
   - external-access-prometheus.yaml
   - external-access-alertmanager.yaml
   - external-access-traefik.yaml
+  - external-access-postgres.yaml
 
 namespace: argocd
