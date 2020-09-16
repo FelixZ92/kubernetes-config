@@ -12,6 +12,8 @@ resources:
   - secrets/monitoring-signing-secret-sealed.json
   - secrets/postgres-operator-oidc-secret.json
   - secrets/postgres-operator-signing-secret-sealed.json
+  - secrets/longhorn-system-oidc-secret.json
+  - secrets/longhorn-system-signing-secret-sealed.json
   - secrets/traefik-oidc-secret.json
   - secrets/traefik-signing-secret-sealed.json
 

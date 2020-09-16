@@ -18,7 +18,7 @@ GRAFANA_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/grafana)
 OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
 OIDC_CLIENT_ID = k8s
 
-OIDC_NAMESPACES = monitoring traefik postgres-operator argocd keycloak
+OIDC_NAMESPACES = monitoring traefik postgres-operator argocd keycloak longhorn-system
 
 echo-keycloak:
 	echo $(KEYCLOAK_PASSWORD)
@@ -137,7 +137,7 @@ create-oidc-secret:
 				 > $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-oidc-secret.json ; \
 		git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/$$n-oidc-secret.json ; \
 	done
-	git commit -m "Re-encrypt oidc secret" && \
+	git commit -m "Re-encrypt oidc secret"
 	git push
 
 create-signing-secret:
