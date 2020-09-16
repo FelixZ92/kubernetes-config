@@ -1,0 +1,13 @@
+resources:
+  - ../base
+  - proxy
+
+namespace: monitoring
+
+patchesStrategicMerge:
+  - ingressroute-patch-postgres.yaml
+  - certificate-patch.yaml
+
+commonAnnotations:
+  annotations:
+    argocd.argoproj.io/sync-wave="4"
