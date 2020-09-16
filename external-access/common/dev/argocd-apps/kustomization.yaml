@@ -6,3 +6,4 @@ patchesStrategicMerge:
   - external-access-prometheus-repo-path.yaml
   - external-access-grafana-repo-path.yaml
   - external-access-traefik-repo-path.yaml
+  - external-access-postgres-repo-path.yaml
