@@ -26,3 +26,29 @@ spec:
           kind: TraefikService
       middlewares:
         - name: forward-auth-bouncer-admin
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard-bouncer
+spec:
+  routes:
+    - match: Host(`traefik.192.168.0.13.xip.io`)
+      kind: Rule
+      services:
+        - name: traefik-louketo-proxy
+          port: 3000
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard-bouncer-tls
+spec:
+  routes:
+    - match: Host(`traefik.192.168.0.13.xip.io`)
+      kind: Rule
+      services:
+        - name: traefik-louketo-proxy
+          port: 3000
