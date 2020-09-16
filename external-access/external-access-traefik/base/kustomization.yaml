@@ -11,8 +11,5 @@ resources:
 configMapGenerator:
   - name: forward-auth-config
     literals:
-      - QUARKUS_HTTP_PORT=8080
-      - QUARKUS_LOG_LEVEL=TRACE
-      - SMALLRYE_JWT_TOKEN_HEADER=Cookie
-      - SMALLRYE_JWT_TOKEN_COOKIE=kc-access
-      - SMALLRYE_JWT_VERIFY_KEY_FORMAT=JWK
+      - PORT=8080
+

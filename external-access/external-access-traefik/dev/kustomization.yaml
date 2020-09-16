@@ -15,7 +15,6 @@ configMapGenerator:
   - name: forward-auth-config
     behavior: merge
     literals:
-      - MP_JWT_VERIFY_PUBLICKEY_LOCATION=https://keycloak.192.168.0.13.xip.io/auth/realms/k8s/protocol/openid-connect/certs
-#      - MP_JWT_VERIFY_PUBLICKEY={"keys":[{"kid":"Yk-36O4q8zczsLSc-8G1YI1_a7FdSNsfbXtnAja-feU","kty":"RSA","alg":"RS256","use":"sig","n":"6_GGBILq6Ibk_JzFnQI0I_MILrY3yJ22JS-aviZVIUAnDEKZNlN5VPEH_zAdFKel8j5Cnw6705QqQTI2ZbnZzdAmFBK03k7JYftYRT2Yhja7-6VkGZyH818IPG55yRuY1r-v6c5ZjOx4Zi8pijtRF8JVI6co6kqt_qTY3EbC-WjMf-L5yhOMTma1do8bl9mX1KuRWOqxd3J0MiuC7WKqxR_EkY5NV3OZK9fXSn42dcokOqg5uIVV8-EfuffhpcrqwTI-8GA2gfsLBr0re0D8FPyEiOPRz7lnPZnwQICSfD6hzzldXqWiiZV0HVqBlftGn0fh3Qv0vGDcBuqEt7RxLw","e":"AQAB","x5c":["MIIClTCCAX0CBgF0ejCQkTANBgkqhkiG9w0BAQsFADAOMQwwCgYDVQQDDANrOHMwHhcNMjAwOTEwMjI0MjE3WhcNMzAwOTEwMjI0MzU3WjAOMQwwCgYDVQQDDANrOHMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDr8YYEgurohuT8nMWdAjQj8wgutjfInbYlL5q+JlUhQCcMQpk2U3lU8Qf/MB0Up6XyPkKfDrvTlCpBMjZludnN0CYUErTeTslh+1hFPZiGNrv7pWQZnIfzXwg8bnnJG5jWv6/pzlmM7HhmLymKO1EXwlUjpyjqSq3+pNjcRsL5aMx/4vnKE4xOZrV2jxuX2ZfUq5FY6rF3cnQyK4LtYqrFH8SRjk1Xc5kr19dKfjZ1yiQ6qDm4hVXz4R+59+GlyurBMj7wYDaB+wsGvSt7QPwU/ISI49HPuWc9mfBAgJJ8PqHPOV1epaKJlXQdWoGV+0afR+HdC/S8YNwG6oS3tHEvAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAIbHC/qBS6Pd2frued2eyOOU1WODs67qz6h/Ufoax3OxRMC32l39nBRd2LrxB/OxYS2R7Ky72iUxJ8fNPaQM2eFNdFWinn7RzhzXQsW1XnGGem1oUN0S8OcNJK45lEEV8QIXbwibxflq92bXvHzU+RDhuh/nW6ayHog4iZ6+B75lStuS2NW088vVX+KMMhgZVVpoQph0I4Pbod/vqkcbLx7WqnU9gzEB6xoRq1L5/TZx9Rx/a2EZdK4C9iX3Tn0mrL9E/w1hCEy8IIwm6SJDktfpfCEjgKxD5DEyYoLBOycMWFVsRcXV0Lpp+7Rvubhs/iG1FXoaubObSnqX2GKvAwU="],"x5t":"fwJK42WgvDbumpfzWx8Uald-DWo","x5t#S256":"22yFnI7CpbhMh-WgkbxmQvx2z4OhZ12mJZtXTWl_zrg"}]}
-      - MP_JWT_VERIFY_ISSUER=https://keycloak.192.168.0.13.xip.io/auth/realms/k8s
-      - SMALLRYE_JWT_VERIFY_KEY_FORMAT=JWK
+      - JWKS_ENDPOINT=https://keycloak.192.168.0.13.xip.io/auth/realms/k8s/protocol/openid-connect/certs
+      - JWT_VERIFY_ISSUER=https://keycloak.192.168.0.13.xip.io/auth/realms/k8s
+      - JWKS_URI_IGNORE_SSL=true
