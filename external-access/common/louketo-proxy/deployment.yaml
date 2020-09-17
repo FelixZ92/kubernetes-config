@@ -30,6 +30,7 @@ spec:
             - --config=/etc/gatekeeper/config.yaml
             - --redirection-url=$(REDIRECTION_URL)
             - --upstream-url=$(UPSTREAM_URL)
+            - --discovery-url=$(DISCOVERY_URL)
             - --skip-openid-provider-tls-verify=$(SKIP_OPENID_PROVIDER_TLS_VERIFY)
           envFrom:
             - configMapRef:
