@@ -181,7 +181,6 @@ create-grafana-secret:
 		git push
 
 # kudos to Sébastien Dubois (https://itnext.io/deploying-tls-certificates-for-local-development-and-production-using-kubernetes-cert-manager-9ab46abdd569)
-# workaround with tee as long kubectl is installed with snapcraft: https://bugs.launchpad.net/ubuntu/+source/snapd/+bug/1849753
 generate-local-ca:
 	@rm -rf "$(CA_CERTS_FOLDER)" && \
 		mkdir -p "$(CA_CERTS_FOLDER)/$(ENVIRONMENT_DEV)" && \

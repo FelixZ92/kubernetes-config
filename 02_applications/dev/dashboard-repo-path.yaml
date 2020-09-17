@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dashboard
+spec:
+  source:
+    path: external-access/dashboard/dev

@@ -5,6 +5,8 @@ bases:
 resources:
   - secrets/argocd-oidc-secret.json
   - secrets/argocd-signing-secret-sealed.json
+  - secrets/dashboard-oidc-secret.json
+  - secrets/dashboard-signing-secret-sealed.json
   - secrets/grafana-admin-user-sealed.json
   - secrets/keycloak-admin-user-sealed.json
   - secrets/keycloak-oidc-secret.json
@@ -26,3 +28,4 @@ patchesStrategicMerge:
   - traefik-env-patch.yaml
   - keycloak-repo-path.yaml
   - external-access-repo-path.yaml
+  - dashboard-repo-path.yaml
