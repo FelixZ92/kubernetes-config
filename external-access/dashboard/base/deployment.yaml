@@ -14,6 +14,7 @@ spec:
       labels:
         app.kubernetes.io/name: dashboard
     spec:
+      serviceAccountName: dashboard
       containers:
         - name: dashboard
           image: registry.gitlab.com/felixz92/dashboard:v0.1.4
