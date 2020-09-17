@@ -17,7 +17,7 @@ spec:
       serviceAccountName: dashboard
       containers:
         - name: dashboard
-          image: registry.gitlab.com/felixz92/dashboard:v0.1.4
+          image: registry.gitlab.com/felixz92/dashboard:v0.1.5
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
