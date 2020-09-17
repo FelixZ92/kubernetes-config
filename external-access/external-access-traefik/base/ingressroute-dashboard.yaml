@@ -11,6 +11,11 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: dashboard-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://github.com/traefik/traefik/blob/master/docs/content/assets/img/traefik.logo.png?raw=true"
+    dashboard.zippelf.com/display-name: "Traefik"
+    dashboard.zippelf.com/docs: "https://docs.traefik.io/"
 spec:
   entryPoints:
     - websecure

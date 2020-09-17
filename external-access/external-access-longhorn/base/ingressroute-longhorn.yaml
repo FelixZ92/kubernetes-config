@@ -11,6 +11,11 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: longhorn-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://raw.githubusercontent.com/longhorn/website/master/static/img/icon-longhorn.svg"
+    dashboard.zippelf.com/display-name: "Longhorn"
+    dashboard.zippelf.com/docs: "https://longhorn.io/docs/latest/"
 spec:
   entryPoints:
     - websecure
