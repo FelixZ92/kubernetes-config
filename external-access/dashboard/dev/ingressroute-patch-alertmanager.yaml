@@ -1,0 +1,26 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  routes:
+    - match: Host(`dashboard.192.168.0.13.xip.io`)
+      kind: Rule
+      services:
+        - name: dashboard-louketo-proxy
+          port: 3000
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard-tls
+spec:
+  routes:
+    - match: Host(`dashboard.192.168.0.13.xip.io`)
+      kind: Rule
+      services:
+        - name: dashboard-louketo-proxy
+          port: 3000

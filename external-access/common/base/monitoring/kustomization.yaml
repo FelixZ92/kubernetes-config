@@ -1,5 +1,4 @@
 resources:
   - middlewares.yaml
-  - certificate.yaml
 
 namespace: monitoring

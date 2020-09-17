@@ -2,4 +2,4 @@ resources:
   - ../../base/monitoring
 
 patchesStrategicMerge:
-  - certificate-patch.yaml
+  - ../../../../dashboard/dev/certificate-patch.yaml

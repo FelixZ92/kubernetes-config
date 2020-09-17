@@ -2,10 +2,9 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: infra-tls-certificate
-  namespace: monitoring
+  name: dashboard-tls-certificate
 spec:
-  secretName: tls-infra-ingress
+  secretName: tls-dashboard-ingress
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer

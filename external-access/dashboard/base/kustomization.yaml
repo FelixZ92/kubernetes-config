@@ -1,0 +1,9 @@
+resources:
+  - namespace.yaml
+  - cert.yaml
+  - service.yaml
+  - deployment.yaml
+  - middlewares.yaml
+  - ingressroute.yaml
+
+namespace: dashboard

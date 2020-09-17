@@ -18,7 +18,7 @@ GRAFANA_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/grafana)
 OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
 OIDC_CLIENT_ID = k8s
 
-OIDC_NAMESPACES = monitoring traefik postgres-operator argocd keycloak longhorn-system
+OIDC_NAMESPACES = monitoring traefik postgres-operator argocd keycloak longhorn-system dashboard
 
 echo-keycloak:
 	echo $(KEYCLOAK_PASSWORD)
