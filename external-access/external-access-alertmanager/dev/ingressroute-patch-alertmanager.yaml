@@ -17,9 +17,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: alertmanager-tls
-  annotations:
-    dashboard.zippelf.com/scrape: "true"
-    dashboard.zippelf.com/logo: "https://cdn.rancher.com/wp-content/uploads/2015/05/27094511/prometheus-logo-square.png"
 spec:
   routes:
     - match: Host(`alertmanager.192.168.0.13.xip.io`)

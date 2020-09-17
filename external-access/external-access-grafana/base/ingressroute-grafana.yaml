@@ -11,6 +11,11 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: grafana-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://user-images.githubusercontent.com/10999/43383564-afa9ea6c-93db-11e8-855b-de8be4f79756.png"
+    dashboard.zippelf.com/display-name: "Grafana"
+    dashboard.zippelf.com/docs: "https://grafana.com/docs/grafana/latest/"
 spec:
   entryPoints:
     - websecure
