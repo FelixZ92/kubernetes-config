@@ -13,7 +13,7 @@ metadata:
   name: alertmanager-tls
   annotations:
     dashboard.zippelf.com/scrape: "true"
-    dashboard.zippelf.com/logo: "https://cdn.rancher.com/wp-content/uploads/2015/05/27094511/prometheus-logo-square.png"
+    dashboard.zippelf.com/logo: "https://avatars1.githubusercontent.com/u/3380462?s=200&v=4"
     dashboard.zippelf.com/display-name: "Alertmanager"
     dashboard.zippelf.com/docs: "https://prometheus.io/docs/alerting/latest/alertmanager/"
 spec:
