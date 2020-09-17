@@ -4,3 +4,4 @@ resources:
 
 patchesStrategicMerge:
   - certificate-patch.yaml
+  - ingressroute-patch-alertmanager.yaml
