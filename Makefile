@@ -184,7 +184,9 @@ create-grafana-secret:
 create-grafana-generic-oauth-secret:
 	@if [ -z "$(OIDC_SECRET)" ]; then echo "OIDC_SECRET not set, exit"; exit 1; fi
 	@if [ -z "$(OIDC_CLIENT_ID)" ]; then echo "OIDC_CLIENT_ID not set, exit"; exit 1; fi
-	@envsubst '$${ROOT_DOMAIN} $${OIDC_CLIENT_ID} $${OIDC_SECRET}' < hack/grafana-generic-auth-secret.yaml > tmp/grafana-generic-auth-secret.yaml
+	@if [ "$(ENVIRONMENT)" = "dev" ]; then export SKIP_TLS=true; else export SKIP_TLS=false; fi ; \
+ 		envsubst '$${ROOT_DOMAIN} $${OIDC_CLIENT_ID} $${OIDC_SECRET} $${SKIP_TLS}' \
+		< hack/grafana-generic-auth-secret.yaml > tmp/grafana-generic-auth-secret.yaml
 	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
 			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
 			 < $(CURRENT_DIR)/tmp/grafana-generic-auth-secret.yaml \
