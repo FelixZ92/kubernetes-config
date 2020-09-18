@@ -108,6 +108,8 @@ prometheus-operator:
       userKey: username
       passwordKey: password
 
+    envFromSecret: "grafana-generic-oauth"
+
     extraConfigmapMounts: []
     # - name: certs-configmap
     #   mountPath: /etc/grafana/ssl/

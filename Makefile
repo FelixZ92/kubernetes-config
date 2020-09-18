@@ -13,10 +13,11 @@ SECRET_KEY = $(shell cat ${KUBE_MANIFEST} | yq  -r '.spec.encryptedData | to_ent
 endif
 
 ENVIRONMENT=dev
+export ROOT_DOMAIN=192.168.0.13.xip.io# export needed for grafana generic oauth hack
 KEYCLOAK_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/keycloak/admin)
 GRAFANA_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/grafana)
-OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
-OIDC_CLIENT_ID = k8s
+export OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
+export OIDC_CLIENT_ID = k8s
 
 OIDC_NAMESPACES = monitoring traefik postgres-operator argocd keycloak longhorn-system dashboard
 
@@ -179,6 +180,16 @@ create-grafana-secret:
 	@git add $(CURRENT_DIR)/02_applications/$(ENVIRONMENT)/secrets/grafana-admin-user-sealed.json && \
 		git commit -m "Re-encrypt grafana secret" && \
 		git push
+
+create-grafana-generic-oauth-secret:
+	@if [ -z "$(OIDC_SECRET)" ]; then echo "OIDC_SECRET not set, exit"; exit 1; fi
+	@if [ -z "$(OIDC_CLIENT_ID)" ]; then echo "OIDC_CLIENT_ID not set, exit"; exit 1; fi
+	@envsubst '$${ROOT_DOMAIN} $${OIDC_CLIENT_ID} $${OIDC_SECRET}' < hack/grafana-generic-auth-secret.yaml > tmp/grafana-generic-auth-secret.yaml
+	@kubeseal --controller-name $(SEALED_SECRETS_CONTROLLER_NAME) \
+			--controller-namespace $(SEALED_SECRETS_CONTROLLER_NAMESPACE) \
+			 < $(CURRENT_DIR)/tmp/grafana-generic-auth-secret.yaml \
+			 > $(CURRENT_DIR)/prometheus-operator/$(ENVIRONMENT)/grafana-generic-auth-secret.yaml
+
 
 # kudos to Sébastien Dubois (https://itnext.io/deploying-tls-certificates-for-local-development-and-production-using-kubernetes-cert-manager-9ab46abdd569)
 generate-local-ca:
