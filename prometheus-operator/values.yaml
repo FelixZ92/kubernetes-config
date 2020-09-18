@@ -98,6 +98,9 @@ prometheus-operator:
     grafana.ini:
       server:
         root_url: https://grafana.192.168.0.13 # this host can be localhost
+#      auth.generic_oauth:
+#        enabled: true
+#      openid email profile
     ## Deploy default dashboards.
     ##
     defaultDashboardsEnabled: true
