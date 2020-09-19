@@ -1,5 +1,0 @@
-resources:
-  - ../../base/monitoring
-
-patchesStrategicMerge:
-  - ../../../../dashboard/dev/certificate-patch.yaml
