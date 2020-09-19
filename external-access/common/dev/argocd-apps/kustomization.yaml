@@ -8,3 +8,4 @@ patchesStrategicMerge:
   - external-access-traefik-repo-path.yaml
   - external-access-postgres-repo-path.yaml
   - external-access-longhorn-repo-path.yaml
+  - external-access-argocd-repo-path.yaml
