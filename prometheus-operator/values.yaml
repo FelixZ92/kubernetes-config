@@ -153,7 +153,11 @@ prometheus-operator:
     enabled: true
 
   kubeEtcd:
-    enabled: false
+    enabled: true
+    endpoints:
+      - 192.168.0.11
+    # - 10.141.4.23
+    # - 10.141.4.24
 
   kubeScheduler:
     enabled: true
