@@ -110,10 +110,11 @@ prometheus-operator:
     envFromSecret: "grafana-generic-oauth"
 
     dashboards:
-      keycloak:
-        gnetId: 10441
-        revision: 1
-        datasource: Prometheus
+      default:
+        keycloak:
+          gnetId: 10441
+          revision: 1
+          datasource: Prometheus
     plugins:
       - grafana-piechart-panel
       - grafana-clock-panel
