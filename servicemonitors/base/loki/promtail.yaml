@@ -54,7 +54,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "sum(promtail_targets_active_total{cluster=~\"$cluster\",job=\"$namespace/$name\"})",
+                         "expr": "sum(promtail_targets_active_total{job=\"$namespace/$name\"})",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "Active Targets",
@@ -130,7 +130,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "sum(promtail_files_active_total{cluster=~\"$cluster\",job=\"$namespace/$name\"})",
+                         "expr": "sum(promtail_files_active_total{job=\"$namespace/$name\"})",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "Active Targets",
@@ -218,7 +218,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "sum(rate(promtail_read_bytes_total{cluster=~\"$cluster\",job=\"$namespace/$name\"}[1m]))",
+                         "expr": "sum(rate(promtail_read_bytes_total{job=\"$namespace/$name\"}[1m]))",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "logs read",
@@ -294,7 +294,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "sum(rate(promtail_read_lines_total{cluster=~\"$cluster\",job=\"$namespace/$name\"}[1m]))",
+                         "expr": "sum(rate(promtail_read_lines_total{job=\"$namespace/$name\"}[1m]))",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "lines read",
@@ -466,7 +466,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "histogram_quantile(0.99, sum by (le) (job:promtail_request_duration_seconds_bucket:sum_rate{job=\"$namespace/$name\", cluster=~\"$cluster\"})) * 1e3",
+                         "expr": "histogram_quantile(0.99, sum by (le) (job:promtail_request_duration_seconds_bucket:sum_rate{job=\"$namespace/$name\"})) * 1e3",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "99th Percentile",
@@ -474,7 +474,7 @@ data:
                          "step": 10
                       },
                       {
-                         "expr": "histogram_quantile(0.50, sum by (le) (job:promtail_request_duration_seconds_bucket:sum_rate{job=\"$namespace/$name\", cluster=~\"$cluster\"})) * 1e3",
+                         "expr": "histogram_quantile(0.50, sum by (le) (job:promtail_request_duration_seconds_bucket:sum_rate{job=\"$namespace/$name\"})) * 1e3",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "50th Percentile",
@@ -482,7 +482,7 @@ data:
                          "step": 10
                       },
                       {
-                         "expr": "1e3 * sum(job:promtail_request_duration_seconds_sum:sum_rate{job=\"$namespace/$name\", cluster=~\"$cluster\"}) / sum(job:promtail_request_duration_seconds_count:sum_rate{job=\"$namespace/$name\", cluster=~\"$cluster\"})",
+                         "expr": "1e3 * sum(job:promtail_request_duration_seconds_sum:sum_rate{job=\"$namespace/$name\"}) / sum(job:promtail_request_duration_seconds_count:sum_rate{job=\"$namespace/$name\"})",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "Average",
@@ -553,29 +553,6 @@ data:
                 "refresh": 1,
                 "regex": "",
                 "type": "datasource"
-             },
-             {
-                "allValue": null,
-                "current": {
-                   "text": "prod",
-                   "value": "prod"
-                },
-                "datasource": "$datasource",
-                "hide": 0,
-                "includeAll": false,
-                "label": "cluster",
-                "multi": false,
-                "name": "cluster",
-                "options": [ ],
-                "query": "label_values(kube_pod_container_info{image=~\".*promtail.*\"}, cluster)",
-                "refresh": 1,
-                "regex": "",
-                "sort": 2,
-                "tagValuesQuery": "",
-                "tags": [ ],
-                "tagsQuery": "",
-                "type": "query",
-                "useTags": false
              },
              {
                 "allValue": null,
