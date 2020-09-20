@@ -54,7 +54,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "sum(promtail_targets_active_total{job=\"$name\"})",
+                         "expr": "sum(promtail_targets_active_total{job=\"$namespace/$name\"})",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "Active Targets",
@@ -130,7 +130,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "sum(promtail_files_active_total{job=\"$name\"})",
+                         "expr": "sum(promtail_files_active_total{job=\"$namespace/$name\"})",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "Active Targets",
@@ -218,7 +218,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "sum(rate(promtail_read_bytes_total{job=\"$name\"}[1m]))",
+                         "expr": "sum(rate(promtail_read_bytes_total{job=\"$namespace/$name\"}[1m]))",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "logs read",
@@ -294,7 +294,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "sum(rate(promtail_read_lines_total{job=\"$name\"}[1m]))",
+                         "expr": "sum(rate(promtail_read_lines_total{job=\"$namespace/$name\"}[1m]))",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "lines read",
@@ -466,7 +466,7 @@ data:
                    "steppedLine": false,
                    "targets": [
                       {
-                         "expr": "histogram_quantile(0.99, sum by (le) (job:promtail_request_duration_seconds_bucket:sum_rate{job=\"$name\"})) * 1e3",
+                         "expr": "histogram_quantile(0.99, sum by (le) (job:promtail_request_duration_seconds_bucket:sum_rate{job=\"$namespace/$name\"})) * 1e3",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "99th Percentile",
@@ -474,7 +474,7 @@ data:
                          "step": 10
                       },
                       {
-                         "expr": "histogram_quantile(0.50, sum by (le) (job:promtail_request_duration_seconds_bucket:sum_rate{job=\"$name\"})) * 1e3",
+                         "expr": "histogram_quantile(0.50, sum by (le) (job:promtail_request_duration_seconds_bucket:sum_rate{job=\"$namespace/$name\"})) * 1e3",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "50th Percentile",
@@ -482,7 +482,7 @@ data:
                          "step": 10
                       },
                       {
-                         "expr": "1e3 * sum(job:promtail_request_duration_seconds_sum:sum_rate{job=\"$name\"}) / sum(job:promtail_request_duration_seconds_count:sum_rate{job=\"$name\"})",
+                         "expr": "1e3 * sum(job:promtail_request_duration_seconds_sum:sum_rate{job=\"$namespace/$name\"}) / sum(job:promtail_request_duration_seconds_count:sum_rate{job=\"$namespace/$name\"})",
                          "format": "time_series",
                          "intervalFactor": 2,
                          "legendFormat": "Average",
@@ -590,7 +590,7 @@ data:
                 "multi": false,
                 "name": "name",
                 "options": [ ],
-                "query": "label_values(kube_service_info{namespace=\"$namespace\",service=~\"promtail.*\"}, created_by_name)",
+                "query": "label_values(kube_service_info{namespace=\"$namespace\",service=~\"promtail.*\"}, service)",
                 "refresh": 1,
                 "regex": "",
                 "sort": 2,
