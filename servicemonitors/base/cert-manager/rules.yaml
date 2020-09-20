@@ -3,7 +3,7 @@ kind: PrometheusRule
 metadata:
   labels:
     release: prometheus-operator
-  name: prometheus-operator-general.rules
+  name: cert-manager.rules
 spec:
   "groups":
     - "name": "cert-manager"
