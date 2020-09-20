@@ -109,6 +109,10 @@ prometheus-operator:
 
     envFromSecret: "grafana-generic-oauth"
 
+    sidecar:
+      dashboards:
+        searchNamespace: "ALL"
+
     extraConfigmapMounts: []
     # - name: certs-configmap
     #   mountPath: /etc/grafana/ssl/
