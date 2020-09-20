@@ -21,6 +21,14 @@ spec:
   routes:
     - match: Host(`argocd.192.168.0.13.xip.io`)
       kind: Rule
+      priority: 10
       services:
         - name: argocd-server
           port: 80
+    - match: Host(`argocd.192.168.0.13.xip.io`) && Headers(`Content-Type`, `application/grpc`)
+      kind: Rule
+      priority: 11
+      services:
+        - name: argocd-server
+          port: 80
+          scheme: h2c

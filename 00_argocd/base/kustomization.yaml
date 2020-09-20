@@ -6,6 +6,7 @@ namespace: argocd
 
 patchesStrategicMerge:
   - argocd-cm-data.yaml
+  - deployment-patch.yaml
 
 images:
   - name: argoproj/argocd
