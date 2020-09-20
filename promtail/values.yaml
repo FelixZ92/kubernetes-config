@@ -72,3 +72,5 @@ promtail:
 
   serviceMonitor:
     enabled: true
+    additionalLabels:
+      release: prometheus-operator
