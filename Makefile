@@ -16,6 +16,7 @@ ENVIRONMENT=dev
 export ROOT_DOMAIN=192.168.0.13.xip.io# export needed for grafana generic oauth hack
 KEYCLOAK_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/keycloak/admin)
 GRAFANA_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/grafana)
+ARGOCD_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/argocd)
 export OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
 export OIDC_CLIENT_ID = k8s
 
@@ -241,4 +242,7 @@ bootstrap-cluster: update-secrets
 	kustomize build ./01_argocd-application/dev/ | kubectl apply -f -
 	kustomize build ./02_applications/dev/ | kubectl apply -f -
 
+update-argocd-secret:
+	kubectl -n argocd patch secret argocd-secret \
+    	-p '{"stringData": {"admin.password": "'$$(bcrypt-tool hash $(ARGOCD_PASSWORD) 10)'","admin.passwordMtime": "'$$(date +%FT%T%Z)'"}}'
 # TODO: service accounts for deploy hooks
