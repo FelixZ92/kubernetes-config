@@ -109,6 +109,12 @@ prometheus-operator:
 
     envFromSecret: "grafana-generic-oauth"
 
+    dashboards:
+      keycloak:
+        gnetId: 10441
+        revision: 1
+        datasource: Prometheus
+
     sidecar:
       dashboards:
         searchNamespace: "ALL"
