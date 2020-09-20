@@ -1,3 +1,4 @@
 resources:
   - servicemonitor.yaml
+  - dashboard.yaml
 namespace: keycloak
