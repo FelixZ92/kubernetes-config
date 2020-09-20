@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/name: keycloak
     release: prometheus-operator
   name: keycloak-spi
-  namespace: keycloak
 spec:
   endpoints:
     - path: /auth/realms/master/metrics
