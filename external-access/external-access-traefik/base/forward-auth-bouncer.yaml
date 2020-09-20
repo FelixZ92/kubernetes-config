@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: forward-auth-bouncer
-          image: registry.gitlab.com/felixz92/forward-auth-bouncer-go:v0.2.2
+          image: registry.gitlab.com/felixz92/forward-auth-bouncer-go:v0.2.4
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
