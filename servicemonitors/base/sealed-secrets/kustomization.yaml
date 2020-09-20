@@ -1,0 +1,5 @@
+resources:
+  - dashboard.yaml
+  - rules.yaml
+  - servicemonitor.yaml
+namespace: kube-system
