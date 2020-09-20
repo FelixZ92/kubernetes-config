@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: keycloak
     app.kubernetes.io/name: keycloak
     release: prometheus-operator
-  name: keycloak
+  name: keycloak-spi
   namespace: keycloak
 spec:
   endpoints:
