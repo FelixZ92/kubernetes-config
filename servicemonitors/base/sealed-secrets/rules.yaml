@@ -3,7 +3,7 @@ kind: PrometheusRule
 metadata:
   labels:
     release: prometheus-operator
-  name: cert-manager.rules
+  name: sealed-secrets.rules
 spec:
   groups:
     - name: sealed-secrets

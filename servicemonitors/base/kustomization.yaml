@@ -2,3 +2,4 @@ resources:
   - ./argocd
   - ./cert-manager
   - ./keycloak
+  - ./sealed-secrets
