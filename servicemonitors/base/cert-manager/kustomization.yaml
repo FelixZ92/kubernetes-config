@@ -2,6 +2,7 @@ namespace: cert-manager
 resources:
   - rules.yaml
   - servicemonitor.yaml
+  - dashboard.yaml
 
 commonLabels:
   app: cert-manager
