@@ -1,0 +1,10 @@
+namespace: cert-manager
+resources:
+  - rules.yaml
+  - servicemonitor.yaml
+
+commonLabels:
+  app: cert-manager
+  app.kubernetes.io/component: controller
+  app.kubernetes.io/instance: cert-manager
+  app.kubernetes.io/name: cert-manager
