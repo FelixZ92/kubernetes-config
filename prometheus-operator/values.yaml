@@ -166,6 +166,10 @@ prometheus-operator:
       - 192.168.0.11
     # - 10.141.4.23
     # - 10.141.4.24
+    serviceMonitor:
+      ## Scrape interval. If not set, the Prometheus default scrape interval is used.
+      ##
+      scheme: https
 
   kubeScheduler:
     enabled: true
