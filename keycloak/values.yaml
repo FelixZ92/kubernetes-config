@@ -58,7 +58,8 @@ keycloak:   # The number of replicas to create
         secretKeyRef:
           key: password
           name: "keycloak-admin-user"
-
+    - name: KEYCLOAK_STATISTICS
+      value: all
   # - name: KEYCLOAK_LOGLEVEL
   #   value: DEBUG
   # - name: WILDFLY_LOGLEVEL
