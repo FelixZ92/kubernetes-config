@@ -14,7 +14,7 @@ subsets:
         ip: 192.168.0.13
     ports:
       - name: http-metrics
-        port: 2379
+        port: 2381
         protocol: TCP
 
 ---
@@ -55,23 +55,3 @@ subsets:
       - name: http-metrics
         port: 10251
         protocol: TCP
----
-# Source: prometheus-operator-custom/charts/prometheus-operator/templates/exporters/kube-etcd/servicemonitor.yaml
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: prometheus-operator-kube-etcd
-  namespace: monitoring
-spec:
-  endpoints:
-    - port: http-metrics
-      scheme: https
-      bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-      tlsConfig:
-        cert:
-          secret:
-            key: tls.crt
-            name: prom-etcd-node1-cert
-        keySecret:
-          key: tls.key
-          name: prom-etcd-node1-cert
