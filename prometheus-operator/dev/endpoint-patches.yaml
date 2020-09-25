@@ -70,8 +70,8 @@ spec:
       tlsConfig:
         cert:
           secret:
-            key: tls.key
+            key: tls.crt
             name: prom-etcd-node1-cert
         keySecret:
-          key: tls.crt
+          key: tls.key
           name: prom-etcd-node1-cert
