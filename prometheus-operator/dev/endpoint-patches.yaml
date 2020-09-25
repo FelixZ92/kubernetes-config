@@ -65,6 +65,7 @@ metadata:
 spec:
   endpoints:
     - port: http-metrics
+      scheme: https
       bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
       tlsConfig:
         cert:
