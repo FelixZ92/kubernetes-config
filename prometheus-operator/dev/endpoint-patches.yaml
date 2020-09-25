@@ -56,3 +56,21 @@ subsets:
         port: 10251
         protocol: TCP
 ---
+# Source: prometheus-operator-custom/charts/prometheus-operator/templates/exporters/kube-etcd/servicemonitor.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-operator-kube-etcd
+  namespace: monitoring
+spec:
+  endpoints:
+    - port: http-metrics
+      bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      tlsConfig:
+        cert:
+          secret:
+            key: key
+            name: prom-etcd-node1-cert
+        keySecret:
+          key: cert
+          name: prom-etcd-node1-cert
