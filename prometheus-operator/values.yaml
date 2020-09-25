@@ -170,7 +170,6 @@ prometheus-operator:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
       scheme: https
-      insecureSkipVerify: true
 
   kubeScheduler:
     enabled: true

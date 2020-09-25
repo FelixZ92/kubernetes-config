@@ -6,9 +6,9 @@ metadata:
   namespace: kube-system
 subsets:
   - addresses:
-      - ip: 192.168.0.11
-      - ip: 192.168.0.12
-      - ip: 192.168.0.13
+      - hostname: node1
+      - hostname: node2
+      - hostname: node3
     ports:
       - name: http-metrics
         port: 2379
@@ -23,9 +23,9 @@ metadata:
   namespace: kube-system
 subsets:
   - addresses:
-      - ip: 192.168.0.11
-      - ip: 192.168.0.12
-      - ip: 192.168.0.13
+      - hostname: node1
+      - hostname: node2
+      - hostname: node3
     ports:
       - name: http-metrics
         port: 10252
@@ -39,9 +39,9 @@ metadata:
   namespace: kube-system
 subsets:
   - addresses:
-      - ip: 192.168.0.11
-      - ip: 192.168.0.12
-      - ip: 192.168.0.13
+      - hostname: node1
+      - hostname: node2
+      - hostname: node3
     ports:
       - name: http-metrics
         port: 10251
