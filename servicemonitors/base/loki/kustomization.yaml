@@ -10,3 +10,7 @@ resources:
   - promtail.yaml
   - promtail-alerts.yaml
   - promtail-rules.yaml
+
+commonLabels:
+    release: prometheus-operator
+    app: prometheus-operator

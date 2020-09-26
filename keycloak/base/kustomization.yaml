@@ -10,3 +10,6 @@ resources:
   - init-keycloak.yaml
 
 namespace: keycloak
+
+patchesStrategicMerge:
+  - prometheus-rule-patch.yaml

@@ -1,0 +1,9 @@
+---
+# Source: keycloak/charts/keycloak/templates/prometheusrule.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: keycloak
+  labels:
+    release: prometheus-operator
+    app: prometheus-operator

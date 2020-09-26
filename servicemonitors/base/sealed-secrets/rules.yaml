@@ -3,6 +3,7 @@ kind: PrometheusRule
 metadata:
   labels:
     release: prometheus-operator
+    app: prometheus-operator
   name: sealed-secrets.rules
 spec:
   groups:
