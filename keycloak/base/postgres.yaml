@@ -41,7 +41,7 @@ spec:
           memory: 200M
       env:
         - name: "DATA_SOURCE_URI"
-          value: "localhost/database?sslmode=disable"
+          value: "localhost/keycloak?sslmode=disable"
         - name: "DATA_SOURCE_USER"
           valueFrom:
             secretKeyRef:
