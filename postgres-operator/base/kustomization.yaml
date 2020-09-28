@@ -1,5 +1,2 @@
 resources:
   - all.yaml
-
-patchesStrategicMerge:
-  - config-patch.yaml
