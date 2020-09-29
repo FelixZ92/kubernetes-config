@@ -1,0 +1,4 @@
+resources:
+  - dashboard.yaml
+  - rules.yaml
+namespace: postgres-operator
