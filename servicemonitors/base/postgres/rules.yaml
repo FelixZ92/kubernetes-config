@@ -4,7 +4,7 @@ metadata:
   labels:
     release: prometheus-operator
     app: prometheus-operator
-  name: cert-manager.rules
+  name: postgres.rules
 spec:
   groups:
     - name: PostgreSQL
