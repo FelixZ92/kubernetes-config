@@ -117,7 +117,7 @@ data:
           "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(rate(node_cpu{instance=\"$host\", mode=\"iowait\"}[$interval])) by (mode)* 100 / scalar(count(node_cpu{mode=\"user\", instance=\"$host\"})) or sum(irate(node_cpu{instance=\"$host\", mode=\"iowait\"}[5m])) by (mode) * 100 / scalar(count(node_cpu{mode=\"user\", instance=\"$host\"}))",
+              "expr": "sum(rate(node_cpu_seconds_total{instance=\"$host\", mode=\"iowait\"}[$interval])) by (mode)* 100 / scalar(count(node_cpu_seconds_total{mode=\"user\", instance=\"$host\"})) or sum(irate(node_cpu_seconds_total{instance=\"$host\", mode=\"iowait\"}[5m])) by (mode) * 100 / scalar(count(node_cpu_seconds_total{mode=\"user\", instance=\"$host\"}))",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{mode}}",
@@ -200,7 +200,7 @@ data:
           "tableColumn": "",
           "targets": [
             {
-              "expr": "sum(rate(node_cpu{instance=\"$host\", mode=\"user\"}[$interval])) by (mode)* 100 / scalar(count(node_cpu{mode=\"user\", instance=\"$host\"})) or sum(irate(node_cpu{instance=\"$host\", mode=\"user\"}[5m])) by (mode) * 100 / scalar(count(node_cpu{mode=\"user\", instance=\"$host\"}))",
+              "expr": "sum(rate(node_cpu_seconds_total{instance=\"$host\", mode=\"user\"}[$interval])) by (mode)* 100 / scalar(count(node_cpu_seconds_total{mode=\"user\", instance=\"$host\"})) or sum(irate(node_cpu_seconds_total{instance=\"$host\", mode=\"user\"}[5m])) by (mode) * 100 / scalar(count(node_cpu_seconds_total{mode=\"user\", instance=\"$host\"}))",
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 2,

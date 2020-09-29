@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: identity-pg-metrics
+  name: identity-pg-0-metrics
   labels:
     application: spilo
     cluster-name: identity-pg
+    statefulset.kubernetes.io/pod-name: identity-pg-0
     team: identity
 spec:
   selector:
@@ -24,8 +25,9 @@ metadata:
     application: spilo
     cluster-name: identity-pg
     team: identity
+    statefulset.kubernetes.io/pod-name: identity-pg-0
     release: prometheus-operator
-  name: identity-pg
+  name: identity-pg-0
 spec:
   endpoints:
     - path: /metrics
@@ -36,3 +38,4 @@ spec:
       application: spilo
       cluster-name: identity-pg
       team: identity
+      statefulset.kubernetes.io/pod-name: identity-pg-0
