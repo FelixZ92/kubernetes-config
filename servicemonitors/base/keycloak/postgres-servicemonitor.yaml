@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -33,7 +34,6 @@ spec:
     - path: /metrics
       port: exporter
       honorLabels: true
-      l
   selector:
     matchLabels:
       application: spilo
