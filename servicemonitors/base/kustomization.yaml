@@ -4,3 +4,4 @@ resources:
   - ./keycloak
   - ./sealed-secrets
   - ./loki
+  - ./postgres
