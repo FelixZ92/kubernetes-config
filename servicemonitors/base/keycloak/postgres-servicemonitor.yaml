@@ -24,11 +24,12 @@ metadata:
     application: spilo
     cluster-name: identity-pg
     team: identity
+    release: prometheus-operator
   name: identity-pg
 spec:
   endpoints:
     - path: /metrics
-      targetPort: 9187
+      port: exporter
       honorLabels: true
   selector:
     matchLabels:
