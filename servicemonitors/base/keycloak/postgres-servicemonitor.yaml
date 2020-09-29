@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: identity-pg-metrics
+  labels:
+    application: spilo
+    cluster-name: identity-pg
+    team: identity
+spec:
+  selector:
+    application: spilo
+    cluster-name: identity-pg
+  ports:
+    - port: 9187
+      name: exporter
+      protocol: TCP
+      targetPort: exporter
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    application: spilo
+    cluster-name: identity-pg
+    team: identity
+  name: identity-pg
+spec:
+  endpoints:
+    - path: /metrics
+      port: exporter
+      honorLabels: true
+  selector:
+    matchLabels:
+      application: spilo
+      cluster-name: identity-pg
+      team: identity
