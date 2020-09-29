@@ -33,6 +33,7 @@ spec:
     - path: /metrics
       port: exporter
       honorLabels: true
+      l
   selector:
     matchLabels:
       application: spilo

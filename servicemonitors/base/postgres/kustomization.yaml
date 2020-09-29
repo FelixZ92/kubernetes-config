@@ -1,4 +1,5 @@
 resources:
-  - dashboard.yaml
+  - pg-exporter.yaml
+  - pg-overview.yaml
   - rules.yaml
 namespace: postgres-operator
