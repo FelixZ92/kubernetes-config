@@ -28,7 +28,7 @@ metadata:
 spec:
   endpoints:
     - path: /metrics
-      port: exporter
+      targetPort: 9187
       honorLabels: true
   selector:
     matchLabels:
