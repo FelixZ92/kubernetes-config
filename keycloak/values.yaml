@@ -193,7 +193,7 @@ keycloak:   # The number of replicas to create
             available for the last 5 minutes.
         expr: |
           (1 - absent(kube_pod_status_ready{namespace="keycloak", condition="true"}
-          * on (pod) group_left (label_component) kube_pod_labels{label_component="keycloak",
+          * on (pod) group_left (label_app_kubernetes_io_instance) kube_pod_labels{label_app_kubernetes_io_instance="keycloak",
           namespace="keycloak"})) == 0
         for: 5m
         labels:
@@ -227,7 +227,7 @@ keycloak:   # The number of replicas to create
             for the last 5 minutes.
         expr: |
           (1 - absent(kube_pod_status_ready{namespace="keycloak", condition="true"}
-          * on (pod) group_left (label_component) kube_pod_labels{label_team="identity",
+          * on (pod) group_left (label_team) kube_pod_labels{label_team="identity",
           namespace="keycloak"})) == 0
         for: 5m
         labels:
