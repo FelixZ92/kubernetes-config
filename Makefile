@@ -19,6 +19,7 @@ GRAFANA_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/grafana)
 ARGOCD_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/argocd)
 export OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
 export OIDC_CLIENT_ID = k8s
+export PGO_ADMIN_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/pgo-admin)
 
 OIDC_NAMESPACES = monitoring traefik postgres-operator argocd keycloak longhorn-system dashboard
 
@@ -245,4 +246,8 @@ bootstrap-cluster: update-secrets
 update-argocd-secret:
 	kubectl -n argocd patch secret argocd-secret \
     	-p '{"stringData": {"admin.password": "'$$(bcrypt-tool hash $(ARGOCD_PASSWORD) 10)'","admin.passwordMtime": "'$$(date +%FT%T%Z)'"}}'
-# TODO: service accounts for deploy hooks
+
+deploy-pgo:
+	@kubectl create ns pgo || true
+	envsubst '$${PGO_ADMIN_PASSWORD}' < pgo/postgres-operator.yaml | kubectl -n pgo apply -f -
+
