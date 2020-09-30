@@ -1,2 +1,4 @@
 bases:
   - ../base
+patchesStrategicMerge:
+  - argocd-cm-data-patch.yaml

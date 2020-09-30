@@ -19,7 +19,6 @@ GRAFANA_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/grafana)
 ARGOCD_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/argocd)
 export OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)
 export OIDC_CLIENT_ID = k8s
-export PGO_ADMIN_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/pgo-admin)
 
 OIDC_NAMESPACES = monitoring traefik postgres-operator argocd keycloak longhorn-system dashboard
 
@@ -122,9 +121,7 @@ blub:
 	kubectl version foo >/dev/null 2>&1 || { echo >&2 "I require kubectl but it's not installed.  Aborting."; exit 1; }
 
 test:
-	for n in $(OIDC_NAMESPACES); do \
-		echo $$n ; \
-	done
+	echo $(OIDC_CLIENT_ID)
 
 create-oidc-secret:
 	@if [ -z "$(OIDC_SECRET)" ]; then echo "OIDC_SECRET not set, exit"; exit 1; fi
@@ -244,10 +241,7 @@ bootstrap-cluster: update-secrets
 	kustomize build ./02_applications/dev/ | kubectl apply -f -
 
 update-argocd-secret:
-	kubectl -n argocd patch secret argocd-secret \
+	@kubectl -n argocd patch secret argocd-secret \
     	-p '{"stringData": {"admin.password": "'$$(bcrypt-tool hash $(ARGOCD_PASSWORD) 10)'","admin.passwordMtime": "'$$(date +%FT%T%Z)'"}}'
-
-deploy-pgo:
-	@kubectl create ns pgo || true
-	envsubst '$${PGO_ADMIN_PASSWORD}' < pgo/postgres-operator.yaml | kubectl -n pgo apply -f -
-
+	@kubectl -n argocd patch secret argocd-secret \
+    	-p '{"stringData": {"oidc.keycloak.clientSecret": "'$(OIDC_SECRET)'"}}'
