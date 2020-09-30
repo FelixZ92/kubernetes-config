@@ -1,0 +1,40 @@
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: infrastructure-critical
+value: 200000000
+globalDefault: false
+description: "Used for critical infrastructure applications"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: highest-priority
+value: 1000000
+globalDefault: false
+description: "Used for business critical pods"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: high-priority
+value: 750000
+globalDefault: false
+description: "Used for more important pods"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: default-priority
+value: 500000
+globalDefault: true
+description: "Used for uncritical pods; cluster default"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: low-priority
+value: 250000
+globalDefault: false
+description: "Used for less important pods"
