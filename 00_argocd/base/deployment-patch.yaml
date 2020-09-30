@@ -80,7 +80,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: argocd-redis-ha-haproxy
+  name: argocd-redis-ha-server
 spec:
   template:
     spec:
