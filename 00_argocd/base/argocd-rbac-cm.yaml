@@ -4,4 +4,4 @@ metadata:
   name: argocd-rbac-cm
 data:
   policy.csv: |
-    g, k8s:cluster-admin, role:admin
+    g, cluster-admins, role:admin
