@@ -1,0 +1,8 @@
+resources:
+  - event-exporter.yaml
+
+namespace: monitoring
+
+commonLabels:
+  app.kubernetes.io/instance: event-exporter
+  app.kubernetes.io/name: event-exporter

@@ -2,3 +2,4 @@ resources:
   - hooks/presync-hook-check-grafana-password.yaml
   - ../crds
   - all.yaml
+  - event-exporter
