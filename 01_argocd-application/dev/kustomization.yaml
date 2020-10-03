@@ -1,6 +1,0 @@
-bases:
-  - ../base
-
-patchesStrategicMerge:
-  - application-argocd-repo-path.yaml
-  - application-applications-repo-path.yaml
