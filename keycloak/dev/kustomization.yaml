@@ -1,7 +1,6 @@
 resources:
   - ../base
   - k8s-keycloak-client.yaml
-  - ../hooks
 
 patchesStrategicMerge:
   - certificates-patch.yaml

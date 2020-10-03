@@ -19,7 +19,7 @@ spec:
             name: louketo-proxy-rules
       containers:
         - name: gatekeeper
-          image: quay.io/louketo/louketo-proxy
+          image: quay.io/louketo/louketo-proxy:1.0.0
           imagePullPolicy: Always
           args:
             - --enable-default-deny=false
@@ -58,4 +58,11 @@ spec:
             - containerPort: 3000
               name: proxy
               protocol: TCP
+          resources:
+            requests:
+              cpu: 20m
+              memory: 50Mi
+            limits:
+              cpu: 30m
+              memory: 100Mi
       restartPolicy: Always

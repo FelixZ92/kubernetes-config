@@ -258,3 +258,12 @@ prometheus-operator:
               requests:
                 storage: 2700Mi
       priorityClassName: ""
+
+  prometheus-node-exporter:
+    resources:
+       limits:
+         cpu: 200m
+         memory: 50Mi
+       requests:
+         cpu: 100m
+         memory: 30Mi
