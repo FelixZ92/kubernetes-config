@@ -1,3 +1,2 @@
 resources:
   - ca-clusterissuer.yaml
-  - presync-hook-check-local-ca.yaml
