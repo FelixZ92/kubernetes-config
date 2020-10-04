@@ -256,7 +256,7 @@ prometheus-operator:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 2700Mi
+                storage: 5400Mi
       priorityClassName: ""
 
   prometheus-node-exporter:
