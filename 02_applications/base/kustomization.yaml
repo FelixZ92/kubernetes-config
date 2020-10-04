@@ -1,5 +1,4 @@
 resources:
-  - namespace.yaml
   - sealed-secrets.yaml
   - longhorn.yaml
   - cert-manager.yaml
