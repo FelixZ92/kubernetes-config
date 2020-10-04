@@ -1,3 +1,4 @@
 resources:
+  - middlewares.yaml
   - ingressroute-alertmanager.yaml
   - cert.yaml

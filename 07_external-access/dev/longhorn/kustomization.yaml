@@ -1,10 +1,11 @@
 resources:
-  - ../base
+  - ../../base/longhorn
+  - proxy
 
-namespace: monitoring
+namespace: longhorn-system
 
 patchesStrategicMerge:
-  - ingressroute-patch-grafana.yaml
+  - ingressroute-patch-longhorn.yaml
   - certificate-patch.yaml
 
 commonAnnotations:

@@ -1,10 +1,10 @@
 resources:
-  - ../base
+  - ../../base/grafana
 
-namespace: argocd
+namespace: monitoring
 
 patchesStrategicMerge:
-  - ingressroute-patch.yaml
+  - ingressroute-patch-grafana.yaml
   - certificate-patch.yaml
 
 commonAnnotations:

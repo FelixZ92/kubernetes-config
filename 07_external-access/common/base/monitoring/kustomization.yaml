@@ -1,4 +1,0 @@
-resources:
-  - middlewares.yaml
-
-namespace: monitoring

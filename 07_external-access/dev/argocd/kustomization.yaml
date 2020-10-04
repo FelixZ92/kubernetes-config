@@ -1,11 +1,10 @@
 resources:
-  - ../base
-  - proxy
+  - ../../base/argocd
 
-namespace: postgres-operator
+namespace: argocd
 
 patchesStrategicMerge:
-  - ingressroute-patch-postgres.yaml
+  - ingressroute-patch.yaml
   - certificate-patch.yaml
 
 commonAnnotations:

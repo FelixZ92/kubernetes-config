@@ -1,11 +1,11 @@
 resources:
-  - ../base
+  - ../../base/postgres-operator
   - proxy
 
-namespace: monitoring
+namespace: postgres-operator
 
 patchesStrategicMerge:
-  - ingressroute-patch-alertmanager.yaml
+  - ingressroute-patch-postgres.yaml
   - certificate-patch.yaml
 
 commonAnnotations:

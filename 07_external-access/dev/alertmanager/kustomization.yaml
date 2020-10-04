@@ -1,11 +1,11 @@
 resources:
-  - ../base
+  - ../../base/alertmanager
   - proxy
 
 namespace: monitoring
 
 patchesStrategicMerge:
-  - ingressroute-patch-prometheus.yaml
+  - ingressroute-patch-alertmanager.yaml
   - certificate-patch.yaml
 
 commonAnnotations:

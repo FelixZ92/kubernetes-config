@@ -1,11 +1,11 @@
 resources:
-  - ../base
+  - ../../base/prometheus
   - proxy
 
-namespace: longhorn-system
+namespace: monitoring
 
 patchesStrategicMerge:
-  - ingressroute-patch-longhorn.yaml
+  - ingressroute-patch-prometheus.yaml
   - certificate-patch.yaml
 
 commonAnnotations:
