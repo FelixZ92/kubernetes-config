@@ -8,7 +8,7 @@ resources:
   - secrets/dashboard-oidc-secret.json
   - secrets/dashboard-signing-secret-sealed.json
   - secrets/grafana-admin-user.json
-  - secrets/keycloak-admin-user-sealed.json
+  - secrets/keycloak-admin-user.json
   - secrets/keycloak-oidc-secret.json
   - secrets/monitoring-oidc-secret.json
   - secrets/monitoring-signing-secret-sealed.json
