@@ -3,7 +3,7 @@ bases:
 resources:
   - namespace.yaml
   - appproject-infrastructure.yaml
-  - application-argocd.yaml
+
 namespace: argocd
 
 patchesStrategicMerge:

@@ -1,5 +1,6 @@
 resources:
   - 00_global-resources/global-resources.yaml
+  - 01_argocd/application-argocd.yaml
   - 03_infrastructure/cert-manager.yaml
   - 03_infrastructure/certificate-authority.yaml
   - 03_infrastructure/sealed-secrets.yaml

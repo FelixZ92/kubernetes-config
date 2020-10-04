@@ -17,8 +17,8 @@ bootstrap-cluster:
 	kustomize build ./03_infrastructure/cert-manager/base/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/certificate-authority/dev/ | kubectl apply -f -
 	kustomize build ./04_data-store/longhorn/base/ | kubectl apply -f -
-	helm template postgres-operator 04_data-store/postgres-operator --namespace postgres-operator --include-crds > 04_data-store/postgres-operator/base/all.yaml && kustomize build 04_data-store/postgres-operator/base | kubectl apply -f -
-	#helm template prometheus-operator 05_observability/prometheus-operator --namespace monitoring --include-crds > 05_observability/prometheus-operator/base/all.yaml && kustomize build 05_observability/prometheus-operator/dev | kubectl apply -f -
+	helm template postgres-operator 04_data-store/postgres-operator --namespace postgres-operator --include-crds > 04_data-store/postgres-operator/base/all.yaml && kustomize build 04_data-store/postgres-operator/base | kubectl -n postgres-operator apply -f -
+	helm template prometheus-operator 05_observability/prometheus-operator --namespace monitoring --include-crds > 05_observability/prometheus-operator/base/all.yaml && kustomize build 05_observability/prometheus-operator/dev | kubectl apply -f -
 	kustomize build ./01_argocd/dev/ | kubectl apply -f -
 	kustomize build ./02_applications/dev/ | kubectl apply -f -
 

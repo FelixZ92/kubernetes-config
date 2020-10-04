@@ -4,5 +4,5 @@ metadata:
   name: argocd
 spec:
   source:
-    path: 00_argocd/dev
+    path: 01_argocd/dev
     targetRevision: master

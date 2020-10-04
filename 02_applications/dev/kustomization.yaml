@@ -20,6 +20,7 @@ resources:
   - secrets/traefik-signing-secret-sealed.json
 
 patchesStrategicMerge:
+  - 01_argocd/application-argocd-repo-path.yaml
   - 03_infrastructure/certificate-authority-repo-path.yaml
   - 03_infrastructure/traefik-env-patch.yaml
   - 05_observability/loki-env-patch.yaml
