@@ -1,21 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets
+  name: cert-manager
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 spec:
   destination:
-    namespace: sealed-secrets
+    namespace: cert-manager
     server: https://kubernetes.default.svc
   project: infrastructure
   source:
-    path: sealed-secrets/base
+    path: 02_infrastructure/cert-manager/base
     repoURL: https://gitlab.com/FelixZ92/k8s-dev.git
     targetRevision: master
   syncPolicy:
     automated:
-      prune: true
+      prune: false
       selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
