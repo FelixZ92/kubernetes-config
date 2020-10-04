@@ -19,7 +19,7 @@ spec:
             name: louketo-proxy-rules
       containers:
         - name: gatekeeper
-          image: quay.io/louketo/louketo-proxy:1.0.0
+          image: quay.io/louketo/louketo-proxy
           imagePullPolicy: Always
           args:
             - --enable-default-deny=false
