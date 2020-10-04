@@ -75,7 +75,7 @@ prometheus-operator:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 2700Mi
+                storage: 5400Mi
       externalUrl: https://alertmanager
       routePrefix: /
       nodeSelector:
