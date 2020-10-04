@@ -29,8 +29,3 @@ patchesStrategicMerge:
   - 06_identity/keycloak-repo-path.yaml
   - 07_external-access/external-access-repo-path.yaml
   - 07_external-access/dashboard-repo-path.yaml
-
-    application: spilo
-    cluster-name: identity-pg
-    spilo-role: master
-    team: identity
