@@ -1,14 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: applications
+  name: global-resources
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   destination:
-    namespace: argocd
+    namespace: kube-system
     server: https://kubernetes.default.svc
   project: infrastructure
   source:
-    path: 02_applications/base
+    path: 00_global-resources
     repoURL: https://gitlab.com/FelixZ92/k8s-dev.git
     targetRevision: master
   syncPolicy:
