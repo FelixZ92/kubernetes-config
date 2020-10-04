@@ -17,7 +17,7 @@ resources:
   - secrets/longhorn-system-oidc-secret.json
   - secrets/longhorn-system-oidc-signing-secret.json
   - secrets/traefik-oidc-secret.json
-  - secrets/traefik-signing-secret-sealed.json
+  - secrets/traefik-oidc-signing-secret.json
 
 patchesStrategicMerge:
   - 01_argocd/application-argocd-repo-path.yaml
