@@ -1,21 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: longhorn
+  name: external-access
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   destination:
-    namespace: longhorn-system
+    namespace: traefik
     server: https://kubernetes.default.svc
   project: infrastructure
   source:
-    path: longhorn/base
+    path: 07_external-access/common/base
     repoURL: https://gitlab.com/FelixZ92/k8s-dev.git
     targetRevision: master
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  syncOptions:
-    - CreateNamespace=true

@@ -1,17 +1,16 @@
 resources:
-  - sealed-secrets.yaml
-  - longhorn.yaml
-  - cert-manager.yaml
-  - certificate-authority.yaml
-  - traefik.yaml
-  - prometheus-operator.yaml
-  - loki.yaml
-  - promtail.yaml
-  - keycloak.yaml
-  - postgres-operator.yaml
-  - postgres-operator-ui.yaml
-  - external-access.yaml
-  - secret-check-sa.yaml
-  - dashboard.yaml
-  - servicemonitors.yaml
+  - 03_infrastructure/cert-manager.yaml
+  - 03_infrastructure/certificate-authority.yaml
+  - 03_infrastructure/sealed-secrets.yaml
+  - 03_infrastructure/traefik.yaml
+  - 04_datastore/longhorn.yaml
+  - 04_datastore/postgres-operator.yaml
+  - 04_datastore/postgres-operator-ui.yaml
+  - 05_observability/loki.yaml
+  - 05_observability/prometheus-operator.yaml
+  - 05_observability/promtail.yaml
+  - 05_observability/servicemonitors.yaml
+  - 06_identity/keycloak.yaml
+  - 07_external-access/external-access.yaml
+  - 07_external-access/dashboard.yaml
 namespace: argocd

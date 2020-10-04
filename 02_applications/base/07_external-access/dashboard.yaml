@@ -1,24 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki
+  name: dashboard
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   destination:
-    namespace: loki
+    namespace: dashboard
     server: https://kubernetes.default.svc
   project: infrastructure
   source:
-    path: loki
+    path: 07_external-access/dashboard/base
     repoURL: https://gitlab.com/FelixZ92/k8s-dev.git
     targetRevision: master
-    plugin:
-      name: kustomized-helm
-      env:
-        - name: ENVIRONMENT
-          value: base
   syncPolicy:
     automated:
-      selfHeal: true
       prune: true
+      selfHeal: true

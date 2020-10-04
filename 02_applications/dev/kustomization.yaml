@@ -20,12 +20,11 @@ resources:
   - secrets/traefik-signing-secret-sealed.json
 
 patchesStrategicMerge:
-  - cert-manager-repo-path.yaml
-  - prometheus-operator-env-patch.yaml
-  - loki-env-patch.yaml
-  - promtail-env-patch.yaml
-  - certificate-authority-repo-path.yaml
-  - traefik-env-patch.yaml
-  - keycloak-repo-path.yaml
-  - external-access-repo-path.yaml
-  - dashboard-repo-path.yaml
+  - 03_infrastructure/certificate-authority-repo-path.yaml
+  - 03_infrastructure/traefik-env-patch.yaml
+  - 05_observability/loki-env-patch.yaml
+  - 05_observability/prometheus-operator-env-patch.yaml
+  - 05_observability/promtail-env-patch.yaml
+  - 06_identity/keycloak-repo-path.yaml
+  - 07_external-access/external-access-repo-path.yaml
+  - 07_external-access/dashboard-repo-path.yaml

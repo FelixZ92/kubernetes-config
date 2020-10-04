@@ -4,4 +4,4 @@ metadata:
   name: external-access
 spec:
   source:
-    path: external-access/common/dev
+    path: 07_external-access/common/dev

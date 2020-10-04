@@ -62,7 +62,7 @@ function create_generic_user_pass_secret() {
     local username="${3}"
     local password="${4}"
     local filename="${5}"
-    @kubectl -n "${namespace}" --dry-run=client create secret generic "${name}" \
+    kubectl -n "${namespace}" --dry-run=client create secret generic "${name}" \
       --from-literal="username=${username}" --from-literal="password=${password}" -o json \
       > "${BASE_DIR}/tmp/${filename}"
 }
@@ -92,10 +92,10 @@ function create_oidc_secrets() {
 # $1: namespace
 function create_signing_secret() {
     local namespace="${1}"
-    openssl rand -hex 16 | tr -d '\n' > "${BASE_DIR}/tmp/${${BASE_DIR}/tmp/${namespace}}-signing-secret.tmp"
+    openssl rand -hex 16 | tr -d '\n' > "${BASE_DIR}/tmp/${namespace}-oidc-signing-secret.tmp"
     kubectl -n "${namespace}" --dry-run=client create secret generic oidc-signing-secret \
-      --from-file=secret="${BASE_DIR}/tmp/${namespace}-signing-secret.tmp" -o json \
-      > "${BASE_DIR}/tmp/${namespace}-signing-secret.json"
+      --from-file=secret="${BASE_DIR}/tmp/${namespace}-oidc-signing-secret.tmp" -o json \
+      > "${BASE_DIR}/tmp/${namespace}-oidc-signing-secret.json"
     encrypt_secret "${namespace}-oidc-signing-secret.json" "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets"
     git add "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets/${namespace}-oidc-signing-secret.json"
 }
@@ -145,8 +145,8 @@ function create_grafana_generic_auth_secret() {
     envsubst '${ROOT_DOMAIN} ${OIDC_CLIENT_ID} ${OIDC_SECRET} ${SKIP_TLS}' \
       < hack/grafana-generic-auth-secret.yaml \
       > tmp/grafana-generic-auth-secret.yaml
-		encrypt_secret "grafana-generic-auth-secret.yaml" "${BASE_DIR}/04_observability/prometheus-operator/${K8S_ENVRIONMENT}"
-    git add "${CURRENT_DIR}/04_observability/prometheus-operator/${K8S_ENVRIONMENT}"
+		encrypt_secret "grafana-generic-auth-secret.yaml" "${BASE_DIR}/05_observability/prometheus-operator/${K8S_ENVRIONMENT}"
+    git add "${BASE_DIR}/05_observability/prometheus-operator/${K8S_ENVRIONMENT}"
     git commit -m "Re-encrypt grafana-generic-auth secret"
 		git push
 }

@@ -1,2 +1,3 @@
 resources:
   - ca-clusterissuer.yaml
+  - dev-ca-secret-sealed.json

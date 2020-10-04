@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: dashboard
 spec:
   source:
-    path: cert-manager/dev
+    path: 07_external-access/dashboard/dev

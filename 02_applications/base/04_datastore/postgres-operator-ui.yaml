@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: keycloak
+  name: postgres-operator-ui
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   destination:
-    namespace: keycloak
+    namespace: postgres-operator
     server: https://kubernetes.default.svc
   project: infrastructure
   source:
-    path: keycloak
+    path: 04_datastore/postgres-operator-ui
     repoURL: https://gitlab.com/FelixZ92/k8s-dev.git
     targetRevision: master
     plugin:
@@ -22,5 +22,5 @@ spec:
           value: "--include-crds"
   syncPolicy:
     automated:
-      prune: false
       selfHeal: true
+      prune: true
