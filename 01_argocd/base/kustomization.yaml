@@ -1,6 +1,6 @@
-bases:
-  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=master
+
 resources:
+  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=master
   - namespace.yaml
   - appproject-infrastructure.yaml
 
@@ -13,4 +13,4 @@ patchesStrategicMerge:
 
 images:
   - name: argoproj/argocd
-    newTag: v1.7.2
+    newTag: v1.7.7

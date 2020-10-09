@@ -25,8 +25,7 @@ data:
       "editable": true,
       "gnetId": 455,
       "graphTooltip": 0,
-      "id": 37,
-      "iteration": 1601422061613,
+      "iteration": 1602279733087,
       "links": [],
       "panels": [
         {
@@ -1326,9 +1325,9 @@ data:
           {
             "allValue": ".*",
             "current": {
-              "selected": true,
-              "text": "identity-pg-0",
-              "value": "identity-pg-0"
+              "selected": false,
+              "text": "identity-pg-2",
+              "value": "identity-pg-2"
             },
             "datasource": "Prometheus",
             "definition": "label_values({label_application=\"spilo\"}, pod)",
@@ -1357,14 +1356,14 @@ data:
               "value": "$__all"
             },
             "datasource": "Prometheus",
-            "definition": "",
+            "definition": "label_values(pg_stat_database_tup_fetched{pod=~\"$host\",datname!~\"template.*|postgres\"},datname)",
             "hide": 0,
             "includeAll": true,
             "label": "db",
             "multi": false,
             "name": "db",
             "options": [],
-            "query": "label_values(pg_stat_database_tup_fetched{instance=~\"$host\",datname!~\"template.*|postgres\"},datname)",
+            "query": "label_values(pg_stat_database_tup_fetched{pod=~\"$host\",datname!~\"template.*|postgres\"},datname)",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -1409,5 +1408,5 @@ data:
       "timezone": "browser",
       "title": "Postgres Overview",
       "uid": "wGgaPlciz",
-      "version": 2
+      "version": 1
     }

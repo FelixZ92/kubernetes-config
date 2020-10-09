@@ -6,8 +6,8 @@ metadata:
   labels:
     application: spilo
     cluster-name: identity-pg
-    statefulset.kubernetes.io/pod-name: identity-pg-0
     team: identity
+    component: metrics
 spec:
   selector:
     application: spilo
@@ -26,9 +26,8 @@ metadata:
     application: spilo
     cluster-name: identity-pg
     team: identity
-    statefulset.kubernetes.io/pod-name: identity-pg-0
     release: prometheus-operator
-  name: identity-pg-0
+  name: identity-pg
 spec:
   endpoints:
     - path: /metrics
@@ -39,4 +38,4 @@ spec:
       application: spilo
       cluster-name: identity-pg
       team: identity
-      statefulset.kubernetes.io/pod-name: identity-pg-0
+      component: metrics

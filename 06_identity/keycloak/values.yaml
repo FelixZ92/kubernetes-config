@@ -33,7 +33,7 @@ keycloak:   # The number of replicas to create
     - name: DB_VENDOR
       value: postgres
     - name: DB_ADDR
-      value: identity-pg
+      value: identity-pg-repl
     - name: DB_PORT
       value: "5432"
     - name: DB_DATABASE

@@ -25,8 +25,7 @@ data:
       "editable": true,
       "gnetId": 12485,
       "graphTooltip": 0,
-      "id": 38,
-      "iteration": 1601421816595,
+      "iteration": 1602279207990,
       "links": [],
       "panels": [
         {
@@ -1057,7 +1056,7 @@ data:
             "ymax": null,
             "ymin": null
           },
-          "tableColumn": "pg_settings_shared_buffers_bytes{instance=\"db01vp-nbg6a.obs.noris.net:9187\", job=\"postgres-exporter\", server=\"213.95.132.73:5432\"}",
+          "tableColumn": "",
           "targets": [
             {
               "expr": "pg_settings_shared_buffers_bytes{pod=\"$Instance\"}",
@@ -1148,7 +1147,7 @@ data:
             "ymax": null,
             "ymin": null
           },
-          "tableColumn": "pg_settings_max_connections{instance=\"db01vp-nbg6a.obs.noris.net:9187\", job=\"postgres-exporter\", server=\"213.95.132.73:5432\"}",
+          "tableColumn": "",
           "targets": [
             {
               "expr": "pg_settings_max_connections{pod=\"$Instance\"}",
@@ -2328,10 +2327,12 @@ data:
                 "ymax": null,
                 "ymin": null
               },
-              "tableColumn": "pg_stat_activity_count{datname=\"grafana\", instance=\"db01vp-nbg6a.obs.noris.net:9187\", job=\"postgres-exporter\", server=\"213.95.132.73:5432\", state=\"active\"}",
+              "tableColumn": "",
               "targets": [
                 {
-                  "expr": "pg_stat_activity_count{state=\"active\",instance=\"$Instance\",datname=~\"$Database\"}",
+                  "expr": "pg_stat_activity_count{state=\"active\",pod=\"$Instance\",datname=~\"$Database\"}",
+                  "interval": "",
+                  "legendFormat": "",
                   "refId": "A"
                 }
               ],
@@ -2427,7 +2428,9 @@ data:
               "tableColumn": "pg_database_size{datname=\"grafana\", instance=\"db01vp-nbg6a.obs.noris.net:9187\", job=\"postgres-exporter\", server=\"213.95.132.73:5432\"}",
               "targets": [
                 {
-                  "expr": "pg_database_size{instance=\"$Instance\",datname=\"$Database\"}",
+                  "expr": "pg_database_size{pod=\"$Instance\",datname=\"$Database\"}",
+                  "interval": "",
+                  "legendFormat": "",
                   "refId": "A"
                 }
               ],
@@ -2505,7 +2508,7 @@ data:
                 "showThresholdLabels": false,
                 "showThresholdMarkers": true
               },
-              "pluginVersion": "7.0.3",
+              "pluginVersion": "7.2.0-beta2",
               "scopedVars": {
                 "Database": {
                   "selected": false,
@@ -2515,7 +2518,9 @@ data:
               },
               "targets": [
                 {
-                  "expr": "pg_stat_database_blks_hit{instance=~\"$Instance\",datname=~\"$Database\"}/(pg_stat_database_blks_hit{instance=~\"$Instance\",datname=~\"$Database\"}+pg_stat_database_blks_read{instance=~\"$Instance\",datname=~\"$Database\"})",
+                  "expr": "pg_stat_database_blks_hit{pod=~\"$Instance\",datname=~\"$Database\"}/(pg_stat_database_blks_hit{pod=~\"$Instance\",datname=~\"$Database\"}+pg_stat_database_blks_read{pod=~\"$Instance\",datname=~\"$Database\"})",
+                  "interval": "",
+                  "legendFormat": "",
                   "refId": "A"
                 }
               ],
@@ -2583,7 +2588,7 @@ data:
                 "showThresholdLabels": false,
                 "showThresholdMarkers": true
               },
-              "pluginVersion": "7.0.3",
+              "pluginVersion": "7.2.0-beta2",
               "scopedVars": {
                 "Database": {
                   "selected": false,
@@ -2593,7 +2598,9 @@ data:
               },
               "targets": [
                 {
-                  "expr": "pg_stat_database_xact_commit{instance=\"$Instance\",datname=~\"$Database\"}/(pg_stat_database_xact_commit{instance=\"$Instance\",datname=~\"$Database\"} + pg_stat_database_xact_rollback{instance=\"$Instance\",datname=~\"$Database\"})",
+                  "expr": "pg_stat_database_xact_commit{pod=\"$Instance\",datname=~\"$Database\"}/(pg_stat_database_xact_commit{pod=\"$Instance\",datname=~\"$Database\"} + pg_stat_database_xact_rollback{pod=\"$Instance\",datname=~\"$Database\"})",
+                  "interval": "",
+                  "legendFormat": "",
                   "refId": "A"
                 }
               ],
@@ -2679,7 +2686,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "sum((rate(pg_stat_database_xact_commit{instance=\"$Instance\",datname=\"$Database\"}[$Interval])))+sum((rate(pg_stat_database_xact_rollback{instance=\"$Instance\",datname=\"$Database\"}[$Interval])))",
+                  "expr": "sum((rate(pg_stat_database_xact_commit{pod=\"$Instance\",datname=\"$Database\"}[$Interval])))+sum((rate(pg_stat_database_xact_rollback{pod=\"$Instance\",datname=\"$Database\"}[$Interval])))",
                   "interval": "",
                   "legendFormat": "",
                   "refId": "A"
@@ -2710,7 +2717,8 @@ data:
               "description": "View: pg_stat_activity",
               "fieldConfig": {
                 "defaults": {
-                  "custom": {}
+                  "custom": {},
+                  "links": []
                 },
                 "overrides": []
               },
@@ -2749,9 +2757,10 @@ data:
               ],
               "nullPointMode": "null as zero",
               "options": {
-                "dataLinks": []
+                "alertThreshold": true
               },
               "percentage": false,
+              "pluginVersion": "7.2.0-beta2",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -2768,7 +2777,8 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "sum by (state) (pg_stat_activity_count{instance=\"$Instance\",datname=\"$Database\"})",
+                  "expr": "sum by (state) (pg_stat_activity_count{pod=\"$Instance\",datname=\"$Database\"})",
+                  "interval": "",
                   "legendFormat": "{{state}}",
                   "refId": "A"
                 }
@@ -2826,7 +2836,8 @@ data:
               "description": "1 Minute rate of transactions committed or rollback.",
               "fieldConfig": {
                 "defaults": {
-                  "custom": {}
+                  "custom": {},
+                  "links": []
                 },
                 "overrides": []
               },
@@ -2858,9 +2869,10 @@ data:
               "linewidth": 1,
               "nullPointMode": "null",
               "options": {
-                "dataLinks": []
+                "alertThreshold": true
               },
               "percentage": false,
+              "pluginVersion": "7.2.0-beta2",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -2877,13 +2889,13 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "rate(pg_stat_database_xact_commit{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_xact_commit{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "interval": "",
                   "legendFormat": "committed",
                   "refId": "A"
                 },
                 {
-                  "expr": "rate(pg_stat_database_xact_rollback{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_xact_rollback{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "hide": false,
                   "interval": "",
                   "legendFormat": "rollback",
@@ -2940,7 +2952,8 @@ data:
               "description": "Source: pg_stat_database",
               "fieldConfig": {
                 "defaults": {
-                  "custom": {}
+                  "custom": {},
+                  "links": []
                 },
                 "overrides": []
               },
@@ -2969,9 +2982,10 @@ data:
               "linewidth": 1,
               "nullPointMode": "null",
               "options": {
-                "dataLinks": []
+                "alertThreshold": true
               },
               "percentage": false,
+              "pluginVersion": "7.2.0-beta2",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -2988,19 +3002,19 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "rate(pg_stat_database_tup_inserted{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_tup_inserted{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "interval": "",
                   "legendFormat": "Inserts",
                   "refId": "A"
                 },
                 {
-                  "expr": "rate(pg_stat_database_tup_updated{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_tup_updated{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "interval": "",
                   "legendFormat": "Updates",
                   "refId": "B"
                 },
                 {
-                  "expr": "rate(pg_stat_database_tup_deleted{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_tup_deleted{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "interval": "",
                   "legendFormat": "Deletes",
                   "refId": "C"
@@ -3056,7 +3070,8 @@ data:
               "description": "Source: pg_stat_database\n\n* tup_fetched: rows needed to satisfy queries\n* tup_returned: rows read/scanned",
               "fieldConfig": {
                 "defaults": {
-                  "custom": {}
+                  "custom": {},
+                  "links": []
                 },
                 "overrides": []
               },
@@ -3085,9 +3100,10 @@ data:
               "linewidth": 1,
               "nullPointMode": "null",
               "options": {
-                "dataLinks": []
+                "alertThreshold": true
               },
               "percentage": false,
+              "pluginVersion": "7.2.0-beta2",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -3104,13 +3120,13 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "rate(pg_stat_database_tup_fetched{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_tup_fetched{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "interval": "",
                   "legendFormat": "Fetched",
                   "refId": "A"
                 },
                 {
-                  "expr": "rate(pg_stat_database_tup_returned{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_tup_returned{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "interval": "",
                   "legendFormat": "Returned",
                   "refId": "B"
@@ -3166,7 +3182,8 @@ data:
               "description": "Source: pg_locks",
               "fieldConfig": {
                 "defaults": {
-                  "custom": {}
+                  "custom": {},
+                  "links": []
                 },
                 "overrides": []
               },
@@ -3200,9 +3217,10 @@ data:
               ],
               "nullPointMode": "null",
               "options": {
-                "dataLinks": []
+                "alertThreshold": true
               },
               "percentage": false,
+              "pluginVersion": "7.2.0-beta2",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -3219,7 +3237,8 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "sum by (mode) (pg_locks_count{instance=\"$Instance\",datname=\"$Database\"})",
+                  "expr": "sum by (mode) (pg_locks_count{pod=\"$Instance\",datname=\"$Database\"})",
+                  "interval": "",
                   "legendFormat": "{{mode}}",
                   "refId": "A"
                 }
@@ -3274,7 +3293,8 @@ data:
               "description": "Should be 0 \n\nSource: pg_stat_database\n\nWith log_lock_waits turned on, deadlocks will be logged to the PostgreSQL Logfiles.",
               "fieldConfig": {
                 "defaults": {
-                  "custom": {}
+                  "custom": {},
+                  "links": []
                 },
                 "overrides": []
               },
@@ -3310,9 +3330,10 @@ data:
               ],
               "nullPointMode": "null",
               "options": {
-                "dataLinks": []
+                "alertThreshold": true
               },
               "percentage": false,
+              "pluginVersion": "7.2.0-beta2",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -3329,7 +3350,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "rate(pg_stat_database_deadlocks{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_deadlocks{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "interval": "",
                   "legendFormat": "deadlocks",
                   "refId": "A"
@@ -3385,7 +3406,8 @@ data:
               "description": "Should be 0. If temporary files are created, it can indicate insufficient work_mem. With log_temp_files the creation of temporary files are logged to the PostgreSQL Logfiles.",
               "fieldConfig": {
                 "defaults": {
-                  "custom": {}
+                  "custom": {},
+                  "links": []
                 },
                 "overrides": []
               },
@@ -3421,9 +3443,10 @@ data:
               ],
               "nullPointMode": "null",
               "options": {
-                "dataLinks": []
+                "alertThreshold": true
               },
               "percentage": false,
+              "pluginVersion": "7.2.0-beta2",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -3440,7 +3463,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "rate(pg_stat_database_temp_files{instance=\"$Instance\",datname=\"$Database\"}[$Interval])",
+                  "expr": "rate(pg_stat_database_temp_files{pod=\"$Instance\",datname=\"$Database\"}[$Interval])",
                   "interval": "",
                   "legendFormat": "temp_files",
                   "refId": "A"
@@ -3535,9 +3558,14 @@ data:
           {
             "allValue": null,
             "current": {
-              "selected": false,
-              "text": "All",
-              "value": "$__all"
+              "selected": true,
+              "tags": [],
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
             },
             "datasource": "Prometheus",
             "definition": "label_values(datname)",
@@ -3643,5 +3671,5 @@ data:
       "timezone": "",
       "title": "PostgreSQL Exporter",
       "uid": "v5ciIbUZz",
-      "version": 3
+      "version": 1
     }
