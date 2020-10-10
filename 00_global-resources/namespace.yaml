@@ -7,11 +7,26 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 ---
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: traefik
+automountServiceAccountToken: false
+
+---
+apiVersion: v1
 kind: Namespace
 metadata:
   name: monitoring
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: monitoring
+automountServiceAccountToken: false
 ---
 apiVersion: v1
 kind: Namespace
@@ -21,11 +36,27 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 ---
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: loki
+automountServiceAccountToken: false
+
+---
+apiVersion: v1
 kind: Namespace
 metadata:
   name: keycloak
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: keycloak
+automountServiceAccountToken: false
+
 ---
 apiVersion: v1
 kind: Namespace
@@ -35,8 +66,22 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 ---
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: postgres-operator
+automountServiceAccountToken: false
+---
+apiVersion: v1
 kind: Namespace
 metadata:
   name: dashboard
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: dashboard
+automountServiceAccountToken: false
