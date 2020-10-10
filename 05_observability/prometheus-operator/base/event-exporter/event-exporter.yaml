@@ -55,6 +55,8 @@ spec:
     metadata:
       name: event-exporter
     spec:
+      securityContext:
+        runAsUser: 65535
       containers:
         - name: event-exporter
           image: caicloud/event-exporter:v0.3.0

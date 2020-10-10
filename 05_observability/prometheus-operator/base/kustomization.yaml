@@ -2,3 +2,11 @@ resources:
   - ../crds
   - all.yaml
   - event-exporter
+
+patchesJson6902:
+  - target:
+      kind: PodSecurityPolicy
+      name: prometheus-operator-grafana
+      version: v1beta1
+      group: policy
+    path: grafana-psp-remove-annotations.yaml
