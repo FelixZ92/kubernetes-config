@@ -2,7 +2,6 @@
 resources:
   - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=master
   - namespace.yaml
-  - appproject-infrastructure.yaml
 
 namespace: argocd
 
