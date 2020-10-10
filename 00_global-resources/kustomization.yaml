@@ -1,3 +1,4 @@
 resources:
+  - psp/
   - priority-classes.yaml
   - namespace.yaml
