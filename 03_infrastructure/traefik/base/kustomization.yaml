@@ -1,4 +1,4 @@
 resources:
   - all.yaml
-
+  - psp.yaml
 namespace: traefik

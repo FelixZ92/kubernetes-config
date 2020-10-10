@@ -19,10 +19,14 @@ bootstrap-cluster:
 	kustomize build ./03_infrastructure/certificate-authority/dev/ | kubectl apply -f -
 	kustomize build ./04_datastore/longhorn/base/ | kubectl apply -f -
 	kustomize build ./04_datastore/postgres-operator/crds/ | kubectl apply -f -
+	kubectl apply -f ./02_applications/dev/secrets
+	helm template traefik ./03_infrastructure/traefik --namespace traefik --include-crds > ./03_infrastructure/traefik/base/all.yaml && kustomize build ./03_infrastructure/traefik/dev | kubectl -n traefik apply -f -
 	helm template postgres-operator ./04_datastore/postgres-operator --namespace postgres-operator > ./04_datastore/postgres-operator/base/all.yaml && kustomize build 04_datastore/postgres-operator/base | kubectl -n postgres-operator apply -f -
 	kustomize build ./05_observability/prometheus-operator/crds | kubectl apply -f -
 	helm template prometheus-operator 05_observability/prometheus-operator --namespace monitoring > 05_observability/prometheus-operator/base/all.yaml && kustomize build 05_observability/prometheus-operator/dev | kubectl apply -f -
+	helm template keycloak ./06_identity/keycloak --namespace keycloak > ./06_identity/keycloak/base/all.yaml && kustomize build ./06_identity/keycloak/dev | kubectl apply -f -
 	kustomize build ./01_argocd/dev/ | kubectl apply -f -
+	kustomize build ./07_external-access/dev | kubectl apply -f -
 	kustomize build ./02_applications/dev/ | kubectl apply -f -
 
 #helm template $ARGOCD_APP_NAME . --namespace $ARGOCD_APP_NAMESPACE $ADDITIONAL_HELM_ARGS > base/all.yaml && kustomize build $ENVIRONMENT"
