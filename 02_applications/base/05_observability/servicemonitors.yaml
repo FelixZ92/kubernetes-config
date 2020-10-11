@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "3"
 spec:
   destination:
-    namespace: servicemonitors
+    namespace: monitoring
     server: https://kubernetes.default.svc
   project: infrastructure
   source:
