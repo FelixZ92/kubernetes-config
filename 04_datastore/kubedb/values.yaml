@@ -20,7 +20,7 @@ kubedb:
     agent: "prometheus.io/coreos-operator"
     # specify where ServiceMonitor crd will be created
     prometheus:
-      namespace: "monitoring"
+      namespace: "kube-system"
     serviceMonitor:
       labels:
         release: prometheus-operator

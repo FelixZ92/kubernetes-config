@@ -1,0 +1,24 @@
+apiVersion: kubedb.com/v1alpha1
+kind: Postgres
+metadata:
+  name: quick-postgres
+spec:
+  version: "11.1"
+  storageType: Durable
+  replicas: 2
+  standByMode: Warm
+  storage:
+    storageClassName: "longhorn-local"
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 3Gi
+  terminationPolicy: DoNotTerminate
+  monitor:
+    agent: prometheus.io/coreos-operator
+    prometheus:
+      namespace: monitoring
+      labels:
+        release: prometheus-operator
+      interval: 10s
