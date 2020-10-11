@@ -9,6 +9,7 @@ resources:
   - 04_datastore/longhorn.yaml
   - 04_datastore/postgres-operator.yaml
   - 04_datastore/postgres-operator-ui.yaml
+  - 04_datastore/kubedb.yaml
   - 05_observability/loki.yaml
   - 05_observability/prometheus-operator.yaml
   - 05_observability/promtail.yaml

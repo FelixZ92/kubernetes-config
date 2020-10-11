@@ -1,0 +1,6 @@
+dependencies:
+- name: kubedb
+  repository: https://charts.appscode.com/stable/
+  version: v0.13.0-rc.0
+digest: sha256:2b28c7caf6427c879aef8d6b71cabcada4c7971cd045bb777cc7df83377b2b8c
+generated: "2020-10-11T23:43:22.718121481+02:00"
