@@ -11,7 +11,7 @@ spec:
   teamId: "identity"
   volume:
     size: 2Gi
-  numberOfInstances: 3
+  numberOfInstances: 2
   users:
     # database owner
     keycloak:
