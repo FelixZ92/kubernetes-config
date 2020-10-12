@@ -17,7 +17,7 @@ bootstrap-cluster:
 	kustomize build ./03_infrastructure/pki/sealed-secrets/base | kubectl apply -f -
 	kustomize build ./03_infrastructure/pki/cert-manager/base/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/pki/certificate-authority/dev/ | kubectl apply -f -
-	kustomize build ./04_datastore/longhorn/base/ | kubectl apply -f -
+	kustomize build ./03_infrastructure/storage/longhorn/base/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/database/postgres-operator/crds/ | kubectl apply -f -
 	kubectl apply -f ./02_applications/dev/secrets
 	helm template traefik ./03_infrastructure/ingress/traefik --namespace traefik --include-crds > ./03_infrastructure/ingress/traefik/base/all.yaml && kustomize build ./03_infrastructure/ingress/traefik/dev | kubectl -n traefik apply -f -
