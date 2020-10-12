@@ -20,7 +20,7 @@ bootstrap-cluster:
 	kustomize build ./04_datastore/longhorn/base/ | kubectl apply -f -
 	kustomize build ./04_datastore/postgres-operator/crds/ | kubectl apply -f -
 	kubectl apply -f ./02_applications/dev/secrets
-	helm template traefik ./03_infrastructure/traefik --namespace traefik --include-crds > ./03_infrastructure/traefik/base/all.yaml && kustomize build ./03_infrastructure/traefik/dev | kubectl -n traefik apply -f -
+	helm template traefik ./03_infrastructure/ingress/traefik --namespace traefik --include-crds > ./03_infrastructure/ingress/traefik/base/all.yaml && kustomize build ./03_infrastructure/ingress/traefik/dev | kubectl -n traefik apply -f -
 	helm template kubedb ./04_datastore/kubedb --namespace kube-system  > ./04_datastore/kubedb/base/all.yaml && kustomize build 04_datastore/kubedb/base/ | kubectl -n kube-system apply -f -
 	helm template postgres-operator ./04_datastore/postgres-operator --namespace postgres-operator --include-crds > ./04_datastore/postgres-operator/base/all.yaml && kustomize build 04_datastore/postgres-operator/base | kubectl -n postgres-operator apply -f -
 	kustomize build ./05_observability/prometheus-operator/crds | kubectl apply -f -
