@@ -1,0 +1,854 @@
+---
+# Source: kubedb/charts/kubedb/templates/operator-psp.yaml
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: kubedb
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+spec:
+  privileged: true  #Allowing privileged pods is necessary for ES db
+  allowPrivilegeEscalation: true #Allowing privilege escalation is necessary for ES db
+  volumes:
+  - "*"
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny
+  allowedCapabilities:
+  - IPC_LOCK
+  - SYS_RESOURCE
+---
+# Source: kubedb/charts/kubedb/templates/service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubedb
+  namespace: kube-system
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+---
+# Source: kubedb/charts/kubedb/templates/apiregistration.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kubedb-apiserver-cert
+  namespace: kube-system
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+type: Opaque
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIekNDQWdlZ0F3SUJBZ0lSQUtzakp2SHliSGhNWmdCdVVJcm1jRE13RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdIaGNOTWpBeE1ERXhNak15T0RRMVdoY05NekF4TURBNU1qTXlPRFExV2pBUgpNUTh3RFFZRFZRUURFd1pyZFdKbFpHSXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCCkFRRDk4TWlFWGJlV2pCcUtOcFJ6aGlzbDBCWWNibytrTVpnd0kzcHprM3JFTk1uaEJVam8wTHpsK2hrRDIremwKQTN3bks0czBjTFkxaVJIenc5cXJVWGRHWFF3dGp5WFpkRGhXQ2lSZy9aRGo5K2cwcDBBQ2Z4eTFSczF2M3NyNQpLbHMwS2JQT1BwbitKVHQ5LzZORDNsdFpoRlhDRys3SUJkOThDaGJNRUZ4dm1WNC85VFNtSUZWaEIzUnlEN0hqCnQwVC93YXFwWlAxN3BYRWxRNHY2SU5Za0xVN2RjcHpnR3o1UVBFUmpnTG9haHJmR0xhWHllaEpKWXVUUjVGdVMKV3k3c3ZWeC9vaXZMMjR3NUtwNlNBZE1qdEY4NGJWZUxKZnVNRTI2bks2SEk3ZEh5cis0ZUxzMW9sNTJGZzZJLwpIU3dXRGFuVHE0R1J4M1FNQjB3Y0xkdUZBZ01CQUFHamRqQjBNQTRHQTFVZER3RUIvd1FFQXdJRm9EQWRCZ05WCkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0RBWURWUjBUQVFIL0JBSXdBREExQmdOVkhSRUUKTGpBc2doSnJkV0psWkdJdWEzVmlaUzF6ZVhOMFpXMkNGbXQxWW1Wa1lpNXJkV0psTFhONWMzUmxiUzV6ZG1NdwpEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBR05rN0NZMDZGY0dBZE9PYlZpanBtbkV1QVA4ZlMzSEpOd0N6NVExCkcxNTZkUEtGampuTHRkK3hnMzlGYjNqVVpZckFyYU1BbFJ6RFlNWU50S3lqWDkwVlpmbGR6WTRPTFc0YUNheDIKM3pHdFNuZDN4a1lWRU1YNmh4aTFQa0xyRGZtNzJNeXRpKzlLa2FNOXFjTXBiTGZrdHBIOWkvaVNSV1piWlE0NApxMU9BV1dEazR1cDJ3WGtUTkdVS0g1SnVqTDlWN293QXBmbThMMWZFK1NXYjc2VnZqaldlMFJYUy8vV2NaRTlzClRXNXhPS053TGViS3hvWUs5Tk1pSzFxNnFBL2pyNjBkck5GM1BaWDJZY0dyVlJoNWlNam90QVJqaU1EaUlibVYKQ0ExMXUyRG42ZEJlUFYrSzdwUE5rYXRYVEpaZ0hYSlJ6TEdUdXJQWFJKTkRMc2M9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBL2ZESWhGMjNsb3dhaWphVWM0WXJKZEFXSEc2UHBER1lNQ042YzVONnhEVEo0UVZJCjZOQzg1Zm9aQTl2czVRTjhKeXVMTkhDMk5Za1I4OFBhcTFGM1JsME1MWThsMlhRNFZnb2tZUDJRNC9mb05LZEEKQW44Y3RVYk5iOTdLK1NwYk5DbXp6ajZaL2lVN2ZmK2pROTViV1lSVndodnV5QVhmZkFvV3pCQmNiNWxlUC9VMApwaUJWWVFkMGNnK3g0N2RFLzhHcXFXVDllNlZ4SlVPTCtpRFdKQzFPM1hLYzRCcytVRHhFWTRDNkdvYTN4aTJsCjhub1NTV0xrMGVSYmtsc3U3TDFjZjZJcnk5dU1PU3Fla2dIVEk3UmZPRzFYaXlYN2pCTnVweXVoeU8zUjhxL3UKSGk3TmFKZWRoWU9pUHgwc0ZnMnAwNnVCa2NkMERBZE1IQzNiaFFJREFRQUJBb0lCQVFDeDBTQm41OFA5akYrdApOcWplK0MxUWpoUmRsbUhKQk4xZm9BaEgxQmFjTzZhOWhkalhCZ3V3TWwrLzN3bFVHQXVnMWhIbEI2UGZldnJ5CktjditPTTUvbS9wQ0VNSGRNaytjbC85L1Z5OVZJcXdiNnAyYzRldDFXSDNVZnpxOEhSZStRQkZqTTF6YnBMQ3kKK3dZVktTZm9XQTFCSGhRblJrMkc2djJwcVM5QkNNdnRkWHQrWmlxeDNVenJaTm4wN1duOWFmbkZEaFdZN0I1KworTVIyaFRzNVYxM1FDWGFjUkdWUTEwc0d2V3k0SHZWbVNtWjBFTUdkYjBVL21qQXQ3VkhOTmkwNUZKMHMxeU9DCmFVQy9RaE5ndmZDM09EMmYyeGZRdlMwczdWeWZUZEhuQlMyaCtxR29RVzJlM1BSVjdzcWIxdnR2YUkrdXBMRHYKMUN3d0d3RWxBb0dCQVA2dmU2VHd2SSs1YmJmV3d4cDI4MlN1YXNONGF1MjZkZFU2NHl6c29RQ3YwR1RIWFE4VgpIeE5TUy9lY0pjWlpkMXh5TjVMbkszZjR3T2hiOE5zcm9oQ2h6RVZFYnlKaGZrSEdIZVZQcElxQW5Ma2FxVit1CkZWUzFBODBwanJOVHFxNEVLc1BKaWFVWUNjQ2lNYUdWSk9MeUZoK0ViQzEzVTJ0SGZrY3FYMis3QW9HQkFQOUEKVU9hQkRKWVFtK25kdnNaSTh4TnF5MGVHY0hMMHR5OWRQd0tFR3F1WXFnTmF0V1VQaUdhbTZXT1Qzby9IcXFtLwpqRTJYdyt0STcyWmZwdGdMSGVrNDNMZERsRDdEM21FanNUUDFyRXg1M3gxTjRxVVlncXZVQVE0S2R5eHVSbzJmCkpPZmlrSTJDRkRzM3V1RzBTZzBvV3BoVGRCc0k2RERYSGN2Tmx3Mi9Bb0dBUnBsd2hmVngzOG1BSDZENTdvRWcKMFQwRVBYRkkrdU5nUEo2WlVOKzdkY3hHMFZqdWMvcmY1V1EveU1EUk85MmJGOVpWajNSamVWdE1abHp1TkdNeApCcmxEUGNSTnBsTXVRNTlldEMxU3FFNGtvNjgvV2xXUWRpM0Rnd0ROSE9ySmVubVBQVHpGMmkwQ3J4S0cvWXF4CmNmTzNyRDd5R2R4bEZHejZGVklxcUhjQ2dZRUE1cXJmc1Q3aitlVXVrUXpVTDJxVFNIUFZHbUVTMDcvMG4zZjcKempGRnpOYWNwWVZlc2VKMG1KZTBDRW9EOGhrMVVFdUs1a0FGVEdaUCtrcnNnd2FnMURlUHRvbjZ1VEhXa0NCcQpMaE9RemxmQVdrSWRWS2N1eDB0Q1hNYjJaWStPY01ObDNhd3doOEVLdVcwbWxIdVNCQXY0dXZtSHpqcWhZaW0wCmdvM2JPUThDZ1lBQzRLRy9JRU9yMEd6STVGL0ZRME1FN09EWDhPOVZ3NDVpNGJuZWtTV0J1L3RwMXhvVDNzTGgKZmxaa29YdUhTSGtqdm9EQi8zT1pSTHJHUldPY3lYeGFZWm1pMHNaUGFoTkl3QWdjVTk3Y1VlQVJkSk96QlJqTwpDWjZEOUlUQ04rMkk5TW5RYUpwTlpKb3hIZjhVMjlsV3gzV2gvRkF2MkN1NDU5SEIzZlFMOGc9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+---
+# Source: kubedb/charts/kubedb/templates/cluster-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubedb
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+rules:
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs: ["*"]
+- apiGroups:
+  - apiregistration.k8s.io
+  resources:
+  - apiservices
+  verbs: ["get", "patch"]
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  - validatingwebhookconfigurations
+  verbs: ["delete", "get", "list", "watch", "patch"]
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - rolebindings
+  - roles
+  verbs: ["create", "delete", "get", "patch"]
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs: ["create", "delete", "get", "patch", "list"]
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  - serviceaccounts
+  verbs: ["create", "delete", "get", "patch"]
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - statefulsets
+  verbs: ["create", "delete", "get", "list", "patch", "update"]
+- apiGroups:
+  - apps
+  resources:
+  - replicasets
+  verbs: ["get"]
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs: ["create", "delete", "get", "list", "watch"]
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs: ["get"]
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs: ["*"]
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  verbs: ["create", "delete", "get", "list", "patch", "watch"]
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs: ["create", "delete", "get", "update", "list", "patch"]
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs: ["create"]
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - kubedb.com
+  - catalog.kubedb.com
+  - authorization.kubedb.com
+  resources:
+  - "*"
+  verbs: ["*"]
+- apiGroups:
+  - appcatalog.appscode.com
+  resources:
+  - "*"
+  verbs: ["*"]
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - servicemonitors
+  verbs: ["*"]
+- apiGroups:
+  - ""
+  resources:
+  - "pods/exec"
+  verbs: ["create"]
+- apiGroups:
+  - policy
+  resources:
+  - podsecuritypolicies
+  verbs: ["use"]
+  resourceNames:
+  - kubedb
+  - elasticsearch-db
+  - etcd-db
+  - memcached-db
+  - mongodb-db
+  - mysql-db
+  - postgres-db
+  - redis-db
+  - elasticsearch-snapshot
+  - mongodb-snapshot
+  - mysql-snapshot
+  - postgres-snapshot
+- apiGroups:
+  - policy
+  resources:
+  - poddisruptionbudgets
+  verbs: ["get", "list", "create", "delete", "patch"]
+- apiGroups:
+  - stash.appscode.com
+  resources:
+  - restoresessions
+  verbs: ["get", "list", "watch"]
+---
+# Source: kubedb/charts/kubedb/templates/apiregistration.yaml
+# to delegate authentication and authorization
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubedb-apiserver-auth-delegator
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+roleRef:
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+  name: system:auth-delegator
+subjects:
+- kind: ServiceAccount
+  name: kubedb
+  namespace: kube-system
+---
+# Source: kubedb/charts/kubedb/templates/cluster-role-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubedb
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubedb
+subjects:
+- kind: ServiceAccount
+  name: kubedb
+  namespace: kube-system
+---
+# Source: kubedb/charts/kubedb/templates/apiregistration.yaml
+# to read the config for terminating authentication
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubedb-apiserver-extension-server-authentication-reader
+  namespace: kube-system
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+roleRef:
+  kind: Role
+  apiGroup: rbac.authorization.k8s.io
+  name: extension-apiserver-authentication-reader
+subjects:
+- kind: ServiceAccount
+  name: kubedb
+  namespace: kube-system
+---
+# Source: kubedb/charts/kubedb/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubedb
+  namespace: kube-system
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+spec:
+  ports:
+  - name: api
+    port: 443
+    targetPort: https
+  selector:
+    app: "kubedb"
+    release: "kubedb"
+---
+# Source: kubedb/charts/kubedb/templates/deployment.yaml
+# GKE returns Major:"1", Minor:"10+"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubedb
+  namespace: kube-system
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "kubedb"
+      release: "kubedb"
+  template:
+    metadata:
+      labels:
+        chart: "kubedb-v0.13.0-rc.0"
+        app: "kubedb"
+        release: "kubedb"
+        heritage: "Helm"
+    spec:
+      serviceAccountName: kubedb
+      containers:
+      - name: operator
+        image: kubedb/operator:v0.13.0-rc.0
+        imagePullPolicy: Always
+        args:
+        - run
+        - --v=3
+        - --governing-service=kubedb
+        - --rbac=true
+        - --secure-port=8443
+        - --audit-log-path=-
+        - --tls-cert-file=/var/serving-cert/tls.crt
+        - --tls-private-key-file=/var/serving-cert/tls.key
+        - --enable-mutating-webhook=true
+        - --enable-validating-webhook=true
+        - --enable-status-subresource=true
+        - --bypass-validating-webhook-xray=false
+        - --use-kubeapiserver-fqdn-for-aks=true
+        - --enable-analytics=false
+        env:
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        ports:
+        - name: https
+          containerPort: 8443
+        volumeMounts:
+        - mountPath: /var/serving-cert
+          name: serving-cert
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: https
+            scheme: HTTPS
+          initialDelaySeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: https
+            scheme: HTTPS
+          initialDelaySeconds: 15
+          timeoutSeconds: 15
+        resources:
+          requests:
+            cpu: 100m
+            memory: 60Mi
+      volumes:
+      - name: serving-cert
+        secret:
+          defaultMode: 420
+          secretName: kubedb-apiserver-cert
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
+        beta.kubernetes.io/os: linux
+---
+# Source: kubedb/charts/kubedb/templates/apiregistration.yaml
+apiVersion: apiregistration.k8s.io/v1beta1
+kind: APIService
+metadata:
+  name: v1alpha1.validators.kubedb.com
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+spec:
+  group: validators.kubedb.com
+  version: v1alpha1
+  service:
+    namespace: kube-system
+    name: kubedb
+  caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lSQU1QRVJobmc3KzdleGRzUUQrRUhXNmN3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdIaGNOTWpBeE1ERXhNak15T0RRMVdoY05NekF4TURBNU1qTXlPRFExV2pBTgpNUXN3Q1FZRFZRUURFd0pqWVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTVZDCkxzTjlvZ0kydE4vQkpsa1BnNGxzWW1GRVRBditpOWVtKzd4VlAwZEZJdExxaFNGdkxFZ05WUzYzb2dKVzNka3EKaTdlOUpqVGxKSysrOUJOVGk3RjA5UnVGREovdllTQVdUa0RTZXFud1EvSGx4M25FWVRTcEVkdmRQay9Ra2x5MApkdnhodFAvVGxwdEJLUTJLdTEwVUJUN0pVOW5SWCtjb2s1UzZKaVo1WXNoQVdoZUdJcHJKNnpuSEVPV09xMGk3ClI1WENqV0RnZjBqOGlGWG9qZWM4U3p1NGl4OGVyNW00SDBmMldUZldQS0YrUWFEUkIxTUF5YWJiWFpsNUROSEgKNk1BdXJaTGRoczlCcys0U2FqazhWcFRSWVRqK3BKKzFheFcva2p6K3BGM2pETHZOdWR1c0Fzb2o2RUNrSzVHZwpLZWs1dkxvTzROS25uZi9heGdrQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXCk1CUUdDQ3NHQVFVRkJ3TUJCZ2dyQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFBWjA4Tkw1ejJZbEgvVFk1Y0RpMFpLSkoxVTR1eWQyZDh0L3lFYjE5NzhLaDZHT1IzYwpVNWtGY0QrMWFwMGdaRzh5SnI2TGtYQi9USWhDalkxN2h1ZDNmbzMyd3QrSjYrVkQ2K2FGd1BsU2VTaUtJeG1aCitDcW44TGVleFBqaWVtODdCR2xRRzl3UnRaR0lwZzR6L3hEbldvZ2ZWUXR1VlRSM2ZEMjVMZDdSU3k2ZWorUloKaHpvZFJ6bGNFVU5uNVNIYi9CSmFFYnNJU1p0a1JEQTd3TURDVUtUKzBUL2NsRmNoMzY0cHdnUjBwb3ZyalhKbAo1dVJZZGlQYXExb0FDbnF0WTBHOWtqdW4zbGpjbEYwT0ZnVTdBR3R0YWdNV2JDOVoyZit3VHZQb1Fjc1NmY0N6ClF3bURpb0xhQWEvVm1OcUxPb1VHL05YVUY5cElVaGhqa1pKUQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  groupPriorityMinimum: 10000
+  versionPriority: 15
+---
+# Source: kubedb/charts/kubedb/templates/apiregistration.yaml
+apiVersion: apiregistration.k8s.io/v1beta1
+kind: APIService
+metadata:
+  name: v1alpha1.mutators.kubedb.com
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+spec:
+  group: mutators.kubedb.com
+  version: v1alpha1
+  service:
+    namespace: kube-system
+    name: kubedb
+  caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lSQU1QRVJobmc3KzdleGRzUUQrRUhXNmN3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdIaGNOTWpBeE1ERXhNak15T0RRMVdoY05NekF4TURBNU1qTXlPRFExV2pBTgpNUXN3Q1FZRFZRUURFd0pqWVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTVZDCkxzTjlvZ0kydE4vQkpsa1BnNGxzWW1GRVRBditpOWVtKzd4VlAwZEZJdExxaFNGdkxFZ05WUzYzb2dKVzNka3EKaTdlOUpqVGxKSysrOUJOVGk3RjA5UnVGREovdllTQVdUa0RTZXFud1EvSGx4M25FWVRTcEVkdmRQay9Ra2x5MApkdnhodFAvVGxwdEJLUTJLdTEwVUJUN0pVOW5SWCtjb2s1UzZKaVo1WXNoQVdoZUdJcHJKNnpuSEVPV09xMGk3ClI1WENqV0RnZjBqOGlGWG9qZWM4U3p1NGl4OGVyNW00SDBmMldUZldQS0YrUWFEUkIxTUF5YWJiWFpsNUROSEgKNk1BdXJaTGRoczlCcys0U2FqazhWcFRSWVRqK3BKKzFheFcva2p6K3BGM2pETHZOdWR1c0Fzb2o2RUNrSzVHZwpLZWs1dkxvTzROS25uZi9heGdrQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXCk1CUUdDQ3NHQVFVRkJ3TUJCZ2dyQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFBWjA4Tkw1ejJZbEgvVFk1Y0RpMFpLSkoxVTR1eWQyZDh0L3lFYjE5NzhLaDZHT1IzYwpVNWtGY0QrMWFwMGdaRzh5SnI2TGtYQi9USWhDalkxN2h1ZDNmbzMyd3QrSjYrVkQ2K2FGd1BsU2VTaUtJeG1aCitDcW44TGVleFBqaWVtODdCR2xRRzl3UnRaR0lwZzR6L3hEbldvZ2ZWUXR1VlRSM2ZEMjVMZDdSU3k2ZWorUloKaHpvZFJ6bGNFVU5uNVNIYi9CSmFFYnNJU1p0a1JEQTd3TURDVUtUKzBUL2NsRmNoMzY0cHdnUjBwb3ZyalhKbAo1dVJZZGlQYXExb0FDbnF0WTBHOWtqdW4zbGpjbEYwT0ZnVTdBR3R0YWdNV2JDOVoyZit3VHZQb1Fjc1NmY0N6ClF3bURpb0xhQWEvVm1OcUxPb1VHL05YVUY5cElVaGhqa1pKUQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  groupPriorityMinimum: 10000
+  versionPriority: 15
+---
+# Source: kubedb/charts/kubedb/templates/servicemonitor.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kubedb
+  namespace: kube-system
+  labels:
+    release: prometheus-operator
+spec:
+  namespaceSelector:
+    matchNames:
+      - kube-system
+  selector:
+    matchLabels:
+      app: "kubedb"
+      release: "kubedb"
+  endpoints:
+    - port: api
+      bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      scheme: https
+      tlsConfig:
+        caFile: /etc/prometheus/secrets/kubedb-apiserver-cert/tls.crt
+        serverName: "kubedb.kube-system.svc"
+---
+# Source: kubedb/charts/kubedb/templates/appcatalog-user-roles.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: appscode:appcatalog:admin
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+rules:
+- apiGroups:
+  - appcatalog.appscode.com
+  resources:
+  - "*"
+  verbs: ["*"]
+---
+# Source: kubedb/charts/kubedb/templates/appcatalog-user-roles.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: appscode:appcatalog:view
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+rules:
+- apiGroups:
+  - appcatalog.appscode.com
+  resources:
+  - "*"
+  verbs: ["get", "list", "watch"]
+---
+# Source: kubedb/charts/kubedb/templates/user-roles.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubedb:core:admin
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+rules:
+- apiGroups:
+  - kubedb.com
+  - catalog.kubedb.com
+  resources:
+  - "*"
+  verbs: ["*"]
+---
+# Source: kubedb/charts/kubedb/templates/user-roles.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubedb:core:edit
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+rules:
+- apiGroups:
+  - kubedb.com
+  resources:
+  - elasticsearches
+  - memcacheds
+  - mongodbs
+  - mysqls
+  - postgreses
+  - redises
+  - snapshots
+  verbs: ["*"]
+- apiGroups:
+  - kubedb.com
+  resources:
+  - dormantdatabases
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - catalog.kubedb.com
+  resources:
+  - elasticsearchversions
+  - memcachedversions
+  - mongodbversions
+  - mysqlversions
+  - postgresversions
+  - redisversions
+  verbs: ["get", "list", "watch"]
+---
+# Source: kubedb/charts/kubedb/templates/user-roles.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kubedb:core:view
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+rules:
+- apiGroups:
+  - kubedb.com
+  resources:
+  - dormantdatabases
+  - elasticsearches
+  - memcacheds
+  - mongodbs
+  - mysqls
+  - postgreses
+  - redises
+  - snapshots
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - catalog.kubedb.com
+  resources:
+  - elasticsearchversions
+  - memcachedversions
+  - mongodbversions
+  - mysqlversions
+  - postgresversions
+  - redisversions
+  verbs: ["get", "list", "watch"]
+---
+# Source: kubedb/charts/kubedb/templates/cleaner.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kubedb-cleaner
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
+spec:
+  backoffLimit: 3
+  activeDeadlineSeconds: 120
+  template:
+    spec:
+      serviceAccountName: kubedb
+      containers:
+      - name: busybox
+        image: appscode/kubectl:v1.12
+        command:
+          - sh
+          - -c
+          - "sleep 2; kubectl delete validatingwebhookconfigurations validators.kubedb.com || true; kubectl delete mutatingwebhookconfiguration mutators.kubedb.com || true"
+        imagePullPolicy: Always
+      restartPolicy: Never
+---
+# Source: kubedb/charts/kubedb/templates/mutating-webhook.yaml
+# GKE returns Major:"1", Minor:"10+"
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: mutators.kubedb.com
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+webhooks:
+- name: elasticsearch.mutators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.kubedb.com/v1alpha1/elasticsearchmutators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["elasticsearches"]
+    operations: ["CREATE", "UPDATE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: postgres.mutators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.kubedb.com/v1alpha1/postgresmutators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["postgreses"]
+    operations: ["CREATE", "UPDATE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: mysql.mutators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.kubedb.com/v1alpha1/mysqlmutators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["mysqls"]
+    operations: ["CREATE", "UPDATE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: mongodb.mutators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.kubedb.com/v1alpha1/mongodbmutators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["mongodbs"]
+    operations: ["CREATE", "UPDATE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: redis.mutators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.kubedb.com/v1alpha1/redismutators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["redises"]
+    operations: ["CREATE", "UPDATE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: memcached.mutators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.kubedb.com/v1alpha1/memcachedmutators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["memcacheds"]
+    operations: ["CREATE", "UPDATE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: etcd.mutators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.kubedb.com/v1alpha1/etcdmutators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["etcds"]
+    operations: ["CREATE", "UPDATE"]
+  failurePolicy: Fail
+  sideEffects: None
+---
+# Source: kubedb/charts/kubedb/templates/validating-webhook.yaml
+# GKE returns Major:"1", Minor:"10+"
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: validators.kubedb.com
+  labels:
+    chart: "kubedb-v0.13.0-rc.0"
+    app: "kubedb"
+    release: "kubedb"
+    heritage: "Helm"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+webhooks:
+- name: elasticsearch.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/elasticsearchvalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["elasticsearches"]
+    operations: ["CREATE", "UPDATE", "DELETE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: postgres.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/postgresvalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["postgreses"]
+    operations: ["CREATE", "UPDATE", "DELETE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: mysql.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/mysqlvalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["mysqls"]
+    operations: ["CREATE", "UPDATE", "DELETE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: mongodb.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/mongodbvalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["mongodbs"]
+    operations: ["CREATE", "UPDATE", "DELETE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: redis.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/redisvalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["redises"]
+    operations: ["CREATE", "UPDATE", "DELETE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: memcached.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/memcachedvalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["memcacheds"]
+    operations: ["CREATE", "UPDATE", "DELETE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: etcd.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/etcdvalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["etcds"]
+    operations: ["CREATE", "UPDATE", "DELETE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: snapshot.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/snapshotvalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["snapshots"]
+    operations: ["CREATE", "UPDATE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: dormantdatabase.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/dormantdatabasevalidators
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: ["kubedb.com"]
+    apiVersions: ["*"]
+    resources: ["dormantdatabases"]
+    operations: ["CREATE", "UPDATE", "DELETE"]
+  failurePolicy: Fail
+  sideEffects: None
+- name: namespace.validators.kubedb.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubedb.com/v1alpha1/namespaces
+    caBundle: bm90LWNhLWNlcnQ=
+  rules:
+  - apiGroups: [""]
+    apiVersions: ["*"]
+    resources: ["namespaces"]
+    operations: ["DELETE"]
+  failurePolicy: Fail
+  sideEffects: None

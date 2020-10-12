@@ -1,0 +1,28 @@
+nfs-client-provisioner:
+  replicaCount: 1
+  image:
+    repository: quay.io/external_storage/nfs-client-provisioner
+    tag: v3.1.0-k8s1.11
+  nfs:
+    server: 192.168.0.1
+    path: /export/k8s-local
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  storageClass:
+    create: true
+    defaultClass: false
+    name: nfs-client
+    allowVolumeExpansion: true
+    reclaimPolicy: Delete
+    archiveOnDelete: true
+  rbac:
+    create: true
+  podSecurityPolicy:
+    enabled: true
+  serviceAccount:
+    create: true

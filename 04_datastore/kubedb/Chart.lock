@@ -2,8 +2,5 @@ dependencies:
 - name: kubedb
   repository: https://charts.appscode.com/stable/
   version: v0.13.0-rc.0
-- name: kubedb-catalog
-  repository: https://charts.appscode.com/stable/
-  version: v0.13.0-rc.0
-digest: sha256:e926e28f5d6973548a83ee45b1cadad4a565081d2d603499705a6e67e1a1cefc
-generated: "2020-10-12T01:17:21.154247234+02:00"
+digest: sha256:2b28c7caf6427c879aef8d6b71cabcada4c7971cd045bb777cc7df83377b2b8c
+generated: "2020-10-12T01:28:26.130465638+02:00"

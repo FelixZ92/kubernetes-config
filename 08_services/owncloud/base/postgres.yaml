@@ -1,9 +1,9 @@
 apiVersion: kubedb.com/v1alpha1
 kind: Postgres
 metadata:
-  name: quick-postgres
+  name: postgres-owncloud
 spec:
-  version: "11.1"
+  version: "11.2"
   storageType: Durable
   replicas: 2
   standByMode: Warm

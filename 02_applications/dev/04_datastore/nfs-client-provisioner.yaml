@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-client-provisioner
+spec:
+  source:
+    plugin:
+      name: kustomized-helm
+      env:
+        - name: ENVIRONMENT
+          value: dev
+        - name: ADDITIONAL_HELM_ARGS
+          value: "--include-crds"
