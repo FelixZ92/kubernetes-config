@@ -14,7 +14,7 @@ update-secrets:
 
 bootstrap-cluster:
 	kustomize build ./00_global-resources | kubectl apply -f -
-	kustomize build ./03_infrastructure/sealed-secrets/base | kubectl apply -f -
+	kustomize build ./03_infrastructure/pki/sealed-secrets/base | kubectl apply -f -
 	kustomize build ./03_infrastructure/cert-manager/base/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/certificate-authority/dev/ | kubectl apply -f -
 	kustomize build ./04_datastore/longhorn/base/ | kubectl apply -f -
