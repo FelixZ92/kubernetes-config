@@ -145,8 +145,8 @@ function create_grafana_generic_auth_secret() {
     envsubst '${ROOT_DOMAIN} ${OIDC_CLIENT_ID} ${OIDC_SECRET} ${SKIP_TLS}' \
       < hack/grafana-generic-auth-secret.yaml \
       > tmp/grafana-generic-auth-secret.yaml
-		encrypt_secret "grafana-generic-auth-secret.yaml" "${BASE_DIR}/05_observability/prometheus-operator/${K8S_ENVRIONMENT}"
-    git add "${BASE_DIR}/05_observability/prometheus-operator/${K8S_ENVRIONMENT}"
+		encrypt_secret "grafana-generic-auth-secret.yaml" "${BASE_DIR}/03_infrastructure/observability/prometheus-operator/${K8S_ENVRIONMENT}"
+    git add "${BASE_DIR}/03_infrastructure/observability/prometheus-operator/${K8S_ENVRIONMENT}"
     git commit -m "Re-encrypt grafana-generic-auth secret"
 		git push
 }
