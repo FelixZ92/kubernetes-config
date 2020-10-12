@@ -27,7 +27,7 @@ bootstrap-cluster:
 	helm template prometheus-operator 05_observability/prometheus-operator --namespace monitoring > 05_observability/prometheus-operator/base/all.yaml && kustomize build 05_observability/prometheus-operator/dev | kubectl apply -f -
 	helm template keycloak ./06_identity/keycloak --namespace keycloak > ./06_identity/keycloak/base/all.yaml && kustomize build ./06_identity/keycloak/dev | kubectl apply -f -
 	kustomize build ./01_argocd/dev/ | kubectl apply -f -
-	kustomize build ./07_external-access/dev | kubectl apply -f -
+	kustomize build ./03_infrastructure/ingress/external-access/dev | kubectl apply -f -
 	kustomize build ./02_applications/dev/ | kubectl apply -f -
 
 #helm template $ARGOCD_APP_NAME . --namespace $ARGOCD_APP_NAMESPACE $ADDITIONAL_HELM_ARGS > base/all.yaml && kustomize build $ENVIRONMENT"

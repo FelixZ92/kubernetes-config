@@ -4,4 +4,4 @@ metadata:
   name: dashboard
 spec:
   source:
-    path: 07_external-access/dashboard/dev
+    path: 03_infrastructure/ingress/external-access/dashboard/dev

@@ -4,4 +4,4 @@ metadata:
   name: external-access
 spec:
   source:
-    path: 07_external-access/dev
+    path: 03_infrastructure/ingress/external-access/dev
