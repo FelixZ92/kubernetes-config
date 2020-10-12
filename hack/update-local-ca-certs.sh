@@ -28,8 +28,8 @@ kubectl -n cert-manager create secret tls dev-ca-secret \
 kubeseal --controller-name "${SEALED_SECRETS_CONTROLLER_NAME}" \
   --controller-namespace "${SEALED_SECRETS_CONTROLLER_NAMESPACE}" \
   <"${BASE_DIR}/tmp/dev-ca-secret.json" \
-  >"${BASE_DIR}/03_infrastructure/certificate-authority/dev/dev-ca-secret-sealed.json"
+  >"${BASE_DIR}/03_infrastructure/pki/certificate-authority/dev/dev-ca-secret-sealed.json"
 
-git add "${BASE_DIR}/03_infrastructure/certificate-authority/dev/dev-ca-secret-sealed.json"
+git add "${BASE_DIR}/03_infrastructure/pki/certificate-authority/dev/dev-ca-secret-sealed.json"
 git commit -m "Update dev CA"
 git push

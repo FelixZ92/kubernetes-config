@@ -4,4 +4,4 @@ metadata:
   name: certificate-authority
 spec:
   source:
-    path: 03_infrastructure/certificate-authority/dev
+    path: 03_infrastructure/pki/certificate-authority/dev

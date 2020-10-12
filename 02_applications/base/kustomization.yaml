@@ -2,7 +2,7 @@ resources:
   - 03_infrastructure/appproject-infrastructure.yaml
   - 00_global-resources/global-resources.yaml
   - 01_argocd/application-argocd.yaml
-  - 03_infrastructure/cert-manager.yaml
+  - 03_infrastructure/pki/cert-manager.yaml
   - 03_infrastructure/certificate-authority.yaml
   - 03_infrastructure/sealed-secrets.yaml
   - 03_infrastructure/traefik.yaml
