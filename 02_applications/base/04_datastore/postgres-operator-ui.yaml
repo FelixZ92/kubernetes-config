@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   project: infrastructure
   source:
-    path: 04_datastore/postgres-operator-ui
+    path: 03_infrastructure/database/postgres-operator-ui
     repoURL: https://gitlab.com/FelixZ92/k8s-dev.git
     targetRevision: master
     plugin:
