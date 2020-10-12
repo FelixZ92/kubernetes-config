@@ -25,7 +25,7 @@ bootstrap-cluster:
 	helm template postgres-operator ./03_infrastructure/database/postgres-operator --namespace postgres-operator --include-crds > ./03_infrastructure/database/postgres-operator/base/all.yaml && kustomize build 03_infrastructure/database/postgres-operator/base | kubectl -n postgres-operator apply -f -
 	kustomize build ./03_infrastructure/observability/prometheus-operator/crds | kubectl apply -f -
 	helm template prometheus-operator 03_infrastructure/observability/prometheus-operator --namespace monitoring > 03_infrastructure/observability/prometheus-operator/base/all.yaml && kustomize build 03_infrastructure/observability/prometheus-operator/dev | kubectl apply -f -
-	helm template keycloak ./06_identity/keycloak --namespace keycloak > ./06_identity/keycloak/base/all.yaml && kustomize build ./06_identity/keycloak/dev | kubectl apply -f -
+	helm template keycloak ./03_infrastructure/identity/keycloak --namespace keycloak > ./03_infrastructure/identity/keycloak/base/all.yaml && kustomize build ./03_infrastructure/identity/keycloak/dev | kubectl apply -f -
 	kustomize build ./01_argocd/dev/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/ingress/external-access/dev | kubectl apply -f -
 	kustomize build ./02_applications/dev/ | kubectl apply -f -
