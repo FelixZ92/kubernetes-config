@@ -1,0 +1,7 @@
+resources:
+  - ../../base/ingress
+
+patchesStrategicMerge:
+  - dashboard-repo-path.yaml
+  - external-access-repo-path.yaml
+  - traefik-env-patch.yaml

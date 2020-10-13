@@ -73,8 +73,8 @@ function create_oidc_secret() {
     kubectl -n "${namespace}" --dry-run=client create secret generic oidc-secret \
       --from-literal=clientid="${OIDC_CLIENT_ID}" --from-literal=secret="${OIDC_SECRET}" -o json \
       >"${BASE_DIR}/tmp/${namespace}-oidc-secret.json"
-    encrypt_secret "${namespace}-oidc-secret.json" "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets"
-    git add "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets/${namespace}-oidc-secret.json"
+    encrypt_secret "${namespace}-oidc-secret.json" "${BASE_DIR}/03_infrastructure/argocd-apps/${K8S_ENVRIONMENT}/secrets"
+    git add "${BASE_DIR}/03_infrastructure/argocd-apps/${K8S_ENVRIONMENT}/secrets/${namespace}-oidc-secret.json"
 }
 
 function create_oidc_secrets() {
@@ -96,8 +96,8 @@ function create_signing_secret() {
     kubectl -n "${namespace}" --dry-run=client create secret generic oidc-signing-secret \
       --from-file=secret="${BASE_DIR}/tmp/${namespace}-oidc-signing-secret.tmp" -o json \
       > "${BASE_DIR}/tmp/${namespace}-oidc-signing-secret.json"
-    encrypt_secret "${namespace}-oidc-signing-secret.json" "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets"
-    git add "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets/${namespace}-oidc-signing-secret.json"
+    encrypt_secret "${namespace}-oidc-signing-secret.json" "${BASE_DIR}/03_infrastructure/argocd-apps/${K8S_ENVRIONMENT}/secrets"
+    git add "${BASE_DIR}/03_infrastructure/argocd-apps/${K8S_ENVRIONMENT}/secrets/${namespace}-oidc-signing-secret.json"
 }
 
 function create_signing_secrets() {
@@ -116,8 +116,8 @@ function create_keycloak_secret() {
         KEYCLOAK_PASSWORD=$(${PASSWORDSTORE_BINARY} "${PASSWORDSTORE_BASE_DIR}/keycloak/admin")
     fi
     create_generic_user_pass_secret "keycloak" "keycloak-admin-user" "keycloak" "${KEYCLOAK_PASSWORD}" "keycloak-admin-user.json"
-    encrypt_secret "keycloak-admin-user.json" "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets/"
-    git add "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets/keycloak-admin-user.json"
+    encrypt_secret "keycloak-admin-user.json" "${BASE_DIR}/03_infrastructure/argocd-apps/${K8S_ENVRIONMENT}/secrets/"
+    git add "${BASE_DIR}/03_infrastructure/argocd-apps/${K8S_ENVRIONMENT}/secrets/keycloak-admin-user.json"
     git commit -m "Re-encrypt keycloak secret"
 		git push
 }
@@ -129,8 +129,8 @@ function create_grafana_secret() {
         GRAFANA_PASSWORD=$(${PASSWORDSTORE_BINARY} "${PASSWORDSTORE_BASE_DIR}/keycloak/admin")
     fi
     create_generic_user_pass_secret "monitoring" "grafana-admin-user" "admin" "${GRAFANA_PASSWORD}" "grafana-admin-user.json"
-    encrypt_secret "grafana-admin-user.json" "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets/"
-    git add "${BASE_DIR}/02_applications/${K8S_ENVRIONMENT}/secrets/grafana-admin-user.json"
+    encrypt_secret "grafana-admin-user.json" "${BASE_DIR}/03_infrastructure/argocd-apps/${K8S_ENVRIONMENT}/secrets/"
+    git add "${BASE_DIR}/03_infrastructure/argocd-apps/${K8S_ENVRIONMENT}/secrets/grafana-admin-user.json"
     git commit -m "Re-encrypt grafana secret"
 		git push
 }

@@ -1,0 +1,5 @@
+resources:
+  - ../../base/pki
+
+patchesStrategicMerge:
+  - certificate-authority-repo-path.yaml

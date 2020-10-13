@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: servicemonitors
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   destination:
     namespace: monitoring

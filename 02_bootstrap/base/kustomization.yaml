@@ -1,0 +1,5 @@
+resources:
+  - global-resources.yaml
+  - appproject-infrastructure.yaml
+  - application-argocd.yaml
+  - application-infrastructure.yaml

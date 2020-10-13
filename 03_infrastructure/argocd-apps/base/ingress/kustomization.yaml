@@ -1,0 +1,4 @@
+resources:
+  - traefik.yaml
+  - external-access.yaml
+  - dashboard.yaml
