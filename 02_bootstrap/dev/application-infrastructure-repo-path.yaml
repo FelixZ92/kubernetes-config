@@ -4,4 +4,4 @@ metadata:
   name: infrastructure
 spec:
   source:
-    path: 03_infrastructure/argocd-apps/base
+    path: 03_infrastructure/argocd-apps/dev
