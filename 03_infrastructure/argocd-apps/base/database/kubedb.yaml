@@ -30,7 +30,7 @@ kind: Application
 metadata:
   name: kubedb-catalog
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   destination:
     namespace: kube-system
