@@ -11,7 +11,7 @@ rules:
   - apiGroups:      ['policy']
     resources:      ['podsecuritypolicies']
     verbs:          ['use']
-    resourceNames:  [nfs-client-provisioner]
+    resourceNames:  ['nfs-client-provisioner']
 
 ---
 # Source: nfs-client-provisioner/charts/nfs-client-provisioner/templates/clusterrole.yaml
@@ -35,4 +35,4 @@ rules:
   - apiGroups:      ['policy']
     resources:      ['podsecuritypolicies']
     verbs:          ['use']
-    resourceNames:  [nfs-client-provisioner]
+    resourceNames:  ['nfs-client-provisioner']
