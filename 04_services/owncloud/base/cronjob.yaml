@@ -12,6 +12,10 @@ spec:
     spec:
       template:
         spec:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65535
+            runAsGroup: 65535
           containers:
             - name: webcron
               image: curlimages/curl:7.73.0
