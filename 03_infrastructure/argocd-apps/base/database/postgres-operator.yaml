@@ -18,8 +18,6 @@ spec:
       env:
         - name: ENVIRONMENT
           value: base
-        - name: ADDITIONAL_HELM_ARGS
-          value: "--include-crds"
   syncPolicy:
     automated:
       selfHeal: true
