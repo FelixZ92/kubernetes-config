@@ -3,3 +3,5 @@ resources:
   - appproject-infrastructure.yaml
   - application-argocd.yaml
   - application-infrastructure.yaml
+  - appproject-services.yaml
+  - application-services.yaml
