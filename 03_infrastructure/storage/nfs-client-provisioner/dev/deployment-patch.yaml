@@ -14,6 +14,6 @@ spec:
         - name: nfs-client-provisioner
           env:
             - name: NFS_SERVER
-              value: 192.168.0.2
+              value: 192.168.0.1
             - name: NFS_PATH
-              value: /export/k8s-localsdsd
+              value: /export/k8s-local
