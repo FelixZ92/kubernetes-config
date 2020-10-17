@@ -30,15 +30,10 @@ spec:
                       - owncloud
       volumes:
         - name: owncloud-data
-          flexVolume:
-            driver: rook.io/rook
-            fsType: ceph
-            options:
-              fsName: myfs
-              clusterNamespace: rook-ceph
-              #path: "/"
+          persistentVolumeClaim:
+            claimName: owncloud-storage
       containers:
-        - image: galexrt/owncloud-server:latest
+        - image: owncloud/server:10.5
           imagePullPolicy: Always
           name: owncloud
           envFrom:

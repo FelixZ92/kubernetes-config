@@ -1,6 +1,10 @@
 resources:
   - ../base
 
+patchesStrategicMerge:
+  - certificate-patch.yaml
+  - ingressroute-patch-alertmanager.yaml
+
 configMapGenerator:
   - name: owncloud-config
     behavior: merge

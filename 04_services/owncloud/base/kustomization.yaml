@@ -1,13 +1,24 @@
 resources:
+  - cert.yaml
+  - cronjob.yaml
+  - deployment.yaml
+  - ingressroute-alertmanager.yaml
+  - middlewares.yaml
   - namespace.yaml
   - postgres.yaml
+  - pvc.yaml
   - redis.yaml
+  - service.yaml
 
 namespace: owncloud
 
 commonLabels:
   app.kubernetes.io/name: owncloud
   app.kubernetes.io/part-of: owncloud
+
+commonAnnotations:
+  annotations:
+    argocd.argoproj.io/sync-wave="10"
 
 configMapGenerator:
   - name: owncloud-config

@@ -14,7 +14,7 @@ spec:
         spec:
           containers:
             - name: webcron
-              image: byrnedo/alpine-curl:latest
+              image: curlimages/curl:7.73.0
               env:
                 - name: HTTP_PORT
                   valueFrom:
