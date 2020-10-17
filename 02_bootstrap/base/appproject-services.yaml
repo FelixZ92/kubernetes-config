@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: services
+spec:
+  description: services
+  destinations:
+  - namespace: "*"
+    server: https://kubernetes.default.svc
+    warn: true
+  sourceRepos:
+  - '*'

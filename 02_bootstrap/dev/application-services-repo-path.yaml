@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: services
+spec:
+  source:
+    path: 04_services/argocd-apps/dev

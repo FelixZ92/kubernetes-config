@@ -2,6 +2,7 @@ resources:
   - namespace.yaml
   - postgres.yaml
   - redis.yaml
+  -
 namespace: owncloud
 
 commonLabels:
