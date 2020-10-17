@@ -9,7 +9,7 @@ kubedb:
     tag: v1.12
   imagePullPolicy: Always
   ## Log level for operator
-  logLevel: 3
+  logLevel: 5
   # Send usage events to Google Analytics
   enableAnalytics: false
 
