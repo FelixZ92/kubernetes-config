@@ -151,8 +151,25 @@ function create_grafana_generic_auth_secret() {
 		git push
 }
 
-create_oidc_secrets
-create_signing_secrets
-create_keycloak_secret
-create_grafana_secret
-create_grafana_generic_auth_secret
+function create_owncloud_admin_secret() {
+    if ! OWNCLOUD_PASSWORD=$(${PASSWORDSTORE_BINARY} "${PASSWORDSTORE_BASE_DIR}/owncloud/admin"); then
+        echo "Generating password ${PASSWORDSTORE_BASE_DIR}/owncloud/admin"
+        ${PASSWORDSTORE_BINARY} generate "${PASSWORDSTORE_BASE_DIR}/owncloud/admin"
+        OWNCLOUD_PASSWORD=$(${PASSWORDSTORE_BINARY} "${PASSWORDSTORE_BASE_DIR}/owncloud/admin")
+    fi
+    kubectl -n "owncloud" --dry-run=client create secret generic "owncloud-config" \
+      --from-literal="OWNCLOUD_ADMIN_PASSWORD=${OWNCLOUD_PASSWORD}" -o json \
+      > "${BASE_DIR}/tmp/owncloud-admin-user.json"
+
+    encrypt_secret "owncloud-admin-user.json" "${BASE_DIR}/04_services/owncloud/${K8S_ENVRIONMENT}/"
+    git add "${BASE_DIR}/04_services/owncloud/${K8S_ENVRIONMENT}/owncloud-admin-user.json"
+    git commit -m "Re-encrypt owncloud secret"
+		git push
+}
+
+#create_oidc_secrets
+#create_signing_secrets
+#create_keycloak_secret
+#create_grafana_secret
+#create_grafana_generic_auth_secret
+create_owncloud_admin_secret
