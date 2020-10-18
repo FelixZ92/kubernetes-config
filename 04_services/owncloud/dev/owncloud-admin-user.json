@@ -1,0 +1,21 @@
+{
+  "kind": "SealedSecret",
+  "apiVersion": "bitnami.com/v1alpha1",
+  "metadata": {
+    "name": "owncloud-config",
+    "namespace": "owncloud",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "name": "owncloud-config",
+        "namespace": "owncloud",
+        "creationTimestamp": null
+      }
+    },
+    "encryptedData": {
+      "OWNCLOUD_ADMIN_PASSWORD": "AgDaqcwprXdBul5ciYTLTaEULgKWfeVlhoqpz7+fmC4fTDhjpjvgv/ODx8tjoKJYqbEn+PZCUrLmVEtyHn3Ct44jQ4jTXG98k8wtOd/NW89H6HftvaG+oHh8c5ddJjccRzWYqYbsM3VNgAV5GpZEsun8Ux1g8i6PB+raiLUu8iIJFnJsaAgVQFUtKzxh5KQ5RkhckAtgEAN/NZpK8NzjZSxAicdqjbaKrqjRdvgGjy9YCWDLOVjUcrkDvC0PtH6QksSE0Hadd6pDt+pouoQ8tz+PWZh8cg3yzgHo6HPrK8l/GSXa0Cg8/+Hqo5XcZLM1q6NNJWCOqN8xSkJ2VQBAYKqut+vLaswZaO3+cFMRoy4ThUsGphznQDqBdciB8lD3TMORpJufIa9zpOtuHAmw7MF3m66PPeEIl1Pwamk7E6Axp/m7oy08wgiQQM7HucXRcX7dC4Ba4oeJrKQ9R8WmMVUw/XJq2vImV4FqKmUOaUQMPWv07WmspbKU/kA884lcy2z/mzU/jd58XkTjWenS4uh75UfwzE5spNn1Ns6j2aoOv3wYXvT6FnwaJJKUjfQybgcRLHeoSbOgvOWzsv/lbhyjS20XH400XuouE55HyVF7Z1H8abNwE0hnInluOpDS/Zte2YJM6Q45/gUJhjuf0PXMb02qWzjs/YfTbLVtm/RjChYWjMBqOGq8n6XKZ2H91lnbOcw26sAt/KXo3nNwxshWxEhvEd7wX/FolRDRtvKifA=="
+    }
+  }
+}
