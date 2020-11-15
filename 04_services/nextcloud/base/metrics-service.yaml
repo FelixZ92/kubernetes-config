@@ -1,0 +1,24 @@
+---
+# Source: nextcloud/charts/nextcloud/templates/metrics-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextcloud-metrics
+  labels:
+  labels:
+    app.kubernetes.io/name: nextcloud
+    helm.sh/chart: nextcloud-2.2.1
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/managed-by: Helm
+  annotations: 
+    prometheus.io/port: "9205"
+    prometheus.io/scrape: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 9205
+    targetPort: metrics
+  selector:
+    app.kubernetes.io/name: nextcloud
+    app.kubernetes.io/instance: nextcloud

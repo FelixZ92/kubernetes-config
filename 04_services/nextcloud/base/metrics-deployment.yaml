@@ -1,0 +1,50 @@
+---
+# Source: nextcloud/charts/nextcloud/templates/metrics-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud-metrics
+  labels:
+    app.kubernetes.io/name: nextcloud
+    helm.sh/chart: nextcloud-2.2.1
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: metrics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nextcloud
+      app.kubernetes.io/instance: nextcloud
+      app.kubernetes.io/component: metrics
+  template:
+    metadata:
+      annotations:
+        null
+      labels:
+        app.kubernetes.io/name: nextcloud
+        app.kubernetes.io/instance: nextcloud
+        app.kubernetes.io/component: metrics
+    spec:
+      containers:
+      - name: metrics-exporter
+        image: "xperimental/nextcloud-exporter:v0.3.0"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: NEXTCLOUD_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud
+              key: nextcloud-username
+        - name: NEXTCLOUD_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud
+              key: nextcloud-password
+        - name: NEXTCLOUD_SERVER
+          value: http://nextcloud.192.168.0.13.xip.io
+        - name: NEXTCLOUD_TIMEOUT
+          value: 5s
+        ports:
+        - name: metrics
+          containerPort: 9205

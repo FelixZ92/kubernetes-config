@@ -1,0 +1,23 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: owncloud
+spec:
+  entryPoints:
+    - web
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: owncloud-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://upload.wikimedia.org/wikipedia/commons/f/f6/OwnCloud_logo_and_wordmark.svg"
+    dashboard.zippelf.com/display-name: "owncloud"
+    dashboard.zippelf.com/docs: "https://doc.owncloud.com/server/10.5/"
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: tls-owncloud-ingress
