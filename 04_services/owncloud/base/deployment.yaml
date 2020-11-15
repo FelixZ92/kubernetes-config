@@ -14,10 +14,10 @@ spec:
     metadata:
       name: owncloud
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65535
-        runAsGroup: 65535
+      serviceAccountName: owncloud
+#      securityContext:
+##        runAsNonRoot: true
+#        runAsUser: 0
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -34,8 +34,9 @@ spec:
                       - owncloud
       volumes:
         - name: owncloud-data
-          persistentVolumeClaim:
-            claimName: owncloud-storage
+          emptyDir: {}
+#          persistentVolumeClaim:
+#            claimName: owncloud-storage
       containers:
         - image: owncloud/server:10.5
           imagePullPolicy: Always

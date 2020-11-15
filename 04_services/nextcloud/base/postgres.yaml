@@ -1,7 +1,7 @@
 apiVersion: kubedb.com/v1alpha1
 kind: Postgres
 metadata:
-  name: postgres-owncloud
+  name: postgres-nextcloud
 spec:
   version: "11.2"
   storageType: Durable

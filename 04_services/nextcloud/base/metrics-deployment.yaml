@@ -5,27 +5,21 @@ kind: Deployment
 metadata:
   name: nextcloud-metrics
   labels:
-    app.kubernetes.io/name: nextcloud
-    helm.sh/chart: nextcloud-2.2.1
-    app.kubernetes.io/instance: nextcloud
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: metrics
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: nextcloud
-      app.kubernetes.io/instance: nextcloud
       app.kubernetes.io/component: metrics
   template:
     metadata:
-      annotations:
-        null
       labels:
-        app.kubernetes.io/name: nextcloud
-        app.kubernetes.io/instance: nextcloud
         app.kubernetes.io/component: metrics
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
       - name: metrics-exporter
         image: "xperimental/nextcloud-exporter:v0.3.0"
@@ -42,7 +36,7 @@ spec:
               name: nextcloud
               key: nextcloud-password
         - name: NEXTCLOUD_SERVER
-          value: http://nextcloud.192.168.0.13.xip.io
+          value: http://nextcloud:8080
         - name: NEXTCLOUD_TIMEOUT
           value: 5s
         ports:

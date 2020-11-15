@@ -1,5 +1,5 @@
 resources:
-  - postgres.yaml
+  - kube-dbpostgres.yaml
   - all.yaml
   - certificates.yaml
   - middlewares.yaml

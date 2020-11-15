@@ -2,7 +2,7 @@
 apiVersion: kubedb.com/v1alpha1
 kind: Redis
 metadata:
-  name: redis-owncloud
+  name: redis-nextcloud
 spec:
   version: "5.0.3-v1"
   mode: Cluster

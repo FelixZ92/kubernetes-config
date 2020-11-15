@@ -5,10 +5,6 @@ kind: Service
 metadata:
   name: nextcloud
   labels:
-    app.kubernetes.io/name: nextcloud
-    helm.sh/chart: nextcloud-2.2.1
-    app.kubernetes.io/instance: nextcloud
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: app
 spec:
   type: ClusterIP
@@ -18,4 +14,4 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app.kubernetes.io/name: nextcloud
+    app.kubernetes.io/component: app

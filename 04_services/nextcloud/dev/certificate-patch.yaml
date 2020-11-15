@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: owncloud-tls-certificate
+  name: nextcloud-tls-certificate
 spec:
   dnsNames:
-    - owncloud.192.168.0.13.xip.io
+    - nextcloud.192.168.0.13.xip.io

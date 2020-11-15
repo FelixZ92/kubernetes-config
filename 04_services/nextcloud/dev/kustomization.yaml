@@ -1,0 +1,6 @@
+resources:
+  - ../base
+
+patchesStrategicMerge:
+  - certificate-patch.yaml
+  - ingressroute-patch.yaml

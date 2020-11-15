@@ -4,11 +4,11 @@ resources:
   - deployment.yaml
   - ingressroute-alertmanager.yaml
   - middlewares.yaml
-  - namespace.yaml
   - postgres.yaml
   - pvc.yaml
   - redis.yaml
   - service.yaml
+  - psp.yaml
 
 namespace: owncloud
 
@@ -26,7 +26,7 @@ configMapGenerator:
       - HTTP_PORT=8080
       - OWNCLOUD_DB_TYPE=pgsql
       - OWNCLOUD_DB_NAME=owncloud
-      - OWNCLOUD_DB_HOST=owncloud-postgres
+      - OWNCLOUD_DB_HOST=postgres-owncloud
       - OWNCLOUD_ADMIN_USERNAME=cluster-admin
       - OWNCLOUD_REDIS_ENABLED=true
       - OWNCLOUD_REDIS_SEEDS=redis-owncloud:6379

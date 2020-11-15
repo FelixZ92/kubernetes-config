@@ -2,9 +2,9 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: owncloud-tls-certificate
+  name: nextcloud-tls-certificate
 spec:
-  secretName: tls-owncloud-ingress
+  secretName: tls-nextcloud-ingress
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer

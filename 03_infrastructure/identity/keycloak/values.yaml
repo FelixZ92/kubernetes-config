@@ -24,7 +24,6 @@ keycloak:   # The number of replicas to create
   command: []
 
   ## Overrides the default args for the Keycloak container
-  args: []
 
   # Additional environment variables for Keycloak
   extraEnv: |
@@ -41,13 +40,13 @@ keycloak:   # The number of replicas to create
     - name: DB_USER
       valueFrom:
         secretKeyRef:
-          key: username
-          name: "keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do"
+          key: POSTGRES_USER
+          name: "postgres-keycloak-auth"
     - name: DB_PASSWORD
       valueFrom:
         secretKeyRef:
-          key: password
-          name: "keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do"
+          key: POSTGRES_PASSWORD
+          name: "postgres-keycloak-auth"
     - name: KEYCLOAK_USER
       valueFrom:
         secretKeyRef:

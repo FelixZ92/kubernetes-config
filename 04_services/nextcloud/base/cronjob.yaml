@@ -1,16 +1,7 @@
----
-# Source: nextcloud/charts/nextcloud/templates/cronjob.yaml
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: nextcloud-cron
-  labels:
-    app.kubernetes.io/name: nextcloud
-    helm.sh/chart: nextcloud-2.2.1
-    app.kubernetes.io/instance: nextcloud
-    app.kubernetes.io/managed-by: Helm
-  annotations:
-    {}
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Forbid
@@ -20,20 +11,21 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: nextcloud
-        app.kubernetes.io/managed-by: Helm
     spec:
       template:
         metadata:
           labels:
             app.kubernetes.io/name: nextcloud
-            app.kubernetes.io/managed-by: Helm
         spec:
           restartPolicy: Never
           containers:
             - name: nextcloud
-              image: "nextcloud:19.0.4-fpm"
+              image: "curlimages/curl:7.73.0"
               imagePullPolicy: IfNotPresent
-              command: [ "curl" ]
+              securityContext:
+                runAsNonRoot: true
+                runAsGroup: 101
+                runAsUser: 100
               args:
                 - "http://nextcloud:8080/cron.php"
               resources:

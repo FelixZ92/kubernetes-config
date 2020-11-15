@@ -1,7 +1,7 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: owncloud
+  name: nextcloud
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
     seccomp.security.alpha.kubernetes.io/defaultProfileName:  'runtime/default'
@@ -40,33 +40,33 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: owncloud
+  name: nextcloud
 automountServiceAccountToken: false
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: owncloud-psp
+  name: nextcloud-psp
 roleRef:
   kind: Role
-  name: owncloud-psp
+  name: nextcloud-psp
   apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: ServiceAccount
-    name: owncloud
-    namespace: owncloud
+    name: nextcloud
+    namespace: nextcloud
 
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: owncloud-psp
+  name: nextcloud-psp
 rules:
   - apiGroups: ['policy']
     resources: ['podsecuritypolicies']
     verbs:     ['use']
-    resourceNames: ['owncloud']
+    resourceNames: ['nextcloud']
   - apiGroups: ['extensions']
     resources: ['podsecuritypolicies']
     verbs:     ['use']
-    resourceNames: ['owncloud']
+    resourceNames: ['nextcloud']

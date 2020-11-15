@@ -167,9 +167,9 @@ function create_owncloud_admin_secret() {
 		git push
 }
 
-#create_oidc_secrets
-#create_signing_secrets
-#create_keycloak_secret
-#create_grafana_secret
-#create_grafana_generic_auth_secret
+create_oidc_secrets
+create_signing_secrets
+create_keycloak_secret
+create_grafana_secret
+create_grafana_generic_auth_secret
 create_owncloud_admin_secret
