@@ -17,6 +17,7 @@ bootstrap-cluster:
 	kustomize build ./03_infrastructure/pki/sealed-secrets/base | kubectl apply -f -
 	kustomize build ./03_infrastructure/pki/cert-manager/base/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/pki/certificate-authority/dev/ | kubectl apply -f -
+	kustomize build ./03_infrastructure/storage/local-path-provisioner/base/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/storage/longhorn/base/ | kubectl apply -f -
 	kubectl apply -k ./03_infrastructure/argocd-apps/dev/secrets
 	helm dep up ./03_infrastructure/ingress/traefik

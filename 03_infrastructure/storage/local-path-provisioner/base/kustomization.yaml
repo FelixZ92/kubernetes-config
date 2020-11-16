@@ -1,0 +1,8 @@
+resources:
+  - github.com/rancher/local-path-provisioner/deploy?ref=master
+  - psp.yaml
+
+namespace: local-path-storage
+
+patchesStrategicMerge:
+  - security-patch.yaml
