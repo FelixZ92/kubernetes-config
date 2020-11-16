@@ -1,0 +1,2 @@
+resources:
+  - github.com/rancher/local-path-provisioner/deploy?ref=master

@@ -11,5 +11,5 @@ spec:
   resources:
     requests:
       storage: 5400Mi
-  storageClassName: longhorn-local
+  storageClassName: local-path
   volumeMode: Filesystem

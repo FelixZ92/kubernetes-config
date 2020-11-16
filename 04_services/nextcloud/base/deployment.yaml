@@ -119,13 +119,13 @@ spec:
               subPath: themes
       volumes:
         - name: nextcloud-data
-#          emptyDir: {}
-          persistentVolumeClaim:
-            claimName: nextcloud-nextcloud
+          emptyDir: {}
+#          persistentVolumeClaim:
+#            claimName: nextcloud-nextcloud
         - name: nextcloud-nginx-config
           configMap:
             name: nextcloud-nginxconfig
       # Will mount configuration files as www-data (id: 33) for nextcloud
-      securityContext:
-        fsGroup: 33
-
+#      securityContext:
+#        fsGroup: 33
+#
