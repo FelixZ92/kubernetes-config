@@ -71,7 +71,7 @@ prometheus-operator:
       storage:
         volumeClaimTemplate:
           spec:
-            storageClassName: longhorn
+            storageClassName: longhorn-local
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
@@ -252,7 +252,7 @@ prometheus-operator:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: longhorn
+            storageClassName: longhorn-local
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
