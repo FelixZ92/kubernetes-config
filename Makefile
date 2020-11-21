@@ -21,17 +21,33 @@ bootstrap-cluster:
 	kustomize build ./03_infrastructure/storage/longhorn/base/ | kubectl apply -f -
 	kubectl apply -k ./03_infrastructure/argocd-apps/dev/secrets
 	helm dep up ./03_infrastructure/ingress/traefik
-	helm template traefik ./03_infrastructure/ingress/traefik --namespace traefik --include-crds > ./03_infrastructure/ingress/traefik/base/all.yaml && kustomize build ./03_infrastructure/ingress/traefik/dev | kubectl -n traefik apply -f -
-	kustomize build ./03_infrastructure/observability/prometheus-operator/crds | kubectl apply -f -
+	helm template traefik ./03_infrastructure/ingress/traefik --namespace traefik --include-crds \
+		> ./03_infrastructure/ingress/traefik/base/all.yaml \
+		&& kustomize build ./03_infrastructure/ingress/traefik/dev \
+		| kubectl -n traefik apply -f -
+	kustomize build ./03_infrastructure/observability/prometheus-operator/crds \
+		| kubectl apply -f -
 	helm dep up ./03_infrastructure/database/kubedb
-	helm template kubedb ./03_infrastructure/database/kubedb --namespace kube-system  > ./03_infrastructure/database/kubedb/base/all.yaml && kustomize build 03_infrastructure/database/kubedb/base/ | kubectl -n kube-system apply -f -
+	helm template kubedb ./03_infrastructure/database/kubedb --namespace kube-system  \
+		> ./03_infrastructure/database/kubedb/base/all.yaml \
+	  	&& kustomize build 03_infrastructure/database/kubedb/base/ \
+	  	| kubectl -n kube-system apply -f -
 	helm dep up ./03_infrastructure/database/kubedb-catalog
-	helm template kubedb-catalog ./03_infrastructure/database/kubedb-catalog --namespace kube-system  > ./03_infrastructure/database/kubedb-catalog/base/all.yaml && kustomize build 03_infrastructure/database/kubedb-catalog/base/ | kubectl -n kube-system apply -f -
+	helm template kubedb-catalog ./03_infrastructure/database/kubedb-catalog --namespace kube-system  \
+		> ./03_infrastructure/database/kubedb-catalog/base/all.yaml \
+		&& kustomize build 03_infrastructure/database/kubedb-catalog/base/ \
+		| kubectl -n kube-system apply -f -
 	helm dep up  ./03_infrastructure/observability/prometheus-operator
-	helm template prometheus-operator ./03_infrastructure/observability/prometheus-operator --namespace monitoring > 03_infrastructure/observability/prometheus-operator/base/all.yaml && kustomize build 03_infrastructure/observability/prometheus-operator/dev | kubectl apply -f -
+	helm template prometheus-operator ./03_infrastructure/observability/prometheus-operator --namespace monitoring \
+		> 03_infrastructure/observability/prometheus-operator/base/all.yaml \
+		&& kustomize build 03_infrastructure/observability/prometheus-operator/dev \
+		| kubectl -n monitoring apply -f -
 	helm dep up ./03_infrastructure/identity/keycloak
-	helm template keycloak ./03_infrastructure/identity/keycloak --namespace keycloak > ./03_infrastructure/identity/keycloak/base/all.yaml && kustomize build ./03_infrastructure/identity/keycloak/dev | kubectl apply -f -
-	kustomize build ./01_argocd/dev/ | kubectl apply -f -
+	helm template keycloak ./03_infrastructure/identity/keycloak --namespace keycloak \
+		> ./03_infrastructure/identity/keycloak/base/all.yaml \
+		&& kustomize build ./03_infrastructure/identity/keycloak/dev \
+		| kubectl -n keycloak apply -f -
+	kustomize build ./01_argocd/dev/ | kubectl -n argocd apply -f -
 	kustomize build ./03_infrastructure/ingress/external-access/dev | kubectl apply -f -
 	kustomize build ./02_bootstrap/dev/ | kubectl -n argocd apply -f -
 

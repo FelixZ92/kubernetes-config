@@ -1,5 +1,5 @@
 resources:
   - ../base
 
-patchesStrategicMerge:
-  - owncloud-repo-path.yaml
+#patchesStrategicMerge:
+#  - owncloud-repo-path.yaml
