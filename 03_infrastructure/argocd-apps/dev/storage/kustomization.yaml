@@ -1,5 +1,5 @@
 resources:
   - ../../base/storage
 
-patchesStrategicMerge:
-  - nfs-client-provisioner-repo-path-patch.yaml
+#patchesStrategicMerge:
+#  - nfs-client-provisioner-repo-path-patch.yaml
