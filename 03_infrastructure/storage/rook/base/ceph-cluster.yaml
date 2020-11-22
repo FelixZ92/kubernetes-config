@@ -17,6 +17,6 @@ spec:
     deviceFilter: vdb
   dashboard:
     enabled: true
-#  monitoring:
-#    enabled: true
-#    rulesNamespace: "rook-ceph"
+  monitoring:
+    enabled: true
+    rulesNamespace: "rook-ceph"
