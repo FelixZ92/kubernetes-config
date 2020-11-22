@@ -226,7 +226,7 @@ keycloak:   # The number of replicas to create
             for the last 5 minutes.
         expr: |
           (1 - absent(kube_pod_status_ready{namespace="keycloak", condition="true"}
-          * on (pod) group_left (label_team) label_kubedb_com_name{label_team="postgres-keycloak",
+          * on (pod) group_left (label_kubedb_com_name) kube_pod_labels{label_kubedb_com_name="postgres-keycloak",
           namespace="keycloak"})) == 0
         for: 5m
         labels:
