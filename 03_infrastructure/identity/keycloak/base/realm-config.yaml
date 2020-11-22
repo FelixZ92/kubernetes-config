@@ -114,15 +114,14 @@ data:
         {
           "name": "groups",
           "protocol": "openid-connect",
-          "protocolMapper": "oidc-usermodel-client-role-mapper",
+          "protocolMapper": "oidc-group-membership-mapper",
           "consentRequired": false,
           "config": {
             "multivalued": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "groups",
-            "userinfo.token.claim": "true",
-            "usermodel.clientRoleMapping.clientId": "k8s"
+            "userinfo.token.claim": "true"
           }
         },
         {
@@ -137,6 +136,20 @@ data:
             "access.token.claim": "true",
             "claim.name": "email",
             "jsonType.label": "String"
+          }
+        },
+        {
+          "name": "k8s",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-client-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "k8s",
+            "usermodel.clientRoleMapping.clientId": "k8s"
           }
         }
       ]
