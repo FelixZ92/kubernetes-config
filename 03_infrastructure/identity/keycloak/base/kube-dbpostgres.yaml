@@ -8,7 +8,7 @@ spec:
   replicas: 2
   standByMode: Warm
   storage:
-    storageClassName: "longhorn-local"
+    storageClassName: "rook-ceph-block"
     accessModes:
       - ReadWriteOnce
     resources:

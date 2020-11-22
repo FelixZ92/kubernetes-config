@@ -17,6 +17,10 @@ bootstrap-cluster:
 	kustomize build ./03_infrastructure/pki/sealed-secrets/base | kubectl apply -f -
 	kustomize build ./03_infrastructure/pki/cert-manager/base/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/pki/certificate-authority/dev/ | kubectl apply -f -
+	helm template rook ./03_infrastructure/storage/rook --namespace rook-ceph  \
+		> ./03_infrastructure/storage/rook/base/all.yaml \
+		&& kustomize build 03_infrastructure/storage/rook/base/ \
+		| kubectl -n rook-ceph apply -f -
 	kustomize build ./03_infrastructure/storage/local-path-provisioner/base/ | kubectl apply -f -
 	kustomize build ./03_infrastructure/storage/longhorn/base/ | kubectl apply -f -
 	kubectl apply -k ./03_infrastructure/argocd-apps/dev/secrets
@@ -41,7 +45,7 @@ bootstrap-cluster:
 	helm template prometheus-operator ./03_infrastructure/observability/prometheus-operator --namespace monitoring \
 		> 03_infrastructure/observability/prometheus-operator/base/all.yaml \
 		&& kustomize build 03_infrastructure/observability/prometheus-operator/dev \
-		| kubectl -n monitoring apply -f -
+		| kubectl apply -f -
 	helm dep up ./03_infrastructure/identity/keycloak
 	helm template keycloak ./03_infrastructure/identity/keycloak --namespace keycloak \
 		> ./03_infrastructure/identity/keycloak/base/all.yaml \

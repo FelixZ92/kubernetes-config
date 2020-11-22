@@ -1,0 +1,6 @@
+resources:
+  - ../crds
+  - all.yaml
+  - ceph-cluster.yaml
+  - toolbox.yaml
+  - block-pools.yaml
