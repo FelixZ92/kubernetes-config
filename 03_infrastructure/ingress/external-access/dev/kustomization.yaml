@@ -2,7 +2,7 @@ resources:
   - alertmanager
   - argocd
   - grafana
-  - longhorn
+#  - longhorn
   - postgres-operator
   - prometheus
   - traefik
