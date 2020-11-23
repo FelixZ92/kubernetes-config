@@ -113,7 +113,7 @@ prometheus-operator:
       - grafana-piechart-panel
       - grafana-clock-panel
     dashboards:
-      rook:
+      default:
        ceph-cluster:
          gnetId: 2842
          revision: 14
