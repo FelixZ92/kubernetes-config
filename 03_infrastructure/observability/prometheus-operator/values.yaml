@@ -272,6 +272,8 @@ prometheus-operator:
               requests:
                 storage: 5400Mi
       priorityClassName: ""
+      secrets:
+        - kubedb-apiserver-cert
 
   prometheus-node-exporter:
     resources:
