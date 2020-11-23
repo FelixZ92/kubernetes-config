@@ -112,6 +112,20 @@ prometheus-operator:
     plugins:
       - grafana-piechart-panel
       - grafana-clock-panel
+    dashboards:
+      rook:
+       ceph-cluster:
+         gnetId: 2842
+         revision: 14
+         datasource: Prometheus
+       ceph-ods:
+         gnetId: 5336
+         revision: 5
+         datasource: Prometheus
+       ceph-pools:
+         gnetId: 5342
+         revision: 5
+         datasource: Prometheus
 
     sidecar:
       dashboards:
