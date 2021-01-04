@@ -1,7 +1,8 @@
 resources:
   - global-resources.yaml
-  - appproject-infrastructure.yaml
-  - application-argocd.yaml
-  - application-infrastructure.yaml
-  - appproject-services.yaml
-  - application-services.yaml
+  - pki.yaml
+#  - appproject-infrastructure.yaml
+#  - application-argocd.yaml
+#  - application-infrastructure.yaml
+#  - appproject-services.yaml
+#  - application-services.yaml

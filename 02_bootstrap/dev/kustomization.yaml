@@ -2,6 +2,4 @@ resources:
   - ../base
 
 patchesStrategicMerge:
-  - application-argocd-repo-path.yaml
-  - application-infrastructure-repo-path.yaml
-  - application-services-repo-path.yaml
+  - pki-repo-path-patch.yaml

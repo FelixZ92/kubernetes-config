@@ -1,19 +1,15 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
 metadata:
   name: global-resources
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+  namespace: kube-system
 spec:
-  destination:
-    namespace: kube-system
-    server: https://kubernetes.default.svc
-  project: infrastructure
-  source:
-    path: 00_global-resources
-    repoURL: https://gitlab.com/FelixZ92/k8s-dev.git
-    targetRevision: master
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  interval: 10m0s
+  path: ./00_global-resources
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server

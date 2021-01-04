@@ -15,7 +15,7 @@ k3d cluster create local \
   --k3s-server-arg '--kube-apiserver-arg=enable-admission-plugins=PodSecurityPolicy' \
   -v "${CURR_DIR}/psp.yaml:/var/lib/rancher/k3s/server/manifests/psp.yaml"
 
-KUBECONFIG=$(k3d kubeconfig write local)
+export KUBECONFIG=$(k3d kubeconfig write local)
 
 kustomize build "$CURR_DIR/../00_global-resources" \
   | kubectl --kubeconfig "${KUBECONFIG}" apply -f -
@@ -33,6 +33,7 @@ kubectl --kubeconfig "${KUBECONFIG}" \
   -o json \
    >"${CURR_DIR}/../tmp/flux-system-ssh-key.json"
 
-encrypt_secret "flux-system-ssh-key.json" .
+encrypt_secret "flux-system-ssh-key.json" "${CURR_DIR}/../01_gitops/dev/"
+git add "${CURR_DIR}/../01_gitops/dev/flux-system-ssh-key.json" && git commit -m "Update flux ssh secret" && git push
 
 echo "Use with export KUBECONFIG=${KUBECONFIG}"
