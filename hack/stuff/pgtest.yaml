@@ -1,0 +1,122 @@
+apiVersion: crunchydata.com/v1
+kind: Pgcluster
+metadata:
+  annotations:
+    current-primary: another
+    primary-deployment: another
+  labels:
+    autofail: "true"
+    crunchy-pgbadger: "false"
+    crunchy-pgha-scope: another
+    crunchy_collect: "true"
+    deployment-name: another
+    name: another
+    pg-cluster: another
+    pg-pod-anti-affinity: ""
+    pgo-backrest: "true"
+    pgo-version: 4.4.1
+    pgouser: admin
+  name: another
+  namespace: keycloak
+spec:
+  ArchiveStorage:
+    accessmode: ""
+    matchLabels: ""
+    name: ""
+    size: ""
+    storageclass: ""
+    storagetype: ""
+    supplementalgroups: ""
+  BackrestStorage:
+    accessmode: ReadWriteOnce
+    matchLabels: ""
+    name: ""
+    size: 1Gi
+    storageclass: rook-ceph-block
+    storagetype: dynamic
+    supplementalgroups: ""
+  PrimaryStorage:
+    accessmode: ReadWriteOnce
+    matchLabels: ""
+    name: another
+    size: 1Gi
+    storageclass: rook-ceph-block
+    storagetype: dynamic
+    supplementalgroups: ""
+  ReplicaStorage:
+    accessmode: ReadWriteOnce
+    matchLabels: ""
+    name: ""
+    size: 1Gi
+    storageclass: rook-ceph-block
+    storagetype: dynamic
+    supplementalgroups: ""
+  WALStorage:
+    accessmode: ReadWriteOnce
+    matchLabels: ""
+    name: ""
+    size: 1Gi
+    storageclass: rook-ceph-block
+    storagetype: dynamic
+    supplementalgroups: ""
+  backrestLimits: {}
+  backrestRepoPath: ""
+  backrestResources:
+    memory: 48Mi
+  backrestS3Bucket: ""
+  backrestS3Endpoint: ""
+  backrestS3Region: ""
+  backrestS3URIStyle: ""
+  backrestS3VerifyTLS: "true"
+  ccpimage: crunchy-postgres-ha
+  ccpimageprefix: registry.developers.crunchydata.com/crunchydata
+  ccpimagetag: centos7-12.4-4.4.1
+  clustername: another
+  collectSecretName: another-collect-secret
+  customconfig: ""
+  database: another
+  exporterport: "9187"
+  limits: {}
+  name: another
+  namespace: keycloak
+  pgBouncer:
+    limits: {}
+    replicas: 0
+    resources:
+      memory: 24Mi
+  pgDataSource:
+    restoreFrom: ""
+    restoreOpts: ""
+  pgbadgerport: "10000"
+  pgoimageprefix: registry.developers.crunchydata.com/crunchydata
+  podAntiAffinity:
+    default: preferred
+    pgBackRest: preferred
+    pgBouncer: preferred
+  policies: ""
+  port: "5432"
+  primarysecretname: another-primaryuser-secret
+  replicas: "0"
+  resources:
+    memory: 128Mi
+  rootsecretname: another-postgres-secret
+  shutdown: false
+  standby: false
+  status: completed
+  syncReplication: null
+  tablespaceMounts: {}
+  tls:
+    caSecret: ""
+    replicationTLSSecret: ""
+    tlsSecret: ""
+  tlsOnly: false
+  user: anotheruser
+  userlabels:
+    crunchy_collect: "true"
+    pg-pod-anti-affinity: ""
+    pgo-version: 4.4.1
+    workflowid: 8a64e220-4538-4ed4-9f8d-557726141bab
+  usersecretname: another-anotheruser-secret
+status:
+  message: Cluster has been initialized
+  state: pgcluster Initialized

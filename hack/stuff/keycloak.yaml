@@ -1,0 +1,509 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    checksum/config-startup: ab2242529136d50e15a5ea25325d2a32d9fdb093dcdb5e7682e742c8565a222c
+    checksum/secrets: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+    cni.projectcalico.org/podIP: 10.42.2.198/32
+    cni.projectcalico.org/podIPs: 10.42.2.198/32
+  creationTimestamp: "2020-09-16T17:06:07Z"
+  generateName: keycloak-
+  labels:
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/name: keycloak
+    controller-revision-hash: keycloak-d4f47597
+    statefulset.kubernetes.io/pod-name: keycloak-0
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:checksum/config-startup: {}
+          f:checksum/secrets: {}
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/name: {}
+          f:controller-revision-hash: {}
+          f:statefulset.kubernetes.io/pod-name: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"981e1c23-6665-4ddd-8ce3-f1035906f52d"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:affinity:
+          .: {}
+          f:podAntiAffinity:
+            .: {}
+            f:preferredDuringSchedulingIgnoredDuringExecution: {}
+            f:requiredDuringSchedulingIgnoredDuringExecution: {}
+        f:containers:
+          k:{"name":"keycloak"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"DB_ADDR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DB_DATABASE"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DB_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"DB_PORT"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"DB_USER"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"DB_VENDOR"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+              k:{"name":"KEYCLOAK_PASSWORD"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"KEYCLOAK_USER"}:
+                .: {}
+                f:name: {}
+                f:valueFrom:
+                  .: {}
+                  f:secretKeyRef:
+                    .: {}
+                    f:key: {}
+                    f:name: {}
+              k:{"name":"PROXY_ADDRESS_FORWARDING"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:livenessProbe:
+              .: {}
+              f:failureThreshold: {}
+              f:httpGet:
+                .: {}
+                f:path: {}
+                f:port: {}
+                f:scheme: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":8080,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+              k:{"containerPort":8443,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+              k:{"containerPort":9990,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:readinessProbe:
+              .: {}
+              f:failureThreshold: {}
+              f:httpGet:
+                .: {}
+                f:path: {}
+                f:port: {}
+                f:scheme: {}
+              f:initialDelaySeconds: {}
+              f:periodSeconds: {}
+              f:successThreshold: {}
+              f:timeoutSeconds: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:securityContext:
+              .: {}
+              f:runAsNonRoot: {}
+              f:runAsUser: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/opt/jboss/keycloak/providers"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+              k:{"mountPath":"/opt/jboss/startup-scripts"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:hostname: {}
+        f:initContainers:
+          .: {}
+          k:{"name":"extensions-init"}:
+            .: {}
+            f:env:
+              .: {}
+              k:{"name":"KEYCLOAK_EXTENSIONS"}:
+                .: {}
+                f:name: {}
+                f:value: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/opt/extensions"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext:
+          .: {}
+          f:fsGroup: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:subdomain: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"keycloak-extensions"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+          k:{"name":"startup"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2020-09-16T17:06:07Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:cni.projectcalico.org/podIP: {}
+          f:cni.projectcalico.org/podIPs: {}
+    manager: calico
+    operation: Update
+    time: "2020-09-25T15:52:23Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:initContainerStatuses: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.42.2.198"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2020-09-25T15:57:20Z"
+  name: keycloak-0
+  namespace: keycloak
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: StatefulSet
+    name: keycloak
+    uid: 981e1c23-6665-4ddd-8ce3-f1035906f52d
+  resourceVersion: "884434"
+  selfLink: /api/v1/namespaces/keycloak/pods/keycloak-0
+  uid: a654b3e0-051a-4920-8597-a29180f5eb8f
+spec:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/component
+              operator: NotIn
+              values:
+              - test
+            matchLabels:
+              app.kubernetes.io/instance: keycloak
+              app.kubernetes.io/name: keycloak
+          topologyKey: failure-domain.beta.kubernetes.io/zone
+        weight: 100
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/component
+            operator: NotIn
+            values:
+            - test
+          matchLabels:
+            app.kubernetes.io/instance: keycloak
+            app.kubernetes.io/name: keycloak
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - env:
+    - name: PROXY_ADDRESS_FORWARDING
+      value: "true"
+    - name: DB_VENDOR
+      value: postgres
+    - name: DB_ADDR
+      value: identity-pg
+    - name: DB_PORT
+      value: "5432"
+    - name: DB_DATABASE
+      value: keycloak
+    - name: DB_USER
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do
+    - name: KEYCLOAK_USER
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: keycloak-admin-user
+    - name: KEYCLOAK_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: keycloak-admin-user
+    image: docker.io/jboss/keycloak:11.0.2
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /auth/
+        port: http
+        scheme: HTTP
+      initialDelaySeconds: 300
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    name: keycloak
+    ports:
+    - containerPort: 8080
+      name: http
+      protocol: TCP
+    - containerPort: 8443
+      name: https
+      protocol: TCP
+    - containerPort: 9990
+      name: http-management
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /auth/realms/master
+        port: http
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /opt/jboss/startup-scripts
+      name: startup
+      readOnly: true
+    - mountPath: /opt/jboss/keycloak/providers
+      name: keycloak-extensions
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: keycloak-token-gbl8k
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: keycloak-0
+  initContainers:
+  - env:
+    - name: KEYCLOAK_EXTENSIONS
+      value: https://github.com/aerogear/keycloak-metrics-spi/releases/download/1.0.4/keycloak-metrics-spi-1.0.4.jar
+    image: quay.io/keycloak/keycloak-init-container:master
+    imagePullPolicy: Always
+    name: extensions-init
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /opt/extensions
+      name: keycloak-extensions
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: keycloak-token-gbl8k
+      readOnly: true
+  nodeName: node3
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000
+  serviceAccount: keycloak
+  serviceAccountName: keycloak
+  subdomain: keycloak-headless
+  terminationGracePeriodSeconds: 60
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - configMap:
+      defaultMode: 365
+      name: keycloak-startup
+    name: startup
+  - emptyDir: {}
+    name: keycloak-extensions
+  - name: keycloak-token-gbl8k
+    secret:
+      defaultMode: 420
+      secretName: keycloak-token-gbl8k
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2020-09-25T15:52:44Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2020-09-25T15:57:20Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2020-09-25T15:57:20Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2020-09-16T17:06:07Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://69874da4eef909191e04b7e95383a127feaf11bf3c6752f8207078ecc99c8c3f
+    image: jboss/keycloak:11.0.2
+    imageID: docker-pullable://jboss/keycloak@sha256:8cdd41cb4a0b210ed3f07df5d18306762e1755bb8d6c1ffc5e083c080528783d
+    lastState:
+      terminated:
+        containerID: docker://81a79a6023de07ffa2cec05153c9a1c3bed414f766a0201fb16d6325303df729
+        exitCode: 1
+        finishedAt: "2020-09-25T15:54:44Z"
+        reason: Error
+        startedAt: "2020-09-25T15:52:44Z"
+    name: keycloak
+    ready: true
+    restartCount: 13
+    started: true
+    state:
+      running:
+        startedAt: "2020-09-25T15:55:05Z"
+  hostIP: 192.168.0.13
+  initContainerStatuses:
+  - containerID: docker://f5015b35fe72ad4fef1383bb9110b69eea77b78b87bf643baaab4036847ea163
+    image: quay.io/keycloak/keycloak-init-container:master
+    imageID: docker-pullable://quay.io/keycloak/keycloak-init-container@sha256:8b0f6c064a03a5209ebdbe6239434c1e676c63f4a98016efa3bb7a450eaa4fd6
+    lastState: {}
+    name: extensions-init
+    ready: true
+    restartCount: 3
+    state:
+      terminated:
+        containerID: docker://f5015b35fe72ad4fef1383bb9110b69eea77b78b87bf643baaab4036847ea163
+        exitCode: 0
+        finishedAt: "2020-09-25T15:52:43Z"
+        reason: Completed
+        startedAt: "2020-09-25T15:52:25Z"
+  phase: Running
+  podIP: 10.42.2.198
+  podIPs:
+  - ip: 10.42.2.198
+  qosClass: Burstable
+  startTime: "2020-09-16T17:06:08Z"

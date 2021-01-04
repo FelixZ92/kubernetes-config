@@ -1,0 +1,15 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"allowVolumeExpansion":true,"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{},"name":"longhorn"},"parameters":{"fromBackup":"","numberOfReplicas":"3","staleReplicaTimeout":"2880"},"provisioner":"driver.longhorn.io"}
+  name: longhorn
+parameters:
+  fromBackup: ""
+  numberOfReplicas: "3"
+  staleReplicaTimeout: "2880"
+provisioner: driver.longhorn.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate

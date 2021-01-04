@@ -1,0 +1,90 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quote
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    app: quote
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quote
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: quote
+    spec:
+      containers:
+        - name: backend
+          image: docker.io/datawire/quote:0.4.1
+          ports:
+            - name: http
+              containerPort: 8080
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https-quote-backend
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: quote-backend
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`quote.192.168.0.13.xip.io`)
+      kind: Rule
+      services:
+        - name: quote
+          port: 80
+      middlewares:
+        - name: redirect-https-quote-backend
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: quote-backend-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`quote.192.168.0.13.xip.io`)
+      kind: Rule
+      services:
+        - name: quote
+          port: 80
+  tls:
+    secretName: quote-app-tls-secret
+
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: quote-tls-certificate
+spec:
+  secretName: quote-app-tls-secret
+  dnsNames:
+    - quote.192.168.0.13.xip.io
+  issuerRef:
+    name: dev-ca-clusterissuer
+    kind: ClusterIssuer

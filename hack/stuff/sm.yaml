@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: prometheus-operator-prometheus
+    app.kubernetes.io/instance: prometheus-operator
+    chart: prometheus-operator-9.3.1
+    heritage: Helm
+    release: prometheus-operator
+  name: prometheus-operator-prometheus
+  namespace: monitoring
+spec:
+  endpoints:
+  - path: /metrics
+    port: web
+  namespaceSelector:
+    matchNames:
+    - monitoring
+  selector:
+    matchLabels:
+      app: prometheus-operator-prometheus
+      release: prometheus-operator
+      self-monitor: "true"
