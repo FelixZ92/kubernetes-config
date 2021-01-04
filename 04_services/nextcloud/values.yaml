@@ -1,0 +1,257 @@
+nextcloud:
+  image:
+    repository: nextcloud
+    tag: 19.0.4-fpm
+    pullPolicy: IfNotPresent
+
+  # Number of replicas to be deployed
+  replicaCount: 1
+
+  ## Allowing use of ingress controllers
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
+  ##
+  ingress:
+    enabled: false
+    annotations: { }
+    #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
+    #  kubernetes.io/tls-acme: "true"
+    #  certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    #  nginx.ingress.kubernetes.io/server-snippet: |-
+    #    server_tokens off;
+    #    proxy_hide_header X-Powered-By;
+
+    #    rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+    #    rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+    #    rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
+    #    location = /.well-known/carddav {
+    #      return 301 $scheme://$host/remote.php/dav;
+    #    }
+    #    location = /.well-known/caldav {
+    #      return 301 $scheme://$host/remote.php/dav;
+    #    }
+    #    location = /robots.txt {
+    #      allow all;
+    #      log_not_found off;
+    #      access_log off;
+    #    }
+    #    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+    #      deny all;
+    #    }
+    #    location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
+    #      deny all;
+    #    }
+    #  tls:
+    #    - secretName: nextcloud-tls
+    #      hosts:
+    #        - nextcloud.kube.home
+
+  nginx:
+    ## You need to set an fpm version of the image for nextcloud if you want to use nginx!
+    enabled: false
+    image:
+      repository: nginx
+      tag: alpine
+      pullPolicy: IfNotPresent
+
+    config:
+      # This generates the default nginx config as per the nextcloud documentation
+      default: true
+      # custom: |-
+      #     worker_processes  1;..
+
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+  nextcloud:
+    host: nextcloud.192.168.0.13.xip.io
+    username: admin
+    password: changeme
+    update: 0
+    datadir: /var/www/html/data
+    tableprefix:
+    persistence:
+      subPath:
+    mail:
+      enabled: false
+      fromAddress: user
+      domain: domain.com
+      smtp:
+        host: domain.com
+        secure: ssl
+        port: 465
+        authtype: LOGIN
+        name: user
+        password: pass
+    # PHP Configuration files
+    # Will be injected in /usr/local/etc/php/conf.d
+    phpConfigs: { }
+    # Default config files
+    # IMPORTANT: Will be used only if you put extra configs, otherwise default will come from nextcloud itself
+    # Default confgurations can be found here: https://github.com/nextcloud/docker/tree/master/16.0/apache/config
+    defaultConfigs:
+      # To protect /var/www/html/config
+      .htaccess: true
+      # Redis default configuration
+      redis.config.php: true
+      # Apache configuration for rewrite urls
+      apache-pretty-urls.config.php: true
+      # Define APCu as local cache
+      apcu.config.php: true
+      # Apps directory configs
+      apps.config.php: true
+      # Used for auto configure database
+      autoconfig.php: true
+      # SMTP default configuration
+      smtp.config.php: true
+    # Extra config files created in /var/www/html/config/
+    # ref: https://docs.nextcloud.com/server/15/admin_manual/configuration_server/config_sample_php_parameters.html#multiple-config-php-file
+    configs: { }
+
+    ##
+    ## Extra environment variables
+    extraEnv:
+    #  - name: SOME_SECRET_ENV
+    #    valueFrom:
+    #      secretKeyRef:
+    #        name: nextcloud
+    #        key: secret_key
+
+  internalDatabase:
+    enabled: false
+    name: nextcloud
+
+  ##
+  ## External database configuration
+  ##
+  externalDatabase:
+    enabled: true
+
+    ## Supported database engines: mysql or postgresql
+    type: postgresql
+
+    ## Database host
+    host: postgres-nextcloud
+
+    ## Database name
+    database: nextcloud
+
+    ## Use a existing secret
+    existingSecret:
+      enabled: true
+      secretName: postgres-nextcloud-auth
+      usernameKey: POSTGRES_USER
+      passwordKey: POSTGRES_PASSWORD
+
+  redis:
+    enabled: true
+    usePassword: false
+
+  ## Cronjob to execute Nextcloud background tasks
+  ## ref: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/background_jobs_configuration.html#webcron
+  ##
+  cronjob:
+    enabled: true
+    curlInsecure: true
+    failedJobsHistoryLimit: 5
+    successfulJobsHistoryLimit: 2
+      # If not set, nextcloud deployment one will be set
+      # resources:
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #  cpu: 100m
+      #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
+
+    # If not set, nextcloud deployment one will be set
+    # nodeSelector: {}
+
+    # If not set, nextcloud deployment one will be set
+    # tolerations: []
+
+    # If not set, nextcloud deployment one will be set
+    # affinity: {}
+
+  service:
+    type: ClusterIP
+    port: 8080
+
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  ##
+  persistence:
+    # Nextcloud Data (/var/www/html)
+    enabled: false
+    annotations: { }
+    ## nextcloud data Persistent Volume Storage Class
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   GKE, AWS & OpenStack)
+    ##
+    storageClass: "nfs-client"
+
+    ## A manually managed Persistent Volume and Claim
+    ## Requires persistence.enabled: true
+    ## If defined, PVC must be created manually before volume will be bound
+    # existingClaim:
+
+    accessMode: ReadWriteOnce
+    size: 3Gi
+
+  resources:
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  ## Prometheus Exporter / Metrics
+  ##
+  metrics:
+    enabled: true
+
+    replicaCount: 1
+    # The metrics exporter needs to know how you serve Nextcloud either http or https
+    https: false
+    timeout: 5s
+
+    image:
+      repository: xperimental/nextcloud-exporter
+      tag: v0.3.0
+      pullPolicy: IfNotPresent
+
+    ## Metrics exporter resource requests and limits
+    ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+    ##
+    # resources: {}
+
+    ## Metrics exporter pod Annotation and Labels
+    # podAnnotations: {}
+
+    # podLabels: {}
+
+    service:
+      type: ClusterIP
+      ## Use serviceLoadBalancerIP to request a specific static IP,
+      ## otherwise leave blank
+      # loadBalancerIP:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9205"
+      labels: { }
