@@ -36,4 +36,6 @@ kubectl --kubeconfig "${KUBECONFIG}" \
 encrypt_secret "flux-system-ssh-key.json" "${CURR_DIR}/../01_gitops/dev/"
 git add "${CURR_DIR}/../01_gitops/dev/flux-system-ssh-key.json" && git commit -m "Update flux ssh secret" && git push
 
+"$CURR_DIR/../hack/update-local-ca-certs.sh"
+
 echo "Use with export KUBECONFIG=${KUBECONFIG}"

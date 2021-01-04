@@ -43,3 +43,6 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: client
+  dependsOn:
+    - name: cert-manager
+      namespace: cert-manager
