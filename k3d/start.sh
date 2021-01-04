@@ -15,16 +15,19 @@ k3d cluster create local \
   --k3s-server-arg '--kube-apiserver-arg=enable-admission-plugins=PodSecurityPolicy' \
   -v "${CURR_DIR}/psp.yaml:/var/lib/rancher/k3s/server/manifests/psp.yaml"
 
+sleep 20
+
 export KUBECONFIG=$(k3d kubeconfig write local)
 
 kustomize build "$CURR_DIR/../00_global-resources" \
-  | kubectl --kubeconfig "${KUBECONFIG}" apply -f -
+  | kubectl apply -f -
 kustomize build "$CURR_DIR/../03_infrastructure/pki/sealed-secrets/base/" \
-  | kubectl --kubeconfig "${KUBECONFIG}" apply -f -
+  | kubectl apply -f -
 
-kubectl --kubeconfig "${KUBECONFIG}" create ns flux-system
-kubectl --kubeconfig "${KUBECONFIG}" \
-  --dry-run=client \
+kubectl wait --for=condition=available --timeout=600s deployment/sealed-secrets-controller -n kube-system
+
+kubectl create ns flux-system
+kubectl --dry-run=client \
   --namespace flux-system \
   create secret generic flux-system \
   --from-file="identity.pub=$HOME/.ssh/gitlab_deploy_key.pub" \
@@ -37,5 +40,8 @@ encrypt_secret "flux-system-ssh-key.json" "${CURR_DIR}/../01_gitops/dev/"
 git add "${CURR_DIR}/../01_gitops/dev/flux-system-ssh-key.json" && git commit -m "Update flux ssh secret" && git push
 
 "$CURR_DIR/../hack/update-local-ca-certs.sh"
+
+kustomize build "$CURR_DIR/../01_gitops/dev" | kubectl apply -f -
+kustomize build "$CURR_DIR/../02_bootstrap/dev" | kubectl apply -f -
 
 echo "Use with export KUBECONFIG=${KUBECONFIG}"
