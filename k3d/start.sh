@@ -39,9 +39,11 @@ kubectl --dry-run=client \
 encrypt_secret "flux-system-ssh-key.json" "${CURR_DIR}/../01_gitops/dev/"
 git add "${CURR_DIR}/../01_gitops/dev/flux-system-ssh-key.json" && git commit -m "Update flux ssh secret" && git push
 
+kustomize build "$CURR_DIR/../01_gitops/dev" | kubectl apply -f -
+
 "$CURR_DIR/../hack/update-local-ca-certs.sh"
 
-kustomize build "$CURR_DIR/../01_gitops/dev" | kubectl apply -f -
+kubectl create namespace cert-manager
 kustomize build "$CURR_DIR/../02_bootstrap/dev" | kubectl apply -f -
 
 echo "Use with export KUBECONFIG=${KUBECONFIG}"
