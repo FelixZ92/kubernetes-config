@@ -1,5 +1,4 @@
 resources:
   - https://github.com/fluxcd/flux2/manifests/install?ref=v0.5.7
-  - gotk-sync.yaml
 
 namespace: flux-system

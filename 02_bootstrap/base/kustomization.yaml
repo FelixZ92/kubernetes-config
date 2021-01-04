@@ -1,5 +1,6 @@
 resources:
   - global-resources.yaml
+  - gotk-sync.yaml
   - pki.yaml
 #  - appproject-infrastructure.yaml
 #  - application-argocd.yaml
