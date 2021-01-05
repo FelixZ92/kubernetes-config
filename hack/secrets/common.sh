@@ -12,7 +12,7 @@ SEALED_SECRETS_CONTROLLER_NAMESPACE=kube-system
 SCRIPT=$(readlink -f "$0")
 # Absolute path this script is in
 SCRIPTPATH=$(dirname "$SCRIPT")
-BASE_DIR=$SCRIPTPATH/..
+BASE_DIR=$(dirname "$(dirname "$CURR_DIR")")
 
 # $1: filename
 # $2: outputDir
