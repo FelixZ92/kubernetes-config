@@ -2,6 +2,7 @@ resources:
   - global-resources.yaml
   - gotk-sync.yaml
   - pki.yaml
+  - observability.yaml
 #  - appproject-infrastructure.yaml
 #  - application-argocd.yaml
 #  - application-infrastructure.yaml
