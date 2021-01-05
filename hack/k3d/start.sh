@@ -15,8 +15,8 @@ k3d cluster create local \
   --k3s-server-arg '--kube-apiserver-arg=enable-admission-plugins=PodSecurityPolicy' \
   -v "${CURR_DIR}/psp.yaml:/var/lib/rancher/k3s/server/manifests/psp.yaml" \
   --agents 3 \
-  --disable traefik \
-  --disable servicelb
+  --k3s-server-arg '--disable=traefik' \
+  --k3s-server-arg '--disable=servicelb'
 
 sleep 20
 
