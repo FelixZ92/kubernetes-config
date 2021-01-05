@@ -30,8 +30,14 @@ deploy_flux() {
     -o json \
      >"${CURR_DIR}/../tmp/flux-system-ssh-key.json"
 
-  encrypt_secret "flux-system-ssh-key.json" "${BASEDIR}/01_gitops/${ENVIRONMENT}/"
+  encrypt_secret "flux-system-ssh-key.json" "${BASEDIR}/01_gitops/${ENVIRONMENT}/" "${BASEDIR}"
   git add "${BASEDIR}/01_gitops/${ENVIRONMENT}/flux-system-ssh-key.json" && git commit -m "Update flux ssh secret" && git push
 
   kustomize build "${BASEDIR}/01_gitops/${ENVIRONMENT}/" | kubectl apply -f -
+}
+
+deploy_prometheus_operator_crds() {
+  BASEDIR="${1}"
+  kustomize build "${BASEDIR}/03_infrastructure/observability/prometheus-operator/crds" \
+		| kubectl apply -f -
 }
