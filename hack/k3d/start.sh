@@ -9,7 +9,7 @@ CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 BASEDIR=$(dirname "$(dirname "$CURR_DIR")")
 
-echo $BASEDIR
+ENVIRONMENT=dev
 
 # shellcheck source=hack/secrets/secrets-common.sh
 source "$CURR_DIR/../secrets/common.sh"
@@ -31,13 +31,15 @@ deploy_global_resources "${BASEDIR}"
 
 deploy_sealed_secrets "${BASEDIR}"
 
-deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "dev"
+deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
 update_local_ca_certs "${BASEDIR}"
 
-kubectl create namespace cert-manager
-kustomize build "$BASEDIR/02_bootstrap/dev" | kubectl apply -f -
-
 deploy_prometheus_operator_crds
+
+kubectl create namespace cert-manager
+
+kustomize build "$BASEDIR/02_bootstrap/${ENVIRONMENT}" | kubectl apply -f -
+
 #
 #echo "Use with export KUBECONFIG=${KUBECONFIG}"

@@ -8,12 +8,3 @@ metadata:
 spec:
   replicas: 2
   externalUrl: "https://alertmanager.192.168.0.13.xip.io"
-  storage:
-    volumeClaimTemplate:
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 2700Mi
-        storageClassName: rook-ceph-block
