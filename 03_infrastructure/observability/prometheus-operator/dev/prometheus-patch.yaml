@@ -1,15 +1,15 @@
 ---
-# Source: prometheus-operator/templates/prometheus/prometheus.yaml
+# Source: kube-prometheus-stack/templates/prometheus/prometheus.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: prometheus-operator-prometheus
+  name: kube-prometheus-stack-prometheus
   namespace: monitoring
   labels:
-    app: prometheus-operator-prometheus
+    app: kube-prometheus-stack-prometheus
 
-    chart: prometheus-operator-9.3.1
-    release: "prometheus-operator"
+    chart: kube-prometheus-stack-9.3.1
+    release: "kube-prometheus-stack"
     heritage: "Helm"
 spec:
   replicas: 2

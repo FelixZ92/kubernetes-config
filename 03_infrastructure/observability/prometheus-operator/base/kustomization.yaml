@@ -5,7 +5,7 @@ resources:
 patchesJson6902:
   - target:
       kind: PodSecurityPolicy
-      name: prometheus-operator-grafana
+      name: kube-prometheus-stack-grafana
       version: v1beta1
       group: policy
     path: grafana-psp-remove-annotations.yaml

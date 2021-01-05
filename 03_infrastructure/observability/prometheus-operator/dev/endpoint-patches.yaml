@@ -1,8 +1,8 @@
-# Source: prometheus-operator/templates/exporters/kube-etcd/endpoints.yaml
+# Source: kube-prometheus-stack/templates/exporters/kube-etcd/endpoints.yaml
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: prometheus-operator-kube-etcd
+  name: kube-prometheus-stack-kube-etcd
   namespace: kube-system
 subsets:
   - addresses:
@@ -18,11 +18,11 @@ subsets:
         protocol: TCP
 
 ---
-# Source: prometheus-operator/templates/exporters/kube-controller-manager/endpoints.yaml
+# Source: kube-prometheus-stack/templates/exporters/kube-controller-manager/endpoints.yaml
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: prometheus-operator-kube-controller-manager
+  name: kube-prometheus-stack-kube-controller-manager
   namespace: kube-system
 subsets:
   - addresses:
@@ -37,11 +37,11 @@ subsets:
         port: 10252
         protocol: TCP
 ---
-# Source: prometheus-operator/templates/exporters/kube-scheduler/endpoints.yaml
+# Source: kube-prometheus-stack/templates/exporters/kube-scheduler/endpoints.yaml
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: prometheus-operator-kube-scheduler
+  name: kube-prometheus-stack-kube-scheduler
   namespace: kube-system
 subsets:
   - addresses:

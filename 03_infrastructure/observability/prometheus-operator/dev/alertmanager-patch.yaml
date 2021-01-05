@@ -1,9 +1,9 @@
 ---
-# Source: prometheus-operator/templates/alertmanager/alertmanager.yaml
+# Source: kube-prometheus-stack/templates/alertmanager/alertmanager.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
 metadata:
-  name: prometheus-operator-alertmanager
+  name: kube-prometheus-stack-alertmanager
   namespace: monitoring
 spec:
   replicas: 2
