@@ -4,6 +4,4 @@ resources:
 #  - oidc-secret.json
 
 patchesStrategicMerge:
-  - endpoint-patches.yaml
-  - alertmanager-patch.yaml
-  - prometheus-patch.yaml
+  - kube-prometheus-stack-release-patch.yaml
