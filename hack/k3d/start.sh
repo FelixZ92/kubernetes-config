@@ -31,11 +31,13 @@ deploy_global_resources "${BASEDIR}"
 
 deploy_sealed_secrets "${BASEDIR}"
 
-deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
+apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
 
 update_local_ca_certs "${BASEDIR}"
 
-deploy_prometheus_operator_crds
+deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
+
+deploy_prometheus_operator_crds "${BASEDIR}"
 
 kubectl create namespace cert-manager
 

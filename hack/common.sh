@@ -3,15 +3,21 @@
 deploy_global_resources() {
   BASEDIR="${1}"
   echo "$BASEDIR"
-  kustomize build "$BASEDIR/00_global-resources" \
-    | kubectl apply -f -
+  kustomize build "$BASEDIR/00_global-resources" |
+    kubectl apply -f -
 }
 
 deploy_sealed_secrets() {
   BASEDIR="${1}"
-  kustomize build "$BASEDIR/03_infrastructure/pki/sealed-secrets/base/" \
-    | kubectl apply -f -
+  kustomize build "$BASEDIR/03_infrastructure/pki/sealed-secrets/base/" |
+    kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/sealed-secrets-controller -n kube-system
+}
+
+apply_secrets() {
+  BASEDIR="${1}"
+  ENVIRONMENT="${2}"
+  gopass-kubeseal applyBulk -f "$BASEDIR/02_bootstrap/dev/secrets.yaml"
 }
 
 deploy_flux() {
@@ -27,17 +33,17 @@ deploy_flux() {
     --from-file="identity.pub=$KEYFILE.pub" \
     --from-file="identity=$KEYFILE" \
     --from-file="known_hosts=$KNOWN_HOSTS_FILE" \
-    -o json \
-     >"${CURR_DIR}/../tmp/flux-system-ssh-key.json"
-
-  encrypt_secret "flux-system-ssh-key.json" "${BASEDIR}/01_gitops/${ENVIRONMENT}/" "${BASEDIR}"
-  git add "${BASEDIR}/01_gitops/${ENVIRONMENT}/flux-system-ssh-key.json" && git commit -m "Update flux ssh secret" && git push
+    -o json |
+    kubeseal --controller-name "${SEALED_SECRETS_CONTROLLER_NAME}" \
+      --controller-namespace "${SEALED_SECRETS_CONTROLLER_NAMESPACE}" \
+      | kubectl apply -f -
 
   kustomize build "${BASEDIR}/01_gitops/${ENVIRONMENT}/" | kubectl apply -f -
+  kubectl wait --for=condition=available --timeout=600s deployment/kustomize-controller -n flux-system
 }
 
 deploy_prometheus_operator_crds() {
   BASEDIR="${1}"
-  kustomize build "${BASEDIR}/03_infrastructure/observability/prometheus-operator/crds" \
-		| kubectl apply -f -
+  kustomize build "${BASEDIR}/03_infrastructure/observability/kube-prometheus-stack/crds" \
+    | kubectl apply -f -
 }

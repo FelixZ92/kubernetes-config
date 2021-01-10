@@ -49,14 +49,7 @@ update_local_ca_certs() {
     --key="${basedir}/.certs/dev/rootCA-key.pem" \
     --cert="${basedir}/.certs/dev/rootCA.pem" \
     --dry-run=client -o json \
-    > "${basedir}/tmp/dev-ca-secret.json"
-
-  kubeseal --controller-name "${SEALED_SECRETS_CONTROLLER_NAME}" \
-    --controller-namespace "${SEALED_SECRETS_CONTROLLER_NAMESPACE}" \
-    <"${basedir}/tmp/dev-ca-secret.json" \
-    >"${basedir}/03_infrastructure/pki/certificate-authority/dev/dev-ca-secret-sealed.json"
-
-  git add "${basedir}/03_infrastructure/pki/certificate-authority/dev/dev-ca-secret-sealed.json"
-  git commit -m "Update dev CA"
-  git push
+    | kubeseal --controller-name "${SEALED_SECRETS_CONTROLLER_NAME}" \
+        --controller-namespace "${SEALED_SECRETS_CONTROLLER_NAMESPACE}" \
+        | kubectl apply -f -
 }
