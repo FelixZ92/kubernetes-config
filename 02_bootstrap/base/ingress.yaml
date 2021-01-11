@@ -13,3 +13,6 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: server
+  dependsOn:
+    - name: kube-prometheus-stack
+      namespace: monitoring
