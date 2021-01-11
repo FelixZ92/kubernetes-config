@@ -1,4 +1,4 @@
 resources:
-  - all.yaml
   - psp.yaml
+  - kube-prometheus-stack-release.yaml
 namespace: traefik
