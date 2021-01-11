@@ -26,6 +26,9 @@ k3d cluster create local \
 sleep 10
 
 export KUBECONFIG=$(k3d kubeconfig write local)
+kubectl label node k3d-local-agent-0 storage=local
+kubectl label node k3d-local-agent-1 storage=local
+kubectl label node k3d-local-agent-2 storage=local
 
 deploy_global_resources "${BASEDIR}"
 
