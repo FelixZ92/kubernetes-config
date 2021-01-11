@@ -119,6 +119,8 @@ spec:
     ## Using default values from https://github.com/helm/charts/blob/master/stable/grafana/values.yaml
     ##
     grafana:
+      rbac:
+        pspUseAppArmor: false
       enabled: true
       image:
         tag: 7.2.0-beta2
