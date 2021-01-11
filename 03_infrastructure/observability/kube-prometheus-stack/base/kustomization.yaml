@@ -1,3 +1,2 @@
 resources:
-  - prometheus-community-repo.yaml
   - kube-prometheus-stack-release.yaml
