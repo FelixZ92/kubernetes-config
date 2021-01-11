@@ -3,6 +3,7 @@ resources:
   - gotk-sync.yaml
   - pki.yaml
   - observability.yaml
+  - ingress.yaml
 #  - appproject-infrastructure.yaml
 #  - application-argocd.yaml
 #  - application-infrastructure.yaml

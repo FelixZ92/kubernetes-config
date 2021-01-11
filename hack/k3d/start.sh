@@ -21,7 +21,10 @@ k3d cluster create local \
   -v "${CURR_DIR}/psp.yaml:/var/lib/rancher/k3s/server/manifests/psp.yaml" \
   --agents 3 \
   --k3s-server-arg '--disable=traefik' \
-  --k3s-server-arg '--disable=servicelb'
+  --k3s-server-arg '--disable=servicelb' \
+  -p "80:80@loadbalancer" \
+  -p "443:443@loadbalancer"
+
 
 sleep 10
 
