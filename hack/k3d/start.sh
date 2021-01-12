@@ -23,10 +23,8 @@ k3d cluster create local \
   --k3s-server-arg '--disable=traefik' \
   --k3s-server-arg '--disable=servicelb' \
   -p "80:80@loadbalancer" \
-  -p "443:443@loadbalancer"
-
-
-sleep 10
+  -p "443:443@loadbalancer" \
+  && sleep 10
 
 export KUBECONFIG=$(k3d kubeconfig write local)
 kubectl label node k3d-local-agent-0 storage=local
