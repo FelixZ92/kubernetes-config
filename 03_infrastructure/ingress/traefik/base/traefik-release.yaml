@@ -17,6 +17,7 @@ spec:
   dependsOn:
     - name: kube-prometheus-stack
       namespace: monitoring
+      kind: Kustomization
   chart:
     spec:
       chart: traefik
