@@ -1,2 +1,4 @@
 resources:
   - kube-prometheus-stack-release.yaml
+  - loki-release.yaml
+  - promtail-release.yaml
