@@ -17,6 +17,8 @@ deploy_sealed_secrets() {
 apply_secrets() {
   BASEDIR="${1}"
   ENVIRONMENT="${2}"
+  echo "Waiting for sealed secrets to become available"
+  kubectl wait --for=condition=available --timeout=600s deployment/sealed-secrets-controller -n kube-system
   gopass-kubeseal applyBulk -f "$BASEDIR/02_bootstrap/dev/secrets.yaml"
 }
 
@@ -27,16 +29,11 @@ deploy_flux() {
   ENVIRONMENT="${4}"
   kubectl create ns flux-system || echo "Namespace flux-system already exists"
 
-  kubectl --dry-run=client \
-    --namespace flux-system \
+  kubectl --namespace flux-system \
     create secret generic flux-system \
     --from-file="identity.pub=$KEYFILE.pub" \
     --from-file="identity=$KEYFILE" \
-    --from-file="known_hosts=$KNOWN_HOSTS_FILE" \
-    -o json |
-    kubeseal --controller-name "${SEALED_SECRETS_CONTROLLER_NAME}" \
-      --controller-namespace "${SEALED_SECRETS_CONTROLLER_NAMESPACE}" \
-      | kubectl apply -f -
+    --from-file="known_hosts=$KNOWN_HOSTS_FILE"
 
   kustomize build "${BASEDIR}/01_gitops/${ENVIRONMENT}/" | kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/kustomize-controller -n flux-system

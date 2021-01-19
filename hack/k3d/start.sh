@@ -36,17 +36,15 @@ deploy_global_resources "${BASEDIR}"
 
 deploy_crds "${BASEDIR}"
 
-deploy_sealed_secrets "${BASEDIR}"
+#deploy_sealed_secrets "${BASEDIR}"
+
+deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
+
+kustomize build "$BASEDIR/02_bootstrap/${ENVIRONMENT}" | kubectl apply -f -
 
 apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
 
 update_local_ca_certs "${BASEDIR}"
-
-deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
-
-kubectl create namespace cert-manager
-
-kustomize build "$BASEDIR/02_bootstrap/${ENVIRONMENT}" | kubectl apply -f -
 
 #
 #echo "Use with export KUBECONFIG=${KUBECONFIG}"
