@@ -27,7 +27,6 @@ deploy_flux() {
   KEYFILE="${2}"
   KNOWN_HOSTS_FILE="${3}"
   ENVIRONMENT="${4}"
-  kubectl create ns flux-system || echo "Namespace flux-system already exists"
 
   kubectl --namespace flux-system \
     create secret generic flux-system \
