@@ -5,4 +5,4 @@ metadata:
   name: certificate-authority
   namespace: cert-manager
 spec:
-  path: ./03_infrastructure/certificate-authority/dev
+  path: ./03_infrastructure/pki/certificate-authority/dev
