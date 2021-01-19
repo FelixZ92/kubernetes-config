@@ -14,5 +14,5 @@ spec:
     namespace: flux-system
   validation: server
   dependsOn:
-    - name: sealed-secrets
+    - name: pki
       namespace: kube-system
