@@ -6,3 +6,5 @@ public/
 tmp/
 .certs
 **/*secret*
+!sealed-secrets
+!sealed-secrets-release.yaml

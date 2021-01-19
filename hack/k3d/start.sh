@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o pipefail
+set -eo pipefail
 
 CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 [ -d "$CURR_DIR" ] || {
@@ -24,15 +24,17 @@ k3d cluster create local \
   --k3s-server-arg '--disable=servicelb' \
   -p "80:80@loadbalancer" \
   -p "443:443@loadbalancer" \
-  && sleep 10
+  && sleep 10 || echo "cluster already exists"
 
 export KUBECONFIG=$(k3d kubeconfig write local)
-kubectl label node k3d-local-agent-0 storage=local
-kubectl label node k3d-local-agent-1 storage=local
-kubectl label node k3d-local-agent-2 storage=local
-kubectl label node k3d-local-agent-2 node.kubernetes.io/ingress=traefik
+kubectl label node k3d-local-agent-0 storage=local --overwrite
+kubectl label node k3d-local-agent-1 storage=local --overwrite
+kubectl label node k3d-local-agent-2 storage=local --overwrite
+kubectl label node k3d-local-agent-2 node.kubernetes.io/ingress=traefik --overwrite
 
 deploy_global_resources "${BASEDIR}"
+
+deploy_prometheus_operator_crds "${BASEDIR}"
 
 deploy_sealed_secrets "${BASEDIR}"
 
@@ -41,8 +43,6 @@ apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
 update_local_ca_certs "${BASEDIR}"
 
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
-
-deploy_prometheus_operator_crds "${BASEDIR}"
 
 kubectl create namespace cert-manager
 

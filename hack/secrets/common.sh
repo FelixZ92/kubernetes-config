@@ -39,7 +39,7 @@ function create_generic_user_pass_secret() {
 update_local_ca_certs() {
   local basedir="${1}"
   if [ ! -f "${basedir}/.certs/dev/rootCA.pem" ] || [ ! -f "${basedir}/.certs/dev/rootCA-key.pem" ]; then
-    @rm -rf "${basedir}/.certs"
+    rm -rf "${basedir}/.certs"
     mkdir -p "${basedir}/.certs/dev"
     mkdir -p "${basedir}/tmp"
     CAROOT=${basedir}/.certs/dev mkcert -install
