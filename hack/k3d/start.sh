@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+set -x
+
 CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 [ -d "$CURR_DIR" ] || {
   echo "FATAL: no current dir (maybe running in zsh?)"; exit 1
@@ -41,6 +43,8 @@ deploy_crds "${BASEDIR}"
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
 kustomize build "$BASEDIR/02_bootstrap/${ENVIRONMENT}" | kubectl apply -f -
+
+kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system pki
 
 apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
 

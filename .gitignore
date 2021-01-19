@@ -8,3 +8,4 @@ tmp/
 **/*secret*
 !sealed-secrets
 !sealed-secrets-release.yaml
+!secrets.yaml

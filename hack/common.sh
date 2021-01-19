@@ -18,7 +18,7 @@ apply_secrets() {
   BASEDIR="${1}"
   ENVIRONMENT="${2}"
   echo "Waiting for sealed secrets to become available"
-  kubectl wait --for=condition=available --timeout=600s deployment/sealed-secrets-controller -n kube-system
+  kubectl wait --for=condition=ready --timeout=600s helmreleases.helm.toolkit.fluxcd.io -n kube-system sealed-secrets
   gopass-kubeseal applyBulk -f "$BASEDIR/02_bootstrap/dev/secrets.yaml"
 }
 
@@ -32,7 +32,8 @@ deploy_flux() {
     create secret generic flux-system \
     --from-file="identity.pub=$KEYFILE.pub" \
     --from-file="identity=$KEYFILE" \
-    --from-file="known_hosts=$KNOWN_HOSTS_FILE"
+    --from-file="known_hosts=$KNOWN_HOSTS_FILE" \
+    || echo "secret flux-system already exists"
 
   kustomize build "${BASEDIR}/01_gitops/${ENVIRONMENT}/" | kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/kustomize-controller -n flux-system
