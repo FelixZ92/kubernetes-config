@@ -34,7 +34,7 @@ kubectl label node k3d-local-agent-2 node.kubernetes.io/ingress=traefik --overwr
 
 deploy_global_resources "${BASEDIR}"
 
-deploy_prometheus_operator_crds "${BASEDIR}"
+deploy_crds "${BASEDIR}"
 
 deploy_sealed_secrets "${BASEDIR}"
 

@@ -42,8 +42,10 @@ deploy_flux() {
   kubectl wait --for=condition=available --timeout=600s deployment/kustomize-controller -n flux-system
 }
 
-deploy_prometheus_operator_crds() {
+deploy_crds() {
   BASEDIR="${1}"
-  kustomize build "${BASEDIR}/03_infrastructure/observability/kube-prometheus-stack/crds" \
+  kustomize build "${BASEDIR}/03_infrastructure/pki/crds" \
+    | kubectl apply -f -
+  kustomize build "${BASEDIR}/03_infrastructure/observability/crds" \
     | kubectl apply -f -
 }
