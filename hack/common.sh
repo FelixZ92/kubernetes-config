@@ -18,7 +18,7 @@ apply_secrets() {
   BASEDIR="${1}"
   ENVIRONMENT="${2}"
   echo "Waiting for sealed secrets to become available"
-  kubectl wait --for=condition=ready --timeout=600s helmreleases.helm.toolkit.fluxcd.io -n kube-system sealed-secrets
+  kubectl wait --for=condition=ready --timeout=600s helmreleases.helm.toolkit.fluxcd.io -n kube-system sealed-secrets-controller
   gopass-kubeseal applyBulk -f "$BASEDIR/02_bootstrap/dev/secrets.yaml"
 }
 
