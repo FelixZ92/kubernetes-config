@@ -21,7 +21,7 @@ metadata:
   namespace: cert-manager
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/pki/certificate-authority/dev
+  path: ./03_infrastructure/pki/certificate-authority/base
   prune: true
   sourceRef:
     kind: GitRepository
