@@ -9,7 +9,7 @@ deploy_global_resources() {
 
 deploy_sealed_secrets() {
   BASEDIR="${1}"
-  kustomize build "$BASEDIR/03_infrastructure/pki/sealed-secrets/base/" |
+  kustomize build "$BASEDIR/03_infrastructure/pki/sealed-secrets/base/" | \
     kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/sealed-secrets-controller -n kube-system
 }
