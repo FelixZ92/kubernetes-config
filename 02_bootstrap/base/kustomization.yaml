@@ -4,6 +4,8 @@ resources:
   - pki.yaml
   - observability.yaml
   - ingress.yaml
+  - database.yaml
+  - identity.yaml
 #  - appproject-infrastructure.yaml
 #  - application-argocd.yaml
 #  - application-infrastructure.yaml

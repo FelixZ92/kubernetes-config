@@ -26,9 +26,9 @@ spec:
     version: "12"
 
 # TODO: update with new pg operator version
-#  spiloRunAsUser: 101
-#  spiloRunAsGroup: 103
-#  spiloFSGroup: 103
+  spiloRunAsUser: 101
+  spiloRunAsGroup: 103
+  spiloFSGroup: 103
 
   sidecars:
     - name: "exporter"
@@ -65,62 +65,62 @@ spec:
             secretKeyRef:
               name: postgres.identity-pg.credentials.postgresql.acid.zalan.do
               key: password
----
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
-metadata:
-  name: postgres-pod
-spec:
-  privileged: true
-  allowPrivilegeEscalation: true
-  requiredDropCapabilities:
-    - ALL
-  volumes:
-    - 'configMap'
-    - 'emptyDir'
-    - 'projected'
-    - 'secret'
-    - 'downwardAPI'
-    - 'persistentVolumeClaim'
-  hostNetwork: false
-  hostIPC: false
-  hostPID: false
-  runAsUser:
-    rule: 'RunAsAny'
-  seLinux:
-    rule: 'RunAsAny'
-  fsGroup:
-    rule: 'RunAsAny'
-  readOnlyRootFilesystem: false
-  supplementalGroups:
-    rule: 'RunAsAny'
-
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: postgres-pod-psp
-  namespace: keycloak
-roleRef:
-  kind: Role
-  name: postgres-pod-psp
-  apiGroup: rbac.authorization.k8s.io
-subjects:
-  - kind: ServiceAccount
-    name: postgres-pod
-    namespace: keycloak
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: postgres-pod-psp
-  namespace: keycloak
-rules:
-  - apiGroups: ['policy']
-    resources: ['podsecuritypolicies']
-    verbs:     ['use']
-    resourceNames: ['postgres-pod']
-  - apiGroups: ['extensions']
-    resources: ['podsecuritypolicies']
-    verbs:     ['use']
-    resourceNames: ['postgres-pod']
+#---
+#apiVersion: policy/v1beta1
+#kind: PodSecurityPolicy
+#metadata:
+#  name: postgres-pod
+#spec:
+#  privileged: true
+#  allowPrivilegeEscalation: true
+#  requiredDropCapabilities:
+#    - ALL
+#  volumes:
+#    - 'configMap'
+#    - 'emptyDir'
+#    - 'projected'
+#    - 'secret'
+#    - 'downwardAPI'
+#    - 'persistentVolumeClaim'
+#  hostNetwork: false
+#  hostIPC: false
+#  hostPID: false
+#  runAsUser:
+#    rule: 'RunAsAny'
+#  seLinux:
+#    rule: 'RunAsAny'
+#  fsGroup:
+#    rule: 'RunAsAny'
+#  readOnlyRootFilesystem: false
+#  supplementalGroups:
+#    rule: 'RunAsAny'
+#
+#---
+#kind: RoleBinding
+#apiVersion: rbac.authorization.k8s.io/v1
+#metadata:
+#  name: postgres-pod-psp
+#  namespace: keycloak
+#roleRef:
+#  kind: Role
+#  name: postgres-pod-psp
+#  apiGroup: rbac.authorization.k8s.io
+#subjects:
+#  - kind: ServiceAccount
+#    name: postgres-pod
+#    namespace: keycloak
+#---
+#kind: Role
+#apiVersion: rbac.authorization.k8s.io/v1
+#metadata:
+#  name: postgres-pod-psp
+#  namespace: keycloak
+#rules:
+#  - apiGroups: ['policy']
+#    resources: ['podsecuritypolicies']
+#    verbs:     ['use']
+#    resourceNames: ['postgres-pod']
+#  - apiGroups: ['extensions']
+#    resources: ['podsecuritypolicies']
+#    verbs:     ['use']
+#    resourceNames: ['postgres-pod']
