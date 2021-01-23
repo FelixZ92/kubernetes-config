@@ -28,7 +28,7 @@ spec:
       interval: 10m
   values:
     deployment:
-      replicas: 3
+      replicas: 1
 
     # Pod disruption budget
     podDisruptionBudget:

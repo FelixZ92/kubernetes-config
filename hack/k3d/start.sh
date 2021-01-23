@@ -24,16 +24,14 @@ k3d cluster create local \
   --agents 3 \
   --k3s-server-arg '--disable=traefik' \
   --k3s-server-arg '--disable=servicelb' \
-  -p "80:80@agent" \
-  -p "443:443@agent" \
+  -p "80:80@agent[2]" \
+  -p "443:443@agent[2]" \
   && sleep 10 || echo "cluster already exists"
 
 export KUBECONFIG=$(k3d kubeconfig write local)
 kubectl label node k3d-local-agent-0 storage=local --overwrite
 kubectl label node k3d-local-agent-1 storage=local --overwrite
 kubectl label node k3d-local-agent-2 storage=local --overwrite
-kubectl label node k3d-local-agent-0 node.kubernetes.io/ingress=traefik --overwrite
-kubectl label node k3d-local-agent-1 node.kubernetes.io/ingress=traefik --overwrite
 kubectl label node k3d-local-agent-2 node.kubernetes.io/ingress=traefik --overwrite
 
 deploy_global_resources "${BASEDIR}"
