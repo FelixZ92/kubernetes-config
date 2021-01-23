@@ -1,6 +1,0 @@
-dependencies:
-- name: kubedb-catalog
-  repository: https://charts.appscode.com/stable/
-  version: v0.13.0-rc.0
-digest: sha256:85e1e1991a324cc897d167685c500af2729ffa6858834410471bc79c4aaf9090
-generated: "2020-11-15T19:43:37.793474849+01:00"
