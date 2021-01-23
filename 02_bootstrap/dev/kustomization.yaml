@@ -4,3 +4,4 @@ resources:
 patchesStrategicMerge:
   - pki-repo-path-patch.yaml
   - observability-repo-path-patch.yaml
+  - identity-repo-path-patch.yaml
