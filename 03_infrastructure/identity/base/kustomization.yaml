@@ -9,6 +9,7 @@ resources:
   - keycloak-user.yaml
   - realm-config.yaml
   - init-keycloak.yaml
+  - keycloak-release.yaml
 
 namespace: keycloak
 #
