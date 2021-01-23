@@ -5,7 +5,7 @@ metadata:
   name: postgres
 spec:
   routes:
-    - match: Host(`postgres.192.168.0.13.xip.io`)
+    - match: Host(`postgres.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: postgres-louketo-proxy
@@ -19,7 +19,7 @@ metadata:
   name: postgres-tls
 spec:
   routes:
-    - match: Host(`postgres.192.168.0.13.xip.io`)
+    - match: Host(`postgres.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: postgres-louketo-proxy

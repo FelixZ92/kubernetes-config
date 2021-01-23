@@ -5,7 +5,7 @@ metadata:
   name: grafana
 spec:
   routes:
-    - match: Host(`grafana.192.168.0.13.xip.io`)
+    - match: Host(`grafana.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: prometheus-operator-grafana
@@ -19,7 +19,7 @@ metadata:
   name: grafana-tls
 spec:
   routes:
-    - match: Host(`grafana.192.168.0.13.xip.io`)
+    - match: Host(`grafana.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: prometheus-operator-grafana

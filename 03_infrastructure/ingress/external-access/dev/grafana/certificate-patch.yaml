@@ -5,4 +5,4 @@ metadata:
   name: grafana-tls-certificate
 spec:
   dnsNames:
-    - grafana.192.168.0.13.xip.io
+    - grafana.127.0.0.1.xip.io

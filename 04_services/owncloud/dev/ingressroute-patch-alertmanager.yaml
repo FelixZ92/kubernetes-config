@@ -5,7 +5,7 @@ metadata:
   name: owncloud
 spec:
   routes:
-    - match: Host(`owncloud.192.168.0.13.xip.io`)
+    - match: Host(`owncloud.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: owncloud
@@ -19,7 +19,7 @@ metadata:
   name: owncloud-tls
 spec:
   routes:
-    - match: Host(`owncloud.192.168.0.13.xip.io`)
+    - match: Host(`owncloud.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: owncloud

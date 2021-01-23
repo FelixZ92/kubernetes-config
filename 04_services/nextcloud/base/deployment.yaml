@@ -53,7 +53,7 @@ spec:
                   name: nextcloud
                   key: nextcloud-password
             - name: NEXTCLOUD_TRUSTED_DOMAINS
-              value: nextcloud.192.168.0.13.xip.io
+              value: nextcloud.127.0.0.1.xip.io
             - name: NEXTCLOUD_DATA_DIR
               value: "/var/www/html/data"
           #        - name: REDIS_HOST
@@ -70,7 +70,7 @@ spec:
               port: http
               httpHeaders:
                 - name: Host
-                  value: "nextcloud.192.168.0.13.xip.io"
+                  value: "nextcloud.127.0.0.1.xip.io"
             initialDelaySeconds: 300
             periodSeconds: 15
             timeoutSeconds: 5
@@ -82,7 +82,7 @@ spec:
               port: http
               httpHeaders:
                 - name: Host
-                  value: "nextcloud.192.168.0.13.xip.io"
+                  value: "nextcloud.127.0.0.1.xip.io"
             initialDelaySeconds: 300
             periodSeconds: 15
             timeoutSeconds: 5
