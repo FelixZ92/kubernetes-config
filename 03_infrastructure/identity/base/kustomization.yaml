@@ -1,7 +1,7 @@
 resources:
 #  - kube-dbpostgres.yaml
   - postgres.yaml
-  - all.yaml
+#  - all.yaml
   - certificates.yaml
   - middlewares.yaml
   - ingressroute-keycloak.yaml
@@ -11,6 +11,6 @@ resources:
   - init-keycloak.yaml
 
 namespace: keycloak
-
-patchesStrategicMerge:
-  - prometheus-rule-patch.yaml
+#
+#patchesStrategicMerge:
+#  - prometheus-rule-patch.yaml
