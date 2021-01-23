@@ -51,7 +51,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`quote.192.168.0.13.xip.io`)
+    - match: Host(`quote.localhost.xip.io`)
       kind: Rule
       services:
         - name: quote
@@ -68,7 +68,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`quote.192.168.0.13.xip.io`)
+    - match: Host(`quote.localhost.xip.io`)
       kind: Rule
       services:
         - name: quote
@@ -84,7 +84,7 @@ metadata:
 spec:
   secretName: quote-app-tls-secret
   dnsNames:
-    - quote.192.168.0.13.xip.io
+    - quote.localhost.xip.io
   issuerRef:
     name: dev-ca-clusterissuer
     kind: ClusterIssuer
