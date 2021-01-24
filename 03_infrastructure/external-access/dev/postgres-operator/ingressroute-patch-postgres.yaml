@@ -5,7 +5,7 @@ metadata:
   name: postgres
 spec:
   routes:
-    - match: Host(`postgres.127.0.0.1.xip.io`)
+    - match: Host(`postgres.192.168.2.105.xip.io`)
       kind: Rule
       services:
         - name: postgres-gatekeeper
@@ -19,7 +19,7 @@ metadata:
   name: postgres-tls
 spec:
   routes:
-    - match: Host(`postgres.127.0.0.1.xip.io`)
+    - match: Host(`postgres.192.168.2.105.xip.io`)
       kind: Rule
       services:
         - name: postgres-gatekeeper

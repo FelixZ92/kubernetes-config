@@ -5,4 +5,4 @@ metadata:
   name: prometheus-tls-certificate
 spec:
   dnsNames:
-    - prometheus.127.0.0.1.xip.io
+    - prometheus.192.168.2.105.xip.io

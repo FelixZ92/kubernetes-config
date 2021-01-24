@@ -5,4 +5,4 @@ metadata:
   name: alertmanager-tls-certificate
 spec:
   dnsNames:
-    - alertmanager.127.0.0.1.xip.io
+    - alertmanager.192.168.2.105.xip.io

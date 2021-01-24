@@ -26,7 +26,7 @@ spec:
             resources:
               requests:
                 storage: 2700Mi
-      externalUrl: "https://alertmanager.127.0.0.1.xip.io"
+      externalUrl: "https://alertmanager.192.168.2.105.xip.io"
 
     ## Component scraping the kube controller manager
     ##
@@ -40,7 +40,7 @@ spec:
 
     prometheus:
       prometheusSpec:
-        externalUrl: "https://prometheus.127.0.0.1.xip.io"
+        externalUrl: "https://prometheus.192.168.2.105.xip.io"
         replicas: 2
         storageSpec:
           volumeClaimTemplate:

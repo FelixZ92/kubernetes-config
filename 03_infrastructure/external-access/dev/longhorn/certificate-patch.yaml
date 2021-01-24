@@ -5,4 +5,4 @@ metadata:
   name: longhorn-tls-certificate
 spec:
   dnsNames:
-    - longhorn.127.0.0.1.xip.io
+    - longhorn.192.168.2.105.xip.io

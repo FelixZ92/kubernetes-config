@@ -5,4 +5,4 @@ metadata:
   name: argocd-tls-certificate
 spec:
   dnsNames:
-    - argocd.127.0.0.1.xip.io
+    - argocd.192.168.2.105.xip.io

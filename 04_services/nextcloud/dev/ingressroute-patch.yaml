@@ -5,7 +5,7 @@ metadata:
   name: nextcloud
 spec:
   routes:
-    - match: Host(`nextcloud.127.0.0.1.xip.io`)
+    - match: Host(`nextcloud.192.168.2.105.xip.io`)
       kind: Rule
       services:
         - name: nextcloud
@@ -19,7 +19,7 @@ metadata:
   name: nextcloud-tls
 spec:
   routes:
-    - match: Host(`nextcloud.127.0.0.1.xip.io`)
+    - match: Host(`nextcloud.192.168.2.105.xip.io`)
       kind: Rule
       services:
         - name: nextcloud

@@ -146,10 +146,10 @@ spec:
       envFromSecret: "grafana-generic-oauth"
 
       env:
-        GF_SERVER_ROOT_URL: "https://grafana.127.0.0.1.xip.io"
+        GF_SERVER_ROOT_URL: "https://grafana.192.168.2.105.xip.io"
         GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
         GF_AUTH_GENERIC_OAUTH_SCOPES: "openid email profile"
-        GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://keycloak.127.0.0.1.xip.io/auth/realms/k8s/protocol/openid-connect/auth"
+        GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://keycloak.192.168.2.105.xip.io/auth/realms/k8s/protocol/openid-connect/auth"
         GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://keycloak-http.keycloak.svc/auth/realms/k8s/protocol/openid-connect/token"
         GF_AUTH_GENERIC_OAUTH_API_URL: "https://keycloak-http.keycloak.svc/auth/realms/k8s/protocol/openid-connect/userinfo"
         GF_AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE: "true"
