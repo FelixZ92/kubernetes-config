@@ -5,7 +5,7 @@ metadata:
   name: prometheus
 spec:
   routes:
-    - match: Host(`prometheus.192.168.2.105.xip.io`)
+    - match: Host(`prometheus.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: prometheus-gatekeeper
@@ -19,7 +19,7 @@ metadata:
   name: prometheus-tls
 spec:
   routes:
-    - match: Host(`prometheus.192.168.2.105.xip.io`)
+    - match: Host(`prometheus.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: prometheus-gatekeeper

@@ -5,4 +5,4 @@ metadata:
   name: owncloud-tls-certificate
 spec:
   dnsNames:
-    - owncloud.192.168.2.105.xip.io
+    - owncloud.127.0.0.1.xip.io

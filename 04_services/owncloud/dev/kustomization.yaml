@@ -10,4 +10,4 @@ configMapGenerator:
   - name: owncloud-config
     behavior: merge
     literals:
-      - OWNCLOUD_DOMAIN=owncloud.192.168.2.105.xip.io
+      - OWNCLOUD_DOMAIN=owncloud.127.0.0.1.xip.io

@@ -5,7 +5,7 @@ metadata:
   name: longhorn
 spec:
   routes:
-    - match: Host(`longhorn.192.168.2.105.xip.io`)
+    - match: Host(`longhorn.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: longhorn-gatekeeper
@@ -19,7 +19,7 @@ metadata:
   name: longhorn-tls
 spec:
   routes:
-    - match: Host(`longhorn.192.168.2.105.xip.io`)
+    - match: Host(`longhorn.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: longhorn-gatekeeper

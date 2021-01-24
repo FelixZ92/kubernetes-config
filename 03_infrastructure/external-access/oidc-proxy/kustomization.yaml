@@ -9,6 +9,6 @@ commonLabels:
 configMapGenerator:
   - name: gatekeeper-config
     literals:
-      - REDIRECTION_URL=https://whoami.192.168.2.105.xip.io
+      - REDIRECTION_URL=https://whoami.127.0.0.1.xip.io
       - UPSTREAM_URL=http://localhost:80
       - SKIP_OPENID_PROVIDER_TLS_VERIFY=false

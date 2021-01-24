@@ -5,4 +5,4 @@ metadata:
   name: postgres-tls-certificate
 spec:
   dnsNames:
-    - postgres.192.168.2.105.xip.io
+    - postgres.127.0.0.1.xip.io

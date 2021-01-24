@@ -11,7 +11,7 @@ configMapGenerator:
   - name: gatekeeper-config
     behavior: replace
     literals:
-      - REDIRECTION_URL=https://prometheus.192.168.2.105.xip.io
+      - REDIRECTION_URL=https://prometheus.127.0.0.1.xip.io
       - UPSTREAM_URL=http://prometheus-operator-prometheus:9090
-      - DISCOVERY_URL=https://keycloak.192.168.2.105.xip.io/auth/realms/k8s
+      - DISCOVERY_URL=https://keycloak.127.0.0.1.xip.io/auth/realms/k8s
       - SKIP_OPENID_PROVIDER_TLS_VERIFY=true

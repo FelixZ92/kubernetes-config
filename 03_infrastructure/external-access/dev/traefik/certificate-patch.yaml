@@ -5,4 +5,4 @@ metadata:
   name: dashboard-tls-certificate
 spec:
   dnsNames:
-    - traefik.192.168.2.105.xip.io
+    - traefik.127.0.0.1.xip.io

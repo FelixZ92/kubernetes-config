@@ -5,7 +5,7 @@ metadata:
   name: argocd
 spec:
   routes:
-    - match: Host(`argocd.192.168.2.105.xip.io`)
+    - match: Host(`argocd.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: argocd-server
@@ -19,13 +19,13 @@ metadata:
   name: argocd-tls
 spec:
   routes:
-    - match: Host(`argocd.192.168.2.105.xip.io`)
+    - match: Host(`argocd.127.0.0.1.xip.io`)
       kind: Rule
       priority: 10
       services:
         - name: argocd-server
           port: 80
-    - match: Host(`argocd.192.168.2.105.xip.io`) && Headers(`Content-Type`, `application/grpc`)
+    - match: Host(`argocd.127.0.0.1.xip.io`) && Headers(`Content-Type`, `application/grpc`)
       kind: Rule
       priority: 11
       services:
