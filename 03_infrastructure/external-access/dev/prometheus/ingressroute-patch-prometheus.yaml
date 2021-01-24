@@ -8,7 +8,7 @@ spec:
     - match: Host(`prometheus.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-louketo-proxy
+        - name: prometheus-gatekeeper
           port: 3000
       middlewares:
         - name: redirect-https
@@ -22,5 +22,5 @@ spec:
     - match: Host(`prometheus.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-louketo-proxy
+        - name: prometheus-gatekeeper
           port: 3000

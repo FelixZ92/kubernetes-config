@@ -8,7 +8,7 @@ spec:
     - match: Host(`postgres.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: postgres-louketo-proxy
+        - name: postgres-gatekeeper
           port: 3000
       middlewares:
         - name: redirect-https
@@ -22,5 +22,5 @@ spec:
     - match: Host(`postgres.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: postgres-louketo-proxy
+        - name: postgres-gatekeeper
           port: 3000

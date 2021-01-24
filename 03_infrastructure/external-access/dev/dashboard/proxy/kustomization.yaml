@@ -8,7 +8,7 @@ commonLabels:
   app.kubernetes.io/instance: external-access-dashboard
 
 configMapGenerator:
-  - name: louketo-proxy-config
+  - name: gatekeeper-config
     behavior: replace
     literals:
       - REDIRECTION_URL=https://dashboard.127.0.0.1.xip.io

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: gatekeeper
-          image: quay.io/louketo/louketo-proxy
+          image: quay.io/gatekeeper/gatekeeper
           imagePullPolicy: Always
           args:
             - --client-id=k8s

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: louketo-proxy
+  name: gatekeeper
   labels:
 
 spec:
@@ -16,10 +16,10 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: louketo-proxy-rules
+            name: gatekeeper-rules
       containers:
         - name: gatekeeper
-          image: quay.io/louketo/louketo-proxy
+          image: quay.io/gogatekeeper/gatekeeper:1.1.0
           imagePullPolicy: Always
           args:
             - --enable-default-deny=false
@@ -34,7 +34,7 @@ spec:
             - --skip-openid-provider-tls-verify=$(SKIP_OPENID_PROVIDER_TLS_VERIFY)
           envFrom:
             - configMapRef:
-                name: louketo-proxy-config
+                name: gatekeeper-config
           env:
             - name: CLIENT_ID
               valueFrom:

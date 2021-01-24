@@ -8,7 +8,7 @@ spec:
     - match: Host(`longhorn.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: longhorn-louketo-proxy
+        - name: longhorn-gatekeeper
           port: 3000
       middlewares:
         - name: redirect-https
@@ -22,5 +22,5 @@ spec:
     - match: Host(`longhorn.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: longhorn-louketo-proxy
+        - name: longhorn-gatekeeper
           port: 3000

@@ -8,7 +8,7 @@ commonLabels:
   app.kubernetes.io/instance: external-access-alertmanager
 
 configMapGenerator:
-  - name: louketo-proxy-config
+  - name: gatekeeper-config
     behavior: replace
     literals:
       - REDIRECTION_URL=https://alertmanager.127.0.0.1.xip.io

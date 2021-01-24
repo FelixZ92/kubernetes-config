@@ -5,15 +5,4 @@ metadata:
   name: external-access
   namespace: traefik
 spec:
-  interval: 10m0s
   path: ./03_infrastructure/external-access/dev
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: infrastructure
-    namespace: flux-system
-  validation: server
-  dependsOn:
-    - name: keycloak
-      namespace: keycloak
-      kind: HelmRelease

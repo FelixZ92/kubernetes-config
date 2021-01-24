@@ -4,10 +4,10 @@ resources:
   - configmap.yaml
 
 commonLabels:
-  app.kubernetes.io/name: louketo-proxy
+  app.kubernetes.io/name: gatekeeper
 
 configMapGenerator:
-  - name: louketo-proxy-config
+  - name: gatekeeper-config
     literals:
       - REDIRECTION_URL=https://whoami.127.0.0.1.xip.io
       - UPSTREAM_URL=http://localhost:80

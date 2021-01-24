@@ -36,7 +36,7 @@ spec:
     - match: Host(`traefik.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: traefik-louketo-proxy
+        - name: traefik-gatekeeper
           port: 3000
       middlewares:
         - name: redirect-https
@@ -50,5 +50,5 @@ spec:
     - match: Host(`traefik.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: traefik-louketo-proxy
+        - name: traefik-gatekeeper
           port: 3000

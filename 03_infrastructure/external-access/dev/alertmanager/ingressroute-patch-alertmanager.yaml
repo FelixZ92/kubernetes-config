@@ -8,7 +8,7 @@ spec:
     - match: Host(`alertmanager.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: alertmanager-louketo-proxy
+        - name: alertmanager-gatekeeper
           port: 3000
       middlewares:
         - name: redirect-https
@@ -22,5 +22,5 @@ spec:
     - match: Host(`alertmanager.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: alertmanager-louketo-proxy
+        - name: alertmanager-gatekeeper
           port: 3000
