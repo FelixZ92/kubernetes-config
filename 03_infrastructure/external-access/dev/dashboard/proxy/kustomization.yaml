@@ -3,6 +3,8 @@ resources:
 
 namePrefix: dashboard-
 
+namespace: dashboard
+
 # workaround for argocd since it does not apply those labels on selectors
 commonLabels:
   app.kubernetes.io/instance: external-access-dashboard
