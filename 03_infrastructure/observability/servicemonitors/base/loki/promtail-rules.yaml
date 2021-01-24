@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   labels:
-    release: prometheus-operator
+    release: kube-prometheus-stack
   name: promtail.rules
 spec:
   "groups":

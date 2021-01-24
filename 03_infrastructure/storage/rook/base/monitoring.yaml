@@ -5,7 +5,7 @@ metadata:
   namespace: rook-ceph
   labels:
     team: rook
-    release: prometheus-operator
+    release: kube-prometheus-stack
 spec:
   endpoints:
   - bearerTokenSecret:
@@ -27,7 +27,7 @@ metadata:
   labels:
     prometheus: rook-prometheus
     role: alert-rules
-    release: prometheus-operator
+    release: kube-prometheus-stack
   name: prometheus-ceph-v15-rules
   namespace: rook-ceph
 spec:

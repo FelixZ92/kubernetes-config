@@ -21,5 +21,5 @@ spec:
     prometheus:
       namespace: monitoring
       labels:
-        release: prometheus-operator
+        release: kube-prometheus-stack
       interval: 10s

@@ -12,5 +12,5 @@ resources:
   - promtail-rules.yaml
 
 commonLabels:
-    release: prometheus-operator
-    app: prometheus-operator
+    release: kube-prometheus-stack
+    app: kube-prometheus-stack

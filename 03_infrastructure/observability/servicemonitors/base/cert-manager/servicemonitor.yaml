@@ -3,7 +3,7 @@ kind: ServiceMonitor
 metadata:
   name: cert-manager
   labels:
-    release: prometheus-operator
+    release: kube-prometheus-stack
 spec:
   selector:
     matchLabels:

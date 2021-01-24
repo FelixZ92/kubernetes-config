@@ -3,7 +3,7 @@ kind: ServiceMonitor
 metadata:
   name: sealed-secrets
   labels:
-    release: prometheus-operator
+    release: kube-prometheus-stack
     name: sealed-secrets-controller
     app.kubernetes.io/instance: sealed-secrets
 spec:

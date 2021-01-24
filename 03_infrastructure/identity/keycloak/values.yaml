@@ -122,12 +122,12 @@ keycloak:   # The number of replicas to create
   serviceMonitor:
     enabled: true
     labels:
-      release: prometheus-operator
+      release: kube-prometheus-stack
 
   prometheusRule:
     enabled: true
     labels:
-      release: prometheus-operator
+      release: kube-prometheus-stack
     rules:
       - alert: KeycloakJavaHeapThresholdExceeded
         annotations:

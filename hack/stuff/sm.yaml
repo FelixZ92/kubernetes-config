@@ -2,11 +2,11 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    app: prometheus-operator-prometheus
+    app: kube-prometheus-stack
     app.kubernetes.io/instance: prometheus-operator
     chart: prometheus-operator-9.3.1
     heritage: Helm
-    release: prometheus-operator
+    release: kube-prometheus-stack
   name: prometheus-operator-prometheus
   namespace: monitoring
 spec:
@@ -18,6 +18,6 @@ spec:
     - monitoring
   selector:
     matchLabels:
-      app: prometheus-operator-prometheus
-      release: prometheus-operator
+      app: kube-prometheus-stack
+      release: kube-prometheus-stack
       self-monitor: "true"

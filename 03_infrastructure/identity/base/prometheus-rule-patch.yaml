@@ -5,5 +5,5 @@ kind: PrometheusRule
 metadata:
   name: keycloak
   labels:
-    release: prometheus-operator
-    app: prometheus-operator
+    release: kube-prometheus-stack
+    app: kube-prometheus-stack

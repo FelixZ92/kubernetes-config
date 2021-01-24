@@ -97,4 +97,4 @@ spec:
     serviceMonitor:
       enabled: true
       additionalLabels:
-        release: prometheus-operator
+        release: kube-prometheus-stack

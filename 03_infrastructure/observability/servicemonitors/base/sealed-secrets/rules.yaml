@@ -2,8 +2,8 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   labels:
-    release: prometheus-operator
-    app: prometheus-operator
+    release: kube-prometheus-stack
+    app: kube-prometheus-stack
   name: sealed-secrets.rules
 spec:
   groups:
