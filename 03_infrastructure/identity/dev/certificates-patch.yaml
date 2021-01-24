@@ -5,4 +5,4 @@ metadata:
   name: keycloak-tls-certificate
 spec:
   dnsNames:
-    - keycloak.127.0.0.1.xip.io
+    - keycloak-http.keycloak.svc

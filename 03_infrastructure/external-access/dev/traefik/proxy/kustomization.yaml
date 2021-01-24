@@ -9,5 +9,5 @@ configMapGenerator:
     literals:
       - REDIRECTION_URL=https://traefik.127.0.0.1.xip.io
       - UPSTREAM_URL=http://forward-auth-bouncer/dashboard/
-      - DISCOVERY_URL=https://keycloak.127.0.0.1.xip.io/auth/realms/k8s
+      - DISCOVERY_URL=http://keycloak-http.keycloak.svc/auth/realms/k8s
       - SKIP_OPENID_PROVIDER_TLS_VERIFY=true

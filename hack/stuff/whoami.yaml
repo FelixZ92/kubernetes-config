@@ -19,7 +19,7 @@ spec:
           args:
             - --client-id=k8s
             - --client-secret=48bdf60e-cd68-4b2f-9873-3dae7c889a86
-            - --discovery-url=https://keycloak.127.0.0.1.xip.io/auth/realms/k8s
+            - --discovery-url=http://keycloak-http.keycloak.svc/auth/realms/k8s
             - --skip-openid-provider-tls-verify=true
             - --enable-default-deny=false
             - --encryption-key=AgXa7xRcoClDEU0ZDSH4X0XhL5Qy2Z2j
