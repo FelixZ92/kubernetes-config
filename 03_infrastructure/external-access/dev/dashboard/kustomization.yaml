@@ -1,5 +1,5 @@
 resources:
-  - ../../base/dashboard/base
+  - ../../base/dashboard
   - proxy
 
 patchesStrategicMerge:
