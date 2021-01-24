@@ -211,7 +211,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints:
-        - 192.168.0.11
+        - 10.42.0.1
       # - 10.141.4.23
       # - 10.141.4.24
 
@@ -223,7 +223,7 @@ spec:
     kubeEtcd:
       enabled: true
       endpoints:
-        - 192.168.0.11
+        - 10.42.0.1
       # - 10.141.4.23
       # - 10.141.4.24
       service:
@@ -233,7 +233,7 @@ spec:
     kubeScheduler:
       enabled: true
       endpoints:
-        - 192.168.0.11
+        - 10.42.0.1
       # - 10.141.4.23
       # - 10.141.4.24
 

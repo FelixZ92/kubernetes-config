@@ -173,8 +173,7 @@ grafana:
 kubeControllerManager:
   enabled: true
   endpoints:
-    - 192.168.0.11
-  # - 10.141.4.23
+    - 10.42.0.1
   # - 10.141.4.24
 
 ## Component scraping coreDns. Use either this or kubeDns

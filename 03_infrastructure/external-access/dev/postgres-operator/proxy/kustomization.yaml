@@ -1,0 +1,17 @@
+resources:
+  - ../../../oidc-proxy
+
+namePrefix: postgres-
+
+# workaround for argocd since it does not apply those labels on selectors
+commonLabels:
+  app.kubernetes.io/instance: external-access-postgres
+
+configMapGenerator:
+  - name: louketo-proxy-config
+    behavior: replace
+    literals:
+      - REDIRECTION_URL=https://postgres.127.0.0.1.xip.io
+      - UPSTREAM_URL=http://postgres-operator-ui:8081
+      - DISCOVERY_URL=https://keycloak.127.0.0.1.xip.io/auth/realms/k8s
+      - SKIP_OPENID_PROVIDER_TLS_VERIFY=true
