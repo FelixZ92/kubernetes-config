@@ -8,7 +8,7 @@ spec:
     - match: Host(`grafana.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-operator-grafana
+        - name: kube-prometheus-stack-grafana
           port: 80
       middlewares:
         - name: redirect-https
@@ -22,5 +22,5 @@ spec:
     - match: Host(`grafana.127.0.0.1.xip.io`)
       kind: Rule
       services:
-        - name: prometheus-operator-grafana
+        - name: kube-prometheus-stack-grafana
           port: 80
