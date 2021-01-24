@@ -1,5 +1,0 @@
-resources:
-  - ../../base/identity
-
-patchesStrategicMerge:
-  - keycloak-repo-path.yaml

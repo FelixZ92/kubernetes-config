@@ -1,5 +1,0 @@
-resources:
-  - prometheus-operator.yaml
-  - promtail.yaml
-  - loki.yaml
-  - servicemonitors.yaml

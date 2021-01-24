@@ -1,7 +1,0 @@
-resources:
-  - ../base/
-  - grafana-generic-auth-secret.yaml
-#  - oidc-secret.json
-
-patchesStrategicMerge:
-  - kube-prometheus-stack-release-patch.yaml

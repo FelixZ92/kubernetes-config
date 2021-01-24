@@ -1,4 +1,0 @@
-resources:
-  - sealed-secrets.yaml
-  - cert-manager.yaml
-  - certificate-authority.yaml

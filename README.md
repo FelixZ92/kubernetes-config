@@ -10,8 +10,6 @@ $ sudo exportfs -ra && sudo service nfs-kernel-server restart
 
 # Keycloak
 
-Generate oidc client secret (uuid):
-`uuidgen -r | tr -d '\n'` 
-
+- Add `127.0.0.1 keycloak-http.keycloak.svc` to `/etc/hosts/` so redirections work also with k3d
 - make client role `cluster-admin` to composite with `cluster-readonly` 
 - map client roles to groups

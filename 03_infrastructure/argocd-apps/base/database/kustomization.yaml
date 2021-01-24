@@ -1,4 +1,0 @@
-resources:
-  - kubedb.yaml
-#  - postgres-operator.yaml
-#  - postgres-operator-ui.yaml

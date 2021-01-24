@@ -1,7 +1,0 @@
-resources:
-  - ../../base/observability
-
-patchesStrategicMerge:
-  - loki-env-patch.yaml
-  - prometheus-operator-env-patch.yaml
-  - promtail-env-patch.yaml

@@ -1,8 +1,0 @@
----
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: argocd-tls-certificate
-spec:
-  dnsNames:
-    - argocd.127.0.0.1.xip.io
