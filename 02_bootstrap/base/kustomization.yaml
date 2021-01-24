@@ -2,6 +2,7 @@ resources:
   - global-resources.yaml
   - gotk-sync.yaml
   - pki.yaml
+  - storage.yaml
   - observability.yaml
   - ingress.yaml
   - database.yaml

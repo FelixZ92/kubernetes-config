@@ -1,0 +1,4 @@
+resources:
+  - nfs-client-provisioner-release.yaml
+
+namespace: nfs-client-provisioner

@@ -4,7 +4,7 @@
 $ cat /etc/exports
 /export/k8s-local 192.168.0.0/24(rw,sync,no_subtree_check,anonuid=1000,anongid=1000)
 $ sudo mkdir -p /export/k8s-local 
-$ sudo exportfs -ra && sudo service nfs-kernel-server restart
+$ sudo exportfs -ra && sudo systemctl restart nfs-server.service
 
 ````
 
@@ -13,3 +13,5 @@ $ sudo exportfs -ra && sudo service nfs-kernel-server restart
 - Add `127.0.0.1 keycloak-http.keycloak.svc` to `/etc/hosts/` so redirections work also with k3d
 - make client role `cluster-admin` to composite with `cluster-readonly` 
 - map client roles to groups
+
+LABEL="Data" /run/media/fz/Data fuseblk rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096 0 0

@@ -1,0 +1,48 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: felixz92
+spec:
+  interval: 10m
+  url: https://felixz92.gitlab.io/charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfs-client-provisioner
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: nfs-subdir-external-provisioner
+      version: '3.0.0'
+      sourceRef:
+        kind: HelmRepository
+        name: felixz92
+      interval: 10m
+  values:
+    replicaCount: 1
+    image:
+      repository: quay.io/external_storage/nfs-client-provisioner
+      tag: v3.1.0-k8s1.11
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+    storageClass:
+      create: true
+      defaultClass: false
+      name: nfs-client
+      allowVolumeExpansion: true
+      reclaimPolicy: Delete
+      archiveOnDelete: true
+      accessModes: ReadWriteMany
+    rbac:
+      create: true
+    podSecurityPolicy:
+      enabled: true
+    serviceAccount:
+      create: true

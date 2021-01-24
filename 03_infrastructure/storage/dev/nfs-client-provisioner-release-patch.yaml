@@ -1,0 +1,10 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfs-client-provisioner
+spec:
+  values:
+    nfs:
+      server: 172.17.0.1
+      path: /export/k8s-local

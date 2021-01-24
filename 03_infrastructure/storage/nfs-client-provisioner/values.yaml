@@ -20,6 +20,7 @@ nfs-client-provisioner:
     allowVolumeExpansion: true
     reclaimPolicy: Delete
     archiveOnDelete: true
+    accessModes: ReadWriteMany
   rbac:
     create: true
   podSecurityPolicy:
