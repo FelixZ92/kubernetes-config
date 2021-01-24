@@ -14,4 +14,4 @@ Generate oidc client secret (uuid):
 `uuidgen -r | tr -d '\n'` 
 
 - make client role `cluster-admin` to composite with `cluster-readonly` 
-  
+- map client roles to groups
