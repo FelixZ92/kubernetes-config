@@ -6,6 +6,7 @@ resources:
   - ingress.yaml
   - database.yaml
   - identity.yaml
+  - external-access.yaml
 #  - appproject-infrastructure.yaml
 #  - application-argocd.yaml
 #  - application-infrastructure.yaml
