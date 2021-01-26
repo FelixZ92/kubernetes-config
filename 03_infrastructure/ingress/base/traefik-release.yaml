@@ -74,12 +74,6 @@ spec:
         exposedPort: 443
         hostPort: 443
         protocol: TCP
-      traefik:
-        port: 9000
-        expose: true
-        exposedPort: 9000
-        hostPort: 9000
-        protocol: TCP
 
     service:
       enabled: true
