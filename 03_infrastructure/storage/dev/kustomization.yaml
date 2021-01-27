@@ -1,6 +1,6 @@
 resources:
   - ../base
-  - nfs-server.yaml
+#  - nfs-server.yaml
 
 patchesStrategicMerge:
   - nfs-client-provisioner-release-patch.yaml

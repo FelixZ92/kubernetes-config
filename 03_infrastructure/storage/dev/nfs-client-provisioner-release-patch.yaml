@@ -6,5 +6,5 @@ metadata:
 spec:
   values:
     nfs:
-      server: nfs-service
-      path: /
+      server: host.k3d.internal
+      path: /export/k8s-local
