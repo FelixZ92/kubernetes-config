@@ -4,7 +4,7 @@ metadata:
   name: nfs-service
 spec:
   selector:
-    role: nfs
+    app.kubernetes.io/name: nfs-server
   ports:
     # Open the ports required by the NFS server
     # Port 2049 for TCP
