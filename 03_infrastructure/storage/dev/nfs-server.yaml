@@ -67,6 +67,5 @@ roleRef:
   name: nfs-server
   apiGroup: rbac.authorization.k8s.io
 subjects:
-  - apiGroup: rbac.authorization.k8s.io
-    kind: ServiceAccount
+  - kind: ServiceAccount
     name: nfs-server-account
