@@ -64,6 +64,6 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: nfs-client-provisioner
+  name: nfs-provisioner
   annotations:
     argocd.argoproj.io/sync-wave: "-1"

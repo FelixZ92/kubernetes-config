@@ -1,6 +1,7 @@
 resources:
   - global-resources.yaml
   - gotk-sync.yaml
+  - helm-stable.yaml
   - pki.yaml
   - storage.yaml
   - observability.yaml

@@ -2,9 +2,40 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nfs-client-provisioner
+  name: nfs-provisioner
 spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: nfs-server-provisioner
+      version: '1.1.3'
+      sourceRef:
+        kind: HelmRepository
+        name: felixz92
+      interval: 10m
   values:
-    nfs:
-      server: host.k3d.internal
-      path: /export/k8s-local
+    image:
+      repository: quay.io/kubernetes_incubator/nfs-provisioner
+      tag: v2.3.0
+      pullPolicy: IfNotPresent
+      mountOptions:
+        - vers=3
+
+      ## ReclaimPolicy field of the class, which can be either Delete or Retain
+      reclaimPolicy: Delete
+
+    ## For RBAC support:
+    rbac:
+      create: true
+
+      ## Ignored if rbac.create is true
+      ##
+      serviceAccountName: nfs-provisoner
+
+    resources: }
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
