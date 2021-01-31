@@ -5,4 +5,4 @@ metadata:
   name: storage
   namespace: kube-system
 spec:
-  path: ./03_infrastructure/storage/dev
+  path: ./03_infrastructure/storage/overlays/dev

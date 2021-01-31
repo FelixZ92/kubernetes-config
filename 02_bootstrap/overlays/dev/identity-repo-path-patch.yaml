@@ -5,4 +5,4 @@ metadata:
   name: identity
   namespace: keycloak
 spec:
-  path: ./03_infrastructure/identity/dev
+  path: ./03_infrastructure/identity/overlays/dev

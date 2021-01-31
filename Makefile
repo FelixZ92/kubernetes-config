@@ -53,7 +53,7 @@ bootstrap-cluster:
 		| kubectl -n keycloak apply -f -
 	kustomize build ./01_argocd/dev/ | kubectl -n argocd apply -f -
 	kustomize build ./03_infrastructure/ingress/external-access/dev | kubectl apply -f -
-	kustomize build ./02_bootstrap/dev/ | kubectl -n argocd apply -f -
+	kustomize build ./02_bootstrap/overlays/dev/ | kubectl -n argocd apply -f -
 
 #helm template $ARGOCD_APP_NAME . --namespace $ARGOCD_APP_NAMESPACE $ADDITIONAL_HELM_ARGS > base/all.yaml && kustomize build $ENVIRONMENT"
 update-argocd-secret:

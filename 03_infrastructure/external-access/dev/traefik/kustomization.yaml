@@ -4,10 +4,6 @@ resources:
 
 namespace: traefik
 
-commonAnnotations:
-  annotations:
-    argocd.argoproj.io/sync-wave="4"
-
 patchesStrategicMerge:
   - ingressroute-patch-dashboard.yaml
   - certificate-patch.yaml

@@ -1,8 +1,0 @@
-resources:
-  - ../base/database
-  - identity
-  - ingress
-  - observability
-  - pki
-  - secrets
-  - storage

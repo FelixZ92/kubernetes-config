@@ -3,7 +3,7 @@ resources:
 
 namePrefix: longhorn-
 
-# workaround for argocd since it does not apply those labels on selectors
+# workaround to apply those labels on selectors
 commonLabels:
   app.kubernetes.io/instance: external-access-longhorn
 

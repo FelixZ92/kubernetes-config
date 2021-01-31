@@ -12,7 +12,6 @@ data:
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
           "https://alertmanager.127.0.0.1.xip.io/oauth/callback",
-          "https://argocd.127.0.0.1.xip.io/auth/callback",
           "https://dashboard.127.0.0.1.xip.io/oauth/callback",
           "https://grafana.127.0.0.1.xip.io/login/generic_oauth",
           "https://longhorn.127.0.0.1.xip.io/oauth/callback",

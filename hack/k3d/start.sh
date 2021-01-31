@@ -42,7 +42,7 @@ deploy_crds "${BASEDIR}"
 
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
-kustomize build "$BASEDIR/02_bootstrap/${ENVIRONMENT}" | kubectl apply -f -
+kustomize build "$BASEDIR/02_bootstrap/overlays/${ENVIRONMENT}" | kubectl apply -f -
 
 kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system pki
 

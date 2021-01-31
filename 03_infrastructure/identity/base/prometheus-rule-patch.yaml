@@ -1,9 +1,0 @@
----
-# Source: keycloak/charts/keycloak/templates/prometheusrule.yaml
-apiVersion: monitoring.coreos.com/v1
-kind: PrometheusRule
-metadata:
-  name: keycloak
-  labels:
-    release: kube-prometheus-stack
-    app: kube-prometheus-stack

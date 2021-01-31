@@ -1,17 +1,12 @@
 resources:
-#  - kube-dbpostgres.yaml
   - postgres.yaml
-#  - all.yaml
-  - certificates.yaml
-  - middlewares.yaml
-  - ingressroute-keycloak.yaml
-  - keycloak-groups.yaml
-  - keycloak-user.yaml
-  - realm-config.yaml
+  - ingress/certificates.yaml
+  - ingress/middlewares.yaml
+  - ingress/ingressroute-keycloak.yaml
+  - config/keycloak-groups.yaml
+  - config/keycloak-user.yaml
+  - config/realm-config.yaml
   - init-keycloak.yaml
   - keycloak-release.yaml
 
 namespace: keycloak
-#
-#patchesStrategicMerge:
-#  - prometheus-rule-patch.yaml

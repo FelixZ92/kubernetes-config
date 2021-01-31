@@ -5,4 +5,4 @@ metadata:
   name: observability
   namespace: monitoring
 spec:
-  path: ./03_infrastructure/observability/dev
+  path: ./03_infrastructure/observability/overlays/dev

@@ -1,5 +1,0 @@
-resources:
-  - rook.yaml
-#  - longhorn.yaml
-#  - nfs-client-provisioner.yaml.yaml
-#  - local-path-provisioner.yaml

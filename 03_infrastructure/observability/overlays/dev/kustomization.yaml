@@ -1,5 +1,5 @@
 resources:
-  - ../base
+  - ../../base
 
 patchesStrategicMerge:
   - kube-prometheus-patches.yaml

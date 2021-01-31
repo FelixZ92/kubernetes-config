@@ -1,7 +1,0 @@
-resources:
-  - ../base
-
-patchesStrategicMerge:
-  - nfs-client-provisioner-release-patch.yaml
-
-namespace: nfs-client-provisioner.yaml

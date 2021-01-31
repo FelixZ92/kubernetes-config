@@ -6,7 +6,3 @@ namespace: monitoring
 patchesStrategicMerge:
   - ingressroute-patch-grafana.yaml
   - certificate-patch.yaml
-
-commonAnnotations:
-  annotations:
-    argocd.argoproj.io/sync-wave="4"
