@@ -45,4 +45,6 @@ deploy_crds() {
     | kubectl apply -f -
   kustomize build "${BASEDIR}/03_infrastructure/observability/crds" \
     | kubectl apply -f -
+  kustomize build "${BASEDIR}/03_infrastructure/ingress/crds" \
+    | kubectl apply -f -
 }
