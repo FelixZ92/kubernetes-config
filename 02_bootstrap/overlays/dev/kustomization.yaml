@@ -8,3 +8,4 @@ patchesStrategicMerge:
   - storage-repo-path-patch.yaml
   - ingress-path-patch.yaml
   - database-path-patch.yaml
+  - dashboard-path-patch.yaml
