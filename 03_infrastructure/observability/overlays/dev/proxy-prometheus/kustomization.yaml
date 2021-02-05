@@ -3,6 +3,8 @@ resources:
 
 namePrefix: prometheus-
 
+namespace: monitoring
+
 # workaround to apply those labels on selectors
 commonLabels:
   app.kubernetes.io/instance: external-access-prometheus

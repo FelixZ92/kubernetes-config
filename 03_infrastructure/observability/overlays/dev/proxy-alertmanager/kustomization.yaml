@@ -3,6 +3,8 @@ resources:
 
 namePrefix: alertmanager-
 
+namespace: monitoring
+
 # workaround to apply those labels on selectors
 commonLabels:
   app.kubernetes.io/instance: external-access-alertmanager

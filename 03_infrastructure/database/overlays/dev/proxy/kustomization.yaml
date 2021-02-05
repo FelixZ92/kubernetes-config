@@ -3,6 +3,8 @@ resources:
 
 namePrefix: postgres-
 
+namespace: postgres-operator
+
 # workaround to apply those labels on selectors
 commonLabels:
   app.kubernetes.io/instance: external-access-postgres
