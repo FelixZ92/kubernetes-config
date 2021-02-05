@@ -1,0 +1,33 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: grafana-tls-certificate
+spec:
+  secretName: tls-grafana-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+spec:
+  entryPoints:
+    - web
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://cdn.worldvectorlogo.com/logos/grafana.svg"
+    dashboard.zippelf.com/display-name: "Grafana"
+    dashboard.zippelf.com/docs: "https://grafana.com/docs/grafana/latest/"
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: tls-grafana-ingress

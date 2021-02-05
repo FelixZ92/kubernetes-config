@@ -1,0 +1,13 @@
+resources:
+  - ../../../../oidc-proxy
+
+namePrefix: traefik-
+
+configMapGenerator:
+  - name: gatekeeper-config
+    behavior: replace
+    literals:
+      - REDIRECTION_URL=https://traefik.127.0.0.1.xip.io
+      - UPSTREAM_URL=http://forward-auth-bouncer/dashboard/
+      - DISCOVERY_URL=http://keycloak-http.keycloak.svc/auth/realms/k8s
+      - SKIP_OPENID_PROVIDER_TLS_VERIFY=true

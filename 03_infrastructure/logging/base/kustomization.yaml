@@ -1,0 +1,4 @@
+resources:
+  - loki-release.yaml
+  - promtail-release.yaml
+  - loki-monitor

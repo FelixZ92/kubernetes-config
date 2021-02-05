@@ -1,0 +1,4 @@
+resources:
+  - servicemonitor.yaml
+  - dashboard.yaml
+  - postgres-servicemonitor.yaml

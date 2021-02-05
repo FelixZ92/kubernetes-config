@@ -1,0 +1,34 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: postgres-tls-certificate
+spec:
+  dnsNames:
+    - postgres.127.0.0.1.xip.io
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: postgres
+spec:
+  routes:
+    - match: Host(`postgres.127.0.0.1.xip.io`)
+      kind: Rule
+      services:
+        - name: postgres-gatekeeper
+          port: 3000
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: postgres-tls
+spec:
+  routes:
+    - match: Host(`postgres.127.0.0.1.xip.io`)
+      kind: Rule
+      services:
+        - name: postgres-gatekeeper
+          port: 3000

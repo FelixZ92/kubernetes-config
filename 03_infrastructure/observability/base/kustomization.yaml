@@ -1,4 +1,6 @@
 resources:
   - kube-prometheus-stack-release.yaml
-  - loki-release.yaml
-  - promtail-release.yaml
+  - ingress-alertmanager.yaml
+  - ingress-grafana.yaml
+  - ingress-prometheus.yaml
+  - event-exporter/

@@ -1,5 +1,10 @@
 resources:
   - ../../base
+  - proxy-alertmanager/
+  - proxy-prometheus
 
 patchesStrategicMerge:
   - kube-prometheus-patches.yaml
+  - ingress-alertmanager-patch.yaml
+  - ingress-grafana-patch.yaml
+  - ingress-prometheus-patch.yaml

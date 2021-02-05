@@ -2,3 +2,4 @@ resources:
   - https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
   - storageclass.yaml
   - default-svc-account.yaml
+  - ingress.yaml

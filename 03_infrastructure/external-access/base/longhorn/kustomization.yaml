@@ -1,4 +1,0 @@
-resources:
-  - ingressroute-longhorn.yaml
-  - cert.yaml
-  - middlewares.yaml

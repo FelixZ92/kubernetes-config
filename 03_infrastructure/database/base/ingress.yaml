@@ -1,0 +1,42 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: postgres-tls-certificate
+spec:
+  secretName: tls-postgres-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: postgres
+spec:
+  entryPoints:
+    - web
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: postgres-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://github.com/zalando/postgres-operator/blob/master/docs/diagrams/logo.png?raw=true"
+    dashboard.zippelf.com/display-name: "Postgres-Operator"
+    dashboard.zippelf.com/docs: "https://postgres-operator.readthedocs.io/en/latest/"
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: tls-postgres-ingress
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true

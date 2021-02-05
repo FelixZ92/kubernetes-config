@@ -1,9 +1,0 @@
-resources:
-  - ../../base/longhorn
-  - proxy
-
-namespace: longhorn-system
-
-patchesStrategicMerge:
-  - ingressroute-patch-longhorn.yaml
-  - certificate-patch.yaml

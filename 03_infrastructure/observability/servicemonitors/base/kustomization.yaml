@@ -1,7 +1,0 @@
-resources:
-  - ./cert-manager
-  - ./keycloak
-  - ./sealed-secrets
-  - ./loki
-  - ./postgres
-  - ./event-exporter

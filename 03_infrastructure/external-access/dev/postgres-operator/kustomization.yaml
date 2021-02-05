@@ -1,9 +1,0 @@
-resources:
-  - ../../base/postgres-operator
-  - proxy
-
-namespace: postgres-operator
-
-patchesStrategicMerge:
-  - ingressroute-patch-postgres.yaml
-  - certificate-patch.yaml

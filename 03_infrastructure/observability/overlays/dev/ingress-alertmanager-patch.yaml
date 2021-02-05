@@ -1,0 +1,34 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: alertmanager-tls-certificate
+spec:
+  dnsNames:
+    - alertmanager.127.0.0.1.xip.io
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alertmanager
+spec:
+  routes:
+    - match: Host(`alertmanager.127.0.0.1.xip.io`)
+      kind: Rule
+      services:
+        - name: alertmanager-gatekeeper
+          port: 3000
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alertmanager-tls
+spec:
+  routes:
+    - match: Host(`alertmanager.127.0.0.1.xip.io`)
+      kind: Rule
+      services:
+        - name: alertmanager-gatekeeper
+          port: 3000

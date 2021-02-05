@@ -1,0 +1,4 @@
+resources:
+  - keycloak-groups.yaml
+  - keycloak-user.yaml
+  - realm-config.yaml

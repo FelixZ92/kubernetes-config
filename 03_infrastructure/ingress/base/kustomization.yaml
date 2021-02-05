@@ -1,4 +1,5 @@
 resources:
   - psp.yaml
   - traefik-release.yaml
+  - ingress
 namespace: traefik

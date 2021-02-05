@@ -1,3 +1,5 @@
 resources:
   - cert-manager-release.yaml
   - sealed-secrets-release.yaml
+  - sealed-secrets-monitor
+  - cert-manager-monitor

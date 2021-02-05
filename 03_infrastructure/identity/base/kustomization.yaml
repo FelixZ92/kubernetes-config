@@ -1,12 +1,9 @@
 resources:
   - postgres.yaml
-  - ingress/certificates.yaml
-  - ingress/middlewares.yaml
-  - ingress/ingressroute-keycloak.yaml
-  - config/keycloak-groups.yaml
-  - config/keycloak-user.yaml
-  - config/realm-config.yaml
+  - ingress
+  - config
   - init-keycloak.yaml
   - keycloak-release.yaml
+  - monitor
 
 namespace: keycloak

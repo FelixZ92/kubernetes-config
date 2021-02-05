@@ -8,4 +8,5 @@ tmp/
 **/*secret*
 !sealed-secrets
 !sealed-secrets-release.yaml
+!sealed-secrets-monitor
 !secrets.yaml

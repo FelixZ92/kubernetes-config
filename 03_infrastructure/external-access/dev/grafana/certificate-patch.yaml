@@ -1,8 +1,0 @@
----
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: grafana-tls-certificate
-spec:
-  dnsNames:
-    - grafana.127.0.0.1.xip.io

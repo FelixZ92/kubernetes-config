@@ -1,0 +1,34 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: longhorn-tls-certificate
+spec:
+  dnsNames:
+    - longhorn.127.0.0.1.xip.io
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn
+spec:
+  routes:
+    - match: Host(`longhorn.127.0.0.1.xip.io`)
+      kind: Rule
+      services:
+        - name: longhorn-gatekeeper
+          port: 3000
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn-tls
+spec:
+  routes:
+    - match: Host(`longhorn.127.0.0.1.xip.io`)
+      kind: Rule
+      services:
+        - name: longhorn-gatekeeper
+          port: 3000

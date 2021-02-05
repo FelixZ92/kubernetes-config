@@ -1,0 +1,33 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: prometheus-tls-certificate
+spec:
+  secretName: tls-prometheus-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus
+spec:
+  entryPoints:
+    - web
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://avatars1.githubusercontent.com/u/3380462?s=200&v=4"
+    dashboard.zippelf.com/display-name: "Prometheus"
+    dashboard.zippelf.com/docs: "https://prometheus.io/docs/prometheus/latest/"
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: tls-prometheus-ingress

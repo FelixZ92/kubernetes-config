@@ -1,0 +1,4 @@
+resources:
+  - pg-exporter.yaml
+  - pg-overview.yaml
+  - rules.yaml

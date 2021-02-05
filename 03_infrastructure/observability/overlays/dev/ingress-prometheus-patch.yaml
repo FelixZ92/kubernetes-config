@@ -1,0 +1,34 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: prometheus-tls-certificate
+spec:
+  dnsNames:
+    - prometheus.127.0.0.1.xip.io
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus
+spec:
+  routes:
+    - match: Host(`prometheus.127.0.0.1.xip.io`)
+      kind: Rule
+      services:
+        - name: prometheus-gatekeeper
+          port: 3000
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-tls
+spec:
+  routes:
+    - match: Host(`prometheus.127.0.0.1.xip.io`)
+      kind: Rule
+      services:
+        - name: prometheus-gatekeeper
+          port: 3000

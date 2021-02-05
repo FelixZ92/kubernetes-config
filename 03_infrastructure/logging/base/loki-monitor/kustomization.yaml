@@ -1,0 +1,17 @@
+namespace: loki
+
+resources:
+  - loki-alerts.yaml
+  - loki-chunks.yaml
+  - loki-logs.yaml
+  - loki-operational.yaml
+  - loki-reads.yaml
+  - loki-rules.yaml
+  - loki-writes.yaml
+  - promtail.yaml
+  - promtail-alerts.yaml
+  - promtail-rules.yaml
+
+commonLabels:
+    release: kube-prometheus-stack
+    app: kube-prometheus-stack
