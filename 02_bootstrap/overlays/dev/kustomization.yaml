@@ -5,6 +5,6 @@ patchesStrategicMerge:
   - pki-repo-path-patch.yaml
   - observability-repo-path-patch.yaml
   - identity-repo-path-patch.yaml
-  - external-access-repo-path-patch.yaml
   - storage-repo-path-patch.yaml
   - ingress-path-patch.yaml
+  - database-path-patch.yaml
