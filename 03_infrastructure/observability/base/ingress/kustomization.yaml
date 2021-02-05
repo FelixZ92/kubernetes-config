@@ -1,0 +1,6 @@
+resources:
+  - ingress-alertmanager.yaml
+  - ingress-grafana.yaml
+  - ingress-prometheus.yaml
+
+namespace: monitoring

@@ -9,8 +9,3 @@ resources:
   - database.yaml
   - identity.yaml
   - dashboard.yaml
-#  - appproject-infrastructure.yaml
-#  - application-argocd.yaml
-#  - application-infrastructure.yaml
-#  - appproject-services.yaml
-#  - application-services.yaml
