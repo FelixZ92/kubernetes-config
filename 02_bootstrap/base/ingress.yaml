@@ -17,3 +17,4 @@ spec:
     - kind: Deployment
       name: traefik
       apiVersion: apps/v1
+      namespace: traefik

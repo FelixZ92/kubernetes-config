@@ -20,3 +20,4 @@ spec:
     - kind: StatefulSet
       name: keycloak
       apiVersion: apps/v1
+      namespace: keycloak
