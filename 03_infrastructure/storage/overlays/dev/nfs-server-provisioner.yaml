@@ -12,6 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: felixz92
+        namespace: kube-system
       interval: 10m
   values:
     image:

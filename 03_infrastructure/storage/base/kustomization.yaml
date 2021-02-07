@@ -1,4 +1,1 @@
-resources:
-  - helm-repo.yaml
-
 namespace: nfs-provisioner
