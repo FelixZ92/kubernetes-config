@@ -3,3 +3,5 @@ resources:
   - gatekeeper-release.yaml
   - ingressroute.yaml
   - middlewares.yaml
+
+namespace: dashboard
