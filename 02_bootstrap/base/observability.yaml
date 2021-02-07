@@ -16,3 +16,7 @@ spec:
   dependsOn:
     - name: pki
       namespace: kube-system
+  healthChecks:
+    - kind: StatefulSet
+      name: prometheus-kube-prometheus-stack-prometheus
+      apiVersion: apps/v1

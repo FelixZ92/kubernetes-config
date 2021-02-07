@@ -13,3 +13,7 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: server
+  healthChecks:
+    - kind: Deployment
+      name: traefik
+      apiVersion: apps/v1

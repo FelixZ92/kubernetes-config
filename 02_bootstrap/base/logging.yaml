@@ -16,3 +16,8 @@ spec:
   dependsOn:
     - name: observability
       namespace: monitoring
+  healthChecks:
+    - kind: StatefulSet
+      name: loki
+      apiVersion: apps/v1
+      namespace: loki

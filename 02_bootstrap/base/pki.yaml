@@ -13,6 +13,16 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: server
+  healthChecks:
+    - kind: Deployment
+      name: cert-manager
+      apiVersion: apps/v1
+      namespace: cert-manager
+    - kind: Deployment
+      name: sealed-secrets-controller
+      apiVersion: apps/v1
+      namespace: kube-system
+
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization

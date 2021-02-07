@@ -9,3 +9,4 @@ resources:
   - database.yaml
   - identity.yaml
   - dashboard.yaml
+  - logging.yaml
