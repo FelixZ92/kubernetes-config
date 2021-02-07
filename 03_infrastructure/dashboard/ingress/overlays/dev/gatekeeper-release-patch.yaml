@@ -6,6 +6,6 @@ metadata:
 spec:
   values:
     config:
-      redirectionUrl: http://localhost
-      discoveryUrl: http://keycloak
+      redirectionUrl: https://dashboard.127.0.0.1.xip.io
+      discoveryUrl: http://keycloak-http.keycloak.svc/auth/realms/k8s
       skipOpenidProviderTlsVerify: "true"
