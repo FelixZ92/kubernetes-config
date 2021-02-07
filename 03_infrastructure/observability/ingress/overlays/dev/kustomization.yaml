@@ -1,0 +1,7 @@
+resources:
+  - ../../base
+
+patchesStrategicMerge:
+  - ingress-prometheus-patch.yaml
+  - ingress-grafana-patch.yaml
+  - ingress-alertmanager-patch.yaml

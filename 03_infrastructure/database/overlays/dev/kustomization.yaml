@@ -1,6 +1,5 @@
 resources:
   - ../../base
-  - proxy
 
 patchesStrategicMerge:
   - ingress-patch.yaml

@@ -1,0 +1,17 @@
+resources:
+  - ../../base/
+
+namespace: traefik
+
+patchesStrategicMerge:
+  - ingressroute-patch-dashboard.yaml
+  - gatekeeper-release-patch.yaml
+  - certificate-patch.yaml
+
+configMapGenerator:
+  - name: forward-auth-config
+    behavior: merge
+    literals:
+      - JWKS_ENDPOINT=http://keycloak-http.keycloak.svc/auth/realms/k8s/protocol/openid-connect/certs
+      - JWT_VERIFY_ISSUER=http://keycloak-http.keycloak.svc/auth/realms/k8s
+      - JWKS_URI_IGNORE_SSL=true

@@ -1,4 +1,15 @@
 ---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus-gatekeeper
+spec:
+  values:
+    config:
+      redirectionUrl: https://prometheus.127.0.0.1.xip.io
+      discoveryUrl: http://keycloak-http.keycloak.svc/auth/realms/k8s
+      skipOpenidProviderTlsVerify: "true"
+---
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
