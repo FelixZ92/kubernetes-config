@@ -19,7 +19,7 @@ spec:
             name: gatekeeper-rules
       containers:
         - name: gatekeeper
-          image: quay.io/gogatekeeper/gatekeeper:1.1.0
+          image: quay.io/gogatekeeper/gatekeeper:1.2.0
           imagePullPolicy: Always
           args:
             - --enable-default-deny=false
@@ -32,6 +32,7 @@ spec:
             - --upstream-url=$(UPSTREAM_URL)
             - --discovery-url=$(DISCOVERY_URL)
             - --skip-openid-provider-tls-verify=$(SKIP_OPENID_PROVIDER_TLS_VERIFY)
+            - --enable-metrics
           envFrom:
             - configMapRef:
                 name: gatekeeper-config
