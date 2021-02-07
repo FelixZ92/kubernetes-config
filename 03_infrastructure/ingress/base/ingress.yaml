@@ -19,4 +19,4 @@ spec:
     - kind: Deployment
       name: traefik-gatekeeper
       apiVersion: apps/v1
-      namespace: dashboard
+      namespace: traefik

@@ -19,4 +19,4 @@ spec:
     - kind: Deployment
       name: postgres-gatekeeper
       apiVersion: apps/v1
-      namespace: dashboard
+      namespace: postgres-operator
