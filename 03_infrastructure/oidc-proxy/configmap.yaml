@@ -5,6 +5,10 @@ metadata:
 data:
   config.yaml: |
     resources:
+    - uri: /oauth/health
+      white-listed: true
+    - uri: /oauth/metrics
+      white-listed: true
     - uri: /*
       roles:
         - k8s:cluster-admin
