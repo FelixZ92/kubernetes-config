@@ -12,6 +12,6 @@ configMapGenerator:
   - name: forward-auth-config
     behavior: merge
     literals:
-      - JWKS_ENDPOINT=http://keycloak-http.keycloak.svc/auth/realms/k8s/protocol/openid-connect/certs
-      - JWT_VERIFY_ISSUER=http://keycloak-http.keycloak.svc/auth/realms/k8s
+      - JWKS_ENDPOINT=http://keycloak.host.k3d.internal/auth/realms/k8s/protocol/openid-connect/certs
+      - JWT_VERIFY_ISSUER=http://keycloak.host.k3d.internal/auth/realms/k8s
       - JWKS_URI_IGNORE_SSL=true

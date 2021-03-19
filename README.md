@@ -10,6 +10,6 @@ $ sudo exportfs -ra && sudo systemctl restart nfs-server.service
 
 # Keycloak
 
-- Add `127.0.0.1 keycloak-http.keycloak.svc` to `/etc/hosts/` so redirections work also with k3d
+- Add `127.0.0.1 keycloak.host.k3d.internal` to `/etc/hosts/` so redirections work also with k3d
 - make client role `cluster-admin` to composite with `cluster-readonly` 
 - map client roles to groups

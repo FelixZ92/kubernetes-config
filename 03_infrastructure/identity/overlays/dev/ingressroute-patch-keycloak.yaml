@@ -5,7 +5,7 @@ metadata:
   name: keycloak
 spec:
   routes:
-    - match: Host(`keycloak-http.keycloak.svc`)
+    - match: Host(`keycloak.host.k3d.internal`)
       kind: Rule
       services:
         - name: keycloak-http
@@ -33,7 +33,7 @@ metadata:
   name: keycloak-tls
 spec:
   routes:
-    - match: Host(`keycloak-http.keycloak.svc`)
+    - match: Host(`keycloak.host.k3d.internal`)
       kind: Rule
       services:
         - name: keycloak-http
