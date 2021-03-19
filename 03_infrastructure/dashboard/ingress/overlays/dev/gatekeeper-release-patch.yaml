@@ -9,4 +9,4 @@ spec:
       redirectionUrl: https://dashboard.127.0.0.1.xip.io
       discoveryUrl: http://keycloak-http.keycloak.svc/auth/realms/k8s
       skipOpenidProviderTlsVerify: "true"
-      skipTokenVerification: "true"
+      skipTokenVerification: "false"
