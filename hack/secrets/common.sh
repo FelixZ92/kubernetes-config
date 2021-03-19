@@ -42,7 +42,7 @@ update_local_ca_certs() {
     rm -rf "${basedir}/.certs"
     mkdir -p "${basedir}/.certs/dev"
     mkdir -p "${basedir}/tmp"
-    CAROOT=${basedir}/.certs/dev mkcert -install
+    CAROOT=${basedir}/.certs/dev mkcert devmachine.local localhost -install
   fi
 
   kubectl -n cert-manager create secret tls dev-ca-secret \
