@@ -19,6 +19,13 @@ spec:
           port: 80
       middlewares:
         - name: redirect-https
+    - match: Host(`keycloak.devmachine.local`)
+      kind: Rule
+      services:
+        - name: keycloak-http
+          port: 80
+      middlewares:
+        - name: redirect-https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -32,6 +39,11 @@ spec:
         - name: keycloak-http
           port: 80
     - match: Host(`keycloak.devmachine.local.xip.io`)
+      kind: Rule
+      services:
+        - name: keycloak-http
+          port: 80
+    - match: Host(`keycloak.devmachine.local`)
       kind: Rule
       services:
         - name: keycloak-http
