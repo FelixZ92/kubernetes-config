@@ -25,7 +25,7 @@ spec:
             - --encryption-key=AgXa7xRcoClDEU0ZDSH4X0XhL5Qy2Z2j
             - --listen=:3000
 #            - --preserve-host=true
-            - --redirection-url=https://whoami.127.0.0.1.xip.io
+            - --redirection-url=https://whoami.host.k3d.internal
             - --resources=uri=/*
             - --upstream-url=http://localhost:80
 #            - --scopes=nickname
@@ -68,7 +68,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`whoami.127.0.0.1.xip.io`)
+    - match: Host(`whoami.host.k3d.internal`)
       kind: Rule
       services:
         - name: whoami
@@ -84,7 +84,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`whoami.127.0.0.1.xip.io`)
+    - match: Host(`whoami.host.k3d.internal`)
       kind: Rule
       services:
         - name: whoami
@@ -104,4 +104,4 @@ spec:
     name: ca-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - whoami.127.0.0.1.xip.io
+    - whoami.host.k3d.internal

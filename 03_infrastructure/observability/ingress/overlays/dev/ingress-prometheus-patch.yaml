@@ -6,7 +6,7 @@ metadata:
 spec:
   values:
     config:
-      redirectionUrl: https://prometheus.127.0.0.1.xip.io
+      redirectionUrl: https://prometheus.host.k3d.internal
       discoveryUrl: http://keycloak-http.keycloak.svc/auth/realms/k8s
       skipOpenidProviderTlsVerify: "true"
       skipTokenVerification: "false"
@@ -17,7 +17,7 @@ metadata:
   name: prometheus-tls-certificate
 spec:
   dnsNames:
-    - prometheus.127.0.0.1.xip.io
+    - prometheus.host.k3d.internal
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -25,7 +25,7 @@ metadata:
   name: prometheus
 spec:
   routes:
-    - match: Host(`prometheus.127.0.0.1.xip.io`)
+    - match: Host(`prometheus.host.k3d.internal`)
       kind: Rule
       services:
         - name: prometheus-gatekeeper
@@ -39,7 +39,7 @@ metadata:
   name: prometheus-tls
 spec:
   routes:
-    - match: Host(`prometheus.127.0.0.1.xip.io`)
+    - match: Host(`prometheus.host.k3d.internal`)
       kind: Rule
       services:
         - name: prometheus-gatekeeper

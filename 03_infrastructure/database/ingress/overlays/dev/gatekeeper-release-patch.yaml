@@ -6,7 +6,7 @@ metadata:
 spec:
   values:
     config:
-      redirectionUrl: https://postgres.127.0.0.1.xip.io
+      redirectionUrl: https://postgres.host.k3d.internal
       discoveryUrl: http://keycloak-http.keycloak.svc/auth/realms/k8s
       skipOpenidProviderTlsVerify: "true"
       skipTokenVerification: "false"

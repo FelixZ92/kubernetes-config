@@ -68,7 +68,7 @@ nextcloud:
         memory: 128Mi
 
   nextcloud:
-    host: nextcloud.127.0.0.1.xip.io
+    host: nextcloud.host.k3d.internal
     username: admin
     password: changeme
     update: 0

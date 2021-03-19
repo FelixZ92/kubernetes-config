@@ -5,4 +5,4 @@ metadata:
   name: keycloak-tls-certificate
 spec:
   dnsNames:
-    - keycloak.devmachine.local
+    - keycloak.host.k3d.internal

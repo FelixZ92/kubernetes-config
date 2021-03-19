@@ -5,4 +5,4 @@ metadata:
   name: owncloud-tls-certificate
 spec:
   dnsNames:
-    - owncloud.127.0.0.1.xip.io
+    - owncloud.host.k3d.internal

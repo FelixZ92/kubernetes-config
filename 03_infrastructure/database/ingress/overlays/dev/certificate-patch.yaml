@@ -5,4 +5,4 @@ metadata:
   name: postgres-tls-certificate
 spec:
   dnsNames:
-    - postgres.127.0.0.1.xip.io
+    - postgres.host.k3d.internal

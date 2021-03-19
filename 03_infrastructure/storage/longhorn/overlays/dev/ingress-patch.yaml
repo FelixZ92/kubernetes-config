@@ -5,7 +5,7 @@ metadata:
   name: longhorn-tls-certificate
 spec:
   dnsNames:
-    - longhorn.127.0.0.1.xip.io
+    - longhorn.host.k3d.internal
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -13,7 +13,7 @@ metadata:
   name: longhorn
 spec:
   routes:
-    - match: Host(`longhorn.127.0.0.1.xip.io`)
+    - match: Host(`longhorn.host.k3d.internal`)
       kind: Rule
       services:
         - name: longhorn-gatekeeper
@@ -27,7 +27,7 @@ metadata:
   name: longhorn-tls
 spec:
   routes:
-    - match: Host(`longhorn.127.0.0.1.xip.io`)
+    - match: Host(`longhorn.host.k3d.internal`)
       kind: Rule
       services:
         - name: longhorn-gatekeeper

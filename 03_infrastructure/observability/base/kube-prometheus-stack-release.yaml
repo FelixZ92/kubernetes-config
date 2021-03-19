@@ -146,7 +146,7 @@ spec:
       envFromSecret: "grafana-generic-oauth"
 
       env:
-        GF_SERVER_ROOT_URL: "https://grafana.127.0.0.1.xip.io"
+        GF_SERVER_ROOT_URL: "https://grafana.host.k3d.internal"
         GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
         GF_AUTH_GENERIC_OAUTH_SCOPES: "openid email profile"
         GF_AUTH_GENERIC_OAUTH_AUTH_URL: "http://keycloak-http.keycloak.svc/auth/realms/k8s/protocol/openid-connect/auth"

@@ -12,14 +12,14 @@ spec:
           port: 80
       middlewares:
         - name: redirect-https
-    - match: Host(`keycloak.devmachine.local.xip.io`)
+    - match: Host(`keycloak.host.k3d.internal.xip.io`)
       kind: Rule
       services:
         - name: keycloak-http
           port: 80
       middlewares:
         - name: redirect-https
-    - match: Host(`keycloak.devmachine.local`)
+    - match: Host(`keycloak.host.k3d.internal`)
       kind: Rule
       services:
         - name: keycloak-http
@@ -38,12 +38,12 @@ spec:
       services:
         - name: keycloak-http
           port: 80
-    - match: Host(`keycloak.devmachine.local.xip.io`)
+    - match: Host(`keycloak.host.k3d.internal.xip.io`)
       kind: Rule
       services:
         - name: keycloak-http
           port: 80
-    - match: Host(`keycloak.devmachine.local`)
+    - match: Host(`keycloak.host.k3d.internal`)
       kind: Rule
       services:
         - name: keycloak-http
