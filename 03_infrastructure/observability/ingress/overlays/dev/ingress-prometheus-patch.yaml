@@ -7,7 +7,7 @@ spec:
   values:
     config:
       redirectionUrl: https://prometheus.host.k3d.internal
-      discoveryUrl: http://keycloak.host.k3d.internal/auth/realms/k8s
+      discoveryUrl: https://keycloak.host.k3d.internal/auth/realms/k8s
       skipOpenidProviderTlsVerify: "true"
       skipTokenVerification: "false"
 ---
