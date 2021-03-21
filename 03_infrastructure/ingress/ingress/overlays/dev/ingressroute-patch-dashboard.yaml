@@ -5,7 +5,7 @@ metadata:
   name: dashboard
 spec:
   routes:
-    - match: Host(`traefik.host.k3d.internal`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+    - match: Host(`traefik.127.0.0.1.xip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       kind: Rule
       services:
         - name: api@internal
@@ -19,7 +19,7 @@ metadata:
   name: dashboard-tls
 spec:
   routes:
-    - match: Host(`traefik.host.k3d.internal`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+    - match: Host(`traefik.127.0.0.1.xip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       kind: Rule
       services:
         - name: api@internal
@@ -33,7 +33,7 @@ metadata:
   name: dashboard-bouncer
 spec:
   routes:
-    - match: Host(`traefik.host.k3d.internal`)
+    - match: Host(`traefik.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: traefik-gatekeeper
@@ -47,7 +47,7 @@ metadata:
   name: dashboard-bouncer-tls
 spec:
   routes:
-    - match: Host(`traefik.host.k3d.internal`)
+    - match: Host(`traefik.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: traefik-gatekeeper

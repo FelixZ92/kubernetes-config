@@ -6,7 +6,7 @@ metadata:
 spec:
   values:
     config:
-      redirectionUrl: https://traefik.host.k3d.internal
+      redirectionUrl: https://traefik.127.0.0.1.xip.io
       discoveryUrl: https://keycloak.host.k3d.internal/auth/realms/k8s
       skipOpenidProviderTlsVerify: "true"
       skipTokenVerification: "false"

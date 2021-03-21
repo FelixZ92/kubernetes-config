@@ -5,14 +5,7 @@ metadata:
   name: keycloak
 spec:
   routes:
-    - match: Host(`keycloak.host.k3d.internal`)
-      kind: Rule
-      services:
-        - name: keycloak-http
-          port: 80
-      middlewares:
-        - name: redirect-https
-    - match: Host(`keycloak.host.k3d.internal.xip.io`)
+    - match: Host(`keycloak.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: keycloak-http
@@ -38,12 +31,7 @@ spec:
       services:
         - name: keycloak-http
           port: 80
-    - match: Host(`keycloak.host.k3d.internal.xip.io`)
-      kind: Rule
-      services:
-        - name: keycloak-http
-          port: 80
-    - match: Host(`keycloak.host.k3d.internal`)
+    - match: Host(`keycloak.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: keycloak-http

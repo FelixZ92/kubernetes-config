@@ -5,4 +5,4 @@ metadata:
   name: dashboard-tls-certificate
 spec:
   dnsNames:
-    - traefik.host.k3d.internal
+    - traefik.127.0.0.1.xip.io

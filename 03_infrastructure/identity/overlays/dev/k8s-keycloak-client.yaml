@@ -11,13 +11,13 @@ data:
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-          "https://alertmanager.host.k3d.internal/oauth/callback",
-          "https://dashboard.host.k3d.internal/oauth/callback",
-          "https://grafana.host.k3d.internal/login/generic_oauth",
-          "https://longhorn.host.k3d.internal/oauth/callback",
-          "https://postgres.host.k3d.internal/oauth/callback",
-          "https://prometheus.host.k3d.internal/oauth/callback",
-          "https://traefik.host.k3d.internal/oauth/callback"
+          "https://alertmanager.127.0.0.1.xip.io/oauth/callback",
+          "https://dashboard.127.0.0.1.xip.io/oauth/callback",
+          "https://grafana.127.0.0.1.xip.io/login/generic_oauth",
+          "https://longhorn.127.0.0.1.xip.io/oauth/callback",
+          "https://postgres.127.0.0.1.xip.io/oauth/callback",
+          "https://prometheus.127.0.0.1.xip.io/oauth/callback",
+          "https://traefik.127.0.0.1.xip.io/oauth/callback"
       ],
       "webOrigins": [],
       "notBefore": 0,

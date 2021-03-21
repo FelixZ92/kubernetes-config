@@ -5,7 +5,7 @@ metadata:
   name: grafana-tls-certificate
 spec:
   dnsNames:
-    - grafana.host.k3d.internal
+    - grafana.127.0.0.1.xip.io
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -13,7 +13,7 @@ metadata:
   name: grafana
 spec:
   routes:
-    - match: Host(`grafana.host.k3d.internal`)
+    - match: Host(`grafana.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: kube-prometheus-stack-grafana
@@ -27,7 +27,7 @@ metadata:
   name: grafana-tls
 spec:
   routes:
-    - match: Host(`grafana.host.k3d.internal`)
+    - match: Host(`grafana.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: kube-prometheus-stack-grafana

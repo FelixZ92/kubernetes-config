@@ -6,7 +6,7 @@ metadata:
 spec:
   values:
     config:
-      redirectionUrl: https://alertmanager.host.k3d.internal
+      redirectionUrl: https://alertmanager.127.0.0.1.xip.io
       discoveryUrl: https://keycloak.host.k3d.internal/auth/realms/k8s
       skipOpenidProviderTlsVerify: "true"
       skipTokenVerification: "false"
@@ -17,7 +17,7 @@ metadata:
   name: alertmanager-tls-certificate
 spec:
   dnsNames:
-    - alertmanager.host.k3d.internal
+    - alertmanager.127.0.0.1.xip.io
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -25,7 +25,7 @@ metadata:
   name: alertmanager
 spec:
   routes:
-    - match: Host(`alertmanager.host.k3d.internal`)
+    - match: Host(`alertmanager.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: alertmanager-gatekeeper
@@ -39,7 +39,7 @@ metadata:
   name: alertmanager-tls
 spec:
   routes:
-    - match: Host(`alertmanager.host.k3d.internal`)
+    - match: Host(`alertmanager.127.0.0.1.xip.io`)
       kind: Rule
       services:
         - name: alertmanager-gatekeeper
