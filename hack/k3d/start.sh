@@ -34,6 +34,14 @@ kubectl label node k3d-local-agent-1 storage=local --overwrite
 kubectl label node k3d-local-agent-2 storage=local --overwrite
 kubectl label node k3d-local-agent-2 node.kubernetes.io/ingress=traefik --overwrite
 
+export LOCALHOST_GATEWAY=$(docker network inspect k3d-local | jq -r '.[].IPAM.Config[].Gateway')
+
+envsubst '${LOCALHOST_GATEWAY}' < "${CURR_DIR}/coredns-patch.yaml" > "${CURR_DIR}/coredns-patch-substituted.yaml"
+
+kubectl -n kube-system patch cm coredns --patch "$(cat hack/k3d/coredns-patch-substituted.yaml)"
+
+kubectl rollout restart deployment coredns -n kube-system
+
 deploy_global_resources "${BASEDIR}"
 
 deploy_crds "${BASEDIR}"
