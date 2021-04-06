@@ -2,13 +2,13 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: postgres
+  name: dashboard
 spec:
   routes:
-    - match: Host(`postgres.192.168.0.13.xip.io`)
+    - match: Host(`dashboard.192.168.0.13.xip.io`)
       kind: Rule
       services:
-        - name: postgres-gatekeeper
+        - name: dashboard-gatekeeper
           port: 3000
       middlewares:
         - name: redirect-https
@@ -16,11 +16,11 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: postgres-tls
+  name: dashboard-tls
 spec:
   routes:
-    - match: Host(`postgres.192.168.0.13.xip.io`)
+    - match: Host(`dashboard.192.168.0.13.xip.io`)
       kind: Rule
       services:
-        - name: postgres-gatekeeper
+        - name: dashboard-gatekeeper
           port: 3000

@@ -11,13 +11,13 @@ data:
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-          "https://alertmanager.127.0.0.1.xip.io/oauth/callback",
-          "https://dashboard.127.0.0.1.xip.io/oauth/callback",
-          "https://grafana.127.0.0.1.xip.io/login/generic_oauth",
-          "https://longhorn.127.0.0.1.xip.io/oauth/callback",
-          "https://postgres.127.0.0.1.xip.io/oauth/callback",
-          "https://prometheus.127.0.0.1.xip.io/oauth/callback",
-          "https://traefik.127.0.0.1.xip.io/oauth/callback"
+          "https://alertmanager.192.168.0.13.xip.io/oauth/callback",
+          "https://dashboard.192.168.0.13.xip.io/oauth/callback",
+          "https://grafana.192.168.0.13.xip.io/login/generic_oauth",
+          "https://longhorn.192.168.0.13.xip.io/oauth/callback",
+          "https://postgres.192.168.0.13.xip.io/oauth/callback",
+          "https://prometheus.192.168.0.13.xip.io/oauth/callback",
+          "https://traefik.192.168.0.13.xip.io/oauth/callback"
       ],
       "webOrigins": [],
       "notBefore": 0,

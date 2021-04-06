@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: keycloak-tls-certificate
+  name: dashboard-tls-certificate
 spec:
   dnsNames:
-    - keycloak.192.168.0.13.xip.io
+    - dashboard.192.168.0.13.xip.io

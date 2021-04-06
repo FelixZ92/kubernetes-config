@@ -1,0 +1,8 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: certificate-authority
+  namespace: cert-manager
+spec:
+  path: ./03_infrastructure/pki/certificate-authority/vagrant

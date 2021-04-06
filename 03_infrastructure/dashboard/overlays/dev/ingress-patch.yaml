@@ -4,4 +4,4 @@ kind: Kustomization
 metadata:
   name: dashboard-ingress
 spec:
-  path: ./03_infrastructure/dashboard/ingress/overlays/dev
+  path: ./03_infrastructure/dashboard/ingress/overlays/vagrant

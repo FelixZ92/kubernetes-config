@@ -4,4 +4,4 @@ kind: Kustomization
 metadata:
   name: postgres-ingress
 spec:
-  path: ./03_infrastructure/database/ingress/overlays/dev
+  path: ./03_infrastructure/database/ingress/overlays/vagrant

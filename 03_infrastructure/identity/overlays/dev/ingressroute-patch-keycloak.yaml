@@ -26,12 +26,7 @@ metadata:
   name: keycloak-tls
 spec:
   routes:
-    - match: Host(`keycloak.host.k3d.internal`)
-      kind: Rule
-      services:
-        - name: keycloak-http
-          port: 80
-    - match: Host(`keycloak.127.0.0.1.xip.io`)
+    - match: Host(`keycloak.192.168.0.13.xip.io`)
       kind: Rule
       services:
         - name: keycloak-http
