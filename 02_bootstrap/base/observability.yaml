@@ -6,7 +6,7 @@ metadata:
   namespace: monitoring
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/observability/base
+  path: ./03_infrastructure/observability/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository

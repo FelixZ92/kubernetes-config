@@ -5,13 +5,17 @@ metadata:
   name: dashboard-ingress
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/dashboard/ingress/base
+  path: ./03_infrastructure/dashboard/ingress/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository
     name: infrastructure
     namespace: flux-system
   validation: server
+  postBuild:
+    substitute:
+      ENVIRONMENT: ${ENVIRONMENT}
+      BASE_DOMAIN: ${BASE_DOMAIN}
   dependsOn:
     - name: identity
       namespace: keycloak

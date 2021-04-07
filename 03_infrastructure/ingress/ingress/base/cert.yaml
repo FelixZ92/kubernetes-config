@@ -8,3 +8,5 @@ spec:
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer
+  dnsNames:
+    - traefik.${BASE_DOMAIN}

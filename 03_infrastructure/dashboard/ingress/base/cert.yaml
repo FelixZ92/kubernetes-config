@@ -8,3 +8,5 @@ spec:
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer
+  dnsNames:
+    - dashboard.${BASE_DOMAIN}

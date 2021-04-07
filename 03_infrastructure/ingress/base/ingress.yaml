@@ -5,7 +5,7 @@ metadata:
   name: traefik-ingress
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/ingress/ingress/base
+  path: ./03_infrastructure/ingress/ingress/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository

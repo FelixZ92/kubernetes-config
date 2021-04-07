@@ -35884,7 +35884,7 @@ spec:
   replicas: 2
   listenLocal: false
   serviceAccountName: prometheus-operator-alertmanager
-  externalUrl: "https://alertmanager.192.168.0.13.xip.io"
+  externalUrl: "https://alertmanager.${BASE_DOMAIN}"
   nodeSelector:
     storage: local
   paused: false
@@ -36030,7 +36030,7 @@ spec:
         apiVersion: v2
   baseImage: quay.io/prometheus/prometheus
   version: v2.18.2
-  externalUrl: "https://prometheus.192.168.0.13.xip.io:8443"
+  externalUrl: "https://prometheus.${BASE_DOMAIN}:8443"
   nodeSelector:
     storage: local
   paused: false

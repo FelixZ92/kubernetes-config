@@ -5,7 +5,7 @@ metadata:
   name: postgres-ingress
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/database/ingress/base
+  path: ./03_infrastructure/database/ingress/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository

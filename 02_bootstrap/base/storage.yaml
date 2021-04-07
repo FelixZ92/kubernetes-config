@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/storage/base
+  path: ./03_infrastructure/storage/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository

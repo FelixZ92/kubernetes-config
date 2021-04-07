@@ -6,7 +6,7 @@ metadata:
   namespace: dashboard
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/dashboard/base
+  path: ./03_infrastructure/dashboard/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository

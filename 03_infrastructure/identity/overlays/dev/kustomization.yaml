@@ -1,9 +1,32 @@
 resources:
   - ../../base
-  - k8s-keycloak-client.yaml
 
 namespace: keycloak
 
-patchesStrategicMerge:
-  - certificates-patch.yaml
-  - ingressroute-patch-keycloak.yaml
+patches:
+  - target:
+      kind: IngressRoute
+      name: keycloak
+    patch: |-
+      - op: add
+        path: /spec/routes
+        value:
+          - match: Host(`keycloak.host.k3d.internal`)
+            kind: Rule
+            services:
+              - name: keycloak-http
+                port: 80
+            middlewares:
+              - name: redirect-https
+  - target:
+      kind: IngressRoute
+      name: keycloak-tls
+    patch: |-
+      - op: add
+        path: /spec/routes
+        value:
+          - match: Host(`keycloak.host.k3d.internal`)
+            kind: Rule
+            services:
+              - name: keycloak-http
+                port: 80

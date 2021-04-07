@@ -3,4 +3,3 @@ resources:
 
 patchesStrategicMerge:
   - kube-prometheus-patches.yaml
-  - ingress-patch.yaml

@@ -6,6 +6,14 @@ metadata:
 spec:
   entryPoints:
     - web
+  routes:
+    - match: Host(`traefik.${BASE_DOMAIN}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+      middlewares:
+        - name: redirect-https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -21,6 +29,14 @@ spec:
     - websecure
   tls:
     secretName: tls-dashboard-ingress
+  routes:
+    - match: Host(`traefik.${BASE_DOMAIN}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+      middlewares:
+        - name: forward-auth-bouncer-admin
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -29,6 +45,14 @@ metadata:
 spec:
   entryPoints:
     - web
+  routes:
+    - match: Host(`traefik.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: traefik-gatekeeper
+          port: 3000
+      middlewares:
+        - name: redirect-https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -39,3 +63,9 @@ spec:
     - websecure
   tls:
     secretName: tls-dashboard-ingress
+  routes:
+    - match: Host(`traefik.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: traefik-gatekeeper
+          port: 3000

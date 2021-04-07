@@ -8,3 +8,5 @@ spec:
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer
+  dnsNames:
+    - keycloak.${BASE_DOMAIN}

@@ -5,5 +5,6 @@ resources:
   - init-keycloak.yaml
   - keycloak-release.yaml
   - monitor
+  - k8s-keycloak-client.yaml
 
 namespace: keycloak

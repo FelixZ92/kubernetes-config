@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: '12.10.5'
+      version: '14.5.0'
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -26,7 +26,7 @@ spec:
             resources:
               requests:
                 storage: 2700Mi
-      externalUrl: "https://alertmanager.127.0.0.1.xip.io"
+      externalUrl: "https://alertmanager.${BASE_DOMAIN}"
 
     ## Component scraping the kube controller manager
     ##
@@ -40,7 +40,7 @@ spec:
 
     prometheus:
       prometheusSpec:
-        externalUrl: "https://prometheus.127.0.0.1.xip.io"
+        externalUrl: "https://prometheus.${BASE_DOMAIN}"
         replicas: 2
         storageSpec:
           volumeClaimTemplate:

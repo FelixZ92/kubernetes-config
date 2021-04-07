@@ -6,7 +6,7 @@ metadata:
   namespace: postgres-operator
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/database/base
+  path: ./03_infrastructure/database/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository

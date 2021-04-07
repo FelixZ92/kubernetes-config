@@ -6,7 +6,7 @@ metadata:
   namespace: loki
 spec:
   interval: 10m0s
-  path: ./03_infrastructure/logging/base
+  path: ./03_infrastructure/logging/overlay/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository

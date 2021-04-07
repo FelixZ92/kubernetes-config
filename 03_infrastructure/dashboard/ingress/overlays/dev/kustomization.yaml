@@ -1,7 +1,11 @@
 resources:
   - ../../base
 
-patchesStrategicMerge:
-  - certificate-patch.yaml
-  - gatekeeper-release-patch.yaml
-  - ingressroute-patch.yaml
+patches:
+  - target:
+      name: dashboard-gatekeeper
+      kind: HelmRelease
+    patch: |-
+      - op: replace
+        path: /spec/values/config/discoveryUrl
+        value: https://keycloak.host.k3d.internal/auth/realms/k8s

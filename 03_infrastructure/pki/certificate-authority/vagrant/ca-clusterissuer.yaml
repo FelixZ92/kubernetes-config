@@ -1,0 +1,7 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: ca-clusterissuer
+spec:
+  ca:
+    secretName: dev-ca-secret

@@ -3,10 +3,14 @@ resources:
 
 namespace: traefik
 
-patchesStrategicMerge:
-  - ingressroute-patch-dashboard.yaml
-  - gatekeeper-release-patch.yaml
-  - certificate-patch.yaml
+patches:
+  - target:
+      name: traefik-gatekeeper
+      kind: HelmRelease
+    patch: |-
+      - op: replace
+        path: /spec/values/config/discoveryUrl
+        value: https://keycloak.host.k3d.internal/auth/realms/k8s
 
 configMapGenerator:
   - name: forward-auth-config

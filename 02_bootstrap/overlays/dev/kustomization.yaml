@@ -1,11 +1,14 @@
 resources:
   - ../../base
 
-patchesStrategicMerge:
-  - pki-repo-path-patch.yaml
-  - observability-repo-path-patch.yaml
-  - identity-repo-path-patch.yaml
-  - storage-repo-path-patch.yaml
-  - ingress-path-patch.yaml
-  - database-path-patch.yaml
-  - dashboard-path-patch.yaml
+patches:
+  - target:
+      name: ".*"
+      kind: Kustomization
+    patch: |-
+      - op: replace
+        path: /spec/postBuild
+        value:
+          substitute:
+            ENVIRONMENT: dev
+            BASE_DOMAIN: 127.0.0.1.xip.io

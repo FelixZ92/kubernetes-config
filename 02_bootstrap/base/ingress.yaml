@@ -5,7 +5,7 @@ metadata:
   name: ingress
   namespace: traefik
 spec:
-  path: ./03_infrastructure/ingress/base
+  path: ./03_infrastructure/ingress/overlays/${ENVIRONMENT}
   interval: 10m0s
   prune: true
   sourceRef:
