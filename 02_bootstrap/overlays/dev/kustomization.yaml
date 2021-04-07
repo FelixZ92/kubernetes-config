@@ -12,3 +12,4 @@ patches:
           substitute:
             ENVIRONMENT: dev
             BASE_DOMAIN: 127.0.0.1.xip.io
+            SKIP_OPENID_PROVIDER_TLS_VERIFY: ${SKIP_OPENID_PROVIDER_TLS_VERIFY}

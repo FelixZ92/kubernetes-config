@@ -12,6 +12,7 @@ CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 BASEDIR=$(dirname "$(dirname "$CURR_DIR")")
 
 export ENVIRONMENT=dev
+export SKIP_OPENID_PROVIDER_TLS_VERIFY=true
 
 # shellcheck source=hack/secrets/secrets-common.sh
 source "$CURR_DIR/../secrets/common.sh"
