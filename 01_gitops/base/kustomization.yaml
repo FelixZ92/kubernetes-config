@@ -2,3 +2,14 @@ resources:
   - https://github.com/fluxcd/flux2/manifests/install?ref=v0.11.0
 
 namespace: flux-system
+
+patches:
+  - target:
+      name: ".*"
+      kind: Deployment
+    patch: |-
+      - op: add
+        path: /spec/template/spec/securityContext
+        value:
+          runAsNonRoot: true
+          runAsUser: 100

@@ -35,7 +35,7 @@ deploy_flux() {
     --from-file="known_hosts=$KNOWN_HOSTS_FILE" \
     || echo "secret flux-system already exists"
 
-  kustomize build "${BASEDIR}/01_gitops/overlays/${ENVIRONMENT}/" | kubectl apply -f -
+  kustomize build "${BASEDIR}/01_gitops/base/" | kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/kustomize-controller -n flux-system
 }
 

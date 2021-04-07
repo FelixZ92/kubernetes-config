@@ -11,7 +11,7 @@ CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 BASEDIR=$(dirname "$(dirname "$CURR_DIR")")
 
-ENVIRONMENT=dev
+export ENVIRONMENT=dev
 
 # shellcheck source=hack/secrets/secrets-common.sh
 source "$CURR_DIR/../secrets/common.sh"
@@ -50,7 +50,7 @@ deploy_crds "${BASEDIR}"
 
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
-kustomize build "$BASEDIR/02_bootstrap/overlays/${ENVIRONMENT}" | kubectl apply -f -
+kustomize build "$BASEDIR/01_gitops/bootstrap" | envsubst | kubectl apply -f -
 
 kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system pki
 
