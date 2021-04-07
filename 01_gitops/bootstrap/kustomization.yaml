@@ -1,0 +1,5 @@
+resources:
+  - bootstrap.yaml
+  - gotk-sync.yaml
+
+namespace: flux-system
