@@ -13,7 +13,3 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: server
-  postBuild:
-    substitute:
-      ENVIRONMENT: ${ENVIRONMENT}
-      BASE_DOMAIN: ${BASE_DOMAIN}

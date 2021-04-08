@@ -41,7 +41,3 @@ spec:
   dependsOn:
     - name: pki
       namespace: kube-system
-  postBuild:
-    substitute:
-      ENVIRONMENT: ${ENVIRONMENT}
-      BASE_DOMAIN: ${BASE_DOMAIN}

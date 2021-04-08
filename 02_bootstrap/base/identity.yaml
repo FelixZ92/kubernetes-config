@@ -21,7 +21,3 @@ spec:
       name: keycloak
       apiVersion: apps/v1
       namespace: keycloak
-  postBuild:
-    substitute:
-      ENVIRONMENT: ${ENVIRONMENT}
-      BASE_DOMAIN: ${BASE_DOMAIN}
