@@ -1,2 +1,24 @@
 resources:
   - ../../base
+
+patches:
+  - target:
+      name: prometheus-gatekeeper
+      kind: HelmRelease
+    patch: |-
+      - op: replace
+        path: /spec/values/config/discoveryUrl
+        value: https://keycloak.host.k3d.internal/auth/realms/k8s
+      - op: replace
+        path: /spec/values/config/skipOpenidProviderTlsVerify
+        value: true
+  - target:
+      name: alertmanager-gatekeeper
+      kind: HelmRelease
+    patch: |-
+      - op: replace
+        path: /spec/values/config/discoveryUrl
+        value: https://keycloak.host.k3d.internal/auth/realms/k8s
+      - op: replace
+        path: /spec/values/config/skipOpenidProviderTlsVerify
+        value: true
