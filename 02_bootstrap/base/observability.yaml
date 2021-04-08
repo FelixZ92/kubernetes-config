@@ -21,3 +21,8 @@ spec:
       name: prometheus-kube-prometheus-stack-prometheus
       apiVersion: apps/v1
       namespace: monitoring
+  postBuild:
+    substitute:
+      ENVIRONMENT: ${ENVIRONMENT}
+      SKIP_OPENID_PROVIDER_TLS_VERIFY: "${SKIP_OPENID_PROVIDER_TLS_VERIFY}"
+      BASE_DOMAIN: ${BASE_DOMAIN}

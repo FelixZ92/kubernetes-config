@@ -13,3 +13,8 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: server
+  postBuild:
+    substitute:
+      ENVIRONMENT: ${ENVIRONMENT}
+      SKIP_OPENID_PROVIDER_TLS_VERIFY: "${SKIP_OPENID_PROVIDER_TLS_VERIFY}"
+      BASE_DOMAIN: ${BASE_DOMAIN}

@@ -11,6 +11,7 @@ CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 BASEDIR=$(dirname "$(dirname "$CURR_DIR")")
 
+export BASE_DOMAIN=127.0.0.1.xip.io
 export ENVIRONMENT=dev
 export SKIP_OPENID_PROVIDER_TLS_VERIFY=true
 

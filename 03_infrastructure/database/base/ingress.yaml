@@ -20,3 +20,8 @@ spec:
       name: postgres-gatekeeper
       apiVersion: apps/v1
       namespace: postgres-operator
+  postBuild:
+    substitute:
+      ENVIRONMENT: ${ENVIRONMENT}
+      SKIP_OPENID_PROVIDER_TLS_VERIFY: "${SKIP_OPENID_PROVIDER_TLS_VERIFY}"
+      BASE_DOMAIN: ${BASE_DOMAIN}

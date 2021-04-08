@@ -1,14 +1,2 @@
 resources:
   - ../../base
-
-patches:
-  - target:
-      name: ".*"
-      kind: Kustomization
-    patch: |-
-      - op: replace
-        path: /spec/postBuild
-        value:
-          substitute:
-            ENVIRONMENT: vagrant
-            BASE_DOMAIN: ${BASE_DOMAIN}
