@@ -1,2 +1,11 @@
 resources:
   - ../../base
+
+patches:
+  - target:
+      kind: Kustomization
+      name: ".*"
+    patch: |-
+      - op: add
+        path: /spec/postBuild/substitute/SKIP_OPENID_PROVIDER_TLS_VERIFY
+        value: true
