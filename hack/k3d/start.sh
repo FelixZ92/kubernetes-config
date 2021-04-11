@@ -13,7 +13,6 @@ BASEDIR=$(dirname "$(dirname "$CURR_DIR")")
 
 export BASE_DOMAIN=127.0.0.1.xip.io
 export ENVIRONMENT=dev
-export SKIP_OPENID_PROVIDER_TLS_VERIFY=true
 
 # shellcheck source=hack/secrets/secrets-common.sh
 source "$CURR_DIR/../secrets/common.sh"

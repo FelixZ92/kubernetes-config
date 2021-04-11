@@ -24,7 +24,6 @@ spec:
         idKey: clientid
         secretKey: secret
       upstreamUrl: http://kube-prometheus-stack-prometheus:9090
-      skipOpenidProviderTlsVerify: "${SKIP_OPENID_PROVIDER_TLS_VERIFY}"
       redirectionUrl: https://prometheus.${BASE_DOMAIN}
       discoveryUrl: https://keycloak.${BASE_DOMAIN}/auth/realms/k8s
       skipTokenVerification: "false"
