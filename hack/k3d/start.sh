@@ -53,11 +53,12 @@ deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hos
 
 kustomize build "$BASEDIR/01_gitops/bootstrap/overlays/${ENVIRONMENT}/" | envsubst | kubectl apply -f -
 
-#kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system pki
+kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n flux-system bootstrap
+kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system pki
 #
-#apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
+apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
 #
-#update_local_ca_certs "${BASEDIR}"
+update_local_ca_certs "${BASEDIR}"
 
 #
 #echo "Use with export KUBECONFIG=${KUBECONFIG}"
