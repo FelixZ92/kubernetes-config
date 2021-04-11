@@ -12,4 +12,9 @@ $ sudo exportfs -ra && sudo systemctl restart nfs-server.service
 
 - Add `127.0.0.1 keycloak.host.k3d.internal` to `/etc/hosts/` so redirections work also with k3d
 - make client role `cluster-admin` to composite with `cluster-readonly` 
+  - Clients -> k8s -> Roles -> cluster-admin 
 - map client roles to groups
+  - Groups -> cluster-admins -> Edit -> Role Mappings
+- Set default users passwords
+  - Users -> cluster-admin -> Credentials
+    
