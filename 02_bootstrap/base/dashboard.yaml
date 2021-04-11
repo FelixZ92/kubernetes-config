@@ -15,6 +15,6 @@ spec:
   validation: server
   postBuild:
     substitute:
-      ENVIRONMENT: ${ENVIRONMENT}
-      BASE_DOMAIN: ${BASE_DOMAIN}
+      ENVIRONMENT: "${ENVIRONMENT}"
+      BASE_DOMAIN: "${BASE_DOMAIN}"
       SKIP_OPENID_PROVIDER_TLS_VERIFY: "${SKIP_OPENID_PROVIDER_TLS_VERIFY}"
