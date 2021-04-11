@@ -7,11 +7,9 @@ patches:
       kind: Kustomization
     patch: |-
       - op: add
-        path: /spec/postBuild/substitute/SKIP_OPENID_PROVIDER_TLS_VERIFY
-        value: "true"
-      - op: replace
-        path: /spec/postBuild/substitute/ENVIRONMENT
-        value: dev
-      - op: replace
-        path: /spec/postBuild/substitute/BASE_DOMAIN
-        value: 127.0.0.1.xip.io
+        path: /spec/postBuild
+        value:
+          substitute:
+            ENVIRONMENT: ${ENVIRONMENT}
+            BASE_DOMAIN: ${BASE_DOMAIN}
+            SKIP_OPENID_PROVIDER_TLS_VERIFY: "true"
