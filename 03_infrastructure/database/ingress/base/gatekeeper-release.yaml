@@ -24,6 +24,6 @@ spec:
         idKey: clientid
         secretKey: secret
       upstreamUrl: http://postgres-operator-ui:8081
-      redirectionUrl: https://dashboard.${BASE_DOMAIN}
+      redirectionUrl: https://postgres.${BASE_DOMAIN}
       discoveryUrl: https://keycloak.${BASE_DOMAIN}/auth/realms/k8s
       skipTokenVerification: "false"
