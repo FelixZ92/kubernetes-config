@@ -18,3 +18,7 @@ spec:
       name: postgres-operator
       apiVersion: apps/v1
       namespace: postgres-operator
+  postBuild:
+    substitute:
+      ENVIRONMENT: "${ENVIRONMENT}"
+      BASE_DOMAIN: "${BASE_DOMAIN}"

@@ -22,6 +22,10 @@ spec:
       name: sealed-secrets-controller
       apiVersion: apps/v1
       namespace: kube-system
+  postBuild:
+    substitute:
+      ENVIRONMENT: "${ENVIRONMENT}"
+      BASE_DOMAIN: "${BASE_DOMAIN}"
 
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
@@ -41,3 +45,7 @@ spec:
   dependsOn:
     - name: pki
       namespace: kube-system
+  postBuild:
+    substitute:
+      ENVIRONMENT: "${ENVIRONMENT}"
+      BASE_DOMAIN: "${BASE_DOMAIN}"

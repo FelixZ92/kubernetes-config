@@ -21,3 +21,7 @@ spec:
       name: loki
       apiVersion: apps/v1
       namespace: loki
+  postBuild:
+    substitute:
+      ENVIRONMENT: "${ENVIRONMENT}"
+      BASE_DOMAIN: "${BASE_DOMAIN}"
