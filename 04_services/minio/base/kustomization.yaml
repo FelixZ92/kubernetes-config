@@ -5,6 +5,7 @@ resources:
   - pvc.yaml
   - secrets.yaml
   - service.yaml
+  - ingress.yaml
 
 commonLabels:
   app.kubernetes.io/instance: minio
