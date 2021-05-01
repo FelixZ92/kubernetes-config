@@ -47,11 +47,7 @@ test=$(kubectl get cm coredns -n kube-system --template='{{.data.NodeHosts}}' \
 
 kubectl rollout restart deployment coredns -n kube-system
 
-#deploy_global_resources "${BASEDIR}"
-
-#deploy_crds "${BASEDIR}"
-
-#deploy_sealed_secrets "${BASEDIR}"
+deploy_global_resources "${BASEDIR}"
 
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
@@ -59,10 +55,8 @@ kustomize build "$BASEDIR/01_gitops/bootstrap/overlays/${ENVIRONMENT}/" | envsub
 
 kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n flux-system bootstrap
 kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system pki
-#
 apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
-#
+
 update_local_ca_certs "${BASEDIR}"
 
-#
-#echo "Use with export KUBECONFIG=${KUBECONFIG}"
+echo "Use with export KUBECONFIG=${KUBECONFIG}"

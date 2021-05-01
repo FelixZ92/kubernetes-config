@@ -7,13 +7,6 @@ deploy_global_resources() {
     kubectl apply -f -
 }
 
-deploy_sealed_secrets() {
-  BASEDIR="${1}"
-  kustomize build "$BASEDIR/03_infrastructure/pki/sealed-secrets/base/" | \
-    kubectl apply -f -
-  kubectl wait --for=condition=available --timeout=600s deployment/sealed-secrets-controller -n kube-system
-}
-
 apply_secrets() {
   BASEDIR="${1}"
   ENVIRONMENT="${2}"
@@ -28,6 +21,8 @@ deploy_flux() {
   KNOWN_HOSTS_FILE="${3}"
   ENVIRONMENT="${4}"
 
+  kubectl create namespace flux-system || echo "namespace flux-system already exists"
+
   kubectl --namespace flux-system \
     create secret generic flux-system \
     --from-file="identity.pub=$KEYFILE.pub" \
@@ -37,14 +32,4 @@ deploy_flux() {
 
   kustomize build "${BASEDIR}/01_gitops/base/" | kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/kustomize-controller -n flux-system
-}
-
-deploy_crds() {
-  BASEDIR="${1}"
-  kustomize build "${BASEDIR}/03_infrastructure/pki/crds" \
-    | kubectl apply -f -
-  kustomize build "${BASEDIR}/03_infrastructure/observability/crds" \
-    | kubectl apply -f -
-  kustomize build "${BASEDIR}/03_infrastructure/ingress/crds" \
-    | kubectl apply -f -
 }

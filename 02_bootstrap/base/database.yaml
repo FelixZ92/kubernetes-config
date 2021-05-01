@@ -13,6 +13,9 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: server
+  dependsOn:
+    - name: observability
+      namespace: monitoring
   healthChecks:
     - kind: Deployment
       name: postgres-operator
