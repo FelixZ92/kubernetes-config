@@ -5,3 +5,8 @@ resources:
   - pvc.yaml
   - secrets.yaml
   - service.yaml
+
+commonLabels:
+  app.kubernetes.io/instance: minio
+  app.kubernetes.io/name: minio
+
