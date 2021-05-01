@@ -2,6 +2,24 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
+  name: prometheus-operator-crds
+  namespace: monitoring
+spec:
+  interval: 10m0s
+  path: ./03_infrastructure/observability/crds
+  prune: true
+  dependsOn:
+    - name: global-resources
+      namespace: kube-system
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
   name: observability
   namespace: monitoring
 spec:
@@ -16,6 +34,8 @@ spec:
   dependsOn:
     - name: pki
       namespace: kube-system
+    - name: prometheus-operator-crds
+      namespace: monitoring
   healthChecks:
     - kind: StatefulSet
       name: prometheus-kube-prometheus-stack-prometheus

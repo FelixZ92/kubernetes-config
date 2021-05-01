@@ -2,6 +2,24 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
+  name: cert-manager-crds
+  namespace: kube-system
+spec:
+  interval: 10m0s
+  path: ./03_infrastructure/pki/crds
+  prune: true
+  dependsOn:
+    - name: global-resources
+      namespace: kube-system
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
   name: pki
   namespace: kube-system
 spec:
@@ -13,6 +31,9 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: server
+  dependsOn:
+    - name: cert-manager-crds
+      namespace: kube-system
   healthChecks:
     - kind: Deployment
       name: cert-manager
