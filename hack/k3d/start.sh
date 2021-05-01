@@ -48,6 +48,7 @@ test=$(kubectl get cm coredns -n kube-system --template='{{.data.NodeHosts}}' \
 kubectl rollout restart deployment coredns -n kube-system
 
 deploy_global_resources "${BASEDIR}"
+kubectl create ns minio || true
 
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
