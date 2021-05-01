@@ -10,3 +10,4 @@ commonLabels:
   app.kubernetes.io/instance: minio
   app.kubernetes.io/name: minio
 
+namespace: minio
