@@ -1,0 +1,7 @@
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - post-install-create-bucket-job.yaml
+  - pvc.yaml
+  - secrets.yaml
+  - service.yaml
