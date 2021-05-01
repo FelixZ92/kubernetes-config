@@ -1,7 +1,7 @@
 CURRENT_DIR=$(shell pwd)
 
 ENVIRONMENT=dev
-ROOT_DOMAIN=192.168.0.13.xip.io
+ROOT_DOMAIN=192.168.0.13.nip.io
 
 ARGOCD_PASSWORD := $(shell gopass clusters/$(ENVIRONMENT)/argocd)
 OIDC_SECRET := $(shell gopass clusters/$(ENVIRONMENT)/oidc/secret)

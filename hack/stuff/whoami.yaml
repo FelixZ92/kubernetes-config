@@ -12,33 +12,17 @@ spec:
       labels:
         app: whoami
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
-        - name: gatekeeper
-          image: quay.io/gatekeeper/gatekeeper
-          imagePullPolicy: Always
-          args:
-            - --client-id=k8s
-            - --client-secret=48bdf60e-cd68-4b2f-9873-3dae7c889a86
-            - --discovery-url=https://keycloak.host.k3d.internal/auth/realms/k8s
-            - --skip-openid-provider-tls-verify=true
-            - --enable-default-deny=false
-            - --encryption-key=AgXa7xRcoClDEU0ZDSH4X0XhL5Qy2Z2j
-            - --listen=:3000
-#            - --preserve-host=true
-            - --redirection-url=https://whoami.host.k3d.internal
-            - --resources=uri=/*
-            - --upstream-url=http://localhost:80
-#            - --scopes=nickname
-          ports:
-            - containerPort: 3000
-              name: proxy
-              protocol: TCP
-
         - name: whoami
           image: containous/whoami
           imagePullPolicy: IfNotPresent
+          args:
+            - --port=8000
           ports:
-            - containerPort: 80
+            - containerPort: 8000
               name: web
               protocol: TCP
       restartPolicy: Always
@@ -54,10 +38,10 @@ spec:
   selector:
     app: whoami
   ports:
-    - port: 3000
-      name: proxy
+    - port: 80
+      name: web
       protocol: TCP
-      targetPort: proxy
+      targetPort: web
   type: ClusterIP
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -68,11 +52,11 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`whoami.host.k3d.internal`)
+    - match: Host(`whoami.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: whoami
-          port: 3000
+          port: 80
       middlewares:
         - name: redirect-https
 ---
@@ -84,15 +68,15 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`whoami.host.k3d.internal`)
+    - match: Host(`whoami.127.0.0.1.nip.io`)
       kind: Rule
       services:
         - name: whoami
-          port: 3000
+          port: 80
 #      middlewares:
 #        - name: forward-auth-bouncer-admin
   tls:
-    secretName: tls-infra-ingress
+    secretName: tls-whoami-ingress
 ---
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
@@ -104,4 +88,4 @@ spec:
     name: ca-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - whoami.host.k3d.internal
+    - whoami.127.0.0.1.nip.io
