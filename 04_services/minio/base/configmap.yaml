@@ -8,6 +8,7 @@ data:
   initialize: |-
     #!/bin/sh
     set -e ; # Have script exit in the event of a failed command.
+    set -x ;
     MC_CONFIG_DIR="/etc/minio/mc/"
     MC="/usr/bin/mc --insecure --config-dir ${MC_CONFIG_DIR}"
     
