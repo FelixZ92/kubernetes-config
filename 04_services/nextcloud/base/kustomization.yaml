@@ -1,7 +1,6 @@
 resources:
   - postgres.yaml
   - nextcloud-release.yaml
-  - cert.yaml
   - ingressroute.yaml
 
 namespace: nextcloud
