@@ -45,7 +45,7 @@ spec:
                   runAsUser: 100
                   runAsGroup: 101
             target:
-              kind: CreonJob
+              kind: CronJob
               name: nextcloud-cron
 
   values:
