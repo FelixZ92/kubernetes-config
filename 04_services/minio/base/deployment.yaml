@@ -49,6 +49,8 @@ spec:
                   key: secretkey
             - name: MINIO_REGION_NAME
               value: "local"
+            - name: MINIO_DOMAIN
+              value: minio.${BASE_DOMAIN}
           resources:
             requests:
               memory: 4Gi
