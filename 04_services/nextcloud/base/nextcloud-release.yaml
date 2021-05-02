@@ -26,6 +26,30 @@ spec:
         name: nextcloud
         namespace: nextcloud
       interval: 10m
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - patch:
+              - op: add
+                path: /spec/template/spec/
+                value:
+                  securityContext:
+                    runAsUser: 65534
+                    runAsGroup: 65534
+            target:
+              kind: Deployment
+              name: nextcloud-metrics
+          - patch:
+              - op: add
+                path: /spec/template/spec/
+                value:
+                  securityContext:
+                    runAsUser: 100
+                    runAsGroup: 101
+            target:
+              kind: CreonJob
+              name: nextcloud-cron
+
   values:
     image:
       repository: nextcloud
