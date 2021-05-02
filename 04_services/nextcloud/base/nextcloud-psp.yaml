@@ -6,7 +6,7 @@ metadata:
     seccomp.security.alpha.kubernetes.io/defaultProfileName: docker/default
   name: nextcloud
 spec:
-  allowPrivilegeEscalation: false
+  allowPrivilegeEscalation: true
   fsGroup:
     rule: RunAsAny
   requiredDropCapabilities:

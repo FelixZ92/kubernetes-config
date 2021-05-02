@@ -31,6 +31,13 @@ spec:
         patchesJson6902:
           - patch:
               - op: add
+                path: /spec/template/spec/serviceAccountName
+                value: nextcloud
+            target:
+              kind: Deployment
+              name: nextcloud
+          - patch:
+              - op: add
                 path: /spec/template/spec/securityContext
                 value:
                   runAsUser: 65534
