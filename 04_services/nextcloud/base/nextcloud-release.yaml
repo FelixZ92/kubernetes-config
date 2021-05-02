@@ -112,12 +112,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: nextcloud-s3-credentials
-              key: key
+              key: accesskey
         - name: S3_SECRET_KEY
           valueFrom:
             secretKeyRef:
               name: nextcloud-s3-credentials
-              key: secret
+              key: secretkey
 
     internalDatabase:
       enabled: false
