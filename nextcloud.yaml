@@ -1,9 +1,9 @@
 image:
   repository: nextcloud
-  tag: 19.0.3-apache
+  tag: stable-fpm-alpine
 
-lifecycle: {}
-  # postStartCommand: []
+lifecycle: { }
+# postStartCommand: []
 # preStopCommand: []
 
 nextcloud:
@@ -14,8 +14,8 @@ nextcloud:
     secretName: nextcloud-admin-user
     usernameKey: username
     passwordKey: password
-#     smtpUsernameKey: smtp_username
-#     smtpPasswordKey: smtp_password
+  #     smtpUsernameKey: smtp_username
+  #     smtpPasswordKey: smtp_password
   mail:
     enabled: false
     fromAddress: user
@@ -61,12 +61,20 @@ nextcloud:
       valueFrom:
         secretKeyRef:
           name: nextcloud-s3-credentials
-          key: key
+          key: accesskey
     - name: S3_SECRET_KEY
       valueFrom:
         secretKeyRef:
           name: nextcloud-s3-credentials
-          key: secret
+          key: secretkey
+
+nginx:
+  enabled: true
+  image:
+    repository: nginx
+    tag: alpine
+    pullPolicy: IfNotPresent
+  resources: {}
 
 internalDatabase:
   enabled: false
@@ -108,7 +116,7 @@ cronjob:
 persistence:
   # Nextcloud Data (/var/www/html)
   enabled: true
-  annotations: {}
+  annotations: { }
   storageClass: "local-path"
   accessMode: ReadWriteOnce
   size: 8Gi

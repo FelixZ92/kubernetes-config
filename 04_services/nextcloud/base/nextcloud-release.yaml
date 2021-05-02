@@ -58,7 +58,7 @@ spec:
   values:
     image:
       repository: nextcloud
-      tag: 19.0.3-apache
+      tag: stable-fpm-alpine
 
     lifecycle: { }
     # postStartCommand: []
@@ -125,6 +125,14 @@ spec:
             secretKeyRef:
               name: nextcloud-s3-credentials
               key: secretkey
+
+    nginx:
+      enabled: true
+      image:
+        repository: nginx
+        tag: alpine
+        pullPolicy: IfNotPresent
+      resources: { }
 
     internalDatabase:
       enabled: false
