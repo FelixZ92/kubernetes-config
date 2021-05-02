@@ -1,0 +1,3 @@
+resources:
+  - ../../base
+  - s3-credentials.yaml

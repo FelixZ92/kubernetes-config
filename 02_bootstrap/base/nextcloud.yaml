@@ -6,7 +6,7 @@ metadata:
   namespace: nextcloud
 spec:
   interval: 10m0s
-  path: ./04_services/nextcloud/base
+  path: ./04_services/nextcloud/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository
