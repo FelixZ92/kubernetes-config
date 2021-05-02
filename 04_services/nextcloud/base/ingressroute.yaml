@@ -1,4 +1,16 @@
 ---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: nextcloud-tls-certificate
+spec:
+  secretName: tls-nextcloud-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+  dnsNames:
+    - nextcloud.${BASE_DOMAIN}
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -6,6 +18,18 @@ metadata:
 spec:
   entryPoints:
     - web
+  routes:
+    - match: Host(`nextcloud.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: nextcloud
+          port: 8080
+      middlewares:
+        - name: redirect-https
+        - name: nextcloud-caldav
+        - name: nextcloud-webfinger
+        - name: nextcloud-host-meta
+        - name: nextcloud-host-meta-json
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -13,11 +37,67 @@ metadata:
   name: nextcloud-tls
   annotations:
     dashboard.zippelf.com/scrape: "true"
-    dashboard.zippelf.com/logo: "https://upload.wikimedia.org/wikipedia/commons/f/f6/OwnCloud_logo_and_wordmark.svg"
+    dashboard.zippelf.com/logo: "https://avatars1.githubusercontent.com/u/3380462?s=200&v=4"
     dashboard.zippelf.com/display-name: "nextcloud"
-    dashboard.zippelf.com/docs: "https://doc.nextcloud.com/server/10.5/"
+    dashboard.zippelf.com/docs: "https://prometheus.io/docs/alerting/latest/nextcloud/"
 spec:
   entryPoints:
     - websecure
   tls:
     secretName: tls-nextcloud-ingress
+  routes:
+    - match: Host(`nextcloud.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: nextcloud
+          port: 8080
+      middlewares:
+        - name: nextcloud-caldav
+        - name: nextcloud-webfinger
+        - name: nextcloud-host-meta
+        - name: nextcloud-host-meta-json
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nextcloud-caldav
+spec:
+  replacePathRegex:
+    regex: ^/.well-known/ca(l|rd)dav
+    replacement: /remote.php/dav/
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nextcloud-webfinger
+spec:
+  replacePathRegex:
+    regex: ^/.well-known/webfinger
+    replacement: /public.php?service=webfinger
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nextcloud-host-meta
+spec:
+  replacePathRegex:
+    regex: ^/.well-known/host-meta
+    replacement: /public.php?service=host-meta
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nextcloud-host-meta-json
+spec:
+  replacePathRegex:
+    regex: ^/.well-known/host-meta.json
+    replacement: /public.php?service=host-meta-json
