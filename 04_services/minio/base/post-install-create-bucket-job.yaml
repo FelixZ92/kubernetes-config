@@ -18,6 +18,8 @@ spec:
                 name: minio
             - secret:
                 name: minio
+        - name: minio-dir
+          emptyDir: {}
       serviceAccountName: "default"
       containers:
       - name: minio-mc
@@ -32,6 +34,8 @@ spec:
         volumeMounts:
           - name: minio-configuration
             mountPath: /config
+          - name: minio-dir
+            mountPath: /etc/minio
         resources:
           requests:
             memory: 128Mi
