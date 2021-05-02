@@ -32,6 +32,8 @@ spec:
             value: minio
           - name: MINIO_PORT
             value: "9000"
+          - name: MC
+            value: "/usr/bin/mc --insecure --config-dir /etc/minio/mc/"
         volumeMounts:
           - name: minio-configuration
             mountPath: /config
