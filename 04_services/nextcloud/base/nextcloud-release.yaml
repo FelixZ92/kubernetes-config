@@ -31,21 +31,19 @@ spec:
         patchesJson6902:
           - patch:
               - op: add
-                path: /spec/template/spec/
+                path: /spec/template/spec/securityContext
                 value:
-                  securityContext:
-                    runAsUser: 65534
-                    runAsGroup: 65534
+                  runAsUser: 65534
+                  runAsGroup: 65534
             target:
               kind: Deployment
               name: nextcloud-metrics
           - patch:
               - op: add
-                path: /spec/template/spec/
+                path: /spec/jobTemplate/spec/securityContext
                 value:
-                  securityContext:
-                    runAsUser: 100
-                    runAsGroup: 101
+                  runAsUser: 100
+                  runAsGroup: 101
             target:
               kind: CreonJob
               name: nextcloud-cron
