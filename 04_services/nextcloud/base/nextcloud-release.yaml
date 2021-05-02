@@ -40,7 +40,7 @@ spec:
               name: nextcloud-metrics
           - patch:
               - op: add
-                path: /spec/jobTemplate/spec/securityContext
+                path: /spec/jobTemplate/spec/template/spec/securityContext
                 value:
                   runAsUser: 100
                   runAsGroup: 101
