@@ -9,3 +9,4 @@ resources:
   - identity.yaml
   - dashboard.yaml
   - logging.yaml
+  - nextcloud.yaml
