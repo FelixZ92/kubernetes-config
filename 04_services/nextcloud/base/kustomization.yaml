@@ -1,21 +1,7 @@
 resources:
-#  - cronjob.yaml
-#  - deployment.yaml
-#  - psp.yaml
-#  - metrics-deployment.yaml
-#  - metrics-service.yaml
-#  - nextcloud-pvc.yaml
-#  - nginx-config.yaml
-#  - postgres.yaml
-#  - redis.yaml
-#  - secrets.yaml
-#  - service.yaml
-  - ingressroute.yaml
-  - middlewares.yaml
+  - postgres.yaml
+  - nextcloud-release.yaml
   - cert.yaml
-
-commonLabels:
-  app.kubernetes.io/name: nextcloud
-  app.kubernetes.io/instance: nextcloud
+  - ingressroute.yaml
 
 namespace: nextcloud
