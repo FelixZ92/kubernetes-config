@@ -8,6 +8,11 @@ spec:
   interval: 10m0s
   path: ./04_services/nextcloud/overlays/${ENVIRONMENT}
   prune: true
+  dependsOn:
+    - name: ingress
+      namespace: traefik
+    - name: database
+      namespace: postgres-operator
   sourceRef:
     kind: GitRepository
     name: infrastructure

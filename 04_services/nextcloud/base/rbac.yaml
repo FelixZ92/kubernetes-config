@@ -11,7 +11,7 @@ rules:
   - apiGroups:
       - extensions
     resourceNames:
-      - nextcloud
+      - privileged
     resources:
       - podsecuritypolicies
     verbs:
