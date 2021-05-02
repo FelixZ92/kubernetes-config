@@ -100,7 +100,7 @@ spec:
                 'key'        => getenv('S3_ACCESS_KEY'),
                 'secret'     => getenv('S3_SECRET_KEY'),
                 'region'     => getenv('S3_REGION'),
-                'use_ssl'    => getenv('S3_USE_SSL'),
+                'use_ssl'    => false,
                 'use_path_style' => true
               )
             )
