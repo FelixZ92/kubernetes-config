@@ -97,8 +97,8 @@ spec:
                 'autocreate'  => false,
                 'url'         => getenv('S3_ENDPOINT'),
                 'user' => [
-                        'name' => 'getenv('S3_ACCESS_KEY'),
-                        'password' => 'getenv('S3_SECRET_KEY'),
+                        'name' => getenv('S3_ACCESS_KEY'),
+                        'password' => getenv('S3_SECRET_KEY'),
                         'domain' => [
                                 'name' => 'Default',
                         ],
