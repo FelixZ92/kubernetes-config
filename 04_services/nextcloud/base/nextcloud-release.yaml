@@ -126,7 +126,7 @@ spec:
           value: DE
         - name: S3_USE_SSL
           value: "false"
-      - name: OS_TENANT_NAME
+        - name: OS_TENANT_NAME
           valueFrom:
             secretKeyRef:
               name: nextcloud-os-tenant
