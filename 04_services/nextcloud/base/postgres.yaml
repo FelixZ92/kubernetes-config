@@ -31,7 +31,7 @@ spec:
 
   sidecars:
     - name: "exporter"
-      image: "wrouesnel/postgres_exporter"
+      image: "wrouesnel/postgres_exporter:v0.8.0"
       securityContext:
         capabilities:
           drop:
