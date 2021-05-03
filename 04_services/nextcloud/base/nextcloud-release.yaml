@@ -38,6 +38,9 @@ spec:
               name: nextcloud
           - patch:
               - op: add
+                path: /spec/template/spec/automountServiceAccountToken
+                value: false
+              - op: add
                 path: /spec/template/spec/securityContext
                 value:
                   runAsUser: 65534
@@ -60,8 +63,8 @@ spec:
 
   values:
     image:
-      repository: registry.gitlab.com/felixz92/nextcloud-stateless/php-fpm
-      tag: 7.3
+      repository: nextcloud
+      tag: stable-fpm-alpine
 
     lifecycle: { }
     # postStartCommand: []
