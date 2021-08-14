@@ -3,7 +3,8 @@ data:
   Corefile: |
     keycloak.host.k3d.internal:53 {
       hosts {
-        172.25.0.1 keycloak.host.k3d.internal
+        172.18.0.1
+172.18.0.1 keycloak.host.k3d.internal
       }
     }
     .:53 {

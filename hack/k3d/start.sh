@@ -20,8 +20,14 @@ source "$CURR_DIR/../secrets/common.sh"
 source "$CURR_DIR/../common.sh"
 
 k3d cluster create local \
-  --config "${CURR_DIR}/config.yaml" \
-  -v "${CURR_DIR}/psp.yaml:/var/lib/rancher/k3s/server/manifests/psp.yaml@server[0]"
+  --k3s-server-arg '--kube-apiserver-arg=enable-admission-plugins=PodSecurityPolicy' \
+  -v "${CURR_DIR}/psp.yaml:/var/lib/rancher/k3s/server/manifests/psp.yaml" \
+  --agents 3 \
+  --k3s-server-arg '--disable=traefik' \
+  --k3s-server-arg '--disable=servicelb' \
+  -p "80:80@agent[2]" \
+  -p "443:443@agent[2]" \
+  && sleep 10 || echo "cluster already exists"
 
 export KUBECONFIG=$(k3d kubeconfig write local)
 kubectl label node k3d-local-agent-0 storage=local --overwrite
