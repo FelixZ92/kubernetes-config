@@ -1,0 +1,27 @@
+apiVersion: k3d.io/v1alpha2
+kind: Simple
+name: local
+servers: 1
+agents: 3
+ports:
+  - port: 80:80
+    nodeFilters:
+      - agent[2]
+  - port: 443:443
+    nodeFilters:
+      - agent[2]
+
+registries:
+  create: true
+
+options:
+  k3d:
+    wait: true
+    timeout: 60s
+
+  k3s:
+    extraServerArgs:
+      - --disable=traefik
+      - --disable=servicelb
+      - --kube-apiserver-arg=enable-admission-plugins=PodSecurityPolicy
+
