@@ -1,7 +1,7 @@
-apiVersion: "acid.zalan.do/v1"
+apiVersion: acid.zalan.do/v1
 kind: postgresql
 metadata:
-  name: nextcloud-pg
+  name: nextcloud-pg-test
   labels:
     app.kubernetes.io/name: spilo
     app.kubernetes.io/instance: nextcloud-pg
