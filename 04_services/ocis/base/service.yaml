@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ocis-web
+spec:
+  selector:
+    app.kubernetes.io/name: ocis-web
+  ports:
+    - name: web
+      port: 9200
+      protocol: "TCP"
+      targetPort: "web"
+  type: ClusterIP

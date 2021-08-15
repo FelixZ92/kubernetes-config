@@ -1,0 +1,58 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: ocis-web-tls-certificate
+spec:
+  secretName: tls-ocis-web-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+  dnsNames:
+    - ocis.${BASE_DOMAIN}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ocis-web
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`ocis.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: web
+          port: 9200
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ocis-web-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://avatars.githubusercontent.com/u/695951?s=200&v=4"
+    dashboard.zippelf.com/display-name: "ocis-web"
+    dashboard.zippelf.com/docs: "https://docs.min.io/docs/ocis-web-client-complete-guide.html"
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: tls-ocis-web-ingress
+  routes:
+    - match: Host(`ocis.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: web
+          port: 9200
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true

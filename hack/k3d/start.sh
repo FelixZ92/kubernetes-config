@@ -21,7 +21,7 @@ source "$CURR_DIR/../common.sh"
 
 k3d cluster create local \
   --config "${CURR_DIR}/config.yaml" \
-  -v "${CURR_DIR}/psp.yaml:/var/lib/rancher/k3s/server/manifests/psp.yaml@server[0]"
+  -v "${CURR_DIR}/psp.yaml:/var/lib/rancher/k3s/server/manifests/psp.yaml@server[0]" || echo "cluster local already exists"
 
 export KUBECONFIG=$(k3d kubeconfig write local)
 kubectl label node k3d-local-agent-0 storage=local --overwrite

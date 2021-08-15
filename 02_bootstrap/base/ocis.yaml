@@ -1,0 +1,24 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: ocis
+  namespace: ocis
+spec:
+  interval: 10m0s
+  path: ./04_services/ocis/overlays/${ENVIRONMENT}
+  prune: true
+#  dependsOn:
+#    - name: ingress
+#      namespace: traefik
+#    - name: database
+#      namespace: postgres-operator
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+  postBuild:
+    substitute:
+      ENVIRONMENT: "${ENVIRONMENT}"
+      BASE_DOMAIN: "${BASE_DOMAIN}"
