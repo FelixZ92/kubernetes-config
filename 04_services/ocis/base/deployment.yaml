@@ -23,6 +23,13 @@ spec:
         - name: ocis-web
           image: owncloud/ocis
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
           livenessProbe:
             tcpSocket:
               port: 9200
@@ -61,7 +68,7 @@ spec:
             - name: STORAGE_DRIVER_S3NG_ENDPOINT
               value: http://minio.minio.svc:9000
             - name: STORAGE_DRIVER_S3NG_REGION
-              value: default
+              value: local
             - name: MINIO_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
