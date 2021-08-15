@@ -1,0 +1,27 @@
+---
+# Source: refs-ocis/templates/proxy-config-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: proxy-config
+  namespace: default
+data:
+  proxy.json: |
+    {
+    	"HTTP": {
+    		"Namespace": "com.owncloud"
+    	},
+    	"policy_selector": {
+    		"static": {
+    			"policy": "reva"
+    		}
+    	},
+    	"policies": [{
+    		"name": "reva",
+    		"routes": [{
+    				"endpoint": "/",
+    				"backend": "http://ocis-web:9200"
+    			}
+    		]
+    	}]
+    }

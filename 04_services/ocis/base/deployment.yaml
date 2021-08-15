@@ -19,6 +19,9 @@ spec:
         - name: temp
           emptyDir:
             sizeLimit: 1G
+        - name: configs
+          configMap:
+            name: proxy-config
       containers:
         - name: ocis-web
           image: owncloud/ocis
@@ -96,3 +99,5 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: temp
+            - name: configs
+              mountPath: /etc/ocis
