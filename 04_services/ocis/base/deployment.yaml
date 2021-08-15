@@ -14,7 +14,7 @@ spec:
       labels:
         app.kubernetes.io/name: ocis-web
     spec:
-      automountServiceAccountToken: false
+      serviceAccountName: ocis
       volumes:
         - name: temp
           emptyDir:
@@ -36,14 +36,14 @@ spec:
             - containerPort: 9200
               protocol: TCP
               name: web
-          securityContext:
-            capabilities:
-              drop:
-                - ALL
-            readOnlyRootFilesystem: true
-            runAsGroup: 65532
-            runAsNonRoot: true
-            runAsUser: 65532
+#          securityContext:
+#            capabilities:
+#              drop:
+#                - ALL
+#            readOnlyRootFilesystem: true
+#            runAsGroup: 65532
+#            runAsNonRoot: true
+#            runAsUser: 65532
           volumeMounts:
             - mountPath: /tmp
               name: temp
