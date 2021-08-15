@@ -67,7 +67,7 @@ spec:
             - name: STORAGE_USERS_DRIVER
               value: s3ng
             - name: STORAGE_METADATA_DRIVER
-              value: s3ng # keep metadata on ocis storage since this are only small files atm
+              value: ocis # keep metadata on ocis storage since this are only small files atm
             - name: STORAGE_DRIVER_S3NG_ENDPOINT
               value: http://minio.minio.svc:9000
             - name: STORAGE_DRIVER_S3NG_REGION
