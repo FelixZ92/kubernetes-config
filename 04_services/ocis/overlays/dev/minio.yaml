@@ -1,0 +1,10 @@
+---
+# Source: minio/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio
+type: Opaque
+data:
+  accesskey: "TUlOSU9fQUNDRVNTX0tFWQ=="
+  secretkey: "TUlOSU9fU0VDUkVUX0tFWQ=="
