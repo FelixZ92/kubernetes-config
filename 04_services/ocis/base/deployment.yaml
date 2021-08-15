@@ -15,6 +15,10 @@ spec:
         app.kubernetes.io/name: ocis-web
     spec:
       automountServiceAccountToken: false
+      volumes:
+        - name: temp
+          emptyDir:
+            sizeLimit: 1GB
       containers:
         - name: ocis-web
           image: owncloud/ocis
@@ -40,3 +44,6 @@ spec:
             runAsGroup: 65532
             runAsNonRoot: true
             runAsUser: 65532
+          volumeMounts:
+            - mountPath: /tmp
+              name: temp
