@@ -24,7 +24,7 @@ spec:
             name: proxy-config
         - name: metadata
           persistentVolumeClaim:
-            claimName: ocis
+            claimName: ocis-metadata
       containers:
         - name: ocis-web
           image: owncloud/ocis
