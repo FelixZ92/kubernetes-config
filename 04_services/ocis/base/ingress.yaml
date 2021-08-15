@@ -22,7 +22,7 @@ spec:
     - match: Host(`ocis.${BASE_DOMAIN}`)
       kind: Rule
       services:
-        - name: web
+        - name: ocis-web
           port: 9200
       middlewares:
         - name: redirect-https
@@ -45,7 +45,7 @@ spec:
     - match: Host(`ocis.${BASE_DOMAIN}`)
       kind: Rule
       services:
-        - name: web
+        - name: ocis-web
           port: 9200
 ---
 apiVersion: traefik.containo.us/v1alpha1
