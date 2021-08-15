@@ -42,6 +42,8 @@ spec:
           env:
             - name: PROXY_TLS
               value: "false"
+            - name: OCIS_LOG_LEVEL
+              value: debug
             - name: OCIS_URL
               value: https://ocis.${BASE_DOMAIN}
             - name: PROXY_AUTOPROVISION_ACCOUNTS
