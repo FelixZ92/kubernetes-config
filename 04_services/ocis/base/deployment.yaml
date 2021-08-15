@@ -42,8 +42,6 @@ spec:
           env:
             - name: PROXY_TLS
               value: "false"
-            - name: OCIS_LOG_LEVEL
-              value: debug
             - name: OCIS_URL
               value: https://ocis.${BASE_DOMAIN}
             - name: PROXY_AUTOPROVISION_ACCOUNTS
@@ -71,12 +69,12 @@ spec:
               value: http://minio.minio.svc:9000
             - name: STORAGE_DRIVER_S3NG_REGION
               value: local
-            - name: MINIO_ACCESS_KEY
+            - name: STORAGE_DRIVER_S3NG_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: minio
                   key: accesskey
-            - name: MINIO_SECRET_KEY
+            - name: STORAGE_DRIVER_S3NG_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: minio
