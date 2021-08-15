@@ -35,6 +35,7 @@ envsubst '${LOCALHOST_GATEWAY}' < "${CURR_DIR}/coredns-patch.yaml" > "${CURR_DIR
 
 test=$(kubectl get cm coredns -n kube-system --template='{{.data.NodeHosts}}' \
   | sed -n -E -e '/[0-9\.]{4,12}\s+keycloak\.host\.k3d\.internal$/!p' -e "\$a${LOCALHOST_GATEWAY} keycloak.host.k3d.internal" \
+  | sed -n -E -e '/[0-9\.]{4,12}\s+ocis\.host\.k3d\.internal$/!p' -e "\$a${LOCALHOST_GATEWAY} ocis.host.k3d.internal" \
   | tr '\n' '^' \
   | xargs -0 printf '{"data": {"NodeHosts":"%s"}}'\
   | sed -E 's%\^%\\n%g') && kubectl patch cm coredns -n kube-system -p="$test"

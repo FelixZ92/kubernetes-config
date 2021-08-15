@@ -37,7 +37,8 @@ spec:
               value: "false"
             - name: OCIS_URL
               value: https://ocis.${BASE_DOMAIN}
-
+            - name: PROXY_ENABLE_BASIC_AUTH
+              value: "true"
           ports:
             - containerPort: 9200
               protocol: TCP
