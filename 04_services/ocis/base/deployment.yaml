@@ -32,6 +32,9 @@ spec:
             tcpSocket:
               port: 9200
             initialDelaySeconds: 3
+          env:
+            - name: PROXY_TLS
+              value: "false"
           ports:
             - containerPort: 9200
               protocol: TCP
