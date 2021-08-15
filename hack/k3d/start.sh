@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-set -x
+#set -x
 
 CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 [ -d "$CURR_DIR" ] || {

@@ -46,7 +46,7 @@ spec:
             - name: PROXY_TLS
               value: "false"
             - name: OCIS_URL
-              value: https://ocis.${BASE_DOMAIN}
+              value: https://ocis.host.k3d.internal
             - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
             - name: PROXY_OIDC_ISSUER

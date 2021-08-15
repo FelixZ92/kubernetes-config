@@ -3,3 +3,38 @@ resources:
   - minio.yaml
 
 namespace: ocis
+
+patches:
+  - target:
+      kind: Certificate
+      name: ocis-web-tls-certificate
+    patch: |-
+      - op: add
+        path: /spec/dnsNames/-
+        value: ocis.host.k3d.internal
+  - target:
+      kind: IngressRoute
+      name: ocis-web
+    patch: |-
+      - op: add
+        path: /spec/routes/-
+        value:
+          match: Host(`ocis.host.k3d.internal`)
+          kind: Rule
+          services:
+            - name: ocis-web
+              port: 9200
+          middlewares:
+            - name: redirect-https
+  - target:
+      kind: IngressRoute
+      name: ocis-web-tls
+    patch: |-
+      - op: add
+        path: /spec/routes/-
+        value:
+          match: Host(`ocis.host.k3d.internal`)
+          kind: Rule
+          services:
+            - name: ocis-web
+              port: 9200
