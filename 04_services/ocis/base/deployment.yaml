@@ -35,6 +35,9 @@ spec:
           env:
             - name: PROXY_TLS
               value: "false"
+            - name: OCIS_URL
+              value: https://ocis.${BASE_DOMAIN}
+
           ports:
             - containerPort: 9200
               protocol: TCP
