@@ -5,3 +5,4 @@ resources:
   - rbac.authorization.k8s.io_v1_role_nextcloud-privileged.yaml
   - rbac.authorization.k8s.io_v1_rolebinding_nextcloud-privileged.yaml
   - proxy-config-configmap.yaml
+  - pvc.yaml
