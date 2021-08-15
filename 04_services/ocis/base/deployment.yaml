@@ -37,8 +37,21 @@ spec:
               value: "false"
             - name: OCIS_URL
               value: https://ocis.${BASE_DOMAIN}
-            - name: PROXY_ENABLE_BASIC_AUTH
+            - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
+            - name: PROXY_OIDC_ISSUER
+              value: http://keycloak.host.k3d.internal/auth/realms/oCIS
+            - name: WEB_OIDC_AUTHORITY
+              value: http://keycloak.host.k3d.internal/auth/realms/oCIS
+            - name: WEB_OIDC_CLIENT_ID
+              value: web
+            - name: WEB_OIDC_METADATA_URL
+              value: http://keycloak.host.k3d.internal/auth/realms/oCIS/.well-known/openid-configuration
+            - name: STORAGE_OIDC_ISSUER
+              value: http://keycloak.host.k3d.internal
+            - name: STORAGE_LDAP_IDP
+              value: http://keycloak.host.k3d.internal
+
           ports:
             - containerPort: 9200
               protocol: TCP
