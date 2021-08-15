@@ -18,7 +18,7 @@ spec:
       volumes:
         - name: temp
           emptyDir:
-            sizeLimit: 1GB
+            sizeLimit: 1G
       containers:
         - name: ocis-web
           image: owncloud/ocis
