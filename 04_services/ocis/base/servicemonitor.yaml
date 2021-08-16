@@ -99,7 +99,7 @@ metadata:
   labels:
     app.kubernetes.io/name: ocis-metrics
     release: kube-prometheus-stack
-  name: event-exporter
+  name: ocis
 spec:
   endpoints:
     - path: /metrics
