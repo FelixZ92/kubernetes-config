@@ -116,10 +116,32 @@ data:
     }
   config.json: |
     {
+      "server": "https://ocis.host.k3d.internal",
+      "theme": "owncloud",
+      "version": "0.1.0",
+      "openIdConnect": {
+        "metadata_url": "https://keycloak.host.k3d.internal/auth/realms/oCIS/.well-known/openid-configuration",
+        "authority": "https://keycloak.host.k3d.internal/auth/realms/oCIS",
+        "client_id": "web",
+        "response_type": "code",
+        "scope": "openid profile email"
+      },
+      "apps": ["files", "media-viewer"],
       "external_apps": [
+        {
+          "id": "settings",
+          "path": "/settings.js"
+        },
+        {
+          "id": "accounts",
+          "path": "/accounts.js"
+        },
         {
           "id": "hello",
           "path": "/hello.js"
         }
-      ]
+      ],
+      "options": {
+        "hideSearchBar": true
+      }
     }
