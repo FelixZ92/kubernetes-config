@@ -172,6 +172,13 @@ spec:
             gnetId: 5342
             revision: 5
             datasource: Prometheus
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 100m
+          memory: 256Mi
 
       sidecar:
         dashboards:
