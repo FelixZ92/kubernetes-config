@@ -2,7 +2,7 @@ resources:
   - deployment.yaml
   - ingress.yaml
   - service.yaml
-  - proxy-config-configmap.yaml
+  - config.yaml
   - pvc.yaml
 
 configMapGenerator:

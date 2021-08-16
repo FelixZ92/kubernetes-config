@@ -21,7 +21,7 @@ spec:
             sizeLimit: 1G
         - name: configs
           configMap:
-            name: proxy-config
+            name: ocis-config
         - name: metadata
           persistentVolumeClaim:
             claimName: ocis-metadata

@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: proxy-config
+  name: ocis-config
   namespace: default
 data:
   proxy.json: |
