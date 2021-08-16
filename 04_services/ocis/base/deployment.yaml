@@ -132,6 +132,65 @@ spec:
             - containerPort: 9200
               protocol: TCP
               name: web
+
+            - containerPort: 9104
+              protocol: TCP
+              name: metrics-web
+            - containerPort: 9114
+              protocol: TCP
+              name: metrics-ocs
+            - containerPort: 9119
+              protocol: TCP
+              name: metrics-webdav
+            - containerPort: 9129
+              protocol: TCP
+              name: metrics-glauth
+            - containerPort: 9141
+              protocol: TCP
+              name: metrics-storage-frontend
+            - containerPort: 9143
+              protocol: TCP
+              name: metrics-storage-gateway
+            - containerPort: 9145
+              protocol: TCP
+              name: metrics-storage-sharing
+            - containerPort: 9147
+              protocol: TCP
+              name: metrics-storage-auth-basic
+            - containerPort: 9149
+              protocol: TCP
+              name: metrics-storage-auth-bearer
+            - containerPort: 9151
+              protocol: TCP
+              name: metrics-storage-sharing
+            - containerPort: 9156
+              protocol: TCP
+              name: metrics-storage-home
+            - containerPort: 9159
+              protocol: TCP
+              name: metrics-storage-users
+            - containerPort: 9179
+              protocol: TCP
+              name: metrics-storage-public-link
+            - containerPort: 9189
+              protocol: TCP
+              name: metrics-thumbnails
+            - containerPort: 9194
+              protocol: TCP
+              name: metrics-settings
+            - containerPort: 9205
+              protocol: TCP
+              name: metrics-proxy
+            - containerPort: 9217
+              protocol: TCP
+              name: metrics-storage-metadata
+            - containerPort: 9224
+              protocol: TCP
+              name: metrics-onlyoffice
+            - containerPort: 9460
+              protocol: TCP
+              name: metrics-store
+
 #          securityContext:
 #            capabilities:
 #              drop:

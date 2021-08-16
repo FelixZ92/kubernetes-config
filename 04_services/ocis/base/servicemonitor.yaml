@@ -1,0 +1,166 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ocis-metrics
+  labels:
+    app.kubernetes.io/name: ocis-web
+    app.kubernetes.io/component: ocis-metrics
+spec:
+  selector:
+    app.kubernetes.io/name: ocis-web
+  ports:
+    - port: 9104
+      protocol: TCP
+      name: metrics-web
+      targetPort: metrics-web
+    - port: 9114
+      protocol: TCP
+      name: metrics-ocs
+      targetPort: metrics-ocs
+    - port: 9119
+      protocol: TCP
+      name: metrics-webdav
+      targetPort: metrics-webdav
+    - port: 9129
+      protocol: TCP
+      name: metrics-glauth
+      targetPort: metrics-glauth
+    - port: 9134
+      protocol: TCP
+      name: metrics-idp
+      targetPort: metrics-idp
+    - port: 9141
+      protocol: TCP
+      name: metrics-storage-frontend
+      targetPort: metrics-storage-frontend
+    - port: 9143
+      protocol: TCP
+      name: metrics-storage-gateway
+      targetPort: metrics-storage-gateway
+    - port: 9145
+      protocol: TCP
+      name: metrics-storage-sharing
+      targetPort: metrics-storage-sharing
+    - port: 9147
+      protocol: TCP
+      name: metrics-storage-auth-basic
+      targetPort: metrics-storage-auth-basic
+    - port: 9149
+      protocol: TCP
+      name: metrics-storage-auth-bearer
+      targetPort: metrics-storage-auth-bearer
+    - port: 9151
+      protocol: TCP
+      name: metrics-storage-sharing
+      targetPort: metrics-storage-sharing
+    - port: 9156
+      protocol: TCP
+      name: metrics-storage-home
+      targetPort: metrics-storage-home
+    - port: 9159
+      protocol: TCP
+      name: metrics-storage-users
+      targetPort: metrics-storage-users
+    - port: 9179
+      protocol: TCP
+      name: metrics-storage-public-link
+      targetPort: metrics-storage-public-link
+    - port: 9189
+      protocol: TCP
+      name: metrics-thumbnails
+      targetPort: metrics-thumbnails
+    - port: 9194
+      protocol: TCP
+      name: metrics-settings
+      targetPort: metrics-settings
+    - port: 9205
+      protocol: TCP
+      name: metrics-proxy
+      targetPort: metrics-proxy
+    - port: 9217
+      protocol: TCP
+      name: metrics-storage-metadata
+      targetPort: metrics-storage-metadata
+    - port: 9224
+      protocol: TCP
+      name: metrics-onlyoffice
+      targetPort: metrics-onlyoffice
+    - port: 9460
+      protocol: TCP
+      name: metrics-store
+      targetPort: metrics-store
+  type: ClusterIP
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: ocis-metrics
+    release: kube-prometheus-stack
+  name: event-exporter
+spec:
+  endpoints:
+    - path: /metrics
+      honorLabels: true
+      port: metrics-web
+    - path: /metrics
+      honorLabels: true
+      port: metrics-ocs
+    - path: /metrics
+      honorLabels: true
+      port: metrics-webdav
+    - path: /metrics
+      honorLabels: true
+      port: metrics-glauth
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-frontend
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-gateway
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-sharing
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-auth-basic
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-auth-bearer
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-sharing
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-home
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-users
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-public-link
+    - path: /metrics
+      honorLabels: true
+      port: metrics-thumbnails
+    - path: /metrics
+      honorLabels: true
+      port: metrics-settings
+    - path: /metrics
+      honorLabels: true
+      port: metrics-proxy
+    - path: /metrics
+      honorLabels: true
+      port: metrics-storage-metadata
+    - path: /metrics
+      honorLabels: true
+      port: metrics-onlyoffice
+    - path: /metrics
+      honorLabels: true
+      port: metrics-store
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ocis-web
+      app.kubernetes.io/component: ocis-metrics
