@@ -25,6 +25,9 @@ spec:
         - name: metadata
           persistentVolumeClaim:
             claimName: ocis-metadata
+        - name: entrypoint
+          configMap:
+            name: entrypoint
       containers:
         - name: ocis-web
           image: owncloud/ocis
@@ -131,3 +134,5 @@ spec:
               mountPath: /etc/ocis
             - name: metadata
               mountPath: /var/tmp/ocis
+            - name: entrypoint
+              mountPath: /entrypoint
