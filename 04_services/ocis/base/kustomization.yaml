@@ -4,3 +4,11 @@ resources:
   - service.yaml
   - proxy-config-configmap.yaml
   - pvc.yaml
+
+configMapGenerator:
+  - name: entrypoint
+    files:
+      - entrypoint-override.sh
+
+generatorOptions:
+  disableNameSuffixHash: true

@@ -69,6 +69,8 @@ spec:
               value: https://keycloak.host.k3d.internal/auth/realms/oCIS
             - name: STORAGE_HOME_DRIVER
               value: s3ng
+            - name: STORAGE_USERS_DRIVER
+              value: s3ng
             - name: STORAGE_METADATA_DRIVER
               value: ocis # keep metadata on ocis storage since this are only small files atm
             - name: STORAGE_DRIVER_S3NG_ENDPOINT
@@ -92,6 +94,7 @@ spec:
                 secretKeyRef:
                   name: storage-ldap-bind-password
                   key: password
+
 
             - name: IDP_LDAP_BIND_PASSWORD
               valueFrom:
