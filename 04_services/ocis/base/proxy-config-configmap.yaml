@@ -114,3 +114,12 @@ data:
         }
       ]
     }
+  config.json: |
+    {
+      "external_apps": [
+        {
+          "id": "hello",
+          "path": "/hello.js"
+        }
+      ]
+    }
