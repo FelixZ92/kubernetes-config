@@ -118,6 +118,16 @@ spec:
                   name: transfer-secret
                   key: password
 
+            - name: OCIS_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: admin-password
+                  key: password
+            - name: OCIS_ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: admin-password
+                  key: email
           ports:
             - containerPort: 9200
               protocol: TCP
