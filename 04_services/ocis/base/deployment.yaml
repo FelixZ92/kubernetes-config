@@ -88,27 +88,26 @@ spec:
             - name: STORAGE_DRIVER_S3NG_BUCKET
               value: ocis-bucket
 
-#            - name: IDP_LDAP_BIND_PASSWORD
-#              valueFrom:
-#                secretKeyRef:
-#                  name: minio
-#                  key: secretkey
-#            - name: STORAGE_LDAP_BIND_PASSWORD
-#              valueFrom:
-#                secretKeyRef:
-#                  name: minio
-#                  key: secretkey
-#            - name: OCIS_JWT_SECRET
-#              valueFrom:
-#                secretKeyRef:
-#                  name: minio
-#                  key: secretkey
-#            - name: OCIS_TRANSFER_SECRET
-#              valueFrom:
-#                secretKeyRef:
-#                  name: minio
-#                  key: secretkey
-
+            - name: IDP_LDAP_BIND_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: idp-ldap-bind-password
+                  key: password
+            - name: STORAGE_LDAP_BIND_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: storage-ldap-bind-password
+                  key: password
+            - name: OCIS_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: password
+            - name: OCIS_TRANSFER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: transfer-secret
+                  key: password
 
           ports:
             - containerPort: 9200
