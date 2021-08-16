@@ -100,8 +100,6 @@ spec:
                 secretKeyRef:
                   name: storage-ldap-bind-password
                   key: password
-
-
             - name: IDP_LDAP_BIND_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -117,7 +115,6 @@ spec:
                 secretKeyRef:
                   name: transfer-secret
                   key: password
-
             - name: OCIS_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -136,9 +133,6 @@ spec:
               protocol: TCP
               name: metrics
           securityContext:
-            capabilities:
-              drop:
-                - ALL
             readOnlyRootFilesystem: true
             runAsGroup: 65532
             runAsNonRoot: true
