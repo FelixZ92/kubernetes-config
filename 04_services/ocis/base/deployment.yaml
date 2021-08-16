@@ -62,12 +62,12 @@ spec:
             - name: PROXY_OIDC_ISSUER
               value: https://keycloak.host.k3d.internal/auth/realms/oCIS
 #
-#            - name: WEB_OIDC_AUTHORITY
-#              value: https://keycloak.host.k3d.internal/auth/realms/oCIS
-#            - name: WEB_OIDC_CLIENT_ID
-#              value: web
-#            - name: WEB_OIDC_METADATA_URL
-#              value: https://keycloak.host.k3d.internal/auth/realms/oCIS/.well-known/openid-configuration
+            - name: WEB_OIDC_AUTHORITY
+              value: https://keycloak.host.k3d.internal/auth/realms/oCIS
+            - name: WEB_OIDC_CLIENT_ID
+              value: web
+            - name: WEB_OIDC_METADATA_URL
+              value: https://keycloak.host.k3d.internal/auth/realms/oCIS/.well-known/openid-configuration
 
             - name: STORAGE_OIDC_ISSUER
               value: https://keycloak.host.k3d.internal
