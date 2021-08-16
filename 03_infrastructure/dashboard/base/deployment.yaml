@@ -42,3 +42,10 @@ spec:
             runAsGroup: 65532
             runAsNonRoot: true
             runAsUser: 65532
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 20m
+              memory: 64Mi

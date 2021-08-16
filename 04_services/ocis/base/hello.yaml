@@ -30,7 +30,7 @@ spec:
             name: entrypoint
       containers:
         - name: ocis-hello
-          image: owncloud/ocis-hello
+          image: owncloud/ocis-hello:linux-amd64
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9105

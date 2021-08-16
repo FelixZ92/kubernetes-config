@@ -34,6 +34,13 @@ spec:
             runAsGroup: 65532
             runAsNonRoot: true
             runAsUser: 65532
+          resources:
+            requests:
+              cpu: 20m
+              memory: 64Mi
+            limits:
+              cpu: 40m
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service

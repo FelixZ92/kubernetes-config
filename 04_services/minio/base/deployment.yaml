@@ -53,6 +53,10 @@ spec:
               value: minio.${BASE_DOMAIN}
           resources:
             requests:
+              cpu: 10m
+              memory: 1Gi
+            limits:
+              cpu: 100m
               memory: 4Gi
       volumes:
         - name: export

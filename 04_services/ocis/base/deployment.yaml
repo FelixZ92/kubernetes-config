@@ -30,7 +30,7 @@ spec:
             name: entrypoint
       containers:
         - name: ocis-web
-          image: owncloud/ocis
+          image: owncloud/ocis:1.10
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
@@ -134,6 +134,7 @@ spec:
               name: metrics
           securityContext:
             readOnlyRootFilesystem: true
+            runAsNonRoot: true
           volumeMounts:
             - mountPath: /tmp
               name: temp

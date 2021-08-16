@@ -176,6 +176,13 @@ spec:
       sidecar:
         dashboards:
           searchNamespace: "ALL"
+        resources:
+          requests:
+            cpu: 20m
+            memory: 64Mi
+          limits:
+            cpu: 40m
+            memory: 128Mi
 
       extraConfigmapMounts: [ ]
       # - name: certs-configmap
@@ -204,8 +211,14 @@ spec:
       #   type: prometheus
       #   url: https://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
       #   version: 1
-
-
+      downloadDashboards:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 64Mi
+          limits:
+            cpu: 40m
+            memory: 128Mi
     ## Component scraping the kube controller manager
     ##
     kubeControllerManager:
@@ -281,6 +294,14 @@ spec:
         repository: quay.io/prometheus-operator/prometheus-config-reloader
         tag: v0.44.0
 
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 100m
+          memory: 256Mi
+
     ## Deploy a Prometheus instance
     ##
     prometheus:
@@ -320,3 +341,12 @@ spec:
         requests:
           cpu: 100m
           memory: 30Mi
+
+    kube-state-metrics:
+      resources:
+        requests:
+          cpu: 20m
+          memory: 64Mi
+        limits:
+          cpu: 40m
+          memory: 128Mi
