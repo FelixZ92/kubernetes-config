@@ -32,9 +32,9 @@ spec:
         - name: ocis-web
           image: owncloud/ocis
           imagePullPolicy: IfNotPresent
-          command:
-            - /bin/sh
-            - /entrypoint/entrypoint-override.sh
+#          command:
+#            - /bin/sh
+#            - /entrypoint/entrypoint-override.sh
           resources:
             requests:
               cpu: 100m
