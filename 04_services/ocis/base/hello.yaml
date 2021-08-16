@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocis-hello
+  labels:
+    app.kubernetes.io/name: ocis-hello
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ocis-hello
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ocis-hello
+    spec:
+      automountServiceAccountToken: false
+      volumes:
+        - name: temp
+          emptyDir:
+            sizeLimit: 1G
+        - name: configs
+          configMap:
+            name: ocis-config
+        - name: metadata
+          persistentVolumeClaim:
+            claimName: ocis-metadata
+        - name: entrypoint
+          configMap:
+            name: entrypoint
+      containers:
+        - name: ocis-hello
+          image: owncloud/ocis-hello
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9105
+              name: web
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ocis-hello
+spec:
+  selector:
+    app.kubernetes.io/name: ocis-hello
+  ports:
+    - name: web
+      port: 9105
+      protocol: "TCP"
+      targetPort: "web"
+  type: ClusterIP
