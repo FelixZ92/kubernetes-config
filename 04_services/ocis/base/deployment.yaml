@@ -14,7 +14,7 @@ spec:
       labels:
         app.kubernetes.io/name: ocis-web
     spec:
-      serviceAccountName: ocis
+      automountServiceAccountToken: false
       volumes:
         - name: temp
           emptyDir:
