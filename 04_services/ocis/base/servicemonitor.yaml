@@ -32,60 +32,60 @@ spec:
       targetPort: metrics-idp
     - port: 9141
       protocol: TCP
-      name: metrics-storage-frontend
-      targetPort: metrics-storage-frontend
+      name: metrics-s-f # storage-frontend
+      targetPort: metrics-s-f # storage-frontend
     - port: 9143
       protocol: TCP
-      name: metrics-storage-gateway
-      targetPort: metrics-storage-gateway
+      name: metrics-s-g # storage-gateway
+      targetPort: metrics-s-g # storage-gateway
     - port: 9145
       protocol: TCP
-      name: metrics-storage-sharing
-      targetPort: metrics-storage-sharing
+      name: metrics-s-s # storage-sharing
+      targetPort: metrics-s-s # storage-sharing
     - port: 9147
       protocol: TCP
-      name: metrics-storage-auth-basic
-      targetPort: metrics-storage-auth-basic
+      name: metrics-s-a-b # storage-auth-basic
+      targetPort: metrics-s-a-b # storage-auth-basic
     - port: 9149
       protocol: TCP
-      name: metrics-storage-auth-bearer
-      targetPort: metrics-storage-auth-bearer
+      name: metrics-s-a-be # storage-auth-bearer
+      targetPort: metrics-s-a-be # storage-auth-bearer
     - port: 9151
       protocol: TCP
-      name: metrics-storage-sharing
-      targetPort: metrics-storage-sharing
+      name: metrics-s-sh # storage-sharing
+      targetPort: metrics-s-sh # storage-sharing
     - port: 9156
       protocol: TCP
-      name: metrics-storage-home
-      targetPort: metrics-storage-home
+      name: metrics-s-h # storage-home
+      targetPort: metrics-s-h # storage-home
     - port: 9159
       protocol: TCP
-      name: metrics-storage-users
-      targetPort: metrics-storage-users
+      name: metrics-s-u # storage-users
+      targetPort: metrics-s-u # storage-users
     - port: 9179
       protocol: TCP
-      name: metrics-storage-public-link
-      targetPort: metrics-storage-public-link
+      name: metrics-s-p-l # storage-public-link
+      targetPort: metrics-s-p-l # storage-public-link
     - port: 9189
       protocol: TCP
-      name: metrics-thumbnails
-      targetPort: metrics-thumbnails
+      name: metrics-t # thumbnails
+      targetPort: metrics-t # thumbnails
     - port: 9194
       protocol: TCP
-      name: metrics-settings
-      targetPort: metrics-settings
+      name: metrics-set # settings
+      targetPort: metrics-set # settings
     - port: 9205
       protocol: TCP
       name: metrics-proxy
       targetPort: metrics-proxy
     - port: 9217
       protocol: TCP
-      name: metrics-storage-metadata
-      targetPort: metrics-storage-metadata
+      name: metrics-s-m # storage-metadata
+      targetPort: metrics-s-m # storage-metadata
     - port: 9224
       protocol: TCP
-      name: metrics-onlyoffice
-      targetPort: metrics-onlyoffice
+      name: metrics-oo # onlyoffice
+      targetPort: metrics-oo # onlyoffice
     - port: 9460
       protocol: TCP
       name: metrics-store
@@ -116,46 +116,46 @@ spec:
       port: metrics-glauth
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-frontend
+      port: metrics-s-f # storage-frontend
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-gateway
+      port: metrics-s-g # storage-gateway
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-sharing
+      port: metrics-s-s # storage-sharing
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-auth-basic
+      port: metrics-s-a-b # storage-auth-basic
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-auth-bearer
+      port: metrics-s-a-be #storage-auth-bearer
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-sharing
+      port: metrics-s-sh # storage-sharing
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-home
+      port: metrics-s-h # storage-home
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-users
+      port: metrics-s-u # storage-users
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-public-link
+      port: metrics-s-p-l # storage-public-link
     - path: /metrics
       honorLabels: true
-      port: metrics-thumbnails
+      port: metrics-t #thumbnails
     - path: /metrics
       honorLabels: true
-      port: metrics-settings
+      port: metrics-set # settings
     - path: /metrics
       honorLabels: true
       port: metrics-proxy
     - path: /metrics
       honorLabels: true
-      port: metrics-storage-metadata
+      port: metrics-s-m # storage-metadata
     - path: /metrics
       honorLabels: true
-      port: metrics-onlyoffice
+      port: metrics-oo # onlyoffice
     - path: /metrics
       honorLabels: true
       port: metrics-store
