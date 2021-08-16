@@ -50,25 +50,25 @@ spec:
               value: "false"
             - name: OCIS_URL
               value: https://ocis.host.k3d.internal
+
             - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
             - name: PROXY_OIDC_ISSUER
               value: https://keycloak.host.k3d.internal/auth/realms/oCIS
+
             - name: WEB_OIDC_AUTHORITY
               value: https://keycloak.host.k3d.internal/auth/realms/oCIS
             - name: WEB_OIDC_CLIENT_ID
               value: web
             - name: WEB_OIDC_METADATA_URL
               value: https://keycloak.host.k3d.internal/auth/realms/oCIS/.well-known/openid-configuration
+
             - name: STORAGE_OIDC_ISSUER
               value: https://keycloak.host.k3d.internal
             - name: STORAGE_LDAP_IDP
               value: https://keycloak.host.k3d.internal/auth/realms/oCIS
-
             - name: STORAGE_HOME_DRIVER
               value: s3ng
-#            - name: STORAGE_USERS_DRIVER
-#              value: s3ng
             - name: STORAGE_METADATA_DRIVER
               value: ocis # keep metadata on ocis storage since this are only small files atm
             - name: STORAGE_DRIVER_S3NG_ENDPOINT
@@ -87,16 +87,16 @@ spec:
                   key: secretkey
             - name: STORAGE_DRIVER_S3NG_BUCKET
               value: ocis-bucket
+            - name: STORAGE_LDAP_BIND_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: storage-ldap-bind-password
+                  key: password
 
             - name: IDP_LDAP_BIND_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: idp-ldap-bind-password
-                  key: password
-            - name: STORAGE_LDAP_BIND_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: storage-ldap-bind-password
                   key: password
             - name: OCIS_JWT_SECRET
               valueFrom:
