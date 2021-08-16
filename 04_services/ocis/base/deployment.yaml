@@ -147,46 +147,46 @@ spec:
               name: metrics-glauth
             - containerPort: 9141
               protocol: TCP
-              name: metrics-storage-frontend
+              name: metrics-s-f # storage-frontend
             - containerPort: 9143
               protocol: TCP
-              name: metrics-storage-gateway
+              name: metrics-s-g # storage-gateway
             - containerPort: 9145
               protocol: TCP
-              name: metrics-storage-sharing
+              name: metrics-s-s # storage-sharing
             - containerPort: 9147
               protocol: TCP
-              name: metrics-storage-auth-basic
+              name: metrics-s-a-b # storage-auth-basic
             - containerPort: 9149
               protocol: TCP
-              name: metrics-storage-auth-bearer
+              name: metrics-s-a-be # storage-auth-bearer
             - containerPort: 9151
               protocol: TCP
-              name: metrics-storage-sharing
+              name: metrics-s-sh # storage-sharing
             - containerPort: 9156
               protocol: TCP
-              name: metrics-storage-home
+              name: metrics-s-h # storage-home
             - containerPort: 9159
               protocol: TCP
-              name: metrics-storage-users
+              name: metrics-s-u # storage-users
             - containerPort: 9179
               protocol: TCP
-              name: metrics-storage-public-link
+              name: metrics-s-p-l # storage-public-link
             - containerPort: 9189
               protocol: TCP
-              name: metrics-thumbnails
+              name: metrics-t # thumbnails
             - containerPort: 9194
               protocol: TCP
-              name: metrics-settings
+              name: metrics-set # settings
             - containerPort: 9205
               protocol: TCP
               name: metrics-proxy
             - containerPort: 9217
               protocol: TCP
-              name: metrics-storage-metadata
+              name: metrics-s-m # storage-metadata
             - containerPort: 9224
               protocol: TCP
-              name: metrics-onlyoffice
+              name: metrics-oo # onlyoffice
             - containerPort: 9460
               protocol: TCP
               name: metrics-store
