@@ -1,5 +1,0 @@
-resources:
-  - ../../base
-  - s3-credentials.yaml
-
-namespace: nextcloud

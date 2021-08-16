@@ -1,8 +1,0 @@
-resources:
-  - nextcloud-psp.yaml
-  - rbac.yaml
-  - postgres.yaml
-  - nextcloud-release.yaml
-  - ingressroute.yaml
-
-namespace: nextcloud
