@@ -317,7 +317,13 @@ spec:
         enabled: true
         minAvailable: 1
         maxUnavailable: ""
-
+      resources:
+        limits:
+          cpu: 200m
+          memory: 2Gi
+        requests:
+          cpu: 100m
+          memory: 1Gi
       prometheusSpec:
         image:
           repository: quay.io/prometheus/prometheus

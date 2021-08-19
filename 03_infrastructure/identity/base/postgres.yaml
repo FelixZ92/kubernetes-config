@@ -12,6 +12,13 @@ spec:
   volume:
     size: 2Gi
   numberOfInstances: 2
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 200M
   users:
     # database owner
     keycloak:
