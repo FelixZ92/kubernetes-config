@@ -30,7 +30,7 @@ spec:
             name: entrypoint
       containers:
         - name: ocis-web
-          image: owncloud/ocis:1.10
+          image: owncloud/ocis@sha256:6a621f8ee87bf8efba601b4922dffe30d0ed77802c0192d104f60d8e46766728
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
