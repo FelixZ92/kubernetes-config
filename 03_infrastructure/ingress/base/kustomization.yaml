@@ -2,4 +2,5 @@ resources:
   - psp.yaml
   - traefik-release.yaml
   - ingress.yaml
+  - podmonitor.yaml
 namespace: traefik
