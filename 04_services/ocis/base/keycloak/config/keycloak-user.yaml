@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-user-config
+data:
+  definition.json: |
+    {
+      "username": "test-user",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Wurzl",
+      "lastName": "Prumpf",
+      "email": "blablub@test.com"
+    }

@@ -1,0 +1,3 @@
+resources:
+  - keycloak-user.yaml
+  - realm-config.yaml
