@@ -10,6 +10,9 @@ spec:
     - port: metrics
       honorLabels: true
       path: /metrics
+  namespaceSelector:
+    matchNames:
+      - traefik
   selector:
     matchLabels:
       app.kubernetes.io/instance: traefik
