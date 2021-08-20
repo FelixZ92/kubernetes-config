@@ -7,6 +7,7 @@ spec:
   parallelism: 1
   template:
     spec:
+      automountServiceAccountToken: false
       restartPolicy: Never
       securityContext:
         runAsUser: 65534
@@ -44,6 +45,13 @@ spec:
               name: keycloak-group-config
             - mountPath: /definitions/realms/applications/clients/k8s/definition
               name: k8s-client-config
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 50m
+              memory: 256Mi
       volumes:
         - name: realm-config
           configMap:

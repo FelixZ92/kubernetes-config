@@ -15,10 +15,21 @@ spec:
       labels:
         app.kubernetes.io/name: forward-auth-bouncer
     spec:
+      serviceAccountName: forward-auth-bouncer
       containers:
         - name: forward-auth-bouncer
           image: registry.gitlab.com/felixz92/forward-auth-bouncer-go:v0.2.4
           imagePullPolicy: IfNotPresent
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /ping
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /ping
+            periodSeconds: 10
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -57,3 +68,9 @@ spec:
       protocol: TCP
       targetPort: http
   type: ClusterIP
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: forward-auth-bouncer
+automountServiceAccountToken: false

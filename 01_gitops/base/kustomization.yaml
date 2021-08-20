@@ -1,5 +1,5 @@
 resources:
-  - https://github.com/fluxcd/flux2/manifests/install?ref=v0.11.0
+  - https://github.com/fluxcd/flux2/releases/download/v0.16.2/install.yaml
 
 namespace: flux-system
 

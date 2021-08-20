@@ -1,5 +1,2 @@
 resources:
   - ../../base
-  - nfs-server-provisioner.yaml
-
-namespace: nfs-provisioner

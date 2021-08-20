@@ -7,6 +7,7 @@ spec:
   parallelism: 1
   template:
     spec:
+      automountServiceAccountToken: false
       restartPolicy: Never
       securityContext:
         runAsUser: 65534
@@ -46,6 +47,13 @@ spec:
               name: k8s-client-config
             - mountPath: /definitions/realms/k8s/clients/k8s/secret
               name: k8s-client-secret
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 50m
+              memory: 256Mi
       volumes:
         - name: realm-config
           configMap:
