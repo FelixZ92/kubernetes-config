@@ -13,3 +13,6 @@ patches:
         value:
           runAsNonRoot: true
           runAsUser: 100
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/memory
+        value: 512Mi

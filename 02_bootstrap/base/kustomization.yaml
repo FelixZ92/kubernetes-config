@@ -2,12 +2,11 @@ resources:
   - global-resources.yaml
   - helm-repos.yaml
   - pki.yaml
-  - storage.yaml
+#  - storage.yaml
   - observability.yaml
   - ingress.yaml
   - database.yaml
   - identity.yaml
   - dashboard.yaml
   - logging.yaml
-#  - nextcloud.yaml
   - ocis.yaml
