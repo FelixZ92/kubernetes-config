@@ -2,8 +2,6 @@ resources:
   - postgres-operator-release.yaml
   - ingress.yaml
   - postgres-monitor
+  - postgres-operator-ui-release.yaml
 
 namespace: postgres-operator
-
-patchesStrategicMerge:
-  - postgres-operator-ui-patch.yaml
