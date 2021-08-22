@@ -1,8 +1,5 @@
 resources:
   - postgres-operator-release.yaml
-  - https://raw.githubusercontent.com/zalando/postgres-operator/v1.6.0/ui/manifests/deployment.yaml
-  - https://raw.githubusercontent.com/zalando/postgres-operator/v1.6.0/ui/manifests/service.yaml
-  - https://raw.githubusercontent.com/zalando/postgres-operator/v1.6.0/ui/manifests/ui-service-account-rbac.yaml
   - ingress.yaml
   - postgres-monitor
 
