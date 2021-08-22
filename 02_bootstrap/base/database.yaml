@@ -25,3 +25,6 @@ spec:
     substitute:
       ENVIRONMENT: "${ENVIRONMENT}"
       BASE_DOMAIN: "${BASE_DOMAIN}"
+    substituteFrom:
+      - kind: Secret
+        name:
