@@ -34,5 +34,7 @@ spec:
       spilo_fsgroup: 103
   install:
     crds: Skip
+    disableOpenAPIValidation: true
   upgrade:
     crds: Skip
+    disableOpenAPIValidation: true
