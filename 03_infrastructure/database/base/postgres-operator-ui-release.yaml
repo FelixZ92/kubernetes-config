@@ -23,6 +23,9 @@ spec:
         name: postgres-operator-ui
         namespace: postgres-operator
       interval: 10m
+  dependsOn:
+    - name: postgres-operator-crds
+      namespace: postgres-operator
   postRenderers:
     - kustomize:
         patchesJson6902:

@@ -17,6 +17,8 @@ spec:
   dependsOn:
     - name: kube-prometheus-stack
       namespace: monitoring
+    - name: postgres-operator-crds
+      namespace: postgres-operator
   chart:
     spec:
       chart: postgres-operator
@@ -32,3 +34,7 @@ spec:
       spilo_runasuser: 101
       spilo_runasgroup: 103
       spilo_fsgroup: 103
+  install:
+    crds: Skip
+  upgrade:
+    crds: Skip
