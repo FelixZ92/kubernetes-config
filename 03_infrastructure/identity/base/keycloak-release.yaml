@@ -156,12 +156,12 @@ spec:
     serviceMonitor:
       enabled: true
       labels:
-        prometheus: kube-prometheus-stack
+        monitoring: kube-prometheus-stack
 
     prometheusRule:
       enabled: true
       labels:
-        prometheus: kube-prometheus-stack
+        monitoring: kube-prometheus-stack
       rules:
         - alert: KeycloakJavaHeapThresholdExceeded
           annotations:

@@ -22,8 +22,6 @@ deploy_flux() {
   KNOWN_HOSTS_FILE="${3}"
   ENVIRONMENT="${4}"
 
-  kubectl create namespace flux-system || echo "namespace flux-system already exists"
-
   kubectl --namespace flux-system \
     create secret generic flux-system \
     --from-file="identity.pub=$KEYFILE.pub" \
@@ -33,4 +31,14 @@ deploy_flux() {
 
   kustomize build "${BASEDIR}/01_gitops/base/" | kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/kustomize-controller -n flux-system
+
+#  deploy_pki "${BASEDIR}" "${ENVIRONMENT}"
+}
+
+deploy_pki() {
+  BASEDIR="${1}"
+  ENVIRONMENT="${2}"
+
+  kustomize build "${BASEDIR}/03_infrastructure/pki/overlays/dev" | envsubst | kubectl apply -f -
+  kubectl wait --for=condition=available --timeout=600s deployment/sealed-secrets-controller -n kube-system
 }

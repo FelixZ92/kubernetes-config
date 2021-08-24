@@ -610,16 +610,16 @@ spec:
 
         ruleSelector:
           matchLabels:
-            prometheus: kube-prometheus-stack
+            monitoring: kube-prometheus-stack
         serviceMonitorSelector:
           matchLabels:
-            prometheus: kube-prometheus-stack
+            monitoring: kube-prometheus-stack
         podMonitorSelector:
           matchLabels:
-            prometheus: kube-prometheus-stack
+            monitoring: kube-prometheus-stack
         probeSelector:
           matchLabels:
-            prometheus: kube-prometheus-stack
+            monitoring: kube-prometheus-stack
     prometheus-node-exporter:
       resources:
         limits:

@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   labels:
-    prometheus: kube-prometheus-stack
+    monitoring: kube-prometheus-stack
     app: kube-prometheus-stack
   name: postgres.rules
 spec:
