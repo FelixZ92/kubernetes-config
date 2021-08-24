@@ -82,4 +82,4 @@ spec:
     serviceMonitor:
       enabled: true
       additionalLabels:
-        release: kube-prometheus-stack
+        prometheus: kube-prometheus-stack

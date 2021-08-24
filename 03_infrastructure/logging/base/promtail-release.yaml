@@ -17,7 +17,7 @@ spec:
   chart:
     spec:
       chart: promtail
-      version: '2.2.0'
+      version: '2.6.0'
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -97,4 +97,4 @@ spec:
     serviceMonitor:
       enabled: true
       additionalLabels:
-        release: kube-prometheus-stack
+        prometheus: kube-prometheus-stack

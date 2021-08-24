@@ -22,7 +22,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     app.kubernetes.io/name: ocis-metrics
-    release: kube-prometheus-stack
+    prometheus: kube-prometheus-stack
   name: ocis
 spec:
   endpoints:

@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   labels:
-    release: kube-prometheus-stack
+    prometheus: kube-prometheus-stack
   name: loki.rules
 spec:
   "groups":
