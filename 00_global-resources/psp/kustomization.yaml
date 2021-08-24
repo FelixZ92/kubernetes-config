@@ -1,2 +1,3 @@
 resources:
   - restricted.yaml
+  - allow-host-ports.yaml
