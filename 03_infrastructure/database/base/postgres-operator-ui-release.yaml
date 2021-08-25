@@ -23,20 +23,19 @@ spec:
         name: postgres-operator-ui
         namespace: postgres-operator
       interval: 10m
-#  postRenderers:
-#    - kustomize:
-#        patchesJson6902:
-#          - patch:
-#              - op: add
-#                path: /spec/template/spec
-#                value:
-#                  securityContext:
-#                    runAsGroup: 65532
-#                    runAsNonRoot: true
-#                    runAsUser: 65532
-#            target:
-#              name: postgres-operator-ui
-#              kind: Deployment
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - patch:
+              - op: add
+                path: /spec/template/spec/securityContext
+                value:
+                  runAsGroup: 65532
+                  runAsNonRoot: true
+                  runAsUser: 65532
+            target:
+              name: postgres-operator-ui
+              kind: Deployment
 
   values:
     # configure UI ENVs
