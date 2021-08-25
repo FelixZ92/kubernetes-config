@@ -50,7 +50,8 @@ spec:
 
     ## Labels to apply to all resources
     ##
-    commonLabels: { }
+    commonLabels:
+      monitoring: kube-prometheus-stack
     # scmhash: abc123
     # myLabel: aakkmd
 
