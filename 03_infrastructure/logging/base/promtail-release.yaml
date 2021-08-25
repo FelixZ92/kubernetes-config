@@ -69,7 +69,7 @@ spec:
         monitoring: kube-prometheus-stack
 
     config:
-      lokiAddress: http://loki-gateway/loki/api/v1/push
+      lokiAddress: http://loki:3100/loki/api/v1/push
 
       extraScrapeConfigs:
         - job_name: journal
