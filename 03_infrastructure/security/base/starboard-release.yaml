@@ -218,3 +218,13 @@ spec:
               - kube-hunter
             rules:
               - runAsRootAllowed
+    securityContext:
+      privileged: false
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsGroup: 10000
+      runAsNonRoot: true
+      runAsUser: 10000
+      capabilities:
+        drop:
+          - ALL
