@@ -27,6 +27,8 @@ spec:
     targetNamespaces: ""
     trivy:
       imageRef: bitnami/trivy:0.19.2
+      mode: ClientServer
+      serverURL: "https://trivy:4954"
     polaris:
       imageRef: quay.io/fairwinds/polaris:4.0
       # resources resource requests and limits
