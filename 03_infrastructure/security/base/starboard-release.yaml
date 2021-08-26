@@ -17,16 +17,13 @@ spec:
   chart:
     spec:
       chart: starboard-operator
-      version: '0.7.0'
+      version: '0.6.0'
       sourceRef:
         kind: HelmRepository
         name: aquasecurity
         namespace: flux-system
       interval: 10m
   values:
-    kubeBench:
-      imageRef: docker.io/aquasec/kube-bench:0.6.3
-
     polaris:
       imageRef: quay.io/fairwinds/polaris:4.0
       # resources resource requests and limits
@@ -221,67 +218,3 @@ spec:
               - kube-hunter
             rules:
               - runAsRootAllowed
-
-    conftest:
-      # imageRef the image reference
-      imageRef: docker.io/openpolicyagent/conftest:v0.25.0
-      # resources resource requests and limits
-      resources:
-        requests:
-          cpu: 50m
-          memory: 50M
-        limits:
-          cpu: 300m
-          memory: 300M
-
-    aqua:
-      # imageRef Aqua scanner image reference. The tag determines the version of the scanner binary executable and it must
-      # be compatible with version of Aqua server.
-      imageRef: docker.io/aquasec/scanner:5.3
-      # serverURL the endpoint URL of Aqua management console
-      serverURL:
-      # username the Aqua management console username
-      username:
-      # password the Aqua management console password
-      password:
-
-    rbac:
-      create: true
-    serviceAccount:
-      # Specifies whether a service account should be created.
-      create: true
-      annotations: { }
-      # name specifies the name of the k8s Service Account. If not set and create is
-      # true, a name is generated using the fullname template.
-      name: ""
-
-    podAnnotations: { }
-
-    podSecurityContext: { }
-    # fsGroup: 2000
-
-    securityContext:
-      privileged: false
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
-      capabilities:
-        drop:
-          - ALL
-
-    resources: { }
-      # We usually recommend not to specify default resources and to leave this as a conscious
-      # choice for the user. This also increases chances charts run on environments with little
-      # resources, such as Minikube. If you do want to specify resources, uncomment the following
-      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-      # limits:
-      #   cpu: 100m
-      #   memory: 128Mi
-      # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-
-    nodeSelector: { }
-
-    tolerations: [ ]
-
-    affinity: { }
