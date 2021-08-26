@@ -10,3 +10,4 @@ resources:
   - dashboard.yaml
   - logging.yaml
   - ocis.yaml
+  - security.yaml
