@@ -13,6 +13,9 @@ spec:
     name: infrastructure
     namespace: flux-system
   validation: server
+  dependsOn:
+    - name: prometheus-operator-crds
+      namespace: monitoring
   postBuild:
     substitute:
       ENVIRONMENT: "${ENVIRONMENT}"
