@@ -1,0 +1,21 @@
+resources:
+  - ../../base/
+
+namespace: traefik
+
+patches:
+  - target:
+      name: traefik-gatekeeper
+      kind: HelmRelease
+    patch: |-
+      - op: replace
+        path: /spec/values/config/skipOpenidProviderTlsVerify
+        value: true
+
+configMapGenerator:
+  - name: forward-auth-config
+    behavior: merge
+    literals:
+      - JWKS_ENDPOINT=https://keycloak.${BASE_DOMAIN}/auth/realms/k8s/protocol/openid-connect/certs
+      - JWT_VERIFY_ISSUER=https://keycloak.${BASE_DOMAIN}/auth/realms/k8s
+      - JWKS_URI_IGNORE_SSL=true

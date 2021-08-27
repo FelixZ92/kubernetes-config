@@ -507,8 +507,8 @@ spec:
     ##
     kubeControllerManager:
       enabled: true
-      endpoints:
-        - 10.42.0.1
+      endpoints: []
+      # - 10.42.0.1
       # - 10.141.4.23
       # - 10.141.4.24
 
@@ -519,26 +519,23 @@ spec:
 
     kubeEtcd:
       enabled: true
-      endpoints:
-        - 10.42.0.1
+      endpoints: []
+      # - 10.42.0.1
       # - 10.141.4.23
       # - 10.141.4.24
-      service:
-        port: 2381
-        targetPort: 2381
 
     kubeScheduler:
       enabled: true
-      endpoints:
-        - 10.42.0.1
+      endpoints: []
+#        - 10.42.0.1
       # - 10.141.4.23
       # - 10.141.4.24
 
     kubeProxy:
-      enabled: false
-      endpoints:
-        - 192.168.0.11
-        - 192.168.0.12
+      enabled: true
+      endpoints: []
+#        - 192.168.0.11
+#        - 192.168.0.12
       # - 10.141.4.23
       # - 10.141.4.24
 

@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: '1.1.0 '
+      version: '1.1.2 '
       sourceRef:
         kind: HelmRepository
         name: longhorn
@@ -50,16 +50,15 @@ spec:
       storageMinimalAvailablePercentage: ~
       upgradeChecker: ~
       defaultReplicaCount: ~
-      guaranteedEngineCPU: ~
       defaultLonghornStaticStorageClass: ~
       backupstorePollInterval: ~
       taintToleration: ~
+      systemManagedComponentsNodeSelector: ~
       priorityClass: ~
       autoSalvage: ~
       autoDeletePodWhenVolumeDetachedUnexpectedly: ~
       disableSchedulingOnCordonedNode: ~
       replicaZoneSoftAntiAffinity: ~
-      volumeAttachmentRecoveryPolicy: ~
       nodeDownPodDeletionPolicy: ~
       allowNodeDrainWithLastHealthyReplica: ~
       mkfsExt4Parameters: ~
@@ -69,16 +68,61 @@ spec:
       systemManagedPodsImagePullPolicy: ~
       allowVolumeCreationWithDegradedAvailability: ~
       autoCleanupSystemGeneratedSnapshot: ~
+      concurrentAutomaticEngineUpgradePerNodeLimit: ~
+      backingImageCleanupWaitInterval: ~
+      guaranteedEngineManagerCPU: ~
+      guaranteedReplicaManagerCPU: ~
 
-    resources: { }
-      # We usually recommend not to specify default resources and to leave this as a conscious
-      # choice for the user. This also increases chances charts run on environments with little
-      # resources, such as Minikube. If you do want to specify resources, uncomment the following
-      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-      # limits:
-      #  cpu: 100m
-      #  memory: 128Mi
-      # requests:
-      #  cpu: 100m
-    #  memory: 128Mi
+    longhornManager:
+      priorityClass: ~
+      tolerations: [ ]
+      ## If you want to set tolerations for Longhorn Manager DaemonSet, delete the `[]` in the line above
+      ## and uncomment this example block
+      # - key: "key"
+      #   operator: "Equal"
+      #   value: "value"
+      #   effect: "NoSchedule"
+      nodeSelector: { }
+      ## If you want to set node selector for Longhorn Manager DaemonSet, delete the `{}` in the line above
+      ## and uncomment this example block
+      #  label-key1: "label-value1"
+      #  label-key2: "label-value2"
+
+    longhornDriver:
+      priorityClass: ~
+      tolerations: [ ]
+      ## If you want to set tolerations for Longhorn Driver Deployer Deployment, delete the `[]` in the line above
+      ## and uncomment this example block
+      # - key: "key"
+      #   operator: "Equal"
+      #   value: "value"
+      #   effect: "NoSchedule"
+      nodeSelector: { }
+      ## If you want to set node selector for Longhorn Driver Deployer Deployment, delete the `{}` in the line above
+      ## and uncomment this example block
+      #  label-key1: "label-value1"
+      #  label-key2: "label-value2"
+
+    longhornUI:
+      priorityClass: ~
+      tolerations: [ ]
+      ## If you want to set tolerations for Longhorn UI Deployment, delete the `[]` in the line above
+      ## and uncomment this example block
+      # - key: "key"
+      #   operator: "Equal"
+      #   value: "value"
+      #   effect: "NoSchedule"
+      nodeSelector: { }
+      ## If you want to set node selector for Longhorn UI Deployment, delete the `{}` in the line above
+      ## and uncomment this example block
+      #  label-key1: "label-value1"
+      #  label-key2: "label-value2"
+
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
     #

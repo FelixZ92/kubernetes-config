@@ -1,42 +1,26 @@
 ---
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
 metadata:
-  name: longhorn-tls-certificate
+  name: dashboard-ingress
 spec:
-  secretName: tls-longhorn-ingress
-  issuerRef:
-    name: ca-clusterissuer
-    kind: ClusterIssuer
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: longhorn
-spec:
-  entryPoints:
-    - web
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: longhorn-tls
-  annotations:
-    dashboard.zippelf.com/scrape: "true"
-    dashboard.zippelf.com/logo: "https://raw.githubusercontent.com/longhorn/website/master/static/img/icon-longhorn.svg"
-    dashboard.zippelf.com/display-name: "Longhorn"
-    dashboard.zippelf.com/docs: "https://longhorn.io/docs/latest/"
-spec:
-  entryPoints:
-    - websecure
-  tls:
-    secretName: tls-longhorn-ingress
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: redirect-https
-spec:
-  redirectScheme:
-    scheme: https
-    permanent: true
+  interval: 10m0s
+  path: ./03_infrastructure/storage/longhorn/ingress/overlays/${ENVIRONMENT}
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+  postBuild:
+    substitute:
+      ENVIRONMENT: ${ENVIRONMENT}
+      BASE_DOMAIN: ${BASE_DOMAIN}
+  dependsOn:
+    - name: identity
+      namespace: keycloak
+  healthChecks:
+    - kind: Deployment
+      name: dashboard-gatekeeper
+      apiVersion: apps/v1
+      namespace: dashboard

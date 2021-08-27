@@ -20,13 +20,13 @@ source "$CURR_DIR/../common.sh"
 
 export KUBECONFIG="${HOME}/kubeconfig-rke2-vagrant.yaml"
 
-kubectl annotate node node1 'node.longhorn.io/default-disks-config=[{"name":"local-disk","path":"/var/lib/longhorn","allowScheduling":true,"tags":["ssd","fast"]}]'
-kubectl annotate node node2 'node.longhorn.io/default-disks-config=[{"name":"local-disk","path":"/var/lib/longhorn","allowScheduling":true,"tags":["ssd","fast"]}]'
-kubectl annotate node node3 'node.longhorn.io/default-disks-config=[{"name":"local-disk","path":"/var/lib/longhorn","allowScheduling":true,"tags":["ssd","fast"]}]'
+kubectl annotate node node1 'node.longhorn.io/default-disks-config=[{"name":"local-disk","path":"/var/lib/longhorn","allowScheduling":true,"tags":["ssd","fast"]}]' --overwrite
+kubectl annotate node node2 'node.longhorn.io/default-disks-config=[{"name":"local-disk","path":"/var/lib/longhorn","allowScheduling":true,"tags":["ssd","fast"]}]' --overwrite
+kubectl annotate node node3 'node.longhorn.io/default-disks-config=[{"name":"local-disk","path":"/var/lib/longhorn","allowScheduling":true,"tags":["ssd","fast"]}]' --overwrite
 
-kubectl annotate node node1 'node.longhorn.io/default-node-tags=["fast","storage"]'
-kubectl annotate node node2 'node.longhorn.io/default-node-tags=["fast","storage"]'
-kubectl annotate node node3 'node.longhorn.io/default-node-tags=["fast","storage"]'
+kubectl annotate node node1 'node.longhorn.io/default-node-tags=["fast","storage"]' --overwrite
+kubectl annotate node node2 'node.longhorn.io/default-node-tags=["fast","storage"]' --overwrite
+kubectl annotate node node3 'node.longhorn.io/default-node-tags=["fast","storage"]' --overwrite
 
 deploy_global_resources "${BASEDIR}"
 

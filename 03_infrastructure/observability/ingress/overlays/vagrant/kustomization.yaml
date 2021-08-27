@@ -3,7 +3,7 @@ resources:
 
 patches:
   - target:
-      name: dashboard-gatekeeper
+      name: ".*-gatekeeper"
       kind: HelmRelease
     patch: |-
       - op: replace

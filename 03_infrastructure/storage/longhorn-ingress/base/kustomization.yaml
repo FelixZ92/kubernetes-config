@@ -1,0 +1,7 @@
+resources:
+  - cert.yaml
+  - gatekeeper-release.yaml
+  - ingressroute.yaml
+  - middlewares.yaml
+
+namespace: longhorn-system

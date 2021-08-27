@@ -3,7 +3,7 @@ resources:
 
 patches:
   - target:
-      name: dashboard-gatekeeper
+      name: longhorn-gatekeeper
       kind: HelmRelease
     patch: |-
       - op: replace

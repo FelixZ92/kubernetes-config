@@ -1,0 +1,12 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: longhorn-tls-certificate
+spec:
+  secretName: tls-longhorn-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+  dnsNames:
+    - longhorn.${BASE_DOMAIN}
