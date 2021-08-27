@@ -1,3 +1,4 @@
 resources:
+  - sealed-secrets-release.yaml
   - starboard-release.yaml
   - trivy-release.yaml

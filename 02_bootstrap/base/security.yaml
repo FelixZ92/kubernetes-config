@@ -12,6 +12,9 @@ spec:
     kind: GitRepository
     name: infrastructure
     namespace: flux-system
+  dependsOn:
+    - name: prometheus-operator-crds
+      namespace: monitoring
   validation: server
   postBuild:
     substitute:
