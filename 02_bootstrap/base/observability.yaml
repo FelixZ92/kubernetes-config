@@ -32,8 +32,6 @@ spec:
     namespace: flux-system
   validation: server
   dependsOn:
-    - name: pki
-      namespace: kube-system
     - name: prometheus-operator-crds
       namespace: monitoring
   healthChecks:
