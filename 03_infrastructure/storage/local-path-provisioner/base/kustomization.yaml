@@ -1,5 +1,5 @@
 resources:
-  - github.com/rancher/local-path-provisioner/deploy?ref=master
+  - github.com/rancher/local-path-provisioner/deploy?ref=v0.0.20
   - psp.yaml
 
 namespace: local-path-storage

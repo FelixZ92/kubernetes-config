@@ -13,7 +13,7 @@ apply_secrets() {
   echo "Waiting for sealed secrets to become available"
   kubectl wait --for=condition=ready --timeout=600s helmreleases.helm.toolkit.fluxcd.io -n kube-system sealed-secrets-controller
   set -x
-  gopass-kubeseal applyBulk -f "$BASEDIR/02_bootstrap/overlays/dev/secrets.yaml"
+  gopass-kubeseal applyBulk -f "$BASEDIR/02_bootstrap/overlays/${ENVIRONMENT}/secrets.yaml"
 }
 
 deploy_flux() {
