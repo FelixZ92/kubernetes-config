@@ -39,10 +39,6 @@ spec:
       name: cert-manager
       apiVersion: apps/v1
       namespace: cert-manager
-    - kind: Deployment
-      name: sealed-secrets-controller
-      apiVersion: apps/v1
-      namespace: kube-system
   postBuild:
     substitute:
       ENVIRONMENT: "${ENVIRONMENT}"
