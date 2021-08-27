@@ -1,3 +1,0 @@
-resources:
-  - rules.yaml
-namespace: kube-system

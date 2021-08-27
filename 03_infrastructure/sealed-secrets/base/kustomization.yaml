@@ -1,0 +1,3 @@
+resources:
+  - sealed-secrets-release.yaml
+  - rules.yaml
