@@ -5,18 +5,19 @@ metadata:
   namespace: monitoring
 spec:
   values:
-    alertmanagerSpec:
-      replicas: 2
-      retention: 120h
-      storage:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: longhorn-local
-            accessModes: [ "ReadWriteOnce" ]
-            resources:
-              requests:
-                storage: 2700Mi
-      externalUrl: "https://alertmanager.${BASE_DOMAIN}"
+    alertmanager:
+      alertmanagerSpec:
+        replicas: 2
+        retention: 120h
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: longhorn-local
+              accessModes: [ "ReadWriteOnce" ]
+              resources:
+                requests:
+                  storage: 2700Mi
+        externalUrl: "https://alertmanager.${BASE_DOMAIN}"
 
     prometheus:
       prometheusSpec:
