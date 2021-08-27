@@ -11,7 +11,8 @@ CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 BASEDIR=$(dirname "$(dirname "$CURR_DIR")")
 
-ENVIRONMENT=vagrant
+export BASE_DOMAIN=192.168.0.13
+export ENVIRONMENT=vagrant
 
 # shellcheck source=hack/secrets/secrets-common.sh
 source "$CURR_DIR/../secrets/common.sh"
@@ -30,16 +31,12 @@ kubectl annotate node node3 'node.longhorn.io/default-node-tags=["fast","storage
 
 deploy_global_resources "${BASEDIR}"
 
-deploy_crds "${BASEDIR}"
-
-#deploy_sealed_secrets "${BASEDIR}"
-
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
-kustomize build "$BASEDIR/02_bootstrap/overlays/${ENVIRONMENT}" | kubectl apply -f -
+kustomize build "$BASEDIR/01_gitops/bootstrap/overlays/${ENVIRONMENT}/" | envsubst | kubectl apply -f -
 
+kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n flux-system bootstrap
 kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system pki
-
 apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
 
 update_local_ca_certs "${BASEDIR}"
