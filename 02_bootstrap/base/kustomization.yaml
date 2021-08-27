@@ -10,4 +10,5 @@ resources:
   - dashboard.yaml
   - logging.yaml
   - ocis.yaml
+  - sealed-controller.yaml
   - security.yaml
