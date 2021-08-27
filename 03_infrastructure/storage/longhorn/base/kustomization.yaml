@@ -1,8 +1,8 @@
 resources:
   - longhorn-release.yaml
 #  - https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
-#  - storageclass.yaml
-#  - default-svc-account.yaml
-#  - ingress.yaml
+  - storageclass.yaml
+  - default-svc-account.yaml
+  - ingress.yaml
 
 namespace: longhorn-system
