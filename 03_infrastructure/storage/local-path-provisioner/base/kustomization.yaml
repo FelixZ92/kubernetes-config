@@ -6,3 +6,13 @@ namespace: local-path-storage
 
 patchesStrategicMerge:
   - security-patch.yaml
+
+patches:
+  - target:
+      kind: ConfigMap
+      name: local-path-config
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value:
+          kustomize.toolkit.fluxcd.io/substitute: disabled
