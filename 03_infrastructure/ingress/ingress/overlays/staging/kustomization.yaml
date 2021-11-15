@@ -1,0 +1,11 @@
+resources:
+  - ../../base/
+
+namespace: traefik
+
+configMapGenerator:
+  - name: forward-auth-config
+    behavior: merge
+    literals:
+      - JWKS_ENDPOINT=https://keycloak.${BASE_DOMAIN}/auth/realms/k8s/protocol/openid-connect/certs
+      - JWT_VERIFY_ISSUER=https://keycloak.${BASE_DOMAIN}/auth/realms/k8s
