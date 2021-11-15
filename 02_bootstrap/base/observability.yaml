@@ -34,6 +34,8 @@ spec:
   dependsOn:
     - name: prometheus-operator-crds
       namespace: monitoring
+    - name: storage
+      namespace: kube-system
   healthChecks:
     - kind: StatefulSet
       name: prometheus-kube-prometheus-stack-prometheus
