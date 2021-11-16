@@ -27,7 +27,6 @@ spec:
     # Pod disruption budget
     podDisruptionBudget:
       enabled: true
-      maxUnavailable: 2
       minAvailable: 1
 
     additionalArguments:
