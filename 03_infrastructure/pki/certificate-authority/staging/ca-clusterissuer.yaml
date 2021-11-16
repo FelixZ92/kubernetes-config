@@ -1,4 +1,4 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: ca-clusterissuer
@@ -7,8 +7,9 @@ spec:
     privateKeySecretRef:
       name: lets-encrypt-account-key
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: felix.zippel@mailbox.org
+    email: zerdus9999@gmail.com
     solvers:
       - http01:
           ingress:
-            class: traefik-internal
+            class: traefik-lb
+            serviceType: ClusterIP

@@ -13,10 +13,6 @@ metadata:
   name: traefik
   namespace: monitoring
 spec:
-  interval: 5m
-  dependsOn:
-    - name: kube-prometheus-stack
-      namespace: monitoring
   chart:
     spec:
       version: '10.6.2'
@@ -34,7 +30,6 @@ spec:
       - "--entryPoints.websecure.proxyProtocol.trustedIPs=10.0.0.2"
       - "--entryPoints.web.forwardedHeaders.trustedIPs=10.0.0.2"
       - "--entryPoints.websecure.forwardedHeaders.trustedIPs=10.0.0.2"
-      - "--providers.kubernetesingress.ingressclass=traefik-internal"
 
     # Configure ports
     ports:

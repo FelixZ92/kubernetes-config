@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: whoami
+  namespace: default
   labels:
     app: whoami
 spec:
@@ -34,6 +35,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: whoami
+  namespace: default
 spec:
   selector:
     app: whoami
@@ -44,15 +46,33 @@ spec:
       targetPort: web
   type: ClusterIP
 ---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: traefik-lb
+spec:
+  controller: traefik.io/ingress-controller
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+  namespace: default
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: whoami
+  namespace: default
 spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`whoami.127.0.0.1.nip.io`)
+    - match: Host(`whoami2.167.233.9.8.nip.io`)
       kind: Rule
       services:
         - name: whoami
@@ -64,11 +84,12 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: whoami-tls
+  namespace: default
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`whoami.127.0.0.1.nip.io`)
+    - match: Host(`whoami2.167.233.9.8.nip.io`)
       kind: Rule
       services:
         - name: whoami
@@ -76,16 +97,33 @@ spec:
 #      middlewares:
 #        - name: forward-auth-bouncer-admin
   tls:
-    secretName: tls-whoami-ingress
+    secretName: tls-whoami2-ingress
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: whoami-tls-certificate
+  namespace: default
 spec:
-  secretName: tls-whoami-ingress
+  secretName: tls-whoami2-ingress
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - whoami.127.0.0.1.nip.io
+    - whoami2.167.233.9.8.nip.io
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`traefik.167.233.9.8.nip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService

@@ -11,7 +11,7 @@ CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 BASEDIR=$(dirname "$(dirname "$CURR_DIR")")
 
-export BASE_DOMAIN=static.24.192.12.49.clients.your-server.de
+export BASE_DOMAIN=162.55.159.246.nip.io
 export ENVIRONMENT=staging
 
 # shellcheck source=hack/secrets/secrets-common.sh
