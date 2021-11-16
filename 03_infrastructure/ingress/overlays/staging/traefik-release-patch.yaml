@@ -19,47 +19,22 @@ spec:
       namespace: monitoring
   chart:
     spec:
-      chart: traefik
-      version: '10.3.1'
-      sourceRef:
-        kind: HelmRepository
-        name: traefik
-        namespace: traefik
-      interval: 10m
+      version: '10.6.2'
   values:
     deployment:
-      replicas: 1
+      replicas: 3
 
     # Pod disruption budget
     podDisruptionBudget:
-      enabled: false
-      # maxUnavailable: 1
-      # minAvailable: 0
+      enabled: true
+      maxUnavailable: 2
+      minAvailable: 1
 
-    ingressRoute:
-      dashboard:
-        enabled: false
-    metrics:
-      prometheus:
-        entrypoint: metrics
-    logs:
-      general:
-        level: ERROR
-      access:
-        enabled: true
-        filters: { }
-        fields:
-          general:
-            defaultmode: keep
-            names: { }
-          headers:
-            defaultmode: drop
-            names: { }
-
-    additionalArguments: [ ]
-    #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
-    #  - "--log.level=DEBUG"
-
+    additionalArguments:
+      - "--entryPoints.web.proxyProtocol.trustedIPs=10.0.0.2"
+      - "--entryPoints.websecure.proxyProtocol.trustedIPs=10.0.0.2"
+      - "--entryPoints.web.forwardedHeaders.trustedIPs=10.0.0.2"
+      - "--entryPoints.websecure.forwardedHeaders.trustedIPs=10.0.0.2"
 
     # Configure ports
     ports:
@@ -78,7 +53,10 @@ spec:
     service:
       enabled: true
       type: LoadBalancer
-
+      annotations:
+        load-balancer.hetzner.cloud/name: "staging-ingress"
+        load-balancer.hetzner.cloud/use-private-ip: "true"
+        load-balancer.hetzner.cloud/uses-proxyprotocol: "true"
     hostNetwork: false
 
 

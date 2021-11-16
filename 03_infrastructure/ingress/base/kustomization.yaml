@@ -1,5 +1,4 @@
 resources:
-  - rolebinding-allow-host-ports.yaml
   - traefik-release.yaml
   - ingress.yaml
   - podmonitor.yaml
