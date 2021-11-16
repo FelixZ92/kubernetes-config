@@ -3,5 +3,12 @@ kind: ClusterIssuer
 metadata:
   name: ca-clusterissuer
 spec:
-  ca:
-    secretName: dev-ca-secret
+  acme:
+    privateKeySecretRef:
+      name: lets-encrypt-account-key
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: felix.zippel@mailbox.org
+    solvers:
+      - http01:
+          ingress:
+            class: traefik-internal

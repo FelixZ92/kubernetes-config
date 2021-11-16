@@ -34,6 +34,7 @@ spec:
       - "--entryPoints.websecure.proxyProtocol.trustedIPs=10.0.0.2"
       - "--entryPoints.web.forwardedHeaders.trustedIPs=10.0.0.2"
       - "--entryPoints.websecure.forwardedHeaders.trustedIPs=10.0.0.2"
+      - "--providers.kubernetesingress.ingressclass=traefik-internal"
 
     # Configure ports
     ports:
