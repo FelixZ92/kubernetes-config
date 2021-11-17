@@ -2,6 +2,8 @@ resources:
   - controller/flux-system.yaml
   - controller/sealed-controller.yaml
   - controller/cert-manager.yaml
+  - controller/kubernetes-replicator.yaml
+  - controller/secret-generator.yaml
   - certificate-authority.yaml
   - global.yaml
   - gitrepos.yaml
