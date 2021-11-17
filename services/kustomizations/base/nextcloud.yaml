@@ -15,7 +15,7 @@ spec:
       namespace: postgres-operator
   sourceRef:
     kind: GitRepository
-    name: infrastructure
+    name: k8s-dev
     namespace: flux-system
   validation: server
   postBuild:

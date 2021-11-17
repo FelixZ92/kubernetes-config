@@ -2,7 +2,7 @@
 apiVersion: scheduling.k8s.io/v1
 kind: PriorityClass
 metadata:
-  name: infrastructure-critical
+  name: k8s-dev-critical
 value: 200000000
 globalDefault: false
 description: "Used for critical infrastructure applications"
