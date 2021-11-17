@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
 spec:
   interval: 10m0s
-  path: system/namespaces
+  path: system/global
   prune: true
   sourceRef:
     kind: GitRepository

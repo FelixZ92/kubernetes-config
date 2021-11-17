@@ -3,6 +3,5 @@ resources:
   - controller/sealed-controller.yaml
   - controller/cert-manager.yaml
   - certificate-authority.yaml
-  - crds.yaml
   - global.yaml
   - gitrepos.yaml
