@@ -1,0 +1,48 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: postgres-operator-crds
+  namespace: postgres-operator
+spec:
+  interval: 10m0s
+  path: infrastructure/database/crds
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: database
+  namespace: postgres-operator
+spec:
+  interval: 10m0s
+  path: infrastructure/database/overlays/${ENVIRONMENT}
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+  dependsOn:
+    - name: observability
+      namespace: monitoring
+    - name: postgres-operator-crds
+      namespace: postgres-operator
+  healthChecks:
+    - kind: Deployment
+      name: postgres-operator
+      apiVersion: apps/v1
+      namespace: postgres-operator
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-env
+#    substituteFrom:
+#      - kind: Secret
+#        name:
+

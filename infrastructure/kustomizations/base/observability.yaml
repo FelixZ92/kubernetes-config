@@ -1,0 +1,51 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: prometheus-operator-crds
+  namespace: monitoring
+spec:
+  interval: 10m0s
+  path: infrastructure/observability/crds
+  prune: true
+  dependsOn:
+    - name: global-resources
+      namespace: kube-system
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: observability
+  namespace: monitoring
+spec:
+  interval: 10m0s
+  path: infrastructure/observability/overlays/${ENVIRONMENT}
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+  dependsOn:
+    - name: prometheus-operator-crds
+      namespace: monitoring
+    - name: storage
+      namespace: kube-system
+  healthChecks:
+    - kind: StatefulSet
+      name: prometheus-kube-prometheus-stack-prometheus
+      apiVersion: apps/v1
+      namespace: monitoring
+    - kind: Deployment
+      name: kube-prometheus-stack-operator
+      apiVersion: apps/v1
+      namespace: monitoring
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-env

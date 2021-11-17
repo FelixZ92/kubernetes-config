@@ -11,25 +11,30 @@ CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 BASEDIR=$(dirname "$(dirname "$CURR_DIR")")
 
-export BASE_DOMAIN=162.55.159.246.nip.io
-export ENVIRONMENT=staging
+export KUBECONFIG="${HOME}/.kube/kubeconfig-rke2-staging.yaml"
+
+BASE_DOMAIN="$(kubectl get cm -n kube-system cluster-env -o jsonpath='{.data.BASE_DOMAIN}')"
+export BASE_DOMAIN
+ENVIRONMENT="$(kubectl get cm -n kube-system cluster-env -o jsonpath='{.data.ENVIRONMENT}')"
+export ENVIRONMENT
 
 # shellcheck source=hack/secrets/secrets-common.sh
 source "$CURR_DIR/../secrets/common.sh"
 # shellcheck source=hack/common.sh
 source "$CURR_DIR/../common.sh"
 
-export KUBECONFIG="${HOME}/.kube/kubeconfig-rke2-staging.yaml"
-
 deploy_global_resources "${BASEDIR}"
 
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
-kustomize build "$BASEDIR/01_gitops/bootstrap/overlays/${ENVIRONMENT}/" | envsubst | kubectl apply -f -
+kustomize build "$BASEDIR/system/sources" | kubectl apply -f -
+kustomize build "$BASEDIR/system/kustomizations" | kubectl apply -f -
 
-kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n flux-system bootstrap
+#kustomize build "$BASEDIR/01_gitops/bootstrap/overlays/${ENVIRONMENT}/" | envsubst | kubectl apply -f -
+
+#kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n flux-system bootstrap
 #kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n flux-system sealed-secrets
-apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
+#apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
 
 #
 #echo "Use with export KUBECONFIG=${KUBECONFIG}"

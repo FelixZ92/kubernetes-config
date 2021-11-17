@@ -1,0 +1,4 @@
+resources:
+  - https://raw.githubusercontent.com/mittwald/kubernetes-secret-generator/v3.3.4/deploy/crds/secretgenerator.mittwald.de_basicauths_crd.yaml
+  - https://github.com/mittwald/kubernetes-secret-generator/raw/v3.3.4/deploy/crds/secretgenerator.mittwald.de_sshkeypairs_crd.yaml
+  - https://github.com/mittwald/kubernetes-secret-generator/raw/v3.3.4/deploy/crds/secretgenerator.mittwald.de_stringsecrets_crd.yaml

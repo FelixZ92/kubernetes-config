@@ -1,0 +1,27 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: logging
+  namespace: loki
+spec:
+  interval: 10m0s
+  path: infrastructure/logging/overlays/${ENVIRONMENT}
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+  dependsOn:
+    - name: observability
+      namespace: monitoring
+  healthChecks:
+    - kind: StatefulSet
+      name: loki
+      apiVersion: apps/v1
+      namespace: loki
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-env

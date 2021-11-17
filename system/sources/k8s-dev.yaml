@@ -1,0 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: k8s-dev
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: restructure
+  secretRef:
+    name: flux-system
+  url: ssh://git@gitlab.com/felixz92/k8s-dev

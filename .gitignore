@@ -5,8 +5,10 @@ public/
 **/charts
 tmp/
 .certs
-**/*secret*
+**/*secret*.yaml
 !sealed-secrets
 !sealed-secrets-release.yaml
-!03_infrastructure/sealed-secrets/monitor
+!infrastructure/sealed-secrets/monitor
 !secrets.yaml
+!secret-generator.yaml
+!secrets-generator-release.yaml

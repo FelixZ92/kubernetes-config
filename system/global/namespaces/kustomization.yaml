@@ -1,0 +1,12 @@
+resources:
+  - cert-manager.yaml
+  - dashboard.yaml
+  - flux-system.yaml
+  - keycloak.yaml
+  - local-path-storage.yaml
+  - loki.yaml
+  - monitoring.yaml
+  - ocis.yaml
+  - postgres-operator.yaml
+  - starboard.yaml
+  - traefik.yaml

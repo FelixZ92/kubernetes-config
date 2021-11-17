@@ -1,0 +1,2 @@
+resources:
+  - hcloud-csi-driver.yaml

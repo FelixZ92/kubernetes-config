@@ -3,7 +3,7 @@
 deploy_global_resources() {
   BASEDIR="${1}"
   echo "$BASEDIR"
-  kustomize build "$BASEDIR/00_global-resources" |
+  kustomize build "$BASEDIR/system/global" |
     kubectl apply -f -
 }
 
@@ -29,16 +29,14 @@ deploy_flux() {
     --from-file="known_hosts=$KNOWN_HOSTS_FILE" \
     || echo "secret flux-system already exists"
 
-  kustomize build "${BASEDIR}/01_gitops/base/" | kubectl apply -f -
+  kustomize build "${BASEDIR}/system/controller/flux/base/" | kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/kustomize-controller -n flux-system
-
-#  deploy_pki "${BASEDIR}" "${ENVIRONMENT}"
 }
 
 deploy_pki() {
   BASEDIR="${1}"
   ENVIRONMENT="${2}"
 
-  kustomize build "${BASEDIR}/03_infrastructure/pki/overlays/dev" | envsubst | kubectl apply -f -
+  kustomize build "${BASEDIR}/infrastructure/pki/overlays/dev" | envsubst | kubectl apply -f -
   kubectl wait --for=condition=available --timeout=600s deployment/sealed-secrets-controller -n kube-system
 }

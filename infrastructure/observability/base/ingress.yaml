@@ -1,0 +1,31 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: monitoring-ingress
+  namespace: monitoring
+spec:
+  interval: 10m0s
+  path: infrastructure/observability/ingress/overlays/${ENVIRONMENT}
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: infrastructure
+    namespace: flux-system
+  validation: server
+  dependsOn:
+    - name: identity
+      namespace: keycloak
+  healthChecks:
+    - kind: Deployment
+      name: alertmanager-gatekeeper
+      apiVersion: apps/v1
+      namespace: monitoring
+    - kind: Deployment
+      name: prometheus-gatekeeper
+      apiVersion: apps/v1
+      namespace: monitoring
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-env

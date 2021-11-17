@@ -1,0 +1,6 @@
+resources:
+  - default-priority.yaml
+  - high-priority.yaml
+  - highest-priority.yaml
+  - infrastructure-critical.yaml
+  - low-priority.yaml

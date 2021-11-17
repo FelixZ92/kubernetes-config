@@ -1,0 +1,5 @@
+resources:
+  - crds
+  - namespaces
+  - priority-classes
+  - psp

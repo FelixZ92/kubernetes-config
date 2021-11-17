@@ -14,45 +14,45 @@ update-secrets:
 
 bootstrap-cluster:
 	kustomize build ./00_global-resources | kubectl apply -f -
-	kustomize build ./03_infrastructure/pki/sealed-secrets/base | kubectl apply -f -
-	kustomize build ./03_infrastructure/pki/cert-manager/base/ | kubectl apply -f -
-	kustomize build ./03_infrastructure/pki/certificate-authority/dev/ | kubectl apply -f -
-	helm template rook ./03_infrastructure/storage/rook --namespace rook-ceph  \
-		> ./03_infrastructure/storage/rook/base/all.yaml \
-		&& kustomize build 03_infrastructure/storage/rook/base/ \
+	kustomize build infrastructure/pki/sealed-secrets/base | kubectl apply -f -
+	kustomize build infrastructure/pki/cert-manager/base/ | kubectl apply -f -
+	kustomize build infrastructure/pki/certificate-authority/dev/ | kubectl apply -f -
+	helm template rook infrastructure/storage/rook --namespace rook-ceph  \
+		> infrastructure/storage/rook/base/all.yaml \
+		&& kustomize build infrastructure/storage/rook/base/ \
 		| kubectl -n rook-ceph apply -f -
-	kustomize build ./03_infrastructure/storage/local-path-provisioner/base/ | kubectl apply -f -
-	kustomize build ./03_infrastructure/storage/longhorn/base/ | kubectl apply -f -
-	kubectl apply -k ./03_infrastructure/argocd-apps/dev/secrets
-	helm dep up ./03_infrastructure/ingress/traefik
-	helm template traefik ./03_infrastructure/ingress/traefik --namespace traefik --include-crds \
-		> ./03_infrastructure/ingress/traefik/base/all.yaml \
-		&& kustomize build ./03_infrastructure/ingress/traefik/dev \
+	kustomize build infrastructure/storage/local-path-provisioner/base/ | kubectl apply -f -
+	kustomize build infrastructure/storage/longhorn/base/ | kubectl apply -f -
+	kubectl apply -k infrastructure/argocd-apps/dev/secrets
+	helm dep up infrastructure/ingress/traefik
+	helm template traefik infrastructure/ingress/traefik --namespace traefik --include-crds \
+		> infrastructure/ingress/traefik/base/all.yaml \
+		&& kustomize build infrastructure/ingress/traefik/dev \
 		| kubectl -n traefik apply -f -
-	kustomize build ./03_infrastructure/observability/prometheus-operator/crds \
+	kustomize build infrastructure/observability/prometheus-operator/crds \
 		| kubectl apply -f -
-	helm dep up ./03_infrastructure/database/kubedb
-	helm template kubedb ./03_infrastructure/database/kubedb --namespace kube-system  \
-		> ./03_infrastructure/database/kubedb/base/all.yaml \
-	  	&& kustomize build 03_infrastructure/database/kubedb/base/ \
+	helm dep up infrastructure/database/kubedb
+	helm template kubedb infrastructure/database/kubedb --namespace kube-system  \
+		> infrastructure/database/kubedb/base/all.yaml \
+	  	&& kustomize build infrastructure/database/kubedb/base/ \
 	  	| kubectl -n kube-system apply -f -
-	helm dep up ./03_infrastructure/database/kubedb-catalog
-	helm template kubedb-catalog ./03_infrastructure/database/kubedb-catalog --namespace kube-system  \
-		> ./03_infrastructure/database/kubedb-catalog/base/all.yaml \
-		&& kustomize build 03_infrastructure/database/kubedb-catalog/base/ \
+	helm dep up infrastructure/database/kubedb-catalog
+	helm template kubedb-catalog infrastructure/database/kubedb-catalog --namespace kube-system  \
+		> infrastructure/database/kubedb-catalog/base/all.yaml \
+		&& kustomize build infrastructure/database/kubedb-catalog/base/ \
 		| kubectl -n kube-system apply -f -
-	helm dep up  ./03_infrastructure/observability/prometheus-operator
-	helm template prometheus-operator ./03_infrastructure/observability/prometheus-operator --namespace monitoring \
-		> 03_infrastructure/observability/prometheus-operator/base/all.yaml \
-		&& kustomize build 03_infrastructure/observability/prometheus-operator/dev \
+	helm dep up  infrastructure/observability/prometheus-operator
+	helm template prometheus-operator infrastructure/observability/prometheus-operator --namespace monitoring \
+		> infrastructure/observability/prometheus-operator/base/all.yaml \
+		&& kustomize build infrastructure/observability/prometheus-operator/dev \
 		| kubectl apply -f -
-	helm dep up ./03_infrastructure/identity/keycloak
-	helm template keycloak ./03_infrastructure/identity/keycloak --namespace keycloak \
-		> ./03_infrastructure/identity/keycloak/base/all.yaml \
-		&& kustomize build ./03_infrastructure/identity/keycloak/dev \
+	helm dep up infrastructure/identity/keycloak
+	helm template keycloak infrastructure/identity/keycloak --namespace keycloak \
+		> infrastructure/identity/keycloak/base/all.yaml \
+		&& kustomize build infrastructure/identity/keycloak/dev \
 		| kubectl -n keycloak apply -f -
 	kustomize build ./01_argocd/dev/ | kubectl -n argocd apply -f -
-	kustomize build ./03_infrastructure/ingress/external-access/dev | kubectl apply -f -
+	kustomize build infrastructure/ingress/external-access/dev | kubectl apply -f -
 	kustomize build ./02_bootstrap/overlays/dev/ | kubectl -n argocd apply -f -
 
 #helm template $ARGOCD_APP_NAME . --namespace $ARGOCD_APP_NAMESPACE $ADDITIONAL_HELM_ARGS > base/all.yaml && kustomize build $ENVIRONMENT"

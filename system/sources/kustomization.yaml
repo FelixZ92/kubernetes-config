@@ -1,0 +1,4 @@
+resources:
+  - k8s-dev.yaml
+  - helm-repos.yaml
+  - mittwald.yaml

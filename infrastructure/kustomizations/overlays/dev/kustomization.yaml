@@ -1,0 +1,9 @@
+resources:
+  - ../../base/dashboard.yaml
+  - ../../base/database.yaml
+  - ../../base/identity.yaml
+  - ../../base/ingress.yaml
+  - ../../base/logging.yaml
+  - ../../base/observability.yaml
+  - ../../base/security.yaml
+  - ../../base/storage.yaml
