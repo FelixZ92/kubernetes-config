@@ -13,9 +13,6 @@ spec:
     name: k8s-dev
     namespace: flux-system
   validation: server
-  dependsOn:
-    - name: cert-manager-crds
-      namespace: kube-system
   healthChecks:
     - kind: Deployment
       name: cert-manager

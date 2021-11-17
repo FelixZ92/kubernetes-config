@@ -11,4 +11,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: k8s-dev
+    namespace: flux-system
   validation: server
