@@ -28,7 +28,7 @@ deploy_global_resources "${BASEDIR}"
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
 kustomize build "$BASEDIR/system/sources" | kubectl apply -f -
-kustomize build "$BASEDIR/system/kustomizations" | kubectl apply -f -
+kubectl apply -f "$BASEDIR/system/bootstrap.yaml"
 
 #kustomize build "$BASEDIR/01_gitops/bootstrap/overlays/${ENVIRONMENT}/" | envsubst | kubectl apply -f -
 
