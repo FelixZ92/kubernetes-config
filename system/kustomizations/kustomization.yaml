@@ -7,3 +7,4 @@ resources:
   - certificate-authority.yaml
   - global.yaml
   - gitrepos.yaml
+  - infrastructure.yaml
