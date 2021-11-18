@@ -46,13 +46,6 @@ spec:
       targetPort: web
   type: ClusterIP
 ---
-apiVersion: networking.k8s.io/v1
-kind: IngressClass
-metadata:
-  name: traefik-lb
-spec:
-  controller: traefik.io/ingress-controller
----
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
@@ -72,7 +65,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`whoami2.167.233.9.8.nip.io`)
+    - match: Host(`whoami4.167.233.11.29.nip.io`)
       kind: Rule
       services:
         - name: whoami
@@ -89,7 +82,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`whoami2.167.233.9.8.nip.io`)
+    - match: Host(`whoami4.167.233.11.29.nip.io`)
       kind: Rule
       services:
         - name: whoami
@@ -110,7 +103,7 @@ spec:
     name: ca-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - whoami2.167.233.9.8.nip.io
+    - whoami4.167.233.11.29.nip.io
 
 ---
 
@@ -122,7 +115,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`traefik.167.233.9.8.nip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+    - match: Host(`traefik2.167.233.11.29.nip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       kind: Rule
       services:
         - name: api@internal

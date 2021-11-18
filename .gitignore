@@ -15,3 +15,4 @@ tmp/
 !oidc-secret.yaml
 !create-grafana-client-secret.yaml
 !signing-secret.yaml
+!create-kratos-dsn-secret.yaml

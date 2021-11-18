@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: keycloak
-  name: init-keycloak-realm
+  name: init-keycloak-realm2
 spec:
   parallelism: 1
   template:
