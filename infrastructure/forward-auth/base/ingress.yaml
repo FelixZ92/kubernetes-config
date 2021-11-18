@@ -5,7 +5,7 @@ metadata:
   name: traefik-forward-auth
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`auth.${BASE_DOMAIN}`)
       kind: Rule
@@ -21,7 +21,7 @@ metadata:
   name: traefik-forward-auth-tls
 spec:
   entryPoints:
-    - https
+    - websecure
   routes:
     - match: Host(`auth.${BASE_DOMAIN}`)
       kind: Rule
