@@ -87,8 +87,8 @@ spec:
       services:
         - name: whoami
           port: 80
-#      middlewares:
-#        - name: forward-auth-bouncer-admin
+      middlewares:
+        - name: traefik-forward-auth
   tls:
     secretName: tls-whoami2-ingress
 ---
@@ -105,6 +105,16 @@ spec:
   dnsNames:
     - whoami4.167.233.11.29.nip.io
 
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-forward-auth
+spec:
+  forwardAuth:
+    address: http://traefik-forward-auth.traefik.svc:4181
+    authResponseHeaders:
+      - X-Forwarded-User
 ---
 
 apiVersion: traefik.containo.us/v1alpha1
