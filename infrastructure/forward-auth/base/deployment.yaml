@@ -28,5 +28,15 @@ spec:
             - name: SECRET
               valueFrom:
                 secretKeyRef:
-                  name: oidc-signing-secret
+                  name: oidc-signing-secret-forward-auth
                   key: secret
+            - name: PROVIDERS_OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: clientID
+                  name: gitlab-client-credentials
+            - name: PROVIDERS_OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: secret
+                  name: gitlab-client-credentials
