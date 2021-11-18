@@ -5,7 +5,7 @@ metadata:
   name: forward-auth
   namespace: traefik
 spec:
-  path: infrastructure/forward-auth
+  path: infrastructure/forward-auth/base
   interval: 10m0s
   prune: true
   sourceRef:
