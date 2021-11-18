@@ -31,8 +31,6 @@ spec:
   dependsOn:
     - name: observability
       namespace: monitoring
-    - name: postgres-operator-crds
-      namespace: postgres-operator
   healthChecks:
     - kind: Deployment
       name: postgres-operator
