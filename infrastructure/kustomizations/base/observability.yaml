@@ -9,7 +9,7 @@ spec:
   path: infrastructure/observability/crds
   prune: true
   dependsOn:
-    - name: global-resources
+    - name: cluster-wide
       namespace: kube-system
   sourceRef:
     kind: GitRepository
@@ -32,8 +32,8 @@ spec:
     namespace: flux-system
   validation: server
   dependsOn:
-    - name: prometheus-operator-crds
-      namespace: monitoring
+    - name: cluster-wide
+      namespace: kube-system
     - name: storage
       namespace: kube-system
   healthChecks:
