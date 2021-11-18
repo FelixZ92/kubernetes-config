@@ -12,3 +12,6 @@ tmp/
 !secrets.yaml
 !secret-generator.yaml
 !secrets-generator-release.yaml
+!oidc-secret.yaml
+!create-grafana-client-secret.yaml
+!signing-secret.yaml

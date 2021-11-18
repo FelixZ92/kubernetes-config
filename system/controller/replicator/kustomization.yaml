@@ -1,2 +1,3 @@
 resources:
   - replicator-release.yaml
+  - oidc-secret.yaml

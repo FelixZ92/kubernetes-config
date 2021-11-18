@@ -10,7 +10,7 @@ resources:
   - forward-auth-bouncer.yaml
   - cert.yaml
   - gatekeeper-release.yaml
-  - ingress-class.yaml
+  - signing-secret.yaml
 
 configMapGenerator:
   - name: forward-auth-config

@@ -3,5 +3,6 @@ resources:
   - gatekeeper-release.yaml
   - ingressroute.yaml
   - middlewares.yaml
+  - signing-secret.yaml
 
 namespace: dashboard
