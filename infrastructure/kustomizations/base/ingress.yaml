@@ -2,24 +2,6 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: traefik-crds
-  namespace: traefik
-spec:
-  interval: 10m0s
-  path: infrastructure/ingress/crds
-  prune: true
-  dependsOn:
-    - name: global-resources
-      namespace: kube-system
-  sourceRef:
-    kind: GitRepository
-    name: k8s-dev
-    namespace: flux-system
-  validation: server
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-kind: Kustomization
-metadata:
   name: ingress
   namespace: traefik
 spec:
@@ -32,8 +14,8 @@ spec:
     namespace: flux-system
   validation: server
   dependsOn:
-    - name: traefik-crds
-      namespace: traefik
+    - name: cluster-wide
+      namespace: kube-system
   healthChecks:
     - kind: Deployment
       name: traefik
