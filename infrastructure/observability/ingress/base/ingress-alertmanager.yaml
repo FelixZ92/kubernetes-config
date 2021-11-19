@@ -20,12 +20,12 @@ spec:
         secretName: oidc-signing-secret
         secretKey: secret
       client:
-        secretName: oidc-secret
-        idKey: clientid
+        secretName: gitlab-client-credentials
+        idKey: clientID
         secretKey: secret
       upstreamUrl: http://kube-prometheus-stack-alertmanager:9093
       redirectionUrl: https://alertmanager.${BASE_DOMAIN}
-      discoveryUrl: https://keycloak.${BASE_DOMAIN}/auth/realms/k8s
+      discoveryUrl: https://gitlab.com
       skipTokenVerification: "false"
 
 ---

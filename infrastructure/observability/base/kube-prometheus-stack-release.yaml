@@ -424,9 +424,14 @@ spec:
 
       env:
         GF_SERVER_ROOT_URL: "https://grafana.${BASE_DOMAIN}"
-        GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
-        GF_AUTH_GENERIC_OAUTH_SCOPES: "openid email profile"
-        GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: "contains(k8s[*], 'cluster-admin') && 'Admin' || contains(k8s[*], 'editor') && 'Editor' || 'Viewer'"
+        GF_AUTH_GITLAB_ENABLED: "true"
+        GF_AUTH_GITLAB_ALLOW_SIGN_UP: "false"
+        GF_AUTH_GITLAB_SCOPES: "read_api"
+        GF_AUTH_GITLAB_AUTH_URL: "https://gitlab.com/oauth/authorize"
+        GF_AUTH_GITLAB_TOKEN_URL: "https://gitlab.com/oauth/token"
+        GF_AUTH_GITLAB_API_URL: "https://gitlab.com/api/v4"
+        GF_AUTH_GITLAB_ALLOWED_GROUPS: "fzx"
+        GF_AUTH_GITLAB_ROLE_ATTRIBUTE_PATH: "is_admin && 'Admin' || 'Viewer'"
 
       plugins:
         - grafana-piechart-panel

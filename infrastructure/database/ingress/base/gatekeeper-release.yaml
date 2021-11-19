@@ -20,10 +20,10 @@ spec:
         secretName: oidc-signing-secret
         secretKey: secret
       client:
-        secretName: oidc-secret
-        idKey: clientid
+        secretName: gitlab-client-credentials
+        idKey: clientID
         secretKey: secret
       upstreamUrl: http://postgres-operator-ui
       redirectionUrl: https://postgres.${BASE_DOMAIN}
-      discoveryUrl: https://keycloak.${BASE_DOMAIN}/auth/realms/k8s
+      discoveryUrl: https://gitlab.com
       skipTokenVerification: "false"

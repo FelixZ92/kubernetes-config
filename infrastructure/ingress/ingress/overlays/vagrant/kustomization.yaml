@@ -16,6 +16,6 @@ configMapGenerator:
   - name: forward-auth-config
     behavior: merge
     literals:
-      - JWKS_ENDPOINT=https://keycloak.${BASE_DOMAIN}/auth/realms/k8s/protocol/openid-connect/certs
-      - JWT_VERIFY_ISSUER=https://keycloak.${BASE_DOMAIN}/auth/realms/k8s
+      - JWKS_ENDPOINT=https://gitlab.com/oauth/discovery/keys
+      - JWT_VERIFY_ISSUER=https://gitlab.com/
       - JWKS_URI_IGNORE_SSL=true
