@@ -600,12 +600,12 @@ spec:
         priorityClassName: ""
 
         resources:
-          requests:
-            cpu: 100m
-            memory: 500Mi
           limits:
             cpu: 200m
-            memory: 1Gi
+            memory: 4Gi
+          requests:
+            cpu: 100m
+            memory: 2Gi
 
         ruleSelector:
           matchLabels:

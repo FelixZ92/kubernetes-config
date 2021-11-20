@@ -22,6 +22,11 @@ config:
     config:
       inCluster: true
   enablePasswordDB: true
+  grpc:
+    tlsCert: /data/grpc/tls.crt
+    tlsKey: /data/grpc/tls.key
+    tlsClientCA: /data/grpc/ca.crt
+    reflection: true
   staticClients:
     - id: example-app
       redirectURIs:
@@ -66,6 +71,18 @@ securityContext:
   runAsNonRoot: true
   runAsUser: 1000
 
-volumes: []
+volumes:
+  - name: dex-grpc-cert
+    secret:
+      items:
+        - key: ca.crt
+          path: ca.crt
+        - key: tls.crt
+          path: tls.crt
+        - key: tls.key
+          path: tls.key
+      secretName: dex-grpc-cert
 
-volumeMounts: []
+volumeMounts:
+  - mountPath: /data/grpc/
+    name: dex-grpc-cert
