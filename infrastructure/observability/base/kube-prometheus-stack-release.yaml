@@ -574,10 +574,10 @@ spec:
         maxUnavailable: ""
       resources:
         limits:
-          cpu: 200m
+          cpu: 500m
           memory: 4Gi
         requests:
-          cpu: 100m
+          cpu: 300m
           memory: 2Gi
 
       prometheusSpec:
@@ -601,10 +601,10 @@ spec:
 
         resources:
           limits:
-            cpu: 200m
+            cpu: 500m
             memory: 4Gi
           requests:
-            cpu: 100m
+            cpu: 300m
             memory: 2Gi
 
         ruleSelector:
