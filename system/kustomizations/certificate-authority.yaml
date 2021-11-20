@@ -6,7 +6,7 @@ metadata:
   namespace: cert-manager
 spec:
   interval: 10m0s
-  path: system/certificate-authority/${ENVIRONMENT}
+  path: system/certificate-authority/overlays/${ENVIRONMENT}
   prune: true
   sourceRef:
     kind: GitRepository

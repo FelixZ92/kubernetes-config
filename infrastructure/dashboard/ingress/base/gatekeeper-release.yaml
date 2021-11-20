@@ -25,5 +25,5 @@ spec:
         secretKey: secret
       upstreamUrl: http://dashboard:3000
       redirectionUrl: https://dashboard.${BASE_DOMAIN}
-      discoveryUrl: https://gitlab.com
+      discoveryUrl: https://dex.${BASE_DOMAIN}
       skipTokenVerification: "false"

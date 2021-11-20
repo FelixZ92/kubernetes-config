@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dex-example
+  namespace: default
+  labels:
+    app: dex-example
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: dex-example
+      labels:
+        app: dex-example
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      volumes:
+        - name: root-ca
+          secret:
+            secretName: lets-encrypt-staging-ca
+            items:
+              - key: root-ca
+                path: root-ca
+      containers:
+        - name: dex-example
+          image: obitech/dex-example-app
+          imagePullPolicy: IfNotPresent
+          args:
+            - --issuer=https://dex.167.233.11.29.nip.io
+            - --redirect-uri=https://dex-example.167.233.11.29.nip.io/callback
+            - --issuer-root-ca=/data/letsencrypt/root-ca
+            - --listen=http://0.0.0.0:5555
+          ports:
+            - containerPort: 5555
+              name: web
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data/letsencrypt/
+              name: root-ca
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: dex-example
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dex-example
+  namespace: default
+spec:
+  selector:
+    app: dex-example
+  ports:
+    - port: 80
+      name: web
+      protocol: TCP
+      targetPort: web
+  type: ClusterIP
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+  namespace: default
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dex-example
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`dex-example.167.233.11.29.nip.io`)
+      kind: Rule
+      services:
+        - name: dex-example
+          port: 80
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dex-example-tls
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`dex-example.167.233.11.29.nip.io`)
+      kind: Rule
+      services:
+        - name: dex-example
+          port: 80
+  tls:
+    secretName: tls-dex-example-ingress
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: dex-example-tls-certificate
+  namespace: default
+spec:
+  secretName: tls-dex-example-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+  dnsNames:
+    - dex-example.167.233.11.29.nip.io

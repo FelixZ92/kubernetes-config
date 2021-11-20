@@ -6,5 +6,6 @@ resources:
   - keycloak-release.yaml
   - monitor
   - k8s-keycloak-client.yaml
+  - dex
 
 namespace: keycloak
