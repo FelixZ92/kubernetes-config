@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dex-client
+spec:
+
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: client
+          image: registry.gitlab.com/felixz92/dexidp-client:latest
+          imagePullPolicy: Always
+          args:
+            - --client-crt=/data/grpc/tls.crt
+            - --client-key=/data/grpc/tls.key
+            - --ca-crt=/data/grpc/ca.crt
+            - --endpoint=dex:5557
+            - create
+            - client
+            - --secret=supersecret
+            - test-client
+          volumeMounts:
+            - mountPath: /data/grpc/
+              name: dex-grpc-cert
+      volumes:
+        - name: dex-grpc-cert
+          secret:
+            items:
+              - key: ca.crt
+                path: ca.crt
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+            secretName: dex-grpc-cert

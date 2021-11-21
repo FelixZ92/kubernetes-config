@@ -2,5 +2,6 @@ resources:
   - cert-manager
   - postgres-operator
   - prometheus-operator
+  - redis-operator
   - traefik
   - secret-generator

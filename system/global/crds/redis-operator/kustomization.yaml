@@ -1,0 +1,3 @@
+resources:
+  - https://github.com/OT-CONTAINER-KIT/helm-charts/raw/main/charts/redis-operator/crds/redis-cluster.yaml
+  - https://github.com/OT-CONTAINER-KIT/helm-charts/raw/main/charts/redis-operator/crds/redis.yaml

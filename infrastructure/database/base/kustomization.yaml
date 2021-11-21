@@ -3,5 +3,6 @@ resources:
   - ingress.yaml
   - postgres-monitor
   - postgres-operator-ui-release.yaml
+  - redis-operator-release.yaml
 
 namespace: postgres-operator
