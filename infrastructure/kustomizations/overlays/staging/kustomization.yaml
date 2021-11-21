@@ -8,3 +8,4 @@ resources:
   - ../../base/security.yaml
   - ../../base/storage.yaml
   - ../../base/forward-auth.yaml
+  - ../../base/redis.yaml
