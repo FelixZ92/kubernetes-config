@@ -3,3 +3,4 @@ resources:
   - event-exporter/
   - ingress.yaml
   - create-grafana-client-secret.yaml
+  - grafana-admin-user.yaml
