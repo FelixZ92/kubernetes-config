@@ -4,3 +4,5 @@ resources:
   - ingress.yaml
   - create-grafana-client-secret.yaml
   - grafana-admin-user.yaml
+
+namespace: monitoring

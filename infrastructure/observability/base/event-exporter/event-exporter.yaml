@@ -14,7 +14,6 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: event-exporter
-    namespace: monitoring
 ---
 apiVersion: v1
 kind: Service
