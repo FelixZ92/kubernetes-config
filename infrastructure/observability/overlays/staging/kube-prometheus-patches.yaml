@@ -9,6 +9,8 @@ spec:
       alertmanagerSpec:
         replicas: 2
         retention: 120h
+        nodeSelector:
+          storage: hcloud
         storage:
           volumeClaimTemplate:
             spec:
@@ -30,6 +32,8 @@ spec:
       prometheusSpec:
         externalUrl: "https://prometheus.${BASE_DOMAIN}"
         replicas: 2
+        nodeSelector:
+          storage: hcloud
         storageSpec:
           volumeClaimTemplate:
             spec:

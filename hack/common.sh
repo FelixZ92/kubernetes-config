@@ -4,7 +4,7 @@ deploy_global_resources() {
   BASEDIR="${1}"
   echo "$BASEDIR"
   kustomize build "$BASEDIR/system/global" |
-    kubectl apply -f -
+    kubectl create -f -
 }
 
 apply_secrets() {

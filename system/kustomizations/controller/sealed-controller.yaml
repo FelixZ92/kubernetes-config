@@ -13,3 +13,8 @@ spec:
     name: k8s-dev
     namespace: flux-system
   validation: server
+  healthChecks:
+    - kind: Deployment
+      name: sealed-secrets-controller
+      apiVersion: apps/v1
+      namespace: kube-system
