@@ -4,7 +4,6 @@ metadata:
   name: redis-external-auth
 spec:
   kubernetesConfig:
-    serviceType: ClusterIP
     image: quay.io/opstree/redis:v6.2.5
     imagePullPolicy: IfNotPresent
     redisSecret:
