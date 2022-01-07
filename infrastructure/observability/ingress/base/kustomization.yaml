@@ -1,7 +1,7 @@
 resources:
-  - ingress-alertmanager.yaml
+#  - ingress-alertmanager.yaml
   - ingress-grafana.yaml
-  - ingress-prometheus.yaml
+#  - ingress-prometheus.yaml
   - signing-secret.yaml
 
 namespace: monitoring

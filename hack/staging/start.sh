@@ -23,7 +23,7 @@ source "$CURR_DIR/../secrets/common.sh"
 # shellcheck source=hack/common.sh
 source "$CURR_DIR/../common.sh"
 
-#deploy_global_resources "${BASEDIR}"
+deploy_global_resources "${BASEDIR}"
 
 deploy_flux "${BASEDIR}" "$HOME/.ssh/gitlab_deploy_key" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
 
