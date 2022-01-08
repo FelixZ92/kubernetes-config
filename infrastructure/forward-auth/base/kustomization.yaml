@@ -24,3 +24,4 @@ configMapGenerator:
       - AUTH_HOST=auth.${BASE_DOMAIN}
       - URL_PATH=/_oauth
       - INSECURE_COOKIE=false
+      - WHITELIST=${ALLOWED_USERS}
