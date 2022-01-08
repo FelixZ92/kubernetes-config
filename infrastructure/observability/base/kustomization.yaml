@@ -1,7 +1,7 @@
 resources:
   - kube-prometheus-stack-release.yaml
   - event-exporter/
-  - ingress.yaml
+  - ingress
   - create-grafana-client-secret.yaml
   - grafana-admin-user.yaml
 

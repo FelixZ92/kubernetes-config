@@ -21,13 +21,6 @@ spec:
                   storage: 2700Mi
         externalUrl: "https://alertmanager.${BASE_DOMAIN}"
 
-    grafana:
-      env:
-        GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://keycloak.${BASE_DOMAIN}/auth/realms/k8s/protocol/openid-connect/auth"
-        GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://keycloak.${BASE_DOMAIN}/auth/realms/k8s/protocol/openid-connect/token"
-        GF_AUTH_GENERIC_OAUTH_API_URL: "https://keycloak.${BASE_DOMAIN}/auth/realms/k8s/protocol/openid-connect/userinfo"
-        GF_AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE: "true"
-
     prometheus:
       prometheusSpec:
         externalUrl: "https://prometheus.${BASE_DOMAIN}"

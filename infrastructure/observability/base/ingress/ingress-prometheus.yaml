@@ -1,34 +1,4 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: prometheus-gatekeeper
-spec:
-  interval: 5m
-  chart:
-    spec:
-      chart: gatekeeper
-      version: '0.6.0'
-      sourceRef:
-        kind: HelmRepository
-        name: felixz92
-        namespace: kube-system
-      interval: 10m
-  values:
-    config:
-      encryptionKey:
-        secretName: oidc-signing-secret
-        secretKey: secret
-      client:
-        secretName: gitlab-client-credentials
-        idKey: clientID
-        secretKey: secret
-      upstreamUrl: http://kube-prometheus-stack-prometheus:9090
-      redirectionUrl: https://prometheus.${BASE_DOMAIN}
-      discoveryUrl: https://gitlab.com
-      skipTokenVerification: "false"
-
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -52,8 +22,8 @@ spec:
     - match: Host(`prometheus.${BASE_DOMAIN}`)
       kind: Rule
       services:
-        - name: prometheus-gatekeeper
-          port: 3000
+        - name: kube-prometheus-stack-prometheus
+          port: 9090
       middlewares:
         - name: redirect-https
 ---
@@ -75,5 +45,7 @@ spec:
     - match: Host(`prometheus.${BASE_DOMAIN}`)
       kind: Rule
       services:
-        - name: prometheus-gatekeeper
-          port: 3000
+        - name: kube-prometheus-stack-prometheus
+          port: 9090
+      middlewares:
+        - name: traefik-forward-auth
