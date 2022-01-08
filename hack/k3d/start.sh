@@ -42,17 +42,17 @@ test=$(kubectl get cm coredns -n kube-system --template='{{.data.NodeHosts}}' \
 
 kubectl rollout restart deployment coredns -n kube-system
 
-deploy_global_resources "${BASEDIR}"
-
-deploy_flux "${BASEDIR}" "$HOME/.ssh/id_ed25519_gitlab" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
-
-kustomize build "$BASEDIR/system/sources" | kubectl apply -f -
-kubectl apply -f "$BASEDIR/system/bootstrap.yaml"
-
-kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system bootstrap
-
-# apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
-
-update_local_ca_certs "${BASEDIR}"
+#deploy_global_resources "${BASEDIR}"
+#
+#deploy_flux "${BASEDIR}" "$HOME/.ssh/id_ed25519_gitlab" "$BASEDIR/hack/known_hosts" "${ENVIRONMENT}"
+#
+#kustomize build "$BASEDIR/system/sources" | kubectl apply -f -
+#kubectl apply -f "$BASEDIR/system/bootstrap.yaml"
+#
+#kubectl wait --for=condition=ready --timeout=600s kustomizations.kustomize.toolkit.fluxcd.io -n kube-system bootstrap
+#
+## apply_secrets "${BASEDIR}" "${ENVIRONMENT}"
+#
+#update_local_ca_certs "${BASEDIR}"
 
 echo "Use with export KUBECONFIG=${KUBECONFIG}"

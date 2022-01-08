@@ -65,7 +65,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`whoami4.167.233.11.29.nip.io`)
+    - match: Host(`whoami4.162.55.153.15.nip.io`)
       kind: Rule
       services:
         - name: whoami
@@ -82,7 +82,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`whoami4.167.233.11.29.nip.io`)
+    - match: Host(`whoami4.162.55.153.15.nip.io`)
       kind: Rule
       services:
         - name: whoami
@@ -103,30 +103,41 @@ spec:
     name: ca-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - whoami4.167.233.11.29.nip.io
+    - whoami4.162.55.153.15.nip.io
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: traefik-forward-auth
+  namespace: default
 spec:
   forwardAuth:
     address: http://traefik-forward-auth.traefik.svc:4181
     authResponseHeaders:
       - X-Forwarded-User
 ---
+#
+#apiVersion: traefik.containo.us/v1alpha1
+#kind: IngressRoute
+#metadata:
+#  name: dashboard
+#spec:
+#  entryPoints:
+#    - web
+#  routes:
+#    - match: Host(`traefik2.162.55.153.15.nip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+#      kind: Rule
+#      services:
+#        - name: api@internal
+#          kind: TraefikService
 
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: dashboard
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`traefik2.167.233.11.29.nip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
-      kind: Rule
-      services:
-        - name: api@internal
-          kind: TraefikService
+https://auth.162.55.153.15.nip.io/_oauth
+https://traefik.162.55.153.15.nip.io
+https://dashboard.162.55.153.15.nip.io
+https://postgres.162.55.153.15.nip.io
+https://alertmanager.162.55.153.15.nip.io
+https://prometheus.162.55.153.15.nip.io
+https://grafana.162.55.153.15.nip.io/login/gitlab
+https://dex.162.55.153.15.nip.io/callback
+http://127.0.0.1:4433/self-service/methods/oidc/callback/gitlab

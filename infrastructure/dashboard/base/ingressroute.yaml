@@ -10,7 +10,7 @@ spec:
     - match: Host(`dashboard.${BASE_DOMAIN}`)
       kind: Rule
       services:
-        - name: dashboard-gatekeeper
+        - name: dashboard
           port: 3000
       middlewares:
         - name: redirect-https
@@ -27,6 +27,8 @@ spec:
   routes:
     - match: Host(`dashboard.${BASE_DOMAIN}`)
       kind: Rule
+      middlewares:
+        - name: traefik-forward-auth
       services:
-        - name: dashboard-gatekeeper
+        - name: dashboard
           port: 3000

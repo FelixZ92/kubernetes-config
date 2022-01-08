@@ -1,7 +1,9 @@
 resources:
+  - cert.yaml
   - service.yaml
   - deployment.yaml
+  - ingressroute.yaml
+  - middlewares.yaml
   - rbac.yaml
-  - ingress.yaml
 
 namespace: dashboard
