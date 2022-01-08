@@ -12,14 +12,14 @@ spec:
     name: k8s-dev
     namespace: flux-system
   validation: server
-  dependsOn:
-    - name: identity
-      namespace: keycloak
-  healthChecks:
-    - kind: Deployment
-      name: traefik-gatekeeper
-      apiVersion: apps/v1
-      namespace: traefik
+#  dependsOn:
+#    - name: identity
+#      namespace: keycloak
+#  healthChecks:
+#    - kind: Deployment
+#      name: traefik-gatekeeper
+#      apiVersion: apps/v1
+#      namespace: traefik
   postBuild:
     substituteFrom:
       - kind: ConfigMap

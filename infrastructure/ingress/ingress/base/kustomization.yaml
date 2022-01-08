@@ -7,13 +7,13 @@ namespace: traefik
 resources:
   - middlewares.yaml
   - ingressroute-dashboard.yaml
-  - forward-auth-bouncer.yaml
+#  - forward-auth-bouncer.yaml
   - cert.yaml
-  - gatekeeper-release.yaml
-  - signing-secret.yaml
+#  - gatekeeper-release.yaml
+#  - signing-secret.yaml
 
-configMapGenerator:
-  - name: forward-auth-config
-    literals:
-      - PORT=8080
+#configMapGenerator:
+#  - name: forward-auth-config
+#    literals:
+#      - PORT=8080
 
