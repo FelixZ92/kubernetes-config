@@ -10,8 +10,8 @@ spec:
     - match: Host(`postgres.${BASE_DOMAIN}`)
       kind: Rule
       services:
-        - name: postgres-gatekeeper
-          port: 3000
+        - name: postgres-operator-ui
+          port: 80
       middlewares:
         - name: redirect-https
 ---
@@ -33,5 +33,7 @@ spec:
     - match: Host(`postgres.${BASE_DOMAIN}`)
       kind: Rule
       services:
-        - name: postgres-gatekeeper
-          port: 3000
+        - name: postgres-operator-ui
+          port: 80
+      middlewares:
+        - name: traefik-forward-auth

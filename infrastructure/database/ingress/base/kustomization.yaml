@@ -1,8 +1,0 @@
-resources:
-  - cert.yaml
-  - gatekeeper-release.yaml
-  - ingressroute.yaml
-  - middlewares.yaml
-  - signing-secret.yaml
-
-namespace: postgres-operator

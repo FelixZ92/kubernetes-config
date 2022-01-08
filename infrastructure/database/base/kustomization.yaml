@@ -3,5 +3,8 @@ resources:
 #  - ingress.yaml
   - postgres-monitor
   - postgres-operator-ui-release.yaml
+  - ingressroute.yaml
+  - middlewares.yaml
+  - cert.yaml
 
 namespace: postgres-operator
