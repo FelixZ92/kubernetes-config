@@ -8,3 +8,4 @@ resources:
   - global.yaml
   - gitrepos.yaml
   - infrastructure.yaml
+  - services.yaml

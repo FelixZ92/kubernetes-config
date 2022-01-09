@@ -101,4 +101,4 @@ data:
     scheme=http
     connectToMinio $scheme
     # Create the bucket
-    createBucket nextcloud none false
+    createBucket ocis-bucket none false

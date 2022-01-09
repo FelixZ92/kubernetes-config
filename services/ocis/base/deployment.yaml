@@ -52,24 +52,31 @@ spec:
               port: 9200
             initialDelaySeconds: 3
           env:
+            - name: ACCOUNTS_DEMO_USERS_AND_GROUPS
+              value: "false"
             - name: PROXY_TLS
               value: "false"
             - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
             - name: PROXY_OIDC_ISSUER
-              value: https://keycloak.host.k3d.internal/auth/realms/oCIS
+              value: https://keycloak.host.k3d.internal/auth/realms/applications
 #
             - name: WEB_OIDC_AUTHORITY
-              value: https://keycloak.host.k3d.internal/auth/realms/oCIS
+              value: https://keycloak.host.k3d.internal/auth/realms/applications
             - name: WEB_OIDC_CLIENT_ID
-              value: web
+              value: ocis-web
             - name: WEB_OIDC_METADATA_URL
-              value: https://keycloak.host.k3d.internal/auth/realms/oCIS/.well-known/openid-configuration
+              value: https://keycloak.host.k3d.internal/auth/realms/applications/.well-known/openid-configuration
 
+            - name: STORAGE_TRANSFER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: storage-transfer-secret
+                  key: password
             - name: STORAGE_OIDC_ISSUER
               value: https://keycloak.host.k3d.internal
             - name: STORAGE_LDAP_IDP
-              value: https://keycloak.host.k3d.internal/auth/realms/oCIS
+              value: https://keycloak.host.k3d.internal/auth/realms/applications
             - name: STORAGE_HOME_DRIVER
               value: s3ng
             - name: STORAGE_USERS_DRIVER
@@ -103,7 +110,11 @@ spec:
                   name: idp-ldap-bind-password
                   key: password
             - name: OCIS_URL
-              value: https://ocis.host.k3d.internal
+              value: https://ocis.${BASE_DOMAIN}
+            - name: OCIS_DOMAIN
+              value: ocis.${BASE_DOMAIN}
+            - name: OCIS_LOG_LEVEL
+              value: info
             - name: OCIS_JWT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -124,6 +135,13 @@ spec:
                 secretKeyRef:
                   name: admin-password
                   key: email
+            - name: OCIS_MACHINE_AUTH_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: machine-auth-api-key
+                  key: password
+            - name: OCIS_INSECURE
+              value: "true"
           ports:
             - containerPort: 9200
               protocol: TCP
