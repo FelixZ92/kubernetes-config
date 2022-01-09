@@ -116,7 +116,7 @@ spec:
             - name: OCIS_DOMAIN
               value: ocis.${BASE_DOMAIN}
             - name: OCIS_LOG_LEVEL
-              value: info
+              value: debug
             - name: OCIS_JWT_SECRET
               valueFrom:
                 secretKeyRef:
