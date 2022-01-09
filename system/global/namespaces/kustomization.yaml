@@ -5,6 +5,7 @@ resources:
   - keycloak.yaml
   - local-path-storage.yaml
   - loki.yaml
+  - minio.yaml
   - monitoring.yaml
   - ocis.yaml
   - postgres-operator.yaml
