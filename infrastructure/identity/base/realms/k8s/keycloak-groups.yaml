@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: keycloak-group-config
+  name: k8s-keycloak-group-config
 data:
   cluster-readonly-users.json: |
     {

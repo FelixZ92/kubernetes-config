@@ -1,3 +1,4 @@
 resources:
+  - client-scope.yaml
   - keycloak-user.yaml
   - realm-config.yaml

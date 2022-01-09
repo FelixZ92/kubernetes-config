@@ -34,15 +34,15 @@ spec:
                   name: keycloak-admin-user
           volumeMounts: # TODO client scope + client extra!
             - mountPath: /definitions/realms/k8s/realm
-              name: realm-config
+              name: k8s-realm-config
             - mountPath: /definitions/realms/k8s/client-scopes
               name: k8s-client-scope
             - mountPath: /definitions/realms/k8s/users/cluster-user
-              name: cluster-user-config
+              name: k8s-cluster-user-config
             - mountPath: /definitions/realms/k8s/users/cluster-admin
-              name: cluster-admin-user-config
+              name: k8s-cluster-admin-user-config
             - mountPath: /definitions/realms/k8s/groups
-              name: keycloak-group-config
+              name: k8s-keycloak-group-config
             - mountPath: /definitions/realms/k8s/clients/k8s/definition
               name: k8s-client-config
             - mountPath: /definitions/realms/k8s/clients/k8s/secret
@@ -55,18 +55,18 @@ spec:
               cpu: 50m
               memory: 256Mi
       volumes:
-        - name: realm-config
+        - name: k8s-realm-config
           configMap:
-            name: realm-config
+            name: k8s-realm-config
             defaultMode: 0755
-        - name: cluster-user-config
-          configMap:
-            defaultMode: 0755
-            name: cluster-user-config
-        - name: cluster-admin-user-config
+        - name: k8s-cluster-user-config
           configMap:
             defaultMode: 0755
-            name: cluster-admin-user-config
+            name: k8s-cluster-user-config
+        - name: k8s-cluster-admin-user-config
+          configMap:
+            defaultMode: 0755
+            name: k8s-cluster-admin-user-config
         - name: k8s-client-scope
           configMap:
             defaultMode: 0755
@@ -75,10 +75,10 @@ spec:
           configMap:
             defaultMode: 0755
             name: k8s-client-config
-        - name: keycloak-group-config
+        - name: k8s-keycloak-group-config
           configMap:
             defaultMode: 0755
-            name: keycloak-group-config
+            name: k8s-keycloak-group-config
         - name: k8s-client-secret
           secret:
             items:

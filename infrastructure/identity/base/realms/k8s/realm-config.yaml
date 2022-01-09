@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: realm-config
+  name: k8s-realm-config
 data:
   definition.json: |
     {
-      "id": "applications",
-      "realm": "applications",
+      "id": "k8s",
+      "realm": "k8s",
       "enabled": true,
       "revokeRefreshToken": true,
       "refreshTokenMaxReuse": 3,
@@ -18,16 +18,16 @@ data:
       "failureFactor": 5,
       "groups": [
         {
-          "name": "admins",
-          "path": "/admins",
+          "name": "cluster-admins",
+          "path": "/cluster-admins",
           "attributes": {},
           "realmRoles": [],
           "clientRoles": {},
           "subGroups": []
         },
         {
-          "name": "users",
-          "path": "/users",
+          "name": "cluster-readonly-users",
+          "path": "/cluster-readonly-users",
           "attributes": {},
           "realmRoles": [],
           "clientRoles": {},
@@ -42,6 +42,6 @@ data:
       "adminEventsDetailsEnabled": false,
       "internationalizationEnabled": false,
       "supportedLocales": [],
-      "keycloakVersion": "12.0.2",
+      "keycloakVersion": "11.0.2",
       "userManagedAccessAllowed": false
     }

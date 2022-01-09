@@ -1,11 +1,11 @@
 resources:
   - postgres.yaml
   - ingress
-  - config
   - init-keycloak.yaml
   - keycloak-release.yaml
   - monitor
   - k8s-keycloak-client.yaml
-#  - dex
+  - signing-secret.yaml
+  - realms
 
 namespace: keycloak
