@@ -1,5 +1,5 @@
 resources:
-  - keycloak-user.yaml
+  - test-user.yaml
   - realm-config.yaml
   - ocis-android-client.yaml
   - ocis-desktop-client.yaml
