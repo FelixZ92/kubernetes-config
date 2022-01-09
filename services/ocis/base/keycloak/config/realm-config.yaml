@@ -16,6 +16,24 @@ data:
       "bruteForceProtected": true,
       "permanentLockout": true,
       "failureFactor": 5,
+      "groups": [
+        {
+          "name": "admins",
+          "path": "/admins",
+          "attributes": {},
+          "realmRoles": [],
+          "clientRoles": {},
+          "subGroups": []
+        },
+        {
+          "name": "users",
+          "path": "/users",
+          "attributes": {},
+          "realmRoles": [],
+          "clientRoles": {},
+          "subGroups": []
+        }
+      ],
       "eventsListeners": [
         "metrics-listener",
         "jboss-logging"
@@ -24,7 +42,7 @@ data:
       "adminEventsDetailsEnabled": false,
       "internationalizationEnabled": false,
       "supportedLocales": [],
-      "keycloakVersion": "11.0.2",
+      "keycloakVersion": "12.0.2",
       "userManagedAccessAllowed": false
     }
 ---

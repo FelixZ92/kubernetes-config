@@ -20,7 +20,7 @@ spec:
   chart:
     spec:
       chart: keycloak
-      version: '9.8.1'
+      version: '16.0.6'
       sourceRef:
         kind: HelmRepository
         name: codecentric
@@ -33,7 +33,7 @@ spec:
     extraInitContainers: |
       - env:
         - name: KEYCLOAK_EXTENSIONS
-          value: https://github.com/aerogear/keycloak-metrics-spi/releases/download/1.0.4/keycloak-metrics-spi-1.0.4.jar
+          value: https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar
         image: quay.io/keycloak/keycloak-init-container:master
         imagePullPolicy: Always
         name: extensions-init
