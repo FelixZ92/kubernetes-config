@@ -85,21 +85,21 @@ spec:
               value: s3ng
             - name: STORAGE_METADATA_DRIVER
               value: ocis # keep metadata on ocis storage since this are only small files atm
-            - name: STORAGE_DRIVER_S3NG_ENDPOINT
+            - name: STORAGE_USERS_DRIVER_S3NG_ENDPOINT
               value: http://minio.minio.svc:9000
-            - name: STORAGE_DRIVER_S3NG_REGION
-              value: local
-            - name: STORAGE_DRIVER_S3NG_ACCESS_KEY
+            - name: STORAGE_USERS_DRIVER_S3NG_REGION
+              value: default
+            - name: STORAGE_USERS_DRIVER_S3NG_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: minio
                   key: accesskey
-            - name: STORAGE_DRIVER_S3NG_SECRET_KEY
+            - name: STORAGE_USERS_DRIVER_S3NG_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: minio
                   key: secretkey
-            - name: STORAGE_DRIVER_S3NG_BUCKET
+            - name: STORAGE_USERS_DRIVER_S3NG_BUCKET
               value: ocis-bucket
             - name: STORAGE_LDAP_BIND_PASSWORD
               valueFrom:
