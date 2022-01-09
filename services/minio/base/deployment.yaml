@@ -9,7 +9,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 100%
-      maxUnavailable: 0F
+      maxUnavailable: 0
   template:
     metadata:
       name: minio
