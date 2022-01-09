@@ -1,7 +1,0 @@
-resources:
-  - keycloak-user.yaml
-  - realm-config.yaml
-  - ocis-android-client.yaml
-  - ocis-desktop-client.yaml
-  - ocis-ios-client.yaml
-  - ocis-web-client.yaml

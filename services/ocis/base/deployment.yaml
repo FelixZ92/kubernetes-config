@@ -54,9 +54,6 @@ spec:
           env:
             - name: PROXY_TLS
               value: "false"
-            - name: OCIS_URL
-              value: https://ocis.host.k3d.internal
-
             - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
             - name: PROXY_OIDC_ISSUER
@@ -105,6 +102,8 @@ spec:
                 secretKeyRef:
                   name: idp-ldap-bind-password
                   key: password
+            - name: OCIS_URL
+              value: https://ocis.host.k3d.internal
             - name: OCIS_JWT_SECRET
               valueFrom:
                 secretKeyRef:

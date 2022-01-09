@@ -18,7 +18,7 @@ data:
   definition.json: |
     {
         "clientId": "ocis-web",
-        "name": "oCIS web"
+        "name": "oCIS web",
         "rootUrl": "https://ocis.owncloud.test",
         "adminUrl": "https://ocis.owncloud.test",
         "surrogateAuthRequired": false,
