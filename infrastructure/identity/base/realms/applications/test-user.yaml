@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: applications-cluster-user-config
+  name: applications-test-user-config
 data:
   definition.json: |
     {

@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: keycloak
-  name: init-keycloak-realm2
+  name: init-keycloak-realm
 spec:
   parallelism: 1
   template:
@@ -47,6 +47,30 @@ spec:
               name: k8s-client-config
             - mountPath: /definitions/realms/k8s/clients/k8s/secret
               name: k8s-client-secret
+
+            - mountPath: /definitions/realms/applications/realm
+              name: applications-realm-config
+            - mountPath: /definitions/realms/applications/users/test-user
+              name: applications-test-user-config
+
+            - mountPath: /definitions/realms/applications/clients/ocis-web/definition
+              name: ocis-web-client-config
+            - mountPath: /definitions/realms/applications/clients/ocis-web/secret
+              name: ocis-web-client-secret
+
+            - mountPath: /definitions/realms/applications/clients/ocis-android/definition
+              name: ocis-android-client-config
+            - mountPath: /definitions/realms/applications/clients/ocis-android/secret
+              name: ocis-android-client-secret
+            - mountPath: /definitions/realms/applications/clients/ocis-ios/definition
+              name: ocis-ios-client-config
+            - mountPath: /definitions/realms/applications/clients/ocis-ios/secret
+              name: ocis-ios-client-secret
+            - mountPath: /definitions/realms/applications/clients/ocis-desktop/definition
+              name: ocis-desktop-client-config
+            - mountPath: /definitions/realms/applications/clients/ocis-desktop/secret
+              name: ocis-desktop-client-secret
+
           resources:
             requests:
               cpu: 50m
@@ -85,4 +109,57 @@ spec:
               - key: secret
                 path: secret
             secretName: oidc-secret
+            defaultMode: 0755
+
+        - name: applications-realm-config
+          configMap:
+            name: applications-realm-config
+            defaultMode: 0755
+        - name: applications-test-user-config
+          configMap:
+            defaultMode: 0755
+            name: applications-test-user-config
+        - name: ocis-web-client-config
+          configMap:
+            defaultMode: 0755
+            name: ocis-web-client-config
+        - name: ocis-web-client-secret
+          secret:
+            items:
+              - key: secret
+                path: secret
+            secretName: ocis-web-client-secret
+            defaultMode: 0755
+        - name: ocis-android-client-config
+          configMap:
+            defaultMode: 0755
+            name: ocis-android-client-config
+        - name: ocis-android-client-secret
+          secret:
+            items:
+              - key: secret
+                path: secret
+            secretName: ocis-android-client-secret
+            defaultMode: 0755
+        - name: ocis-ios-client-config
+          configMap:
+            defaultMode: 0755
+            name: ocis-ios-client-config
+        - name: ocis-ios-client-secret
+          secret:
+            items:
+              - key: secret
+                path: secret
+            secretName: ocis-ios-client-secret
+            defaultMode: 0755
+        - name: ocis-desktop-client-config
+          configMap:
+            defaultMode: 0755
+            name: ocis-desktop-client-config
+        - name: ocis-desktop-client-secret
+          secret:
+            items:
+              - key: secret
+                path: secret
+            secretName: ocis-desktop-client-secret
             defaultMode: 0755
