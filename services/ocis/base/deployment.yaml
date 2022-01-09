@@ -47,10 +47,12 @@ spec:
               port: 9200
             initialDelaySeconds: 3
             timeoutSeconds: 2
+            failureThreshold: 30
           readinessProbe:
             tcpSocket:
               port: 9200
             initialDelaySeconds: 3
+            failureThreshold: 30
           env:
             - name: ACCOUNTS_DEMO_USERS_AND_GROUPS
               value: "false"
