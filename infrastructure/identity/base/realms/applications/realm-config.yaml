@@ -6,7 +6,7 @@ data:
   definition.json: |
     {
       "id": "applications",
-      "realm": "Applications",
+      "realm": "applications",
       "enabled": true,
       "revokeRefreshToken": true,
       "refreshTokenMaxReuse": 3,
