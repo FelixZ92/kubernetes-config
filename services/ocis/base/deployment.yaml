@@ -151,6 +151,12 @@ spec:
             - containerPort: 9104
               protocol: TCP
               name: metrics
+            - containerPort: 9250
+              protocol: TCP
+              name: supervised
+            - containerPort: 9215
+              protocol: TCP
+              name: storage
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
