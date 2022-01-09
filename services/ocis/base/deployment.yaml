@@ -59,14 +59,14 @@ spec:
             - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
             - name: PROXY_OIDC_ISSUER
-              value: https://keycloak.host.k3d.internal/auth/realms/applications
+              value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications
 #
             - name: WEB_OIDC_AUTHORITY
-              value: https://keycloak.host.k3d.internal/auth/realms/applications
+              value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications
             - name: WEB_OIDC_CLIENT_ID
               value: ocis-web
             - name: WEB_OIDC_METADATA_URL
-              value: https://keycloak.host.k3d.internal/auth/realms/applications/.well-known/openid-configuration
+              value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications/.well-known/openid-configuration
 
             - name: STORAGE_TRANSFER_SECRET
               valueFrom:
@@ -74,9 +74,9 @@ spec:
                   name: storage-transfer-secret
                   key: password
             - name: STORAGE_OIDC_ISSUER
-              value: https://keycloak.host.k3d.internal
+              value: https://keycloak.162.55.153.15.nip.io
             - name: STORAGE_LDAP_IDP
-              value: https://keycloak.host.k3d.internal/auth/realms/applications
+              value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications
             - name: STORAGE_HOME_DRIVER
               value: s3ng
             - name: STORAGE_USERS_DRIVER
