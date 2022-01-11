@@ -28,6 +28,9 @@ spec:
         - name: entrypoint
           configMap:
             name: entrypoint
+        - name: ocis
+          persistentVolumeClaim:
+            claimName: ocis
       containers:
         - name: ocis-web
           image: owncloud/ocis:1.16.0
@@ -171,3 +174,5 @@ spec:
               mountPath: /var/tmp/ocis
             - name: entrypoint
               mountPath: /entrypoint
+            - name: ocis
+              mountPath: /var/lib/ocis
