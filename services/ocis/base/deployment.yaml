@@ -90,7 +90,7 @@ spec:
             - name: STORAGE_USERS_DRIVER_S3NG_ENDPOINT
               value: http://minio.minio.svc:9000
             - name: STORAGE_USERS_DRIVER_S3NG_REGION
-              value: default
+              value: local
             - name: STORAGE_USERS_DRIVER_S3NG_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
