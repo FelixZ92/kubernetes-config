@@ -7,7 +7,11 @@ sleep 10
 ocis list
 
 # stop builtin IDP since we use Keycloak as a replacement
+echo "##################################################"
+echo "kill idp"
 ocis kill idp
+
+ocis list
 
 echo "##################################################"
 echo "change default secrets:"
