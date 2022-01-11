@@ -29,7 +29,8 @@ spec:
           configMap:
             name: entrypoint
         - name: ocis
-          emptyDir: { }
+          persistentVolumeClaim:
+            claimName: ocis
       containers:
         - name: ocis-web
           image: owncloud/ocis:1.16.0
@@ -55,6 +56,12 @@ spec:
               port: 9200
             initialDelaySeconds: 3
             failureThreshold: 60
+          startupProbe:
+            tcpSocket:
+              port: 9200
+            initialDelaySeconds: 30
+            failureThreshold: 10
+            periodSeconds: 10
           env:
             - name: ACCOUNTS_DEMO_USERS_AND_GROUPS
               value: "false"
