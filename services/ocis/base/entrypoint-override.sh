@@ -3,7 +3,7 @@
 set -e
 
 ocis server&
-sleep 10
+sleep 90
 ocis list
 
 # stop builtin IDP since we use Keycloak as a replacement
