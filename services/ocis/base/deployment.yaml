@@ -166,11 +166,11 @@ spec:
             - containerPort: 9215
               protocol: TCP
               name: storage
-          #          securityContext:
-          #            readOnlyRootFilesystem: false
-          #            runAsNonRoot: true
-          #            runAsGroup: 1000
-          #            runAsUser: 1000
+          securityContext:
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            runAsGroup: 1000
+            runAsUser: 1000
           volumeMounts:
             - mountPath: /tmp
               name: temp
