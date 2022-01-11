@@ -29,8 +29,7 @@ spec:
           configMap:
             name: entrypoint
         - name: ocis
-          persistentVolumeClaim:
-            claimName: ocis
+          emptyDir: {}
       containers:
         - name: ocis-web
           image: owncloud/ocis:1.16.0
