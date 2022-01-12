@@ -102,3 +102,5 @@ data:
     connectToMinio $scheme
     # Create the bucket
     createBucket ocis-bucket none false
+    createBucket ocis-users none false
+    createBucket ocis-metadata none false
