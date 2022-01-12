@@ -8,6 +8,10 @@ spec:
   ports:
     - name: web
       port: 9200
-      protocol: "TCP"
-      targetPort: "web"
+      protocol: TCP
+      targetPort: web
+    - name: settings
+      port: 9191
+      protocol: TCP
+      targetPort: settings
   type: ClusterIP
