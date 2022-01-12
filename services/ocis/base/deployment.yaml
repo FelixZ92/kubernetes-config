@@ -15,6 +15,11 @@ spec:
         app.kubernetes.io/name: ocis-web
     spec:
       automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsGroup: 1000
+        runAsUser: 1000
+        fsGroup: 1000
       volumes:
         - name: temp
           emptyDir:
@@ -28,9 +33,6 @@ spec:
         - name: entrypoint
           configMap:
             name: entrypoint
-        - name: ocis
-          persistentVolumeClaim:
-            claimName: ocis
       containers:
         - name: ocis-web
           image: owncloud/ocis:1.16.0
@@ -180,5 +182,3 @@ spec:
               mountPath: /var/tmp/ocis
             - name: entrypoint
               mountPath: /entrypoint
-            - name: ocis
-              mountPath: /var/lib/ocis
