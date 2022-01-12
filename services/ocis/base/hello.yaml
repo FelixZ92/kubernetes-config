@@ -26,6 +26,18 @@ spec:
           ports:
             - containerPort: 9105
               name: web
+            - containerPort: 9106
+              name: grpc
+            - containerPort: 9109
+              name: health
+          livenessProbe:
+            httpGet:
+              port: health
+              path: /healthz
+          readinessProbe:
+            httpGet:
+              port: health
+              path: /healthz
           resources:
             requests:
               cpu: 100m
@@ -52,6 +64,10 @@ spec:
   ports:
     - name: web
       port: 9105
-      protocol: "TCP"
-      targetPort: "web"
+      protocol: TCP
+      targetPort: web
+    - name: grpc
+      port: 9106
+      protocol: TCP
+      targetPort: grpc
   type: ClusterIP
