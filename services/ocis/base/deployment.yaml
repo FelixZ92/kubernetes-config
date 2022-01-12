@@ -9,6 +9,8 @@ spec:
     matchLabels:
       app.kubernetes.io/name: ocis-web
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
