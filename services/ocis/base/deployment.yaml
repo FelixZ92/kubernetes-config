@@ -192,6 +192,8 @@ spec:
                   key: password
             - name: OCIS_INSECURE
               value: "true"
+            - name: SETTINGS_GRPC_ADDR
+              value: 0.0.0.0:9191
           ports:
             - containerPort: 9200
               protocol: TCP
@@ -205,6 +207,9 @@ spec:
             - containerPort: 9215
               protocol: TCP
               name: storage
+            - containerPort: 9191
+              protocol: TCP
+              name: settings
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true

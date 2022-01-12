@@ -23,6 +23,14 @@ spec:
         - name: ocis-hello
           image: owncloud/ocis-hello:linux-amd64
           imagePullPolicy: IfNotPresent
+          env:
+            - name: SETTINGS_ENDPOINT
+              value: ocis-web:9191
+            - name: HELLO_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: password
           ports:
             - containerPort: 9105
               name: web
