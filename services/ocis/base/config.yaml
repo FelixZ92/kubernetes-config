@@ -116,7 +116,7 @@ data:
     }
   config.json: |
     {
-      "server": "https://ocis.host.k3d.internal",
+      "server": "https://ocis.${BASE_DOMAIN}",
       "theme": "owncloud",
       "version": "0.1.0",
       "openIdConnect": {

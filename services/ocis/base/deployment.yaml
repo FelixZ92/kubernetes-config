@@ -79,6 +79,8 @@ spec:
               value: ocis-web
             - name: WEB_OIDC_METADATA_URL
               value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications/.well-known/openid-configuration
+            - name: WEB_UI_CONFIG
+              value: /etc/ocis/proxy.json
 
             - name: STORAGE_TRANSFER_SECRET
               valueFrom:
