@@ -41,10 +41,10 @@ spec:
             - /entrypoint/entrypoint-override.sh
           resources:
             requests:
-              cpu: 100m
+              cpu: 200m
               memory: 1024Mi
             limits:
-              cpu: 100m
+              cpu: 200m
               memory: 1024Mi
           livenessProbe:
             tcpSocket:
