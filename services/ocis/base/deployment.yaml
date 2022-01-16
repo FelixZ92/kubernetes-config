@@ -10,7 +10,7 @@ spec:
       app.kubernetes.io/name: ocis-web
   replicas: 1
   strategy:
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -42,7 +42,7 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 512Mi
+              memory: 1024Mi
             limits:
               cpu: 100m
               memory: 512Mi
@@ -71,14 +71,14 @@ spec:
             - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
             - name: PROXY_OIDC_ISSUER
-              value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications
+              value: https://keycloak.${BASE_DOMAIN}/auth/realms/applications
             #
             - name: WEB_OIDC_AUTHORITY
-              value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications
+              value: https://keycloak.${BASE_DOMAIN}/auth/realms/applications
             - name: WEB_OIDC_CLIENT_ID
               value: ocis-web
             - name: WEB_OIDC_METADATA_URL
-              value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications/.well-known/openid-configuration
+              value: https://keycloak.${BASE_DOMAIN}/auth/realms/applications/.well-known/openid-configuration
             - name: WEB_UI_CONFIG
               value: /etc/ocis/config.json
 
@@ -88,9 +88,9 @@ spec:
                   name: storage-transfer-secret
                   key: password
             - name: STORAGE_OIDC_ISSUER
-              value: https://keycloak.162.55.153.15.nip.io
+              value: https://keycloak.${BASE_DOMAIN}
             - name: STORAGE_LDAP_IDP
-              value: https://keycloak.162.55.153.15.nip.io/auth/realms/applications
+              value: https://keycloak.${BASE_DOMAIN}/auth/realms/applications
 
             - name: STORAGE_USERS_DRIVER
               value: s3ng
