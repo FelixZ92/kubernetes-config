@@ -147,7 +147,7 @@ spec:
                   name: minio
                   key: secretkey
             - name: STORAGE_HOME_DRIVER_S3NG_BUCKET
-              value: ocis-users
+              value: ocis-bucket
 
             - name: STORAGE_LDAP_BIND_PASSWORD
               valueFrom:
