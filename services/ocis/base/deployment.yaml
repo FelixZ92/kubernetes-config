@@ -45,7 +45,7 @@ spec:
               memory: 1024Mi
             limits:
               cpu: 100m
-              memory: 512Mi
+              memory: 1024Mi
           livenessProbe:
             tcpSocket:
               port: 9200
