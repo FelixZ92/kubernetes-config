@@ -3,7 +3,6 @@ resources:
   - ingress.yaml
   - service.yaml
   - config.yaml
-  - pvc.yaml
   - hello.yaml
   - servicemonitor.yaml
   - secrets
