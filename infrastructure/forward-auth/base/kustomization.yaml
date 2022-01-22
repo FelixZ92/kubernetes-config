@@ -23,5 +23,5 @@ configMapGenerator:
       - LOG_FORMAT=json
       - AUTH_HOST=auth.${BASE_DOMAIN}
       - URL_PATH=/_oauth
-      - INSECURE_COOKIE=false
+      - INSECURE_COOKIE=true
       - WHITELIST=${ALLOWED_USERS}
