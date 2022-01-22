@@ -6,6 +6,7 @@ resources:
   - hello.yaml
   - servicemonitor.yaml
   - secrets
+  - pvc.yaml
 
 configMapGenerator:
   - name: entrypoint

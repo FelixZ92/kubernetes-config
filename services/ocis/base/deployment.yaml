@@ -10,7 +10,7 @@ spec:
       app.kubernetes.io/name: ocis-web
   replicas: 1
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
@@ -29,9 +29,15 @@ spec:
         - name: configs
           configMap:
             name: ocis-config
+        - name: metadata
+          persistentVolumeClaim:
+            claimName: ocis-metadata
         - name: entrypoint
           configMap:
             name: entrypoint
+        - name: ocis
+          persistentVolumeClaim:
+            claimName: ocis
       containers:
         - name: ocis-web
           image: owncloud/ocis:1.16.0
@@ -94,6 +100,8 @@ spec:
 
             - name: STORAGE_USERS_DRIVER
               value: s3ng
+            - name: STORAGE_METADATA_DRIVER
+              value: ocis # keep metadata on ocis storage since this are only small files atm
             - name: STORAGE_USERS_DRIVER_S3NG_ENDPOINT
               value: http://minio.minio.svc:9000
             - name: STORAGE_USERS_DRIVER_S3NG_REGION
@@ -109,46 +117,7 @@ spec:
                   name: minio
                   key: secretkey
             - name: STORAGE_USERS_DRIVER_S3NG_BUCKET
-              value: ocis-users
-
-            - name: STORAGE_METADATA_DRIVER
-              value: s3ng # keep metadata on ocis storage since this are only small files atm
-            - name: STORAGE_METADATA_DRIVER_S3NG_ENDPOINT
-              value: http://minio.minio.svc:9000
-            - name: STORAGE_METADATA_DRIVER_S3NG_REGION
-              value: local
-            - name: STORAGE_METADATA_DRIVER_S3NG_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: minio
-                  key: accesskey
-            - name: STORAGE_METADATA_DRIVER_S3NG_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: minio
-                  key: secretkey
-            - name: STORAGE_METADATA_DRIVER_S3NG_BUCKET
-              value: ocis-metadata
-
-            - name: STORAGE_HOME_DRIVER
-              value: s3ng
-            - name: STORAGE_HOME_DRIVER_S3NG_ENDPOINT
-              value: http://minio.minio.svc:9000
-            - name: STORAGE_HOME_DRIVER_S3NG_REGION
-              value: local
-            - name: STORAGE_HOME_DRIVER_S3NG_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: minio
-                  key: accesskey
-            - name: STORAGE_HOME_DRIVER_S3NG_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: minio
-                  key: secretkey
-            - name: STORAGE_HOME_DRIVER_S3NG_BUCKET
               value: ocis-bucket
-
             - name: STORAGE_LDAP_BIND_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -220,5 +189,9 @@ spec:
               name: temp
             - name: configs
               mountPath: /etc/ocis
+            - name: metadata
+              mountPath: /var/tmp/ocis
             - name: entrypoint
               mountPath: /entrypoint
+            - name: ocis
+              mountPath: /var/lib/ocis
