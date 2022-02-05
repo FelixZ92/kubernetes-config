@@ -1,0 +1,128 @@
+global:
+  rbac:
+    create: true
+    pspEnabled: true
+
+alertmanager:
+  enabled: true
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      group_by: [ 'job' ]
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      receiver: 'slack'
+      routes:
+        - match:
+            alertname: Watchdog
+          receiver: 'null'
+    receivers:
+      - name: 'null'
+      - name: 'slack'
+        slack_configs:
+          - api_url: https://hooks.slack.com/services/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
+            channel: '#alerts'
+            send_resolved: true
+    templates:
+      - '/etc/alertmanager/config/*.tmpl'
+
+  alertmanagerSpec:
+    replicas: 2
+    retention: 120h
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: hcloud-volumes
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 10Gi
+    externalUrl: "https://alertmanager.${BASE_DOMAIN}"
+    resources:
+      requests:
+        memory: "200Mi"
+        cpu: "100m"
+      limits:
+        memory: "300Mi"
+        cpu: "200m"
+
+## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+##
+grafana:
+  defaultDashboardsTimezone: Europe/Berlin
+  rbac:
+    pspEnabled: true
+    pspUseAppArmor: true
+  sidecar:
+    dashboards:
+      searchNamespace: "ALL"
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki.loki.svc:3100
+      version: 1
+  serviceMonitor:
+    enabled: true
+
+  downloadDashboards:
+    resources:
+      requests:
+        cpu: 20m
+        memory: 64Mi
+      limits:
+        cpu: 40m
+        memory: 128Mi
+
+## Configuration for kube-state-metrics subchart
+##
+kube-state-metrics:
+  selfMonitor:
+    enabled: true
+
+## Deploy node exporter as a daemonset to all nodes
+##
+nodeExporter:
+  enabled: true
+
+## Configuration for prometheus-node-exporter subchart
+##
+prometheus-node-exporter:
+  rbac:
+    pspEnabled: true
+
+## Manages Prometheus and Alertmanager components
+##
+prometheusOperator:
+  enabled: true
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 256Mi
+
+## Deploy a Prometheus instance
+##
+prometheus:
+  externalUrl: "https://prometheus.${BASE_DOMAIN}"
+  resources:
+      limits:
+        cpu: 500m
+        memory: 4Gi
+      requests:
+        cpu: 300m
+        memory: 2Gi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: hcloud-volumes
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 10Gi
+  retention: 7d
+  retentionSize: "10Gi"

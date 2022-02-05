@@ -5,4 +5,9 @@ resources:
   - create-grafana-client-secret.yaml
   - grafana-admin-user.yaml
 
+configMapGenerator:
+  - name: kube-prometheus-stack-values
+    files:
+      - values.yaml
+
 namespace: monitoring
