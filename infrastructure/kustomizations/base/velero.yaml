@@ -13,11 +13,6 @@ spec:
     name: k8s-dev
     namespace: flux-system
   validation: server
-  healthChecks:
-    - kind: StatefulSet
-      name: keycloak
-      apiVersion: apps/v1
-      namespace: keycloak
   postBuild:
     substituteFrom:
       - kind: ConfigMap
