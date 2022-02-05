@@ -1,0 +1,5 @@
+resources:
+  - velero-release.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true

@@ -1,0 +1,52 @@
+initContainers:
+  - name: velero-plugin-for-aws
+    image: velero/velero-plugin-for-aws:v1.3.0
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: [ "ALL" ]
+    add: [ ]
+  readOnlyRootFilesystem: true
+metrics:
+  serviceMonitor:
+    enabled: false
+    additionalLabels:
+      monitoring: kube-prometheus-stack
+# This job upgrades the CRDs.
+upgradeCRDs: false
+
+configuration:
+  # Cloud provider being used (e.g. aws, azure, gcp).
+  provider: aws
+
+  backupStorageLocation:
+    config:
+      bucket: velero-${ENVIRONMENT}
+      region: de
+      s3ForcePathStyle: true
+      s3Url: https://s3.de.cloud.ovh.net
+
+# Info about the secret to be used by the Velero deployment, which
+# should contain credentials for the cloud provider IAM account you've
+# set up for Velero.
+credentials:
+  existingSecret: cloud-credentials
+
+# Whether to create volumesnapshotlocation crd, if false => disable snapshot feature
+snapshotsEnabled: false
+
+# Whether to deploy the restic daemonset.
+deployRestic: true
+
+restic:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 1024Mi

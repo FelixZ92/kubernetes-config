@@ -12,3 +12,4 @@ resources:
   - redis-operator.yaml
   - starboard.yaml
   - traefik.yaml
+  - velero.yaml

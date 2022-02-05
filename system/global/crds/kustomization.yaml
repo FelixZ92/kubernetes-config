@@ -5,3 +5,4 @@ resources:
   - redis-operator
   - traefik
   - secret-generator
+  - velero
