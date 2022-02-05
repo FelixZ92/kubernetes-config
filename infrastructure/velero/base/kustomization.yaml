@@ -3,3 +3,8 @@ resources:
 
 generatorOptions:
   disableNameSuffixHash: true
+
+configMapGenerator:
+  - files:
+      - values.yaml
+    name: velero-values
