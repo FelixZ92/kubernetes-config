@@ -110,12 +110,12 @@ prometheusOperator:
 prometheus:
   externalUrl: "https://prometheus.${BASE_DOMAIN}"
   resources:
-      limits:
-        cpu: 500m
-        memory: 4Gi
-      requests:
-        cpu: 300m
-        memory: 2Gi
+    limits:
+      cpu: 500m
+      memory: 4Gi
+    requests:
+      cpu: 300m
+      memory: 2Gi
     storageSpec:
       volumeClaimTemplate:
         spec:
