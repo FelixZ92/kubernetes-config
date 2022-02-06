@@ -1,8 +1,0 @@
-resources:
-  - ../crds
-  - all.yaml
-  - ceph-cluster.yaml
-  - toolbox.yaml
-  - block-pools.yaml
-  - https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/monitoring/rbac.yaml # rbac for monitoring
-  - monitoring.yaml

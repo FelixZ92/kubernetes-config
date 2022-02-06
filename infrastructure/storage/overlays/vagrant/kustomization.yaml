@@ -1,4 +1,0 @@
-resources:
-  - ../../longhorn/overlays/dev
-  - ../../local-path-provisioner/base
-  - nfs-provisioner.yaml
