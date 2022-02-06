@@ -31,10 +31,10 @@ configAwsOrGcp:
   # kube_iam_role: ""
 
   # S3 bucket to use for shipping postgres daily logs
-  log_s3_bucket: "postgres-logs-${ENVIRONMNENT}"
+  log_s3_bucket: "postgres-logs-${ENVIRONMENT}"
 
   # S3 bucket to use for shipping WAL segments with WAL-E
-  wal_s3_bucket: "postgres-wal-${ENVIRONMNENT}"
+  wal_s3_bucket: "postgres-wal-${ENVIRONMENT}"
 
   # GCS bucket to use for shipping WAL segments with WAL-E
   # wal_gs_bucket: ""
@@ -54,7 +54,7 @@ configLogicalBackup:
   # storage provider - either "s3" or "gcs"
   logical_backup_provider: "s3"
   # S3 Access Key ID
-  logical_backup_s3_bucket: "postgres-logical-${ENVIRONMNENT}"
+  logical_backup_s3_bucket: "postgres-logical-${ENVIRONMENT}"
   # S3 region of bucket
   logical_backup_s3_region: "de"
   # S3 endpoint url when not using AWS
