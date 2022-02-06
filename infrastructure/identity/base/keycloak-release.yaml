@@ -13,7 +13,8 @@ metadata:
   name: keycloak
   namespace: keycloak
 spec:
-  interval: 5m
+  interval: 20m
+  timeout: 10m
   dependsOn:
     - name: postgres-operator
       namespace: postgres-operator
