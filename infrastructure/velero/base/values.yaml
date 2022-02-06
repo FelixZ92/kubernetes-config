@@ -13,9 +13,7 @@ containerSecurityContext:
   readOnlyRootFilesystem: true
 metrics:
   serviceMonitor:
-    enabled: false
-    additionalLabels:
-      monitoring: kube-prometheus-stack
+    enabled: true
 # This job upgrades the CRDs.
 upgradeCRDs: false
 
@@ -24,8 +22,8 @@ configuration:
   provider: aws
 
   backupStorageLocation:
+    bucket: velero-${ENVIRONMENT}
     config:
-      bucket: velero-${ENVIRONMENT}
       region: de
       s3ForcePathStyle: true
       s3Url: https://s3.de.cloud.ovh.net
