@@ -7,4 +7,12 @@ resources:
   - middlewares.yaml
   - cert.yaml
 
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - files:
+      - values.yaml
+    name: postgres-operator-values
+
 namespace: postgres-operator

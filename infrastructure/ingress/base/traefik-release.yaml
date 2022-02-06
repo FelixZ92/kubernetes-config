@@ -20,81 +20,12 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: '10.3.1'
+      version: '10.14.0'
       sourceRef:
         kind: HelmRepository
         name: traefik
         namespace: traefik
       interval: 10m
-  values:
-    deployment:
-      replicas: 1
-
-    # Pod disruption budget
-    podDisruptionBudget:
-      enabled: false
-      # maxUnavailable: 1
-      # minAvailable: 0
-
-    ingressRoute:
-      dashboard:
-        enabled: false
-    metrics:
-      prometheus:
-        entrypoint: metrics
-    logs:
-      general:
-        level: ERROR
-      access:
-        enabled: true
-        filters: { }
-        fields:
-          general:
-            defaultmode: keep
-            names: { }
-          headers:
-            defaultmode: drop
-            names: { }
-
-    additionalArguments: [ ]
-    #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
-    #  - "--log.level=DEBUG"
-
-
-    # Configure ports
-    ports:
-      web:
-        port: 8000
-        expose: true
-        exposedPort: 80
-        protocol: TCP
-        # redirectTo: websecure
-      websecure:
-        port: 8443
-        expose: true
-        exposedPort: 443
-        protocol: TCP
-
-    service:
-      enabled: true
-      type: LoadBalancer
-
-    hostNetwork: false
-
-
-    # Enable to create a PodSecurityPolicy and assign it to the Service Account via RoleBindin or ClusterRoleBinding
-    podSecurityPolicy:
-      enabled: true
-
-    resources:
-      requests:
-        cpu: "100m"
-        memory: "50Mi"
-      limits:
-        cpu: "300m"
-        memory: "150Mi"
-
-    nodeSelector:
-      node.kubernetes.io/ingress: traefik
-
-    priorityClassName: ""
+  valuesFrom:
+    - kind: ConfigMap
+      name: traefik-values

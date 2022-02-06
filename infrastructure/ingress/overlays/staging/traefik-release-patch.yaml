@@ -31,20 +31,6 @@ spec:
       - "--entryPoints.web.forwardedHeaders.trustedIPs=10.0.0.2"
       - "--entryPoints.websecure.forwardedHeaders.trustedIPs=10.0.0.2"
 
-    # Configure ports
-    ports:
-      web:
-        port: 8000
-        expose: true
-        exposedPort: 80
-        protocol: TCP
-        # redirectTo: websecure
-      websecure:
-        port: 8443
-        expose: true
-        exposedPort: 443
-        protocol: TCP
-
     service:
       enabled: true
       type: LoadBalancer
@@ -52,22 +38,3 @@ spec:
         load-balancer.hetzner.cloud/name: "staging-ingress"
         load-balancer.hetzner.cloud/use-private-ip: "true"
         load-balancer.hetzner.cloud/uses-proxyprotocol: "true"
-    hostNetwork: false
-
-
-    # Enable to create a PodSecurityPolicy and assign it to the Service Account via RoleBindin or ClusterRoleBinding
-    podSecurityPolicy:
-      enabled: true
-
-    resources:
-      requests:
-        cpu: "100m"
-        memory: "50Mi"
-      limits:
-        cpu: "300m"
-        memory: "150Mi"
-
-    nodeSelector:
-      node.kubernetes.io/ingress: traefik
-
-    priorityClassName: ""

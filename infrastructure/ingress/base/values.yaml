@@ -1,0 +1,32 @@
+deployment:
+  replicas: 1
+
+ingressRoute:
+  dashboard:
+    enabled: false
+
+logs:
+  general:
+    level: ERROR
+  access:
+    enabled: true
+    filters: {}
+    fields:
+      general:
+        defaultmode: keep
+        names: {}
+      headers:
+        defaultmode: drop
+        names: {}
+
+# Enable to create a PodSecurityPolicy and assign it to the Service Account via RoleBindin or ClusterRoleBinding
+podSecurityPolicy:
+  enabled: true
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "50Mi"
+  limits:
+    cpu: "300m"
+    memory: "150Mi"

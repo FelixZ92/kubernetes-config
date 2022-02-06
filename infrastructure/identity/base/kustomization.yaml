@@ -8,4 +8,12 @@ resources:
   - signing-secret.yaml
   - realms
 
+configMapGenerator:
+  - name: keycloak-values
+    files:
+      - values.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
 namespace: keycloak
