@@ -29,8 +29,6 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: postgres-operator-values
-    - kind: Secret
-      name: s3-creds
   install:
     crds: Skip
     disableOpenAPIValidation: true

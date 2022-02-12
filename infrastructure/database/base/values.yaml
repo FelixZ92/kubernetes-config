@@ -7,40 +7,21 @@ configKubernetes:
   spilo_runasgroup: 103
   spilo_fsgroup: 103
   spilo_allow_privilege_escalation: false
+  pod_environment_configmap: "postgres-operator/pod-env-overrides"
 
 # configure interaction with non-Kubernetes objects from AWS or GCP
 configAwsOrGcp:
   # Additional Secret (aws or gcp credentials) to mount in the pod
-  # additional_secret_mount: "some-secret-name"
+  additional_secret_mount: "postgres-gcp-credentials"
 
   # Path to mount the above Secret in the filesystem of the container(s)
-  # additional_secret_mount_path: "/some/dir"
-
-  # AWS region used to store ESB volumes
-  aws_region: de
-
-  # enable automatic migration on AWS from gp2 to gp3 volumes
-  enable_ebs_gp3_migration: false
-  # defines maximum volume size in GB until which auto migration happens
-  # enable_ebs_gp3_migration_max_size: 1000
+  additional_secret_mount_path: "/var/secrets/google"
 
   # GCP credentials that will be used by the operator / pods
-  # gcp_credentials: ""
-
-  # AWS IAM role to supply in the iam.amazonaws.com/role annotation of Postgres pods
-  # kube_iam_role: ""
-
-  # S3 bucket to use for shipping postgres daily logs
-  log_s3_bucket: "postgres-logs-${ENVIRONMENT}"
-
-  # S3 bucket to use for shipping WAL segments with WAL-E
-  wal_s3_bucket: "postgres-wal-${ENVIRONMENT}"
+  gcp_credentials: "/var/secrets/google/key.json"
 
   # GCS bucket to use for shipping WAL segments with WAL-E
-  # wal_gs_bucket: ""
-
-  # Azure Storage Account to use for shipping WAL segments with WAL-G
-  # wal_az_storage_account: ""
+  wal_gs_bucket: "fzx-${ENVIRONMENT}-postgres-wal"
 
 # configure K8s cron job managed by the operator
 configLogicalBackup:
@@ -52,14 +33,8 @@ configLogicalBackup:
   # prefix for the backup job name
   logical_backup_job_prefix: "logical-backup-"
   # storage provider - either "s3" or "gcs"
-  logical_backup_provider: "s3"
+  logical_backup_provider: gcs
   # S3 Access Key ID
-  logical_backup_s3_bucket: "postgres-logical-${ENVIRONMENT}"
-  # S3 region of bucket
-  logical_backup_s3_region: "de"
-  # S3 endpoint url when not using AWS
-  logical_backup_s3_endpoint: "https://s3.de.cloud.ovh.net"
-  # S3 server side encryption
-  logical_backup_s3_sse: "AES256"
+  logical_backup_s3_bucket: "fzx-${ENVIRONMENT}-postgres-logical"
   # backup schedule in the cron format
-  logical_backup_schedule: "30 00 * * *"
+  logical_backup_schedule: "*/10 * * * *"

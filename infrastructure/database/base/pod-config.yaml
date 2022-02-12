@@ -1,6 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgres-pod-config
+  name: pod-env-overrides
+  namespace: postgres-operator-system
 data:
-  :
+  # Any env variable used by spilo can be added
+  USE_WALG_BACKUP: "true"
+  USE_WALG_RESTORE: "true"
+  CLONE_USE_WALG_RESTORE: "true"
+  BACKUP_SCHEDULE: "*/10 * * * *"
