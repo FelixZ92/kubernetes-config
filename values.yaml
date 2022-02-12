@@ -29,7 +29,7 @@ labels: {}
 # If using kube2iam or kiam, use the following annotation with your AWS_ACCOUNT_ID
 # and VELERO_ROLE_NAME filled in:
 podAnnotations: {}
-  #  iam.amazonaws.com/role: "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<VELERO_ROLE_NAME>"
+#  iam.amazonaws.com/role: "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<VELERO_ROLE_NAME>"
 
 # Additional pod labels for Velero deployment's template. Optional
 # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -52,27 +52,33 @@ dnsPolicy: ClusterFirst
 # Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required.
 # If the value is a string then it is evaluated as a template.
 initContainers:
-  - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.3.0
-    imagePullPolicy: IfNotPresent
-    volumeMounts:
-      - mountPath: /target
-        name: plugins
+# - name: velero-plugin-for-csi
+#   image: velero/velero-plugin-for-csi:v0.2.0
+#   imagePullPolicy: IfNotPresent
+#   volumeMounts:
+#     - mountPath: /target
+#       name: plugins
+# - name: velero-plugin-for-aws
+#   image: velero/velero-plugin-for-aws:v1.3.0
+#   imagePullPolicy: IfNotPresent
+#   volumeMounts:
+#     - mountPath: /target
+#       name: plugins
 
 # SecurityContext to use for the Velero deployment. Optional.
 # Set fsGroup for `AWS IAM Roles for Service Accounts`
 # see more informations at: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
 podSecurityContext: {}
-  # fsGroup: 1337
+# fsGroup: 1337
 
 # Container Level Security Context for the 'velero' container of the Velero deployment. Optional.
 # See: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
-containerSecurityContext:
-  allowPrivilegeEscalation: false
-  capabilities:
-    drop: [ "ALL" ]
-    add: [ ]
-  readOnlyRootFilesystem: true
+containerSecurityContext: {}
+  # allowPrivilegeEscalation: false
+  # capabilities:
+  #   drop: ["ALL"]
+  #   add: []
+# readOnlyRootFilesystem: true
 
 # Pod priority class name to use for the Velero deployment. Optional.
 priorityClassName: ""
@@ -286,7 +292,7 @@ credentials:
   # Note that the format will be different for different providers, please check their documentation.
   # Here is a list of documentation for plugins maintained by the Velero team:
   # [AWS] https://github.com/vmware-tanzu/velero-plugin-for-aws/blob/main/README.md
-  # [GCP] https://github.com/vmware-tanzu/velero-plugin-for-gcp/blob/main/README.md
+  # [GCP] https://github.com/vmware-tanzu/velero-plugin-forF-gcp/blob/main/README.md
   # [Azure] https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure/blob/main/README.md
   secretContents: {}
   #  cloud: |

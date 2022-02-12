@@ -1,32 +1,34 @@
 initContainers:
-  - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.3.0
+  - name: velero-plugin-for-gcp
+    image: velero/velero-plugin-for-gcp:v1.4.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
         name: plugins
+
 containerSecurityContext:
   allowPrivilegeEscalation: false
   capabilities:
-    drop: [ "ALL" ]
-    add: [ ]
+    drop: ["ALL"]
+    add: []
   readOnlyRootFilesystem: true
 metrics:
   serviceMonitor:
     enabled: true
+    additionalLabels:
+      monitoring: kube-prometheus-stack
+
 # This job upgrades the CRDs.
 upgradeCRDs: false
 
 configuration:
   # Cloud provider being used (e.g. aws, azure, gcp).
-  provider: aws
+  provider: gcp
 
   backupStorageLocation:
-    bucket: velero-${ENVIRONMENT}
+    bucket: fzx-velero-${ENVIRONMENT}
     config:
-      region: de
-      s3ForcePathStyle: true
-      s3Url: https://s3.de.cloud.ovh.net
+      region: eu
 
 # Info about the secret to be used by the Velero deployment, which
 # should contain credentials for the cloud provider IAM account you've
