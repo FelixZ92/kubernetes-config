@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/instance: identity-pg
     team: identity
 spec:
+  enableLogicalBackup: true
   teamId: "identity"
   volume:
     size: 2Gi
