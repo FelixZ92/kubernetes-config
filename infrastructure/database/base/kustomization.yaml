@@ -6,6 +6,7 @@ resources:
   - ingressroute.yaml
   - middlewares.yaml
   - cert.yaml
+  - pod-config.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
