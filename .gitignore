@@ -16,3 +16,7 @@ tmp/
 !create-grafana-client-secret.yaml
 !signing-secret.yaml
 !create-kratos-dsn-secret.yaml
+system/secrets/
+
+infrastructure/database/base/values-s3.yaml
+credentials-velero

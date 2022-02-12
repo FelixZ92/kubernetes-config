@@ -1,17 +1,18 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: identity-pg
+  name: identity-pg2
   namespace: keycloak
   labels:
     app.kubernetes.io/name: spilo
     app.kubernetes.io/instance: identity-pg
     team: identity
 spec:
+  enableLogicalBackup: true
   teamId: "identity"
   volume:
     size: 2Gi
-  numberOfInstances: 2
+  numberOfInstances: 1
   resources:
     limits:
       cpu: 1000m
