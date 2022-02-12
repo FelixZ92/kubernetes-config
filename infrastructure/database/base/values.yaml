@@ -28,10 +28,7 @@ configLogicalBackup:
   # image for pods of the logical backup job (example runs pg_dumpall)
   logical_backup_docker_image: "registry.opensource.zalan.do/acid/logical-backup:v1.7.1"
   # path of google cloud service account json file
-  # logical_backup_google_application_credentials: ""
-
-  # prefix for the backup job name
-  logical_backup_job_prefix: "logical-backup-"
+  logical_backup_google_application_credentials: "/var/secrets/google/key.json"
   # storage provider - either "s3" or "gcs"
   logical_backup_provider: gcs
   # S3 Access Key ID
