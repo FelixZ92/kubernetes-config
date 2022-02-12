@@ -1,6 +1,7 @@
 resources:
   - cert-manager.yaml
   - dashboard.yaml
+  - doppler.yaml
   - flux-system.yaml
   - keycloak.yaml
   - local-path-storage.yaml

@@ -1,8 +1,9 @@
 resources:
   - cert-manager
+  - doppler
   - postgres-operator
   - prometheus-operator
   - redis-operator
-  - traefik
   - secret-generator
+  - traefik
   - velero
