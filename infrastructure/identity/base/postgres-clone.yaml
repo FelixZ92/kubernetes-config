@@ -1,11 +1,11 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: identity-pg-clone2
+  name: identity-pg-clone
   namespace: keycloak
   labels:
     app.kubernetes.io/name: spilo
-    app.kubernetes.io/instance: identity-pg-clone2
+    app.kubernetes.io/instance: identity-pg-clone
     team: identity
 spec:
   enableLogicalBackup: true

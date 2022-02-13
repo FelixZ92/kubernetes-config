@@ -8,6 +8,4 @@ data:
   USE_WALG_BACKUP: "true"
   USE_WALG_RESTORE: "true"
   CLONE_USE_WALG_RESTORE: "true"
-  BACKUP_SCHEDULE: "*/10 * * * *"
-#  CLONE_WALG_GS_PREFIX: gs://fzx-${ENVIRONMENT}-postgres-wal/spilo/$(CLONE_SCOPE)
   CLONE_GOOGLE_APPLICATION_CREDENTIALS: /var/secrets/google/key.json
