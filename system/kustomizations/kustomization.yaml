@@ -1,6 +1,5 @@
 resources:
   - controller/flux-system.yaml
-  - controller/doppler.yaml
   - controller/sealed-controller.yaml
   - controller/cert-manager.yaml
   - controller/kubernetes-replicator.yaml

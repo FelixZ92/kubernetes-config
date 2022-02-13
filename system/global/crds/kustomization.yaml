@@ -1,6 +1,5 @@
 resources:
   - cert-manager
-  - doppler
   - postgres-operator
   - prometheus-operator
   - redis-operator
