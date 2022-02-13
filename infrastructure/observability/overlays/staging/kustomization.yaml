@@ -1,2 +1,4 @@
 resources:
   - ../../base
+  - gitlab-client-credentials.yaml
+  - grafana-admin-user.yaml

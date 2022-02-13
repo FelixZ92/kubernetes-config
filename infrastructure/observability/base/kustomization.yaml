@@ -3,7 +3,6 @@ resources:
   - event-exporter/
   - ingress
   - create-grafana-client-secret.yaml
-  - grafana-admin-user.yaml
 
 configMapGenerator:
   - name: kube-prometheus-stack-values

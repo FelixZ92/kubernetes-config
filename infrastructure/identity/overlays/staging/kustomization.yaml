@@ -1,4 +1,5 @@
 resources:
   - ../../base
+  - keycloak-admin-user.yaml
 
 namespace: keycloak
