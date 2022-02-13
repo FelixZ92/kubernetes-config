@@ -5,7 +5,7 @@ metadata:
   namespace: keycloak
   labels:
     app.kubernetes.io/name: spilo
-    app.kubernetes.io/instance: identity-pg-clone
+    app.kubernetes.io/instance: identity-pg-clone2
     team: identity
 spec:
   enableLogicalBackup: true
@@ -24,7 +24,7 @@ spec:
     uid: "1a1be7c5-b646-433b-92e5-dad75a03e96a"
     cluster: "identity-pg"
     timestamp: "2022-12-19T12:40:33+01:00"
-    s3_wal_path: "gs://fzx-staging-postgres-wal/spilo/identity-pg/1a1be7c5-b646-433b-92e5-dad75a03e96a/wal/12"
+#    s3_wal_path: "gs://fzx-staging-postgres-wal/spilo/identity-pg/1a1be7c5-b646-433b-92e5-dad75a03e96a/wal/12"
   postgresql:
     version: "12"
 
