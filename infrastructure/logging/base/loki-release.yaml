@@ -18,6 +18,15 @@ spec:
         name: grafana
         namespace: loki
       interval: 10m
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - patch:
+              - op: replace
+                path: /metadata/labels/release
+                value: kube-prometheus-stack
+            target:
+              kind: ServiceMonitor
   values:
     config:
       limits_config:
@@ -60,5 +69,3 @@ spec:
 
     serviceMonitor:
       enabled: true
-      additionalLabels:
-        release: kube-prometheus-stack

@@ -1,12 +1,3 @@
 resources:
   - ../../base
   - pvc.yaml
-
-patches:
-  - target:
-      name: loki
-      kind: HelmRelease
-    patch: |-
-      - op: replace
-        path: /spec/values/nodeSelector/storage
-        value: hcloud
