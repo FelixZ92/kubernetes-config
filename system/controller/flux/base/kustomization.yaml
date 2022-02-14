@@ -1,7 +1,20 @@
 resources:
   - https://github.com/fluxcd/flux2/releases/download/v0.23.0/install.yaml
+  - podmonitor.yaml
 
 namespace: flux-system
+
+configMapGenerator:
+  - name: flux-grafana-dashboards
+    files:
+      - control-plane.json
+      - cluster.json
+    options:
+      labels:
+        grafana_dashboard: "1"
+
+generatorOptions:
+  disableNameSuffixHash: true
 
 patches:
   - target:
