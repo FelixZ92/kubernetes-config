@@ -27,6 +27,7 @@ spec:
                 value: kube-prometheus-stack
             target:
               kind: ServiceMonitor
+              name: loki
   values:
     config:
       limits_config:
