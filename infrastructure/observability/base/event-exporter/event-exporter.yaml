@@ -33,7 +33,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: event-exporter
     app.kubernetes.io/name: event-exporter
-    monitoring: kube-prometheus-stack
+    release: kube-prometheus-stack
   name: event-exporter
 spec:
   endpoints:

@@ -130,7 +130,7 @@ metadata:
   labels:
     app: prometheus-node-exporter
     heritage: Helm
-    monitoring: kube-prometheus-stack
+    release: kube-prometheus-stack
     chart: prometheus-node-exporter-1.10.0
     jobLabel: node-exporter
 spec:

@@ -16,7 +16,7 @@ metrics:
   serviceMonitor:
     enabled: true
     additionalLabels:
-      monitoring: kube-prometheus-stack
+      release: kube-prometheus-stack
 
 # This job upgrades the CRDs.
 upgradeCRDs: false

@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   labels:
-    monitoring: kube-prometheus-stack
+    release: kube-prometheus-stack
     app: kube-prometheus-stack
   name: sealed-secrets.rules
   namespace: kube-system

@@ -118,7 +118,7 @@ metrics:
   serviceMonitor:
     enabled: false
     additionalLabels:
-      monitoring: kube-prometheus-stack
+      release: kube-prometheus-stack
     # ServiceMonitor namespace. Default to Velero namespace.
     # namespace:
 

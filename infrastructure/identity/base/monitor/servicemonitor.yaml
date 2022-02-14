@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: keycloak
     app.kubernetes.io/name: keycloak
-    monitoring: kube-prometheus-stack
+    release: kube-prometheus-stack
   name: keycloak-spi
 spec:
   endpoints:

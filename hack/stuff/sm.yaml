@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: prometheus-operator
     chart: prometheus-operator-9.3.1
     heritage: Helm
-    monitoring: kube-prometheus-stack
+    release: kube-prometheus-stack
   name: prometheus-operator-prometheus
   namespace: monitoring
 spec:
@@ -19,5 +19,5 @@ spec:
   selector:
     matchLabels:
       app: kube-prometheus-stack
-      monitoring: kube-prometheus-stack
+      release: kube-prometheus-stack
       self-monitor: "true"
