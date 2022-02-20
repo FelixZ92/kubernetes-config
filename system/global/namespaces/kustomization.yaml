@@ -3,6 +3,7 @@ resources:
   - dashboard.yaml
   - doppler.yaml
   - flux-system.yaml
+  - istio-system.yaml
   - keycloak.yaml
   - local-path-storage.yaml
   - loki.yaml
