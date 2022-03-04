@@ -34,4 +34,4 @@ configLogicalBackup:
   # S3 Access Key ID
   logical_backup_s3_bucket: "fzx-${ENVIRONMENT}-postgres-logical"
   # backup schedule in the cron format
-  logical_backup_schedule: "*/10 * * * *"
+  logical_backup_schedule: "30 00 * * *"
