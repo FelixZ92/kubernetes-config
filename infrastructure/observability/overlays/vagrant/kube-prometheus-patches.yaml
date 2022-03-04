@@ -7,7 +7,7 @@ spec:
   values:
     alertmanager:
       alertmanagerSpec:
-        replicas: 2
+        replicas: 1
         retention: 120h
         storage:
           volumeClaimTemplate:
@@ -29,7 +29,7 @@ spec:
     prometheus:
       prometheusSpec:
         externalUrl: "https://prometheus.${BASE_DOMAIN}"
-        replicas: 2
+        replicas: 1
         storageSpec:
           volumeClaimTemplate:
             spec:

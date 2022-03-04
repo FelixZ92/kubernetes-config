@@ -29,7 +29,7 @@ alertmanager:
       - '/etc/alertmanager/config/*.tmpl'
 
   alertmanagerSpec:
-    replicas: 2
+    replicas: 1
     retention: 120h
     storage:
       volumeClaimTemplate:
