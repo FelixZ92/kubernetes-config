@@ -16,7 +16,7 @@ configMapGenerator:
   - name: traefik-forward-auth-env
     literals:
       - DEFAULT_PROVIDER=oidc
-      - PROVIDERS_OIDC_ISSUER_URL=https://gitlab.com
+      - PROVIDERS_OIDC_ISSUER_URL=https://keycloak.${BASE_DOMAIN}/auth/realms/k8s
       - COOKIE_DOMAIN=${BASE_DOMAIN}
       - LIFETIME=21600 # 6 Hours
       - LOG_LEVEL=debug
