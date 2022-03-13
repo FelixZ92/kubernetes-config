@@ -23,6 +23,9 @@ spec:
           image: "ghcr.io/goauthentik/server:2021.12.5"
           imagePullPolicy: "IfNotPresent"
           args: ["server"]
+          envFrom:
+            - configMapRef:
+                name: authentik-config
           env:
             - name: AUTHENTIK_POSTGRESQL__USER
               valueFrom:
