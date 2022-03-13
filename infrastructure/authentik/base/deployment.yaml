@@ -1,0 +1,100 @@
+---
+# Source: authentik/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik-server
+  labels:
+    app.kubernetes.io/component: "server"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: "server"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: "server"
+    spec:
+      serviceAccountName: authentik
+      enableServiceLinks: true
+      containers:
+        - name: authentik
+          image: "ghcr.io/goauthentik/server:2021.12.5"
+          imagePullPolicy: "IfNotPresent"
+          args: ["server"]
+          env:
+            - name: AUTHENTIK_POSTGRESQL__USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: "keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do"
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: "keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do"
+          volumeMounts:
+            - name: geoip-db
+              mountPath: /geoip
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+            - name: http-metrics
+              containerPort: 9300
+              protocol: TCP
+            - name: https
+              containerPort: 9443
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /-/health/live/
+              port: http
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /-/health/ready/
+              port: http
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /-/health/live/
+              port: http
+            initialDelaySeconds: 50
+            periodSeconds: 10
+            failureThreshold: 10
+      volumes:
+        - name: geoip-db
+          emptyDir: {}
+---
+# Source: authentik/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik-worker
+  labels:
+    app.kubernetes.io/component: "worker"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: "worker"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: "worker"
+    spec:
+      serviceAccountName: authentik
+      enableServiceLinks: true
+      containers:
+        - name: authentik
+          image: "ghcr.io/goauthentik/server:2021.12.5"
+          imagePullPolicy: "IfNotPresent"
+          args: ["worker"]
+          volumeMounts:
+            - name: geoip-db
+              mountPath: /geoip
+      volumes:
+        - name: geoip-db
+          emptyDir: {}

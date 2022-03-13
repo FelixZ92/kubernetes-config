@@ -1,0 +1,134 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: authentik-pg
+  namespace: keycloak
+  labels:
+    app.kubernetes.io/name: spilo
+    app.kubernetes.io/instance: authentik-pg
+    team: authentik
+spec:
+  enableLogicalBackup: true
+  teamId: "authentik"
+  volume:
+    size: 2Gi
+  numberOfInstances: 2
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 200M
+  users:
+    # database owner
+    authentik:
+      - superuser
+      - createdb
+    # role for application foo
+    authentik_user: []
+
+  databases:
+    keycloak: keycloak
+  postgresql:
+    version: "12"
+
+# TODO: update with new pg operator version
+  spiloRunAsUser: 101
+  spiloRunAsGroup: 103
+  spiloFSGroup: 103
+
+  sidecars:
+    - name: "exporter"
+      image: "wrouesnel/postgres_exporter:v0.8.0"
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: false
+        runAsGroup: 65532
+#        runAsNonRoot: true
+        runAsUser: 65532
+      ports:
+        - name: exporter
+          containerPort: 9187
+          protocol: TCP
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256M
+        requests:
+          cpu: 100m
+          memory: 200M
+      env:
+        - name: "DATA_SOURCE_URI"
+          value: "localhost/keycloak?sslmode=disable"
+        - name: "DATA_SOURCE_USER"
+          valueFrom:
+            secretKeyRef:
+              name: postgres.authentik-pg.credentials.postgresql.acid.zalan.do
+              key: username
+        - name: "DATA_SOURCE_PASS"
+          valueFrom:
+            secretKeyRef:
+              name: postgres.authentik-pg.credentials.postgresql.acid.zalan.do
+              key: password
+#---
+#apiVersion: policy/v1beta1
+#kind: PodSecurityPolicy
+#metadata:
+#  name: postgres-pod
+#spec:
+#  privileged: true
+#  allowPrivilegeEscalation: true
+#  requiredDropCapabilities:
+#    - ALL
+#  volumes:
+#    - 'configMap'
+#    - 'emptyDir'
+#    - 'projected'
+#    - 'secret'
+#    - 'downwardAPI'
+#    - 'persistentVolumeClaim'
+#  hostNetwork: false
+#  hostIPC: false
+#  hostPID: false
+#  runAsUser:
+#    rule: 'RunAsAny'
+#  seLinux:
+#    rule: 'RunAsAny'
+#  fsGroup:
+#    rule: 'RunAsAny'
+#  readOnlyRootFilesystem: false
+#  supplementalGroups:
+#    rule: 'RunAsAny'
+#
+#---
+#kind: RoleBinding
+#apiVersion: rbac.authorization.k8s.io/v1
+#metadata:
+#  name: postgres-pod-psp
+#  namespace: keycloak
+#roleRef:
+#  kind: Role
+#  name: postgres-pod-psp
+#  apiGroup: rbac.authorization.k8s.io
+#subjects:
+#  - kind: ServiceAccount
+#    name: postgres-pod
+#    namespace: keycloak
+#---
+#kind: Role
+#apiVersion: rbac.authorization.k8s.io/v1
+#metadata:
+#  name: postgres-pod-psp
+#  namespace: keycloak
+#rules:
+#  - apiGroups: ['policy']
+#    resources: ['podsecuritypolicies']
+#    verbs:     ['use']
+#    resourceNames: ['postgres-pod']
+#  - apiGroups: ['extensions']
+#    resources: ['podsecuritypolicies']
+#    verbs:     ['use']
+#    resourceNames: ['postgres-pod']

@@ -1,0 +1,11 @@
+---
+# Source: authentik/templates/prom-service-monitor.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: authentik
+spec:
+  endpoints:
+    - port: http-metrics
+      scrapeTimeout: 3s
+      interval: 30s

@@ -1,0 +1,37 @@
+resources:
+  - deployment.yaml
+  - prom-rules.yaml
+  - prom-service-monitor.yaml
+  - rbac.yaml
+  - service.yaml
+  - postgres.yaml
+  - redis.yaml
+
+commonLabels:
+  app.kubernetes.io/name: authentik
+  app.kubernetes.io/instance: authentik
+
+configurations:
+  - configurations/servicemonitor.yaml
+
+configMapGenerator:
+  - name: authentik-config
+    literals:
+      - AUTHENTIK_AVATARS=gravatar
+      - AUTHENTIK_EMAIL__FROM="" # TODO mail config
+      - AUTHENTIK_EMAIL__HOST="smtp.host"
+      - AUTHENTIK_EMAIL__PASSWORD="smtp-password"
+      - AUTHENTIK_EMAIL__PORT="587"
+      - AUTHENTIK_EMAIL__TIMEOUT="30"
+      - AUTHENTIK_EMAIL__USE_SSL="false"
+      - AUTHENTIK_EMAIL__USE_TLS="false"
+      - AUTHENTIK_EMAIL__USERNAME="smtp-user"
+      - AUTHENTIK_LOG_LEVEL="info"
+      - AUTHENTIK_OUTPOSTS__CONTAINER_IMAGE_BASE="ghcr.io/goauthentik/%(type)s:%(version)s"
+      # TODO database
+      - AUTHENTIK_POSTGRESQL__HOST="authentik-pg"
+      - AUTHENTIK_POSTGRESQL__NAME="authentik"
+      - AUTHENTIK_POSTGRESQL__PORT="5432"
+      - AUTHENTIK_REDIS__HOST="authentik-redis-master"
+      - AUTHENTIK_REDIS__PASSWORD=""
+      - AUTHENTIK_SECRET_KEY="supersecret"
