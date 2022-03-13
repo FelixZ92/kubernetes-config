@@ -29,7 +29,7 @@ spec:
     authentik_user: []
 
   databases:
-    keycloak: authentik
+    authentik: authentik
   postgresql:
     version: "12"
 
