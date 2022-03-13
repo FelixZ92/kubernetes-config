@@ -1,0 +1,39 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: authentik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`authentik.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: authentik
+          port: 80
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: authentik-tls
+  annotations:
+    dashboard.zippelf.com/scrape: "true"
+    dashboard.zippelf.com/logo: "https://goauthentik.io/img/icon_top_brand.svg"
+    dashboard.zippelf.com/display-name: "authentik"
+    dashboard.zippelf.com/docs: "https://goauthentik.io/docs/"
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: tls-authentik-ingress
+  routes:
+    - match: Host(`authentik.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: authentik
+          port: 80
+      middlewares:
+        - name: forward-proto-https
