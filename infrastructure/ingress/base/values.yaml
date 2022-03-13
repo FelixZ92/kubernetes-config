@@ -30,3 +30,8 @@ resources:
   limits:
     cpu: "300m"
     memory: "150Mi"
+
+providers:
+  kubernetesCRD:
+    enabled: true
+    allowCrossNamespace: true
