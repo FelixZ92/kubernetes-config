@@ -47,6 +47,16 @@ spec:
                 secretKeyRef:
                   key: secret
                   name: authentik-key
+            - name: AK_ADMIN_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: admin-password
+            - name: AK_ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: admin-token
           volumeMounts:
             - name: geoip-db
               mountPath: /geoip
@@ -132,6 +142,16 @@ spec:
                 secretKeyRef:
                   key: secret
                   name: authentik-key
+            - name: AK_ADMIN_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: admin-password
+            - name: AK_ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: admin-token
       volumes:
         - name: geoip-db
           emptyDir: {}
