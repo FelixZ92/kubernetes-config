@@ -32,6 +32,4 @@ configMapGenerator:
       - AUTHENTIK_POSTGRESQL__HOST="authentik-pg"
       - AUTHENTIK_POSTGRESQL__NAME="authentik"
       - AUTHENTIK_POSTGRESQL__PORT="5432"
-      - AUTHENTIK_REDIS__HOST="authentik-redis-master"
-      - AUTHENTIK_REDIS__PASSWORD=""
-      - AUTHENTIK_SECRET_KEY="supersecret"
+      - AUTHENTIK_REDIS__HOST="authentik-redis"
