@@ -28,12 +28,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: username
-                  name: "keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do"
+                  name: "authentik-user.identity-pg.credentials.postgresql.acid.zalan.do"
             - name: AUTHENTIK_POSTGRESQL__PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: "keycloak-user.identity-pg.credentials.postgresql.acid.zalan.do"
+                  name: "authentik-user.identity-pg.credentials.postgresql.acid.zalan.do"
           volumeMounts:
             - name: geoip-db
               mountPath: /geoip
