@@ -19,13 +19,13 @@ configMapGenerator:
     literals:
       - AUTHENTIK_AVATARS=gravatar
       - AUTHENTIK_EMAIL__FROM="" # TODO mail config
-      - AUTHENTIK_EMAIL__HOST="smtp.host"
-      - AUTHENTIK_EMAIL__PASSWORD="smtp-password"
+      - AUTHENTIK_EMAIL__HOST=""
+      - AUTHENTIK_EMAIL__PASSWORD=""
       - AUTHENTIK_EMAIL__PORT="587"
       - AUTHENTIK_EMAIL__TIMEOUT="30"
       - AUTHENTIK_EMAIL__USE_SSL="false"
       - AUTHENTIK_EMAIL__USE_TLS="false"
-      - AUTHENTIK_EMAIL__USERNAME="smtp-user"
+      - AUTHENTIK_EMAIL__USERNAME=""
       - AUTHENTIK_LOG_LEVEL="info"
       - AUTHENTIK_OUTPOSTS__CONTAINER_IMAGE_BASE="ghcr.io/goauthentik/%(type)s:%(version)s"
       # TODO database
