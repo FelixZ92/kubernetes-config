@@ -1,4 +1,5 @@
 resources:
+  - ../../base/authentik.yaml
   - ../../base/dashboard.yaml
   - ../../base/database.yaml
   - ../../base/identity.yaml
