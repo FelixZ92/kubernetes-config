@@ -108,6 +108,30 @@ spec:
           volumeMounts:
             - name: geoip-db
               mountPath: /geoip
+          envFrom:
+            - configMapRef:
+                name: authentik-config
+          env:
+            - name: AUTHENTIK_POSTGRESQL__USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: "authentik-user.authentik-pg.credentials.postgresql.acid.zalan.do"
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: "authentik-user.authentik-pg.credentials.postgresql.acid.zalan.do"
+            - name: AUTHENTIK_REDIS__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: redis-password
+            - name: AUTHENTIK_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret
+                  name: authentik-secret
       volumes:
         - name: geoip-db
           emptyDir: {}
