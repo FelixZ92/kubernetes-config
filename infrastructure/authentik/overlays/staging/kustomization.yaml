@@ -2,5 +2,7 @@ resources:
   - ../../base
   - admin-password.yaml
   - redis-password.yaml
+  - authentik-key.yaml
+  - admin-token.yaml
 
 namespace: authentik

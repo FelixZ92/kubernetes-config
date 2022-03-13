@@ -46,7 +46,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: secret
-                  name: authentik-secret
+                  name: authentik-key
           volumeMounts:
             - name: geoip-db
               mountPath: /geoip
@@ -131,7 +131,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: secret
-                  name: authentik-secret
+                  name: authentik-key
       volumes:
         - name: geoip-db
           emptyDir: {}
