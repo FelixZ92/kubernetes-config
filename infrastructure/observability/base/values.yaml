@@ -61,6 +61,7 @@ grafana:
     passwordKey: password
   envFromSecret: "grafana-generic-oauth"
   env:
+    GF_SERVER_ROOT_URL: "https://grafana.${BASE_DOMAIN}"
     GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
     GF_AUTH_GENERIC_OAUTH_SCOPES: "openid email profile"
     GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://authentik.162.55.159.189.nip.io/application/o/authorize/"
