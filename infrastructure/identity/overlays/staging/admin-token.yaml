@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: admin-token
+  namespace: authentik
+spec:
+  encryptedData:
+    token: AgCDrX0NU0Oc4ILm4hTWX+5iPfNIpPNa0D10k05Fb6drj7damsDL4ll9KJz/QFsJ0aCPHheK/uUjdh1hnpsl3XnERyWCptDK2nxZGhulN0RqxIwO/n6V/eTzufCZN4REDlmnCd78TbZ7DzIRTJMX+5FTR7PBFo0y5XfUGG20ACLSNhC9v5nTQ4477Kk6ErTHLDhZk5SCOcNWNQR3IDuwA1QYtDzAnvnD+6gW68ILjjMfBlfRLEIBznsoK+qlW+4C4qrvyOlGXbvOLQEtgjyH8Y8iaO9yaafpLK4qS83ImjAnxnBA94bnMeon4GzlPWCEFjyggeEeeiRr1V10NKkFAKp7e8eyRRvMB8k7RqiQ31vKikqIBkJM3l8b8X1IDyN8QDZasAiYPE8VhxIn7rj2JcWZzkiWNz51OmFFzgFW6ZxkPbYUxX2IDKxdNRzWmTGeLEIa4d92lE6ehybcKqOz3iyKC8GbhfsvHw4fCeGa8EGlOdsarqHE8iJLHI1eERDvwt3wH0D4v5ZCwedlHY2/y7Nd5RrVExZdFsxJM773e1C46svzYZkNTSfMIv5t/5ILzOVyGxIGYQJmYkYV6OK8i4EpCvsoL619mIGafY4EdNEXKrsUYwml2IUsj6C7No81XkJ9wKY4344ZuRX2JNuoDvpGibEDpoiPXywLq2hKAE4twn2ZogZ/peGrZG9zHLqRj9xSOF7jkb+JSs8afoaKHXSYiOufaHgx4EOs/EXfIU5E1hzxfArsaLjxmhj7UrrjW7vstOD+kZ+Uf4gvVp7H18vWnRmFyAYfF0nzSQJlEjQMmXnFvW8NjSU4h5I3UmPnQVWvhLsO2Y3R2YWzMqQWQeDQ20stnSnmbTvu54WJVwlJ/A==
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      name: admin-token
+      namespace: authentik
+    type: Opaque

@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: keycloak-tls-certificate
+  name: authentik-tls-certificate
 spec:
-  secretName: tls-keycloak-ingress
+  secretName: tls-authentik-ingress
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - keycloak.${BASE_DOMAIN}
+    - authentik.${BASE_DOMAIN}

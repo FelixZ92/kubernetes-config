@@ -1,5 +1,8 @@
 resources:
   - ../../base
-  - keycloak-admin-user.yaml
+  - admin-password.yaml
+  - redis-password.yaml
+  - authentik-key.yaml
+  - admin-token.yaml
 
-namespace: keycloak
+namespace: authentik

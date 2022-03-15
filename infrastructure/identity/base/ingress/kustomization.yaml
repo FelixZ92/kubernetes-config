@@ -1,6 +1,4 @@
 resources:
   - certificates.yaml
-  - ingressroute-keycloak.yaml
+  - ingressroute.yaml
   - middlewares.yaml
-
-namespace: keycloak

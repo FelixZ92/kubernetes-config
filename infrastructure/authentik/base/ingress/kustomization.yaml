@@ -1,4 +1,0 @@
-resources:
-  - certificates.yaml
-  - ingressroute.yaml
-  - middlewares.yaml
