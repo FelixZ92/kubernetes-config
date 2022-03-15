@@ -48,4 +48,11 @@ spec:
         - name: kube-prometheus-stack-prometheus
           port: 9090
       middlewares:
-        - name: traefik-forward-auth
+        - name: ak-outpost-prometheus
+          namespace: authentik
+    - match: Host(`prometheus.${BASE_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      services:
+        - name: ak-outpost-prometheus
+          port: 9000
+          namespace: authentik

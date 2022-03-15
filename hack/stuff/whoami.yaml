@@ -59,13 +59,13 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: whoami
+  name: whoami2
   namespace: default
 spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`whoami4.162.55.153.15.nip.io`)
+    - match: Host(`whoami2.162.55.159.189.nip.io`)
       kind: Rule
       services:
         - name: whoami
@@ -76,26 +76,33 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: whoami-tls
+  name: whoami2-tls
   namespace: default
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`whoami4.162.55.153.15.nip.io`)
+    - match: Host(`whoami2.162.55.159.189.nip.io`)
       kind: Rule
       services:
         - name: whoami
           port: 80
       middlewares:
-        - name: traefik-forward-auth
+        - name: ak-outpost-whoami
+          namespace: authentik
+    - match: Host(`whoami2.162.55.159.189.nip.io`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      services:
+        - name: ak-outpost-whoami
+          port: 9000
+          namespace: authentik
   tls:
     secretName: tls-whoami2-ingress
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: whoami-tls-certificate
+  name: whoami2-tls-certificate
   namespace: default
 spec:
   secretName: tls-whoami2-ingress
@@ -103,7 +110,7 @@ spec:
     name: ca-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - whoami4.162.55.153.15.nip.io
+    - whoami2.162.55.159.189.nip.io
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -126,18 +133,8 @@ spec:
 #  entryPoints:
 #    - web
 #  routes:
-#    - match: Host(`traefik2.162.55.153.15.nip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+#    - match: Host(`traefik2.162.55.159.189.nip.io`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
 #      kind: Rule
 #      services:
 #        - name: api@internal
 #          kind: TraefikService
-
-https://auth.162.55.153.15.nip.io/_oauth
-https://traefik.162.55.153.15.nip.io
-https://dashboard.162.55.153.15.nip.io
-https://postgres.162.55.153.15.nip.io
-https://alertmanager.162.55.153.15.nip.io
-https://prometheus.162.55.153.15.nip.io
-https://grafana.162.55.153.15.nip.io/login/gitlab
-https://dex.162.55.153.15.nip.io/callback
-http://127.0.0.1:4433/self-service/methods/oidc/callback/gitlab

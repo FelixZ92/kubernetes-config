@@ -20,3 +20,4 @@ system/secrets/
 
 infrastructure/database/base/values-s3.yaml
 credentials-velero
+terraform.tfvars

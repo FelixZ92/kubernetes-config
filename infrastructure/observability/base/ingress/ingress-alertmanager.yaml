@@ -48,4 +48,11 @@ spec:
         - name: kube-prometheus-stack-alertmanager
           port: 9093
       middlewares:
-        - name: traefik-forward-auth
+        - name: ak-outpost-alertmanager
+          namespace: authentik
+    - match: Host(`alertmanager.${BASE_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      services:
+        - name: ak-outpost-alertmanager
+          port: 9000
+          namespace: authentik

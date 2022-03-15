@@ -30,13 +30,21 @@ spec:
   tls:
     secretName: tls-dashboard-ingress
   routes:
+    - match: Host(`traefik.${BASE_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      services:
+        - name: ak-outpost-traefik
+          port: 9000
+          namespace: authentik
     - match: Host(`traefik.${BASE_DOMAIN}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       kind: Rule
       services:
         - name: api@internal
           kind: TraefikService
       middlewares:
-        - name: traefik-forward-auth
+        - name: ak-outpost-traefik
+          namespace: authentik
+
 #---
 #apiVersion: traefik.containo.us/v1alpha1
 #kind: IngressRoute

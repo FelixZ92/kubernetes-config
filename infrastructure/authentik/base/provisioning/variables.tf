@@ -1,0 +1,1 @@
+variable "BASE_DOMAIN" {}

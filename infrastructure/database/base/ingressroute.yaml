@@ -36,4 +36,12 @@ spec:
         - name: postgres-operator-ui
           port: 80
       middlewares:
-        - name: traefik-forward-auth
+        - name: ak-outpost-postgres
+          namespace: authentik
+    - match: Host(`postgres.${BASE_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      services:
+        - name: ak-outpost-postgres
+          port: 9000
+          namespace: authentik
+
