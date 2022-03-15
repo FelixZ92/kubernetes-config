@@ -17,6 +17,16 @@ resource "authentik_group" "cluster_admins" {
   is_superuser = false
 }
 
+resource "authentik_group" "grafana_admins" {
+  name         = "Grafana Admins"
+  is_superuser = false
+}
+
+resource "authentik_group" "grafana_editors" {
+  name         = "Grafana Editors"
+  is_superuser = false
+}
+
 module "prometheus" {
   source         = "./forward-auth-application"
   base_domain    = var.BASE_DOMAIN
