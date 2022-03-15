@@ -12,7 +12,5 @@ variable "description" {
 variable "publisher" {
   default = ""
 }
-variable "launch_url" {
-  default = ""
-}
+variable "launch_url" {}
 variable "base_domain" {}
