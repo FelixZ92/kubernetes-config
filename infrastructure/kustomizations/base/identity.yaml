@@ -16,11 +16,11 @@ spec:
   dependsOn:
     - name: database
       namespace: postgres-operator
-  healthChecks:
-    - kind: StatefulSet
-      name: keycloak
-      apiVersion: apps/v1
-      namespace: keycloak
+#  healthChecks:
+#    - kind: StatefulSet
+#      name: keycloak
+#      apiVersion: apps/v1
+#      namespace: keycloak
   postBuild:
     substituteFrom:
       - kind: ConfigMap

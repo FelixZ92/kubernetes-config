@@ -14,8 +14,10 @@ spec:
     namespace: flux-system
   validation: server
   dependsOn:
-    - name: observability
-      namespace: monitoring
+    - name: cluster-wide
+      namespace: kube-system
+    - name: storage
+      namespace: kube-system
   healthChecks:
     - kind: StatefulSet
       name: loki

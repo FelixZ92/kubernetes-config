@@ -14,8 +14,8 @@ spec:
     namespace: flux-system
   validation: server
   dependsOn:
-    - name: observability
-      namespace: monitoring
+    - name: cluster-wide
+      namespace: kube-system
   healthChecks:
     - kind: Deployment
       name: redis-operator
