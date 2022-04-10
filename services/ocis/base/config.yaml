@@ -120,8 +120,8 @@ data:
       "theme": "owncloud",
       "version": "0.1.0",
       "openIdConnect": {
-        "metadata_url": "https://keycloak.${BASE_DOMAIN}/auth/realms/applications/.well-known/openid-configuration",
-        "authority": "https://keycloak.${BASE_DOMAIN}/auth/realms/applications",
+        "metadata_url": "https://authentik.${BASE_DOMAIN}/application/o/ocis/.well-known/openid-configuration",
+        "authority": "https://authentik.${BASE_DOMAIN}/application/o/ocis/",
         "client_id": "ocis-web",
         "response_type": "code",
         "scope": "openid profile email"
