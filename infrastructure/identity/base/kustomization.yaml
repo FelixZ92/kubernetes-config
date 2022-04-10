@@ -29,7 +29,6 @@ configMapGenerator:
       - AUTHENTIK_EMAIL__USERNAME=""
       - AUTHENTIK_LOG_LEVEL="info"
       - AUTHENTIK_OUTPOSTS__CONTAINER_IMAGE_BASE="ghcr.io/goauthentik/%(type)s:%(version)s"
-      # TODO database
       - AUTHENTIK_POSTGRESQL__HOST="authentik-pg"
       - AUTHENTIK_POSTGRESQL__NAME="authentik"
       - AUTHENTIK_POSTGRESQL__PORT="5432"

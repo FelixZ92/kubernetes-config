@@ -42,7 +42,7 @@ spec:
             claimName: ocis
       containers:
         - name: ocis-web
-          image: owncloud/ocis:1.16.0
+          image: owncloud/ocis:1.19.1
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
@@ -79,13 +79,13 @@ spec:
             - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
             - name: PROXY_OIDC_ISSUER
-              value: https://keycloak.${BASE_DOMAIN}/auth/realms/applications
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/
             - name: WEB_OIDC_AUTHORITY
-              value: https://keycloak.${BASE_DOMAIN}/auth/realms/applications
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/
             - name: WEB_OIDC_CLIENT_ID
               value: ocis-web
             - name: WEB_OIDC_METADATA_URL
-              value: https://keycloak.${BASE_DOMAIN}/auth/realms/applications/.well-known/openid-configuration
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/.well-known/openid-configuration
             - name: WEB_UI_CONFIG
               value: /etc/ocis/config.json
 
@@ -95,9 +95,9 @@ spec:
                   name: storage-transfer-secret
                   key: password
             - name: STORAGE_OIDC_ISSUER
-              value: https://keycloak.${BASE_DOMAIN}
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/
             - name: STORAGE_LDAP_IDP
-              value: https://keycloak.${BASE_DOMAIN}/auth/realms/applications
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/
 
             - name: STORAGE_USERS_DRIVER
               value: s3ng

@@ -108,6 +108,7 @@ resource "authentik_provider_oauth2" "grafana" {
   client_secret = data.pass_password.grafana_client_secret.password
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   property_mappings = data.authentik_scope_mapping.test.ids
+  redirect_uris = [format("https://grafana.%s/login/generic_oauth", var.BASE_DOMAIN)]
 }
 
 resource "authentik_application" "grafana" {
@@ -117,4 +118,22 @@ resource "authentik_application" "grafana" {
   meta_icon         = "https://cdn.worldvectorlogo.com/logos/grafana.svg"
   meta_description  = "https://grafana.com/docs/grafana/latest/"
   meta_launch_url   = format("https://grafana.%s/", var.BASE_DOMAIN)
+}
+
+resource "authentik_provider_oauth2" "ocis" {
+  name      = "ocis"
+  client_id = "ocis"
+  client_type = "public"
+  authorization_flow = data.authentik_flow.default-authorization-flow.id
+  property_mappings = data.authentik_scope_mapping.test.ids
+#  redirect_uris = [format("https://ocis.%s/login/generic_oauth", var.BASE_DOMAIN)]
+}
+
+resource "authentik_application" "ocis" {
+  name              = "ocis-web"
+  slug              = "ocis-web"
+  protocol_provider = authentik_provider_oauth2.ocis.id
+  meta_icon         = "https://owncloud.dev/logo.png"
+  meta_description  = "https://owncloud.dev/"
+  meta_launch_url   = format("https://ocis.%s/", var.BASE_DOMAIN)
 }
