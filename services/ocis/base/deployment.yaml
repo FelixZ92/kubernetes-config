@@ -196,6 +196,3 @@ spec:
               mountPath: /entrypoint
             - name: ocis
               mountPath: /var/lib/ocis
-
-"https://authentik.162.55.159.189.nip.io/application/o/ocis-web/"
-"https://authentik.162.55.159.189.nip.io/application/o/ocis-web/"
