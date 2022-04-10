@@ -94,10 +94,10 @@ spec:
                 secretKeyRef:
                   name: storage-transfer-secret
                   key: password
-            - name: STORAGE_OIDC_ISSUER
-              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/
-            - name: STORAGE_LDAP_IDP
-              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/
+#            - name: STORAGE_OIDC_ISSUER
+#              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/
+#            - name: STORAGE_LDAP_IDP
+#              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/
 
             - name: STORAGE_USERS_DRIVER
               value: s3ng
@@ -196,3 +196,6 @@ spec:
               mountPath: /entrypoint
             - name: ocis
               mountPath: /var/lib/ocis
+
+"https://authentik.162.55.159.189.nip.io/application/o/ocis-web/"
+"https://authentik.162.55.159.189.nip.io/application/o/ocis-web/"

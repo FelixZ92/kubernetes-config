@@ -121,12 +121,12 @@ resource "authentik_application" "grafana" {
 }
 
 resource "authentik_provider_oauth2" "ocis" {
-  name      = "ocis"
-  client_id = "ocis"
+  name      = "ocis-web"
+  client_id = "ocis-web"
   client_type = "public"
   authorization_flow = data.authentik_flow.default-authorization-flow.id
   property_mappings = data.authentik_scope_mapping.test.ids
-#  redirect_uris = [format("https://ocis.%s/login/generic_oauth", var.BASE_DOMAIN)]
+  redirect_uris = [format("https://ocis.%s/", var.BASE_DOMAIN)]
 }
 
 resource "authentik_application" "ocis" {
