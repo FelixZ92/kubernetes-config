@@ -79,13 +79,13 @@ spec:
             - name: PROXY_AUTOPROVISION_ACCOUNTS
               value: "true"
             - name: PROXY_OIDC_ISSUER
-              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/
             - name: WEB_OIDC_AUTHORITY
-              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/
             - name: WEB_OIDC_CLIENT_ID
               value: ocis-web
             - name: WEB_OIDC_METADATA_URL
-              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/.well-known/openid-configuration
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/.well-known/openid-configuration
             - name: WEB_UI_CONFIG
               value: /etc/ocis/config.json
 
@@ -95,9 +95,9 @@ spec:
                   name: storage-transfer-secret
                   key: password
             - name: STORAGE_OIDC_ISSUER
-              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/
             - name: STORAGE_LDAP_IDP
-              value: https://authentik.${BASE_DOMAIN}/application/o/ocis/
+              value: https://authentik.${BASE_DOMAIN}/application/o/ocis-web/
 
             - name: STORAGE_USERS_DRIVER
               value: s3ng

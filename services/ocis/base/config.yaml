@@ -120,8 +120,8 @@ data:
       "theme": "owncloud",
       "version": "0.1.0",
       "openIdConnect": {
-        "metadata_url": "https://authentik.${BASE_DOMAIN}/application/o/ocis/.well-known/openid-configuration",
-        "authority": "https://authentik.${BASE_DOMAIN}/application/o/ocis/",
+        "metadata_url": "https://authentik.${BASE_DOMAIN}/application/o/ocis-web/.well-known/openid-configuration",
+        "authority": "https://authentik.${BASE_DOMAIN}/application/o/ocis-web/",
         "client_id": "ocis-web",
         "response_type": "code",
         "scope": "openid profile email"
