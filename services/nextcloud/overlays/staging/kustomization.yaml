@@ -1,4 +1,6 @@
 resources:
   - redis-password.yaml
   - nextcloud-admin-user.yaml
+  - nextcloud-objectstore-credentials.yaml
+  - nextcloud-os-tenant.yaml
   - ../../base

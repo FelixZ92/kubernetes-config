@@ -1,3 +1,5 @@
 resources:
   - postgres.yaml
   - redis.yaml
+
+namespace: nextcloud
