@@ -1,0 +1,4 @@
+resources:
+  - redis-password.yaml
+  - nextcloud-admin-user.yaml
+  - ../../base

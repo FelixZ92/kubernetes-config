@@ -10,8 +10,8 @@ image:
 
 nameOverride: ""
 fullnameOverride: ""
-podAnnotations: {}
-deploymentAnnotations: {}
+podAnnotations: { }
+deploymentAnnotations: { }
 
 # Number of replicas to be deployed
 replicaCount: 1
@@ -22,7 +22,7 @@ replicaCount: 1
 ingress:
   enabled: false
   # className: nginx
-  annotations: {}
+  annotations: { }
   #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
   #  kubernetes.io/tls-acme: "true"
   #  cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -54,15 +54,15 @@ ingress:
   #   - secretName: nextcloud-tls
   #     hosts:
   #       - nextcloud.kube.home
-  labels: {}
+  labels: { }
   path: /
   pathType: Prefix
 
 
 # Allow configuration of lifecycle hooks
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
-lifecycle: {}
-  # postStartCommand: []
+lifecycle: { }
+# postStartCommand: []
 # preStopCommand: []
 
 phpClientHttpsFix:
@@ -101,7 +101,7 @@ nextcloud:
       password: pass
   # PHP Configuration files
   # Will be injected in /usr/local/etc/php/conf.d for apache image and in /usr/local/etc/php-fpm.d when nginx.enabled: true
-  phpConfigs: {}
+  phpConfigs: { }
   # Default config files
   # IMPORTANT: Will be used only if you put extra configs, otherwise default will come from nextcloud itself
   # Default confgurations can be found here: https://github.com/nextcloud/docker/tree/master/16.0/apache/config
@@ -130,6 +130,36 @@ nextcloud:
         'overwrite.cli.url' => 'https://nextcloud.${BASE_DOMAIN}',
         'filelocking.enabled' => 'true',
         'loglevel' => '2',
+      );
+
+    objectstorage.config.php: |-
+      <?php
+      $CONFIG = array (
+        'objectstore'   => array(
+          'class'       => '\\OC\\Files\\ObjectStore\\Swift',
+          'arguments'   => array(
+            'bucket'      => 'test',
+            'autocreate'  => false,
+            'url'         => getenv('S3_ENDPOINT'),
+            'user' => [
+                    'name' => getenv('S3_ACCESS_KEY'),
+                    'password' => getenv('S3_SECRET_KEY'),
+                    'domain' => [
+                            'name' => 'Default',
+                    ],
+            ],
+            'scope' => [
+                    'project' => [
+                            'name' => getenv('OS_TENANT_NAME'),
+                            'domain' => [
+                                    'name' => 'Default',
+                            ],
+                    ],
+            ],
+            'serviceName' => 'swift',
+            'region'      => getenv('S3_REGION'),
+          )
+        )
       );
 
   # For example, to use S3 as primary storage
@@ -165,11 +195,30 @@ nextcloud:
   ##
   ## Extra environment variables
   extraEnv:
-  #  - name: SOME_SECRET_ENV
-  #    valueFrom:
-  #      secretKeyRef:
-  #        name: nextcloud
-  #        key: secret_key
+    - name: S3_ENDPOINT
+      value: https://auth.cloud.ovh.net/v3
+    - name: S3_PORT
+      value: "9000"
+    - name: S3_REGION
+      value: DE
+    - name: S3_USE_SSL
+      value: "false"
+    - name: OS_TENANT_NAME
+      valueFrom:
+        secretKeyRef:
+          name: nextcloud-os-tenant
+          key: tenant
+    - name: S3_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: nextcloud-objectstore-credentials
+          key: accesskey
+    - name: S3_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: nextcloud-objectstore-credentials
+          key: secretkey
+
 
   # Extra mounts for the pods. Example shown is for connecting a legacy NFS volume
   # to NextCloud pods in Kubernetes. This can then be configured in External Storage
@@ -204,7 +253,7 @@ nginx:
     # custom: |-
     #     worker_processes  1;..
 
-  resources: {}
+  resources: { }
 
 internalDatabase:
   enabled: false
@@ -292,22 +341,22 @@ redis:
 cronjob:
   enabled: true
   # Nexcloud image is used as default but only curl is needed
-  image: {}
+  image: { }
     # repository: nextcloud
     # tag: 16.0.3-apache
     # pullPolicy: IfNotPresent
-    # pullSecrets:
+  # pullSecrets:
   #   - myRegistrKeySecretName
   # Every 5 minutes
   # Note: Setting this to any any other value than 5 minutes might
   #  cause issues with how nextcloud background jobs are executed
   schedule: "*/5 * * * *"
-  annotations: {}
+  annotations: { }
   # Set curl's insecure option if you use e.g. self-signed certificates
   curlInsecure: false
   failedJobsHistoryLimit: 5
   successfulJobsHistoryLimit: 2
-    # If not set, nextcloud deployment one will be set
+  # If not set, nextcloud deployment one will be set
   resources:
     limits:
       cpu: 100m
@@ -337,7 +386,7 @@ service:
 persistence:
   # Nextcloud Data (/var/www/html)
   enabled: true
-  annotations: {}
+  annotations: { }
   ## nextcloud data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -360,13 +409,13 @@ persistence:
   nextcloudData:
     enabled: false
     subPath:
-    annotations: {}
+    annotations: { }
     # storageClass: "-"
     # existingClaim:
     accessMode: ReadWriteOnce
     size: 8Gi
 
-resources: {}
+resources: { }
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -375,7 +424,7 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
   # requests:
-  #  cpu: 100m
+#  cpu: 100m
 #  memory: 128Mi
 
 ## Liveness and readiness probe values
@@ -413,11 +462,11 @@ hpa:
   minPods: 1
   maxPods: 10
 
-nodeSelector: {}
+nodeSelector: { }
 
-tolerations: []
+tolerations: [ ]
 
-affinity: {}
+affinity: { }
 
 
 ## Prometheus Exporter / Metrics
@@ -457,7 +506,7 @@ metrics:
     annotations:
       prometheus.io/scrape: "true"
       prometheus.io/port: "9205"
-    labels: {}
+    labels: { }
 
 rbac:
   enabled: false
