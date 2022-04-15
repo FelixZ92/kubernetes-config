@@ -1,3 +1,4 @@
 resources:
   - ../../base/ocis.yaml
   - ../../base/minio.yaml
+  - ../../base/nextcloud.yaml

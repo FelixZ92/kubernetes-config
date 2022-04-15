@@ -1,14 +1,14 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: authentik-pg
+  name: nextcloud-pg
   labels:
     app.kubernetes.io/name: spilo
-    app.kubernetes.io/instance: authentik-pg
-    team: authentik
+    app.kubernetes.io/instance: nextcloud-pg
+    team: nextcloud
 spec:
   enableLogicalBackup: true
-  teamId: "authentik"
+  teamId: "nextcloud"
   volume:
     size: 2Gi
   numberOfInstances: 1
@@ -21,14 +21,14 @@ spec:
       memory: 200M
   users:
     # database owner
-    authentik:
+    nextcloud:
       - superuser
       - createdb
     # role for application foo
-    authentik_user: []
+    nextcloud_user: []
 
   databases:
-    authentik: authentik
+    nextcloud: nextcloud
   postgresql:
     version: "12"
 
@@ -61,14 +61,14 @@ spec:
           memory: 200M
       env:
         - name: "DATA_SOURCE_URI"
-          value: "localhost/authentik?sslmode=disable"
+          value: "localhost/nextcloud?sslmode=disable"
         - name: "DATA_SOURCE_USER"
           valueFrom:
             secretKeyRef:
-              name: postgres.authentik-pg.credentials.postgresql.acid.zalan.do
+              name: postgres.nextcloud-pg.credentials.postgresql.acid.zalan.do
               key: username
         - name: "DATA_SOURCE_PASS"
           valueFrom:
             secretKeyRef:
-              name: postgres.authentik-pg.credentials.postgresql.acid.zalan.do
+              name: postgres.nextcloud-pg.credentials.postgresql.acid.zalan.do
               key: password

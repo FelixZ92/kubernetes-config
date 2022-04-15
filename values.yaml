@@ -1,400 +1,466 @@
+## Official nextcloud image version
+## ref: https://hub.docker.com/r/library/nextcloud/tags/
 ##
-## Configuration settings that directly affect the Velero deployment YAML.
-##
-
-# Details of the container image to use in the Velero deployment & daemonset (if
-# enabling restic). Required.
 image:
-  repository: velero/velero
-  tag: v1.7.1
-  # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
-  # If used, it will take precedence over the image.tag.
-  # digest:
+  repository: nextcloud
+  tag: 23.0.3-apache
   pullPolicy: IfNotPresent
-  # One or more secrets to be used when pulling images
-  imagePullSecrets: []
-  # - registrySecretName
+  # pullSecrets:
+  #   - myRegistrKeySecretName
 
-# Annotations to add to the Velero deployment's. Optional.
-#
-# If you are using reloader use the following annotation with your VELERO_SECRET_NAME
-annotations: {}
-# secret.reloader.stakater.com/reload: "<VELERO_SECRET_NAME>"
-
-# Labels to add to the Velero deployment's. Optional.
-labels: {}
-
-# Annotations to add to the Velero deployment's pod template. Optional.
-#
-# If using kube2iam or kiam, use the following annotation with your AWS_ACCOUNT_ID
-# and VELERO_ROLE_NAME filled in:
+nameOverride: ""
+fullnameOverride: ""
 podAnnotations: {}
-#  iam.amazonaws.com/role: "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<VELERO_ROLE_NAME>"
+deploymentAnnotations: {}
 
-# Additional pod labels for Velero deployment's template. Optional
-# ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
-podLabels: {}
+# Number of replicas to be deployed
+replicaCount: 1
 
-# Resource requests/limits to specify for the Velero deployment.
-# https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
-resources:
-  requests:
-    cpu: 500m
-    memory: 128Mi
-  limits:
-    cpu: 1000m
-    memory: 512Mi
+## Allowing use of ingress controllers
+## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
+##
+ingress:
+  enabled: false
+  # className: nginx
+  annotations: {}
+  #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
+  #  kubernetes.io/tls-acme: "true"
+  #  cert-manager.io/cluster-issuer: letsencrypt-prod
+  #  nginx.ingress.kubernetes.io/server-snippet: |-
+  #    server_tokens off;
+  #    proxy_hide_header X-Powered-By;
 
-# Configure the dnsPolicy of the Velero deployment
-# See: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
-dnsPolicy: ClusterFirst
+  #    rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+  #    rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+  #    rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
+  #    location = /.well-known/carddav {
+  #      return 301 $scheme://$host/remote.php/dav;
+  #    }
+  #    location = /.well-known/caldav {
+  #      return 301 $scheme://$host/remote.php/dav;
+  #    }
+  #    location = /robots.txt {
+  #      allow all;
+  #      log_not_found off;
+  #      access_log off;
+  #    }
+  #    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+  #      deny all;
+  #    }
+  #    location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
+  #      deny all;
+  #    }
+  # tls:
+  #   - secretName: nextcloud-tls
+  #     hosts:
+  #       - nextcloud.kube.home
+  labels: {}
+  path: /
+  pathType: Prefix
 
-# Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required.
-# If the value is a string then it is evaluated as a template.
-initContainers:
-# - name: velero-plugin-for-csi
-#   image: velero/velero-plugin-for-csi:v0.2.0
-#   imagePullPolicy: IfNotPresent
-#   volumeMounts:
-#     - mountPath: /target
-#       name: plugins
-# - name: velero-plugin-for-aws
-#   image: velero/velero-plugin-for-aws:v1.3.0
-#   imagePullPolicy: IfNotPresent
-#   volumeMounts:
-#     - mountPath: /target
-#       name: plugins
 
-# SecurityContext to use for the Velero deployment. Optional.
-# Set fsGroup for `AWS IAM Roles for Service Accounts`
-# see more informations at: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
-podSecurityContext: {}
-# fsGroup: 1337
+# Allow configuration of lifecycle hooks
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
+lifecycle: {}
+  # postStartCommand: []
+# preStopCommand: []
 
-# Container Level Security Context for the 'velero' container of the Velero deployment. Optional.
-# See: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
-containerSecurityContext: {}
-  # allowPrivilegeEscalation: false
-  # capabilities:
-  #   drop: ["ALL"]
-  #   add: []
-# readOnlyRootFilesystem: true
+phpClientHttpsFix:
+  enabled: false
+  protocol: https
 
-# Pod priority class name to use for the Velero deployment. Optional.
-priorityClassName: ""
+nextcloud:
+  host: nextcloud.${BASE_DOMAIN}
+  username: admin
+  password: changeme
+  ## Use an existing secret
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-admin
+    usernameKey: username
+    passwordKey: password
+    tokenKey: serverinfo_token
+    smtpUsernameKey: smtp_username
+    smtpPasswordKey: smtp_password
+  update: 0
+  # If web server is not binding default port, you can define it
+  # containerPort: 8080
+  datadir: /var/www/html/data
+  persistence:
+    subPath:
+  mail:
+    enabled: false
+    fromAddress: user
+    domain: domain.com
+    smtp:
+      host: domain.com
+      secure: ssl
+      port: 465
+      authtype: LOGIN
+      name: user
+      password: pass
+  # PHP Configuration files
+  # Will be injected in /usr/local/etc/php/conf.d for apache image and in /usr/local/etc/php-fpm.d when nginx.enabled: true
+  phpConfigs: {}
+  # Default config files
+  # IMPORTANT: Will be used only if you put extra configs, otherwise default will come from nextcloud itself
+  # Default confgurations can be found here: https://github.com/nextcloud/docker/tree/master/16.0/apache/config
+  defaultConfigs:
+    # To protect /var/www/html/config
+    .htaccess: true
+    # Redis default configuration
+    redis.config.php: true
+    # Apache configuration for rewrite urls
+    apache-pretty-urls.config.php: true
+    # Define APCu as local cache
+    apcu.config.php: true
+    # Apps directory configs
+    apps.config.php: true
+    # Used for auto configure database
+    autoconfig.php: true
+    # SMTP default configuration
+    smtp.config.php: true
+  # Extra config files created in /var/www/html/config/
+  # ref: https://docs.nextcloud.com/server/15/admin_manual/configuration_server/config_sample_php_parameters.html#multiple-config-php-file
+  configs:
+    custom.config.php: |-
+      <?php
+      $CONFIG = array (
+        'overwriteprotocol' => 'https',
+        'overwrite.cli.url' => 'https://nextcloud.${BASE_DOMAIN}',
+        'filelocking.enabled' => 'true',
+        'loglevel' => '2',
+      );
 
-# Tolerations to use for the Velero deployment. Optional.
-tolerations: []
+  # For example, to use S3 as primary storage
+  # ref: https://docs.nextcloud.com/server/13/admin_manual/configuration_files/primary_storage.html#simple-storage-service-s3
+  #
+  #  configs:
+  #    s3.config.php: |-
+  #      <?php
+  #      $CONFIG = array (
+  #        'objectstore' => array(
+  #          'class' => '\\OC\\Files\\ObjectStore\\S3',
+  #          'arguments' => array(
+  #            'bucket'     => 'my-bucket',
+  #            'autocreate' => true,
+  #            'key'        => 'xxx',
+  #            'secret'     => 'xxx',
+  #            'region'     => 'us-east-1',
+  #            'use_ssl'    => true
+  #          )
+  #        )
+  #      );
 
-# Affinity to use for the Velero deployment. Optional.
-affinity: {}
+  ## Strategy used to replace old pods
+  ## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes
+  ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+  strategy:
+    type: Recreate
+    # type: RollingUpdate
+    # rollingUpdate:
+    #   maxSurge: 1
+    #   maxUnavailable: 0
 
-# Node selector to use for the Velero deployment. Optional.
+  ##
+  ## Extra environment variables
+  extraEnv:
+  #  - name: SOME_SECRET_ENV
+  #    valueFrom:
+  #      secretKeyRef:
+  #        name: nextcloud
+  #        key: secret_key
+
+  # Extra mounts for the pods. Example shown is for connecting a legacy NFS volume
+  # to NextCloud pods in Kubernetes. This can then be configured in External Storage
+  extraVolumes:
+  #  - name: nfs
+  #    nfs:
+  #      server: "10.0.0.1"
+  #      path: "/nextcloud_data"
+  #      readOnly: false
+  extraVolumeMounts:
+  #  - name: nfs
+  #    mountPath: "/legacy_data"
+
+  # Extra secuurityContext parameters. For example you may need to define runAsNonRoot directive
+  # extraSecurityContext:
+  #   runAsUser: "33"
+  #   runAsGroup: "33"
+  #   runAsNonRoot: true
+  #   readOnlyRootFilesystem: true
+
+nginx:
+  ## You need to set an fpm version of the image for nextcloud if you want to use nginx!
+  enabled: false
+  image:
+    repository: nginx
+    tag: alpine
+    pullPolicy: IfNotPresent
+
+  config:
+    # This generates the default nginx config as per the nextcloud documentation
+    default: true
+    # custom: |-
+    #     worker_processes  1;..
+
+  resources: {}
+
+internalDatabase:
+  enabled: false
+  name: nextcloud
+
+##
+## External database configuration
+##
+externalDatabase:
+  enabled: false
+
+  ## Supported database engines: mysql or postgresql
+  type: postgresql
+
+  ## Database host
+  host: nextcloud-pg
+
+  ## Database user
+  user: nextcloud_user
+
+  ## Database password
+  password: todo
+
+  ## Database name
+  database: nextcloud
+
+  ## Use a existing secret
+  existingSecret:
+    enabled: true
+    secretName: nextcloud-user.nextcloud-pg.credentials.postgresql.acid.zalan.do
+    usernameKey: username
+    passwordKey: password
+
+##
+## MariaDB chart configuration
+##
+mariadb:
+  ## Whether to deploy a mariadb server to satisfy the applications database requirements. To use an external database set this to false and configure the externalDatabase parameters
+  enabled: false
+
+  auth:
+    database: nextcloud
+    username: nextcloud
+    password: changeme
+
+  architecture: standalone
+
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  ##
+  primary:
+    persistence:
+      enabled: false
+      # storageClass: ""
+      accessMode: ReadWriteOnce
+      size: 8Gi
+
+##
+## PostgreSQL chart configuration
+## for more options see https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+##
+postgresql:
+  enabled: true
+  postgresqlUsername: nextcloud
+  postgresqlPassword: changeme
+  postgresqlDatabase: nextcloud
+  persistence:
+    enabled: false
+    # storageClass: ""
+
+##
+## Redis chart configuration
+## for more options see https://github.com/bitnami/charts/tree/master/bitnami/redis
+##
+
+redis:
+  enabled: true
+  auth:
+    enabled: true
+    password: 'changeme'
+
+## Cronjob to execute Nextcloud background tasks
+## ref: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/background_jobs_configuration.html#webcron
+##
+cronjob:
+  enabled: true
+  # Nexcloud image is used as default but only curl is needed
+  image: {}
+    # repository: nextcloud
+    # tag: 16.0.3-apache
+    # pullPolicy: IfNotPresent
+    # pullSecrets:
+  #   - myRegistrKeySecretName
+  # Every 5 minutes
+  # Note: Setting this to any any other value than 5 minutes might
+  #  cause issues with how nextcloud background jobs are executed
+  schedule: "*/5 * * * *"
+  annotations: {}
+  # Set curl's insecure option if you use e.g. self-signed certificates
+  curlInsecure: false
+  failedJobsHistoryLimit: 5
+  successfulJobsHistoryLimit: 2
+    # If not set, nextcloud deployment one will be set
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  # If not set, nextcloud deployment one will be set
+  # nodeSelector: {}
+
+  # If not set, nextcloud deployment one will be set
+  # tolerations: []
+
+  # If not set, nextcloud deployment one will be set
+  # affinity: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  loadBalancerIP: nil
+  nodePort: nil
+
+## Enable persistence using Persistent Volume Claims
+## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+##
+persistence:
+  # Nextcloud Data (/var/www/html)
+  enabled: true
+  annotations: {}
+  ## nextcloud data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # storageClass: "-"
+
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  # existingClaim:
+
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+  ## Use an additional pvc for the data directory rather than a subpath of the default PVC
+  ## Useful to store data on a different storageClass (e.g. on slower disks)
+  nextcloudData:
+    enabled: false
+    subPath:
+    annotations: {}
+    # storageClass: "-"
+    # existingClaim:
+    accessMode: ReadWriteOnce
+    size: 8Gi
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+#  memory: 128Mi
+
+## Liveness and readiness probe values
+## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+##
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+startupProbe:
+  enabled: false
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
+
+
+## Enable pod autoscaling using HorizontalPodAutoscaler
+## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+##
+hpa:
+  enabled: false
+  cputhreshold: 60
+  minPods: 1
+  maxPods: 10
+
 nodeSelector: {}
 
-# Extra volumes for the Velero deployment. Optional.
-extraVolumes: []
+tolerations: []
 
-# Extra volumeMounts for the Velero deployment. Optional.
-extraVolumeMounts: []
+affinity: {}
 
-# Settings for Velero's prometheus metrics. Enabled by default.
+
+## Prometheus Exporter / Metrics
+##
 metrics:
   enabled: true
-  scrapeInterval: 30s
-  scrapeTimeout: 10s
 
-  # service metdata if metrics are enabled
+  replicaCount: 1
+  # The metrics exporter needs to know how you serve Nextcloud either http or https
+  https: false
+  # Use API token if set, otherwise fall back to password authentication
+  # https://github.com/xperimental/nextcloud-exporter#token-authentication
+  # Currently you still need to set the token manually in your nextcloud install
+  token: ""
+  timeout: 5s
+
+  image:
+    repository: xperimental/nextcloud-exporter
+    tag: 0.5.1
+    pullPolicy: IfNotPresent
+
+  ## Metrics exporter resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  # resources: {}
+
+  ## Metrics exporter pod Annotation and Labels
+  # podAnnotations: {}
+
+  # podLabels: {}
+
   service:
-    annotations: {}
+    type: ClusterIP
+    ## Use serviceLoadBalancerIP to request a specific static IP,
+    ## otherwise leave blank
+    # loadBalancerIP:
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "9205"
     labels: {}
 
-  # Pod annotations for Prometheus
-  podAnnotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "8085"
-    prometheus.io/path: "/metrics"
-
-  serviceMonitor:
-    enabled: false
-    additionalLabels:
-      release: kube-prometheus-stack
-    # ServiceMonitor namespace. Default to Velero namespace.
-    # namespace:
-
-kubectl:
-  image:
-    repository: docker.io/bitnami/kubectl
-    # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
-    # If used, it will take precedence over the kubectl.image.tag.
-    # digest:
-    # kubectl image tag. If used, it will take precedence over the cluster Kubernetes version.
-    # tag: 1.16.15
-  # Resource requests/limits to specify for the upgrade/cleanup job. Optional
-  resources: {}
-  # Annotations to set for the upgrade/cleanup job. Optional.
-  annotations: {}
-  # Labels to set for the upgrade/cleanup job. Optional.
-  labels: {}
-
-# This job upgrades the CRDs.
-upgradeCRDs: false
-
-# This job is meant primarily for cleaning up CRDs on CI systems.
-# Using this on production systems, especially those that have multiple releases of Velero, will be destructive.
-cleanUpCRDs: false
-
-##
-## End of deployment-related settings.
-##
-
-
-##
-## Parameters for the `default` BackupStorageLocation and VolumeSnapshotLocation,
-## and additional server settings.
-##
-configuration:
-  # Cloud provider being used (e.g. aws, azure, gcp).
-  provider: aws
-
-  # Parameters for the `default` BackupStorageLocation. See
-  # https://velero.io/docs/v1.6/api-types/backupstoragelocation/
-  backupStorageLocation:
-    # name is the name of the backup storage location where backups should be stored. If a name is not provided,
-    # a backup storage location will be created with the name "default". Optional.
-    name:
-    # provider is the name for the backup storage location provider. If omitted
-    # `configuration.provider` will be used instead.
-    provider:
-    # bucket is the name of the bucket to store backups in. Required.
-    bucket: velero-staging
-    # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
-    caCert:
-    # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
-    prefix:
-    # default indicates this location is the default backup storage location. Optional.
-    default:
-    # Additional provider-specific configuration. See link above
-    # for details of required/optional fields for your provider.
-    config:
-      region: de
-      s3ForcePathStyle: true
-      s3Url: https://s3.de.cloud.ovh.net
-    #  kmsKeyId:
-    #  resourceGroup:
-    #  The ID of the subscription containing the storage account, if different from the cluster’s subscription. (Azure only)
-    #  subscriptionId:
-    #  storageAccount:
-    #  publicUrl:
-    #  Name of the GCP service account to use for this backup storage location. Specify the
-    #  service account here if you want to use workload identity instead of providing the key file.(GCP only)
-    #  serviceAccount:
-
-  # Parameters for the `default` VolumeSnapshotLocation. See
-  # https://velero.io/docs/v1.6/api-types/volumesnapshotlocation/
-  volumeSnapshotLocation:
-    # name is the name of the volume snapshot location where snapshots are being taken. Required.
-    name:
-    # provider is the name for the volume snapshot provider. If omitted
-    # `configuration.provider` will be used instead.
-    provider:
-    # Additional provider-specific configuration. See link above
-    # for details of required/optional fields for your provider.
-    config: {}
-  #    region:
-  #    apiTimeout:
-  #    resourceGroup:
-  #    The ID of the subscription where volume snapshots should be stored, if different from the cluster’s subscription. If specified, also requires `configuration.volumeSnapshotLocation.config.resourceGroup`to be set. (Azure only)
-  #    subscriptionId:
-  #    incremental:
-  #    snapshotLocation:
-  #    project:
-
-  # These are server-level settings passed as CLI flags to the `velero server` command. Velero
-  # uses default values if they're not passed in, so they only need to be explicitly specified
-  # here if using a non-default value. The `velero server` default values are shown in the
-  # comments below.
-  # --------------------
-  # `velero server` default: 1m
-  backupSyncPeriod:
-  # `velero server` default: 1h
-  resticTimeout:
-  # `velero server` default: namespaces,persistentvolumes,persistentvolumeclaims,secrets,configmaps,serviceaccounts,limitranges,pods
-  restoreResourcePriorities:
-  # `velero server` default: false
-  restoreOnlyMode:
-  # `velero server` default: 20.0
-  clientQPS:
-  # `velero server` default: 30
-  clientBurst:
-  # `velero server` default: empty
-  disableControllers:
-  #
-
-  # additional key/value pairs to be used as environment variables such as "AWS_CLUSTER_NAME: 'yourcluster.domain.tld'"
-  extraEnvVars: {}
-
-  # Comma separated list of velero feature flags. default: empty
-  # features: EnableCSI
-  features:
-
-  # Set log-level for Velero pod. Default: info. Other options: debug, warning, error, fatal, panic.
-  logLevel:
-
-  # Set log-format for Velero pod. Default: text. Other option: json.
-  logFormat:
-
-  # Set true for backup all pod volumes without having to apply annotation on the pod when used restic Default: false. Other option: false.
-  defaultVolumesToRestic:
-
-  # How often 'restic prune' is run for restic repositories by default. Default: 168h. Optional.
-  defaultResticPruneFrequency:
-
-##
-## End of backup/snapshot location settings.
-##
-
-
-##
-## Settings for additional Velero resources.
-##
-
 rbac:
-  # Whether to create the Velero role and role binding to give all permissions to the namespace to Velero.
-  create: true
-  # Whether to create the cluster role binding to give administrator permissions to Velero
-  clusterAdministrator: true
-
-# Information about the Kubernetes service account Velero uses.
-serviceAccount:
-  server:
+  enabled: false
+  serviceaccount:
     create: true
-    name:
-    annotations:
-    labels:
-
-# Info about the secret to be used by the Velero deployment, which
-# should contain credentials for the cloud provider IAM account you've
-# set up for Velero.
-credentials:
-  # Whether a secret should be used. Set to false if, for examples:
-  # - using kube2iam or kiam to provide AWS IAM credentials instead of providing the key file. (AWS only)
-  # - using workload identity instead of providing the key file. (GCP only)
-  useSecret: true
-  # Name of the secret to create if `useSecret` is true and `existingSecret` is empty
-  name:
-  # Name of a pre-existing secret (if any) in the Velero namespace
-  # that should be used to get IAM account credentials. Optional.
-  existingSecret: cloud-credentials
-  # Data to be stored in the Velero secret, if `useSecret` is true and `existingSecret` is empty.
-  # As of the current Velero release, Velero only uses one secret key/value at a time.
-  # The key must be named `cloud`, and the value corresponds to the entire content of your IAM credentials file.
-  # Note that the format will be different for different providers, please check their documentation.
-  # Here is a list of documentation for plugins maintained by the Velero team:
-  # [AWS] https://github.com/vmware-tanzu/velero-plugin-for-aws/blob/main/README.md
-  # [GCP] https://github.com/vmware-tanzu/velero-plugin-forF-gcp/blob/main/README.md
-  # [Azure] https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure/blob/main/README.md
-  secretContents: {}
-  #  cloud: |
-  #    [default]
-  #    aws_access_key_id=<REDACTED>
-  #    aws_secret_access_key=<REDACTED>
-  # additional key/value pairs to be used as environment variables such as "DIGITALOCEAN_TOKEN: <your-key>". Values will be stored in the secret.
-  extraEnvVars: {}
-  # Name of a pre-existing secret (if any) in the Velero namespace
-  # that will be used to load environment variables into velero and restic.
-  # Secret should be in format - https://kubernetes.io/docs/concepts/configuration/secret/#use-case-as-container-environment-variables
-  extraSecretRef: ""
-
-# Whether to create backupstoragelocation crd, if false => do not create a default backup location
-backupsEnabled: true
-# Whether to create volumesnapshotlocation crd, if false => disable snapshot feature
-snapshotsEnabled: false
-
-# Whether to deploy the restic daemonset.
-deployRestic: true
-
-restic:
-  podVolumePath: /var/lib/kubelet/pods
-  privileged: false
-  # Pod priority class name to use for the Restic daemonset. Optional.
-  priorityClassName: ""
-  # Resource requests/limits to specify for the Restic daemonset deployment. Optional.
-  # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
-  resources:
-    requests:
-      cpu: 50m
-      memory: 128Mi
-    limits:
-      cpu: 1000m
-      memory: 1024Mi
-
-  # Tolerations to use for the Restic daemonset. Optional.
-  tolerations: []
-
-  # Annotations to set for the Restic daemonset. Optional.
-  annotations: {}
-
-  # labels to set for the Restic daemonset. Optional.
-  labels: {}
-
-  # will map /scratch to emptyDir. Set to false and specify your own volume
-  # via extraVolumes and extraVolumeMounts that maps to /scratch
-  # if you don't want to use emptyDir.
-  useScratchEmptyDir: true
-
-  # Extra volumes for the Restic daemonset. Optional.
-  extraVolumes: []
-
-  # Extra volumeMounts for the Restic daemonset. Optional.
-  extraVolumeMounts: []
-
-  # Configure the dnsPolicy of the Restic daemonset
-  # See: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
-  dnsPolicy: ClusterFirst
-
-  # SecurityContext to use for the Velero deployment. Optional.
-  # Set fsGroup for `AWS IAM Roles for Service Accounts`
-  # see more informations at: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
-  podSecurityContext:
-    runAsUser: 0
-    # fsGroup: 1337
-
-  # Container Level Security Context for the 'restic' container of the restic DaemonSet. Optional.
-  # See: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
-  containerSecurityContext: {}
-
-  # Node selector to use for the Restic daemonset. Optional.
-  nodeSelector: {}
-
-# Backup schedules to create.
-# Eg:
-# schedules:
-#   mybackup:
-#     disabled: false
-#     labels:
-#       myenv: foo
-#     annotations:
-#       myenv: foo
-#     schedule: "0 0 * * *"
-#     useOwnerReferencesInBackup: true
-#     template:
-#       ttl: "240h"
-#       includedNamespaces:
-#       - foo
-schedules: {}
-
-# Velero ConfigMaps.
-# Eg:
-# configMaps:
-#   restic-restore-action-config:
-#     labels:
-#       velero.io/plugin-config: ""
-#       velero.io/restic: RestoreItemAction
-#     data:
-#       image: velero/velero-restic-restore-helper:v1.7.1
-configMaps: {}
-
-##
-## End of additional Velero resource settings.
-##
+    name: nextcloud-serviceaccount
