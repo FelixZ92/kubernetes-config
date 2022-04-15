@@ -175,12 +175,12 @@ spec:
           - name: NEXTCLOUD_USERNAME
             valueFrom:
               secretKeyRef:
-                name: nextcloud-admin
+                name: nextcloud-admin-user
                 key: username
           - name: NEXTCLOUD_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: nextcloud-admin
+                name: nextcloud-admin-user
                 key: password
           - name: NEXTCLOUD_SERVER
             value: http://localhost:8080
