@@ -65,7 +65,10 @@ spec:
         - name: REDIS_HOST_PORT
           value: "6379"
         - name: REDIS_HOST_PASSWORD
-          value: changeme
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: redis-password
         - name: S3_ENDPOINT
           value: https://auth.cloud.ovh.net/v3
         - name: S3_PORT
