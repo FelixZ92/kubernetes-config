@@ -112,11 +112,18 @@ spec:
             httpHeaders:
             - name: Host
               value: "nextcloud.${BASE_DOMAIN}"
+        startupProbe:
+          httpGet:
+            path: /status.php
+            port: http
+            httpHeaders:
+              - name: Host
+                value: "nextcloud.${BASE_DOMAIN}"
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 5
           successThreshold: 1
-          failureThreshold: 3
+          failureThreshold: 20
         resources:
           {}
         volumeMounts:
