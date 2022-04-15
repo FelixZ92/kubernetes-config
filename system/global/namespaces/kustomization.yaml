@@ -10,6 +10,7 @@ resources:
   - loki.yaml
   - minio.yaml
   - monitoring.yaml
+  - nextcloud.yaml
   - ocis.yaml
   - postgres-operator.yaml
   - redis-operator.yaml
