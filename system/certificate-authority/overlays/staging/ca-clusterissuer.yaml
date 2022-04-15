@@ -11,5 +11,5 @@ spec:
     solvers:
       - http01:
           ingress:
-            class: traefik-lb
+            class: traefik
             serviceType: ClusterIP

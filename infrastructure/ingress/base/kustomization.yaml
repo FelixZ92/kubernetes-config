@@ -2,7 +2,6 @@ resources:
   - traefik-release.yaml
   - ingress.yaml
   - podmonitor.yaml
-  - ingress-class.yaml
 #  - external-auth
 namespace: traefik
 
