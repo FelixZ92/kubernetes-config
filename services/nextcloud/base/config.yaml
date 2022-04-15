@@ -14,7 +14,7 @@ data:
       'overwriteprotocol' => 'https',
       'overwrite.cli.url' => 'https://nextcloud.${BASE_DOMAIN}',
       'filelocking.enabled' => 'true',
-      'loglevel' => '2',
+      'loglevel' => '0',
     );
   objectstorage.config.php: |-
     <?php
@@ -62,6 +62,7 @@ data:
     <?php
     if (getenv('REDIS_HOST')) {
       $CONFIG = array (
+        'memcache.local' => '\\OC\\Memcache\\Redis',
         'memcache.distributed' => '\OC\Memcache\Redis',
         'memcache.locking' => '\OC\Memcache\Redis',
         'redis' => array(
