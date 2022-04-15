@@ -1,128 +1,146 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: whoami
-  namespace: default
-  labels:
-    app: whoami
-spec:
-  replicas: 1
-  template:
-    metadata:
-      name: whoami
-      labels:
-        app: whoami
-    spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-      containers:
-        - name: whoami
-          image: containous/whoami
-          imagePullPolicy: IfNotPresent
-          args:
-            - --port=8000
-          ports:
-            - containerPort: 8000
-              name: web
-              protocol: TCP
-      restartPolicy: Always
-  selector:
-    matchLabels:
-      app: whoami
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: whoami
-  namespace: default
-spec:
-  selector:
-    app: whoami
-  ports:
-    - port: 80
-      name: web
-      protocol: TCP
-      targetPort: web
-  type: ClusterIP
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: redirect-https
-  namespace: default
-spec:
-  redirectScheme:
-    scheme: https
-    permanent: true
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: whoami2
-  namespace: default
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`whoami2.162.55.159.189.nip.io`)
-      kind: Rule
-      services:
-        - name: whoami
-          port: 80
-      middlewares:
-        - name: redirect-https
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: whoami2-tls
-  namespace: default
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: Host(`whoami2.162.55.159.189.nip.io`)
-      kind: Rule
-      services:
-        - name: whoami
-          port: 80
-      middlewares:
-        - name: ak-outpost-whoami
-          namespace: authentik
-    - match: Host(`whoami2.162.55.159.189.nip.io`) && PathPrefix(`/outpost.goauthentik.io/`)
-      kind: Rule
-      services:
-        - name: ak-outpost-whoami
-          port: 9000
-          namespace: authentik
-  tls:
-    secretName: tls-whoami2-ingress
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: whoami
+#  namespace: default
+#  labels:
+#    app: whoami
+#spec:
+#  replicas: 1
+#  template:
+#    metadata:
+#      name: whoami
+#      labels:
+#        app: whoami
+#    spec:
+#      securityContext:
+#        runAsNonRoot: true
+#        runAsUser: 1000
+#      containers:
+#        - name: whoami
+#          image: containous/whoami
+#          imagePullPolicy: IfNotPresent
+#          args:
+#            - --port=8000
+#          ports:
+#            - containerPort: 8000
+#              name: web
+#              protocol: TCP
+#      restartPolicy: Always
+#  selector:
+#    matchLabels:
+#      app: whoami
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: whoami
+#  namespace: default
+#spec:
+#  selector:
+#    app: whoami
+#  ports:
+#    - port: 80
+#      name: web
+#      protocol: TCP
+#      targetPort: web
+#  type: ClusterIP
+#---
+#apiVersion: traefik.containo.us/v1alpha1
+#kind: Middleware
+#metadata:
+#  name: redirect-https
+#  namespace: default
+#spec:
+#  redirectScheme:
+#    scheme: https
+#    permanent: true
+#---
+#apiVersion: traefik.containo.us/v1alpha1
+#kind: IngressRoute
+#metadata:
+#  name: whoam3
+#  namespace: default
+#spec:
+#  entryPoints:
+#    - web
+#  routes:
+#    - match: Host(`whoam3.162.55.159.189.nip.io`)
+#      kind: Rule
+#      services:
+#        - name: whoami
+#          port: 80
+#      middlewares:
+#        - name: redirect-https
+#---
+#apiVersion: traefik.containo.us/v1alpha1
+#kind: IngressRoute
+#metadata:
+#  name: whoam3-tls
+#  namespace: default
+#spec:
+#  entryPoints:
+#    - websecure
+#  routes:
+#    - match: Host(`whoam3.162.55.159.189.nip.io`)
+#      kind: Rule
+#      services:
+#        - name: whoami
+#          port: 80
+##      middlewares:
+##        - name: ak-outpost-whoami
+##          namespace: authentik
+##    - match: Host(`whoam3.162.55.159.189.nip.io`) && PathPrefix(`/outpost.goauthentik.io/`)
+##      kind: Rule
+##      services:
+##        - name: ak-outpost-whoami
+##          port: 9000
+##          namespace: authentik
+#  tls:
+#    secretName: tls-whoam3-ingress
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: whoami2-tls-certificate
+  name: whoami4-tls-certificate
   namespace: default
 spec:
-  secretName: tls-whoami2-ingress
+  secretName: tls-whoami4-ingress
   issuerRef:
     name: ca-clusterissuer
     kind: ClusterIssuer
   dnsNames:
-    - whoami2.162.55.159.189.nip.io
-
+    - whoami4.162.55.159.189.nip.io
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: traefik-forward-auth
-  namespace: default
+  name: test
 spec:
-  forwardAuth:
-    address: http://traefik-forward-auth.traefik.svc:4181
-    authResponseHeaders:
-      - X-Forwarded-User
+  ingressClassName: traefik-lb
+  rules:
+    - host: whoami4.162.55.159.189.nip.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: cm-acme-http-solver-prssl
+                port:
+                  number: 8089
+            pathType: Exact
+            path: /.well-known/acme-challenge/iblFrGw2mZ4viV1j3fsL6DCZqnKc1EjAhAQ8kX_mzs0
+
+#---
+#apiVersion: traefik.containo.us/v1alpha1
+#kind: Middleware
+#metadata:
+#  name: traefik-forward-auth
+#  namespace: default
+#spec:
+#  forwardAuth:
+#    address: http://traefik-forward-auth.traefik.svc:4181
+#    authResponseHeaders:
+#      - X-Forwarded-User
 ---
 #
 #apiVersion: traefik.containo.us/v1alpha1

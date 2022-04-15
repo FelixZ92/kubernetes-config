@@ -35,3 +35,8 @@ providers:
   kubernetesCRD:
     enabled: true
     allowCrossNamespace: true
+
+# Use ingressClass. Ignored if Traefik version < 2.3 / kubernetes < 1.18.x
+ingressClass:
+  enabled: true
+  isDefaultClass: true
