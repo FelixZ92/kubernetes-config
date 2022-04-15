@@ -6,5 +6,6 @@ resources:
   - deployment.yaml
   - nextcloud-pvc.yaml
   - service.yaml
+  - ingress.yaml
 
 namespace: nextcloud
