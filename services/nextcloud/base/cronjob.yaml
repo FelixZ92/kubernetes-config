@@ -1,0 +1,44 @@
+---
+# Source: nextcloud/templates/cronjob.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: nextcloud-cron
+  labels:
+    app.kubernetes.io/name: nextcloud
+    app.kubernetes.io/instance: nextcloud
+  annotations:
+    {}
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 5
+  successfulJobsHistoryLimit: 2
+  jobTemplate:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nextcloud
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: nextcloud
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: nextcloud
+              image: "nextcloud:23.0.3-apache"
+              imagePullPolicy: IfNotPresent
+              command: [ "curl" ]
+              args:
+                - "http://nextcloud:8080/cron.php"
+              # Will mount configuration files as www-data (id: 82) for nextcloud
+              # Will mount configuration files as www-data (id: 33) for nextcloud
+              securityContext:
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 128Mi
+                requests:
+                  cpu: 100m
+                  memory: 128Mi

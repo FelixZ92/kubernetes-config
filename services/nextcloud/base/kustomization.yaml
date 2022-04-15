@@ -1,5 +1,10 @@
 resources:
   - postgres.yaml
   - redis.yaml
+  - config.yaml
+  - cronjob.yaml
+  - deployment.yaml
+  - nextcloud-pvc.yaml
+  - service.yaml
 
 namespace: nextcloud

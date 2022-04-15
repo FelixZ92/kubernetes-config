@@ -1,0 +1,217 @@
+---
+# Source: nextcloud/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+  labels:
+    app.kubernetes.io/name: nextcloud
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/component: app
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nextcloud
+      app.kubernetes.io/instance: nextcloud
+      app.kubernetes.io/component: app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nextcloud
+        app.kubernetes.io/instance: nextcloud
+        app.kubernetes.io/component: app
+        nextcloud-redis-client: "true"
+      annotations:
+        backup.velero.io/backup-volumes: nextcloud-main,nextcloud-config
+    spec:
+      containers:
+      - name: nextcloud
+        image: "nextcloud:23.0.3-apache"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POSTGRES_HOST
+          value: "nextcloud-pg"
+        - name: POSTGRES_DB
+          value: "nextcloud"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-user.nextcloud-pg.credentials.postgresql.acid.zalan.do
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-user.nextcloud-pg.credentials.postgresql.acid.zalan.do
+              key: password
+        - name: NEXTCLOUD_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-admin
+              key: username
+        - name: NEXTCLOUD_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-admin
+              key: password
+        - name: NEXTCLOUD_TRUSTED_DOMAINS
+          value: "nextcloud.${BASE_DOMAIN} localhost"
+        - name: NEXTCLOUD_DATA_DIR
+          value: "/var/www/html/data"
+        - name: REDIS_HOST
+          value: nextcloud-redis
+        - name: REDIS_HOST_PORT
+          value: "6379"
+        - name: REDIS_HOST_PASSWORD
+          value: changeme
+        - name: S3_ENDPOINT
+          value: https://auth.cloud.ovh.net/v3
+        - name: S3_PORT
+          value: "9000"
+        - name: S3_REGION
+          value: DE
+        - name: S3_USE_SSL
+          value: "false"
+        - name: OS_TENANT_NAME
+          valueFrom:
+            secretKeyRef:
+              key: tenant
+              name: nextcloud-os-tenant
+        - name: S3_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: accesskey
+              name: nextcloud-objectstore-credentials
+        - name: S3_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secretkey
+              name: nextcloud-objectstore-credentials
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /status.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: "nextcloud.${BASE_DOMAIN}"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /status.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: "nextcloud.${BASE_DOMAIN}"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        resources:
+          {}
+        volumeMounts:
+        - name: nextcloud-main
+          mountPath: /var/www/
+          subPath: root
+        - name: nextcloud-main
+          mountPath: /var/www/html
+          subPath: html
+        - name: nextcloud-main
+          mountPath: /var/www/html/data
+          subPath: data
+        - name: nextcloud-main
+          mountPath: /var/www/html/config
+          subPath: config
+        - name: nextcloud-main
+          mountPath: /var/www/html/custom_apps
+          subPath: custom_apps
+        - name: nextcloud-main
+          mountPath: /var/www/tmp
+          subPath: tmp
+        - name: nextcloud-main
+          mountPath: /var/www/html/themes
+          subPath: themes
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/custom.config.php
+          subPath: custom.config.php
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/objectstorage.config.php
+          subPath: objectstorage.config.php
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/.htaccess
+          subPath: .htaccess
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/apache-pretty-urls.config.php
+          subPath: apache-pretty-urls.config.php
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/apcu.config.php
+          subPath: apcu.config.php
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/apps.config.php
+          subPath: apps.config.php
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/autoconfig.php
+          subPath: autoconfig.php
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/redis.config.php
+          subPath: redis.config.php
+        - name: nextcloud-config
+          mountPath: /var/www/html/config/smtp.config.php
+          subPath: smtp.config.php
+      - name: metrics-exporter
+        image: "xperimental/nextcloud-exporter:0.5.1"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: NEXTCLOUD_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: nextcloud-admin
+                key: username
+          - name: NEXTCLOUD_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: nextcloud-admin
+                key: password
+          - name: NEXTCLOUD_SERVER
+            value: http://localhost:8080
+          - name: NEXTCLOUD_TIMEOUT
+            value: 30s
+        ports:
+          - name: metrics
+            containerPort: 9205
+        securityContext:
+          runAsUser: 1000
+          runAsNonRoot: true
+      initContainers:
+      - name: postgresql-isready
+        image: bitnami/postgresql:14.2.0-debian-10-r54
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: nextcloud-user.nextcloud-pg.credentials.postgresql.acid.zalan.do
+                key: username
+        command:
+          - "sh"
+          - "-c"
+          - until pg_isready -h nextcloud-postgresql -U ${POSTGRES_USER} ; do sleep 2 ; done
+      volumes:
+      - name: nextcloud-main
+        persistentVolumeClaim:
+          claimName: nextcloud-nextcloud
+      - name: nextcloud-config
+        configMap:
+          name: nextcloud-config
+      # Will mount configuration files as www-data (id: 33) for nextcloud
+      securityContext:
+        fsGroup: 33
