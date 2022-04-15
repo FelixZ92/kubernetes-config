@@ -1,0 +1,17 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: nextcloud-os-tenant
+  namespace: nextcloud
+spec:
+  encryptedData:
+    tenant: AgCfo1IV+M7Tz1LMnTo3Kma7xmyy73ltKQ8bTawvcV+RIG+kHxRBYcbATYrquasjCvQlzTapqYJr0BUkAlli3hFACjuCodmH0kSvaZbx3KlZ+QSVahcft0/jrBDpdjxpi1oKugxR7xC5nqF+vlHiWHn11rE/co3vlijKt2AFMAcojg9jUL5lYXIbLl5z+Q1A+jo+9Ws8j/CLxauavCriSJl/utVaumFQ7+umDSJIziEUl0gHVMaw+KuhbzQTcy7XqdXyf0fXAFJ4+mTHigxkNNye5QYbsy0JD0/AxZnSulUAzEhx9y5k2yGaN+JznJF4xs0PY1hKnmnK8GLSyGQbzkAiqR0eXO+mgepVTZY9pmCxI0W1rsuGM1r8iZiTAShvjimIFyIgs9ju57UdWKjhRPKdTJ9CeaH4//x5S+X6dAP1ZL3KJojxfhLvlpq77SMWBSxJm9tM/23bM5TjGhVNhAr3uZGG18LLWzHb8aEOuhXPS/0Nc1ls4lPZ7rdausHVbgcdYMjsm3O4Q7NSgzjn8d8OCLhp0+sa5ezoSrQclpxrVGJrF7CKaNM7yNl3GGS/kp1ge4JPXIE82PxyV8uhMEY9wa6gD9TKerH4Ye1W3BYDkEKGP7MssAq15PyJONdPPNbF28cXccNpJZiJWHV1xHfw40PANdQJCRthZ5L0odaep4rjWiiCzn7YAIo9KrNHrGxeteyRyNVoAmEBUGrTZoQm
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      name: nextcloud-os-tenant
+      namespace: nextcloud
+    type: Opaque
+
