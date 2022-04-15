@@ -49,12 +49,12 @@ spec:
         - name: NEXTCLOUD_ADMIN_USER
           valueFrom:
             secretKeyRef:
-              name: nextcloud-admin
+              name: nextcloud-admin-user
               key: username
         - name: NEXTCLOUD_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: nextcloud-admin
+              name: nextcloud-admin-user
               key: password
         - name: NEXTCLOUD_TRUSTED_DOMAINS
           value: "nextcloud.${BASE_DOMAIN} localhost"
