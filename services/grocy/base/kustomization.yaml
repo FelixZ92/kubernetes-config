@@ -4,6 +4,9 @@ resources:
   - service.yaml
 namespace: grocy
 configMapGenerator:
+  - name: config-php
+    files:
+      - config.php
   - name: nginx-common-conf
     files:
       - common.conf

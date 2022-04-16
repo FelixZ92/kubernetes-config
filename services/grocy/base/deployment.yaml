@@ -18,17 +18,17 @@ spec:
     spec:
       securityContext:
         fsGroup: 82
-      initContainers:
-        - name: cp-config-dist
-          image: grocy/backend:v3.2.0-0
-          command:
-            - sh
-          args:
-            - -c
-            - 'ls -la /var/www/ && whoami && cp /var/www/config-dist.php /var/www/data/config.php'
-          volumeMounts:
-            - mountPath: /var/www/data
-              name: grocy-data
+#      initContainers:
+#        - name: cp-config-dist
+#          image: grocy/backend:v3.2.0-0
+#          command:
+#            - sh
+#          args:
+#            - -c
+#            - 'ls -la /var/www/ && whoami && cp /var/www/config-dist.php /var/www/data/config.php'
+#          volumeMounts:
+#            - mountPath: /var/www/data
+#              name: grocy-data
       containers:
         - image: grocy/frontend:v3.2.0-0
           name: frontend
@@ -46,6 +46,9 @@ spec:
             - name: nginx-common-conf
               mountPath: /etc/nginx/common.conf
               subPath: common.conf
+            - name: config-php
+              mountPath: /var/www/data/config.php
+              subPath: config.php
         - image: grocy/backend:v3.2.0-0
           name: backend
           ports:
@@ -100,4 +103,9 @@ spec:
             items:
               - key: common.conf
                 path: common.conf
-
+        - name: config-php
+          configMap:
+            name: config-php
+            items:
+              - key: config.php
+                path: config.php
