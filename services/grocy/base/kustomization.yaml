@@ -9,7 +9,7 @@ configMapGenerator:
       - common.conf
   - name: grocy-env
     literals:
-      - GROCY_CULTURE=en
+      - GROCY_CULTURE=de
       - GROCY_MODE=production
       - MAX_UPLOAD=50M
       - PHP_MAX_FILE_UPLOAD="200"
