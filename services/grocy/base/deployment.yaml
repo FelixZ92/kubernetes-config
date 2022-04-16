@@ -25,7 +25,7 @@ spec:
             - sh
           args:
             - -c
-            - 'ls -la /var/www/ && whoami'
+            - 'ls -la /var/www/ && whoami && cp /var/www/config-dist.php /var/www/data/config.php'
           volumeMounts:
             - mountPath: /var/www/data
               name: grocy-data
