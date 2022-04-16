@@ -1,2 +1,4 @@
 resources:
   - ../../base
+  - grocy-admin-user.yaml
+  - grocy-ldap-search.yaml

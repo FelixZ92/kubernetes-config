@@ -1,0 +1,18 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: grocy-admin-user
+  namespace: grocy
+spec:
+  encryptedData:
+    password: AgAi2rfwUqJzI9FzO1uxDjYxJWf9j2pCf4q0u9DzW5uad+cKzGLALOf5KUOgLBu1hYE4sUU2CL+jvcD5wxozppkvRgzse8rp8R5MtOLL3cT/qTzwhThgCcEMBYZUac7ar9ZXxL2rmLcYEvJa0Z4vzYRkU7F3cW58FNUfg4wfPNebNUC8JNsgwKt/gD1udqx78hWiEi5wgdvitCsZbiVKn4tjngw7BIQKdglxOjYMbR1K8gRpxvNVs8yaQ3/Kxwb/6tgiMvRkSavZ2nA9t9RHuQry12WywzCEZDQ9i8IBcpSCtfDswSji31FrxCFqGz8ejSB0ANwL9yiYZdp5frnFLLWwuLo2iV4U1piM+TH/0YjDJWut7KBYFYps+MGbaoCiTsaecc3U/wzP0zWX7bMj1JGtQgycyo3xgLMKwRgoP7dFS4YfIMQNgJOO8dCKk3bX6QG75kkmUccmJxtI3VeX5KlXD3AXwfMJemLnHVW1UPyxebXIhsdnRDuck8kZ/aP5DP6mBvYADfyWTeGUQf3ugQM5z8dNYuxaHFYSpb/RXynWUZKvoCsXCQP+Z6cs7WIl+56Ly41+QiBeI7i/HcAM49kdiE/pby18UoqVrM3ZX7h93k+4/B3VfeAmZULgoce4mkUJ+sVAYl9cbIVp0RagaFZvT2puhGZgGaRFruZDgcFe/7U+A6gzFfeC4eUrTUc3Fc5g+jH+zppVANz4ktxv/9NiZjbCWt4VuBRtfR9y7GC1Qw==
+    username: AgAD+bMjUetFmWdIu1vlwwwTHEbX/rm9n/GK9CnXWX75EC3TQ/96w5rVUOPfv40jYjBG3z2Z7G3Ffe9fkq7QFDtfd3Nvr3mLRpuggPSBiF0hEsOFXDsfsYlHppNUPWiXxFHwmeZihlxiIlvqbyfMNiyoqVFuiUxdfiX2/jtrjzRUMjseYN9qOzFEpF0AIpSzuNNfWgWyjarlYIkh/DADOAdfhdlnfRIZLa2/24HxDzXnb9nyZb2QiY4ylXBVV/5s6PANuTGB/+laUquPbZBTiIxE7h9Isxcmyy+9EY9/n436Lt0EIks2ypnpjgpTf7V3J2k2rzT7//2uxlhFfj3pa0Eo/UQPbZhdboY0nRkh+99N3gdl8rLgNLLScPe+b5qVzVYu4UBJ+l5vNnTtGVxDJ79x2LFxbJGUtb2iKGbF+iXjZliV1swdF3pKcBHUR1kmyqhEYcubeEFDCq/6zm/Te+yeLA5OD4uetrTjhwbh9/whjnHigdvHGZ5yg2+IEfShZgMT8w9fqPX37U/bbUE7C+0v+2xC4MLGtdLestUohdCJR+hiajIw7UqBr/58dqiixynQgi1Ro4YmRyjJvyE+kKVPS55m7gsSf1u6chGU1d5vhjWAoaD+xPdbGlzJDmS7WgaWMIVHLiegNIX44cSgQqTvRXayQ6V5MFKT6KpKXou2OJRHp413zVPtyHqH8HSNmLTJ1cDGiw==
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      name: grocy-admin-user
+      namespace: grocy
+    type: Opaque
+

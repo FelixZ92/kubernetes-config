@@ -35,6 +35,22 @@ spec:
           ports:
             - containerPort: 9000
           resources: { }
+          env:
+            - name: GROCY_LDAP_BIND_PW
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: grocy-ldap-search
+            - name: GROCY_HTTP_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: grocy-admin-user
+            - name: GROCY_HTTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: grocy-admin-user
           envFrom:
             - configMapRef:
                 name: grocy-env
