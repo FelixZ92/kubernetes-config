@@ -2,11 +2,12 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - service.yaml
+  - ingress.yaml
 namespace: grocy
 configMapGenerator:
-  - name: config-php
-    files:
-      - config.php
+#  - name: config-php
+#    files:
+#      - config.php
   - name: nginx-common-conf
     files:
       - common.conf
@@ -18,10 +19,6 @@ configMapGenerator:
       - PHP_MAX_FILE_UPLOAD="200"
       - PHP_MAX_POST=100M
       - PHP_MEMORY_LIMIT=512M
-      - GROCY_LDAP_ADDRESS=ldap://ak-outpost-ldap-test.authentik.svc
-      - GROCY_LDAP_BASE_DN="ou=users,DC=ldap,DC=goauthentik,DC=io"
-      - GROCY_LDAP_BIND_DN="cn=ldap-search,ou=ldap-search,dc=ldap,dc=goauthentik,dc=io"
-      - GROCY_LDAP_USER_FILTER=""
-      - GROCY_LDAP_UID_ATTR=uid
-      - GROCY_AUTH_CLASS="Grocy\Middleware\LdapAuthMiddleware"
+      - GROCY_REVERSE_PROXY_AUTH_HEADER=X-Authentik-Username
+      - GROCY_AUTH_CLASS="Grocy\Middleware\ReverseProxyAuthMiddleware"
       - GROCY_DEFAULT_LOCALE=de

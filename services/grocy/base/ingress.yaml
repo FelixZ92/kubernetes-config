@@ -1,0 +1,62 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grocy
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`grocy.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: grocy
+          port: 8080
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grocy-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`grocy.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: grocy
+          port: 8080
+      middlewares:
+        - name: ak-outpost-grocy
+          namespace: authentik
+    - match: Host(`grocy.${BASE_DOMAIN}`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      services:
+        - name: ak-outpost-grocy
+          port: 9000
+          namespace: authentik
+  tls:
+    secretName: tls-grocy-ingress
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grocy-tls-certificate
+spec:
+  secretName: tls-grocy-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+  dnsNames:
+    - grocy.${BASE_DOMAIN}

@@ -77,9 +77,9 @@ spec:
               name: grocy-data
             - mountPath: /tmp
               name: tmpfs1
-            - name: config-php
-              mountPath: /var/www/data/config.php
-              subPath: config.php
+#            - name: config-php
+#              mountPath: /var/www/data/config.php
+#              subPath: config.php
       restartPolicy: Always
       volumes:
         - name: logs
@@ -103,9 +103,9 @@ spec:
             items:
               - key: common.conf
                 path: common.conf
-        - name: config-php
-          configMap:
-            name: config-php
-            items:
-              - key: config.php
-                path: config.php
+#        - name: config-php
+#          configMap:
+#            name: config-php
+#            items:
+#              - key: config.php
+#                path: config.php

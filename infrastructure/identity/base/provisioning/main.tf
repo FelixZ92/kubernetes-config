@@ -90,6 +90,19 @@ module "whoami" {
   group          = authentik_group.cluster_admins.id
 }
 
+module "grocy" {
+  source         = "./forward-auth-application"
+  base_domain    = var.BASE_DOMAIN
+  auth_flow      = data.authentik_flow.default-authorization-flow.id
+  external_host  = format("https://grocy.%s/", var.BASE_DOMAIN)
+  name           = "grocy"
+  icon           = "https://raw.githubusercontent.com/grocy/grocy/master/public/img/grocy_icon.svg"
+  description    = "https://github.com/grocy/grocy"
+  launch_url     = format("https://grocy.%s/", var.BASE_DOMAIN)
+  k8s_connection = authentik_service_connection_kubernetes.local.id
+  group          = authentik_group.cluster_admins.id
+}
+
 data "pass_password" "grafana_client_secret" {
   path = format("kubernetes/%s/authentik/grafana/client-secret", var.ENVIRONMENT)
 }
