@@ -46,9 +46,6 @@ spec:
             - name: nginx-common-conf
               mountPath: /etc/nginx/common.conf
               subPath: common.conf
-            - name: config-php
-              mountPath: /var/www/data/config.php
-              subPath: config.php
         - image: grocy/backend:v3.2.0-0
           name: backend
           ports:
@@ -80,6 +77,9 @@ spec:
               name: grocy-data
             - mountPath: /tmp
               name: tmpfs1
+            - name: config-php
+              mountPath: /var/www/data/config.php
+              subPath: config.php
       restartPolicy: Always
       volumes:
         - name: logs
