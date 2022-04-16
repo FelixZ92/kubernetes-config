@@ -23,5 +23,5 @@ configMapGenerator:
       - GROCY_LDAP_BIND_DN="cn=ldap-search,ou=ldap-search,dc=ldap,dc=goauthentik,dc=io"
       - GROCY_LDAP_USER_FILTER=""
       - GROCY_LDAP_UID_ATTR=uid
-#      - GROCY_AUTH_CLASS="Grocy\Middleware\LdapAuthMiddleware"
+      - GROCY_AUTH_CLASS="Grocy\Middleware\LdapAuthMiddleware"
       - GROCY_DEFAULT_LOCALE=de
