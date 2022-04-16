@@ -5,16 +5,14 @@ resources:
   - ingress.yaml
 namespace: grocy
 configMapGenerator:
-#  - name: config-php
-#    files:
-#      - config.php
+  - name: config-php
+    files:
+      - config.php
   - name: nginx-common-conf
     files:
       - common.conf
   - name: grocy-env
     literals:
-      - GROCY_CULTURE=de
-      - GROCY_MODE=dev
       - MAX_UPLOAD=50M
       - PHP_MAX_FILE_UPLOAD="200"
       - PHP_MAX_POST=100M
