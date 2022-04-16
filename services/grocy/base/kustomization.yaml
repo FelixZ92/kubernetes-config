@@ -21,3 +21,4 @@ configMapGenerator:
       - GROCY_LDAP_USER_FILTER=""
       - GROCY_LDAP_UID_ATTR=uid
       - GROCY_AUTH_CLASS="Grocy\Middleware\LdapAuthMiddleware"
+      - GROCY_DEFAULT_LOCALE=de
