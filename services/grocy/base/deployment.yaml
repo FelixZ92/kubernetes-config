@@ -16,6 +16,17 @@ spec:
       labels:
         app.kubernetes.io/name: grocy
     spec:
+      initContainers:
+        - name: cp-config-dist
+          image: alpine:3
+          command:
+            - cp
+          args:
+            - /var/www/config-dist.php
+            - /var/www/data/config.php
+          volumeMounts:
+            - mountPath: /var/www/data
+              name: grocy-data
       containers:
         - image: grocy/frontend:v3.2.0-0
           name: frontend
