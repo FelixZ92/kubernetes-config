@@ -9,6 +9,10 @@ metadata:
   annotations:
     velero.io/exclude-from-backup: "true"
 spec:
+  clone:
+    uid: "d3d54f77-3f3b-4d89-a938-0b2a634bda8a"
+    cluster: "nextcloud-pg"
+    timestamp: "2022-04-17T00:00:00+01:00"
   enableLogicalBackup: true
   teamId: "nextcloud"
   volume:
@@ -21,16 +25,6 @@ spec:
     requests:
       cpu: 100m
       memory: 200M
-  users:
-    # database owner
-    nextcloud:
-      - superuser
-      - createdb
-    # role for application foo
-    nextcloud_user: []
-
-  databases:
-    nextcloud: nextcloud
   postgresql:
     version: "12"
 
