@@ -1,0 +1,14 @@
+resources:
+  - deployment.yaml
+  - pvc.yaml
+  - service.yaml
+
+configMapGenerator:
+  - name: grocy-env
+    literals:
+      - GROCY_CULTURE=en
+      - GROCY_MODE=production
+      - MAX_UPLOAD=50M
+      - PHP_MAX_FILE_UPLOAD="200"
+      - PHP_MAX_POST=100M
+      - PHP_MEMORY_LIMIT=512M

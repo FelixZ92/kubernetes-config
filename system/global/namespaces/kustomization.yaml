@@ -4,6 +4,7 @@ resources:
   - dashboard.yaml
   - doppler.yaml
   - flux-system.yaml
+  - grocy.yaml
   - istio-system.yaml
   - keycloak.yaml
   - local-path-storage.yaml
