@@ -1,2 +1,4 @@
 resources:
   - ../../base
+  - pgadmin-default-user.yaml
+  - postgres-gcp-credentials.yaml

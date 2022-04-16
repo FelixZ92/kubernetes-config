@@ -103,12 +103,12 @@ data "authentik_scope_mapping" "test" {
 }
 
 resource "authentik_provider_oauth2" "grafana" {
-  name      = "grafana"
-  client_id = "grafana"
-  client_secret = data.pass_password.grafana_client_secret.password
+  name               = "grafana"
+  client_id          = "grafana"
+  client_secret      = data.pass_password.grafana_client_secret.password
   authorization_flow = data.authentik_flow.default-authorization-flow.id
-  property_mappings = data.authentik_scope_mapping.test.ids
-  redirect_uris = [format("https://grafana.%s/login/generic_oauth", var.BASE_DOMAIN)]
+  property_mappings  = data.authentik_scope_mapping.test.ids
+  redirect_uris      = [format("https://grafana.%s/login/generic_oauth", var.BASE_DOMAIN)]
 }
 
 resource "authentik_application" "grafana" {
@@ -121,12 +121,12 @@ resource "authentik_application" "grafana" {
 }
 
 resource "authentik_provider_oauth2" "ocis" {
-  name      = "ocis-web"
-  client_id = "ocis-web"
-  client_type = "public"
+  name               = "ocis-web"
+  client_id          = "ocis-web"
+  client_type        = "public"
   authorization_flow = data.authentik_flow.default-authorization-flow.id
-  property_mappings = data.authentik_scope_mapping.test.ids
-  redirect_uris = [format("https://ocis.%s/", var.BASE_DOMAIN)]
+  property_mappings  = data.authentik_scope_mapping.test.ids
+  redirect_uris      = [format("https://ocis.%s/", var.BASE_DOMAIN)]
 }
 
 resource "authentik_application" "ocis" {
@@ -137,3 +137,32 @@ resource "authentik_application" "ocis" {
   meta_description  = "https://owncloud.dev/"
   meta_launch_url   = format("https://ocis.%s/", var.BASE_DOMAIN)
 }
+
+data "authentik_property_mapping_saml" "nextcloud" {
+  managed_list = [
+    "goauthentik.io/providers/saml/uid",
+    "goauthentik.io/providers/saml/username",
+    "goauthentik.io/providers/saml/ms-windowsaccountname",
+    "goauthentik.io/providers/saml/groups",
+    "goauthentik.io/providers/saml/email",
+    "goauthentik.io/providers/saml/name",
+    "goauthentik.io/providers/saml/upn"
+  ]
+}
+
+resource "authentik_provider_saml" "nextcloud" {
+  name               = "nextcloud"
+  authorization_flow = data.authentik_flow.default-authorization-flow.id
+  acs_url            = format("https://nextcloud.%s/apps/user_saml/saml/acs", var.BASE_DOMAIN)
+  issuer             = format("https://authentik.%s", var.BASE_DOMAIN)
+  sp_binding         = "post"
+  audience           = format("https://nextcloud.%s/apps/user_saml/saml/metadata", var.BASE_DOMAIN)
+  property_mappings  = data.authentik_property_mapping_saml.nextcloud.ids
+}
+
+resource "authentik_application" "nextcloud" {
+  name              = "nextcloud"
+  slug              = "nextcloud"
+  protocol_provider = authentik_provider_saml.nextcloud.id
+}
+
