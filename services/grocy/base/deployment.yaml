@@ -30,6 +30,8 @@ spec:
               name: nginx-logs
             - mountPath: /tmp
               name: tmpfs2
+            - name: nginx-common-conf
+              mountPath: /etc/nginx/
         - image: grocy/backend:v3.2.0-0
           name: backend
           ports:
@@ -78,4 +80,10 @@ spec:
         - emptyDir:
             medium: Memory
           name: tmpfs2
-status: { }
+        - name: nginx-common-conf
+          configMap:
+            name: nginx-common-conf
+            items:
+              - key: common.conf
+                path: common.conf
+

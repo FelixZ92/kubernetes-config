@@ -4,6 +4,9 @@ resources:
   - service.yaml
 namespace: grocy
 configMapGenerator:
+  - name: nginx-common-conf
+    files:
+      - common.conf
   - name: grocy-env
     literals:
       - GROCY_CULTURE=en
