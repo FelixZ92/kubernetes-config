@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/name: spilo
     app.kubernetes.io/instance: nextcloud-pg
     team: nextcloud
+  annotations:
+    velero.io/exclude-from-backup: "true"
 spec:
   enableLogicalBackup: true
   teamId: "nextcloud"

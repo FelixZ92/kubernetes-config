@@ -2,6 +2,8 @@ apiVersion: redis.redis.opstreelabs.in/v1beta1
 kind: Redis
 metadata:
   name: nextcloud-redis
+  annotations:
+    velero.io/exclude-from-backup: "true"
 spec:
   kubernetesConfig:
     image: quay.io/opstree/redis:v6.2.5
@@ -30,8 +32,10 @@ spec:
   redisConfig: {}
   storage:
     volumeClaimTemplate:
+      metadata:
+        annotations:
+          velero.io/exclude-from-backup: "true"
       spec:
-        # storageClassName: standard
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:

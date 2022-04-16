@@ -25,7 +25,7 @@ spec:
         app.kubernetes.io/component: app
         nextcloud-redis-client: "true"
       annotations:
-        backup.velero.io/backup-volumes: nextcloud-main,nextcloud-config
+        backup.velero.io/backup-volumes: nextcloud-main
     spec:
       containers:
       - name: nextcloud

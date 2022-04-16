@@ -27,6 +27,11 @@ resource "authentik_group" "grafana_editors" {
   is_superuser = false
 }
 
+resource "authentik_group" "grocy_users" {
+  name = "Grocy Users"
+  is_superuser = false
+}
+
 module "prometheus" {
   source         = "./forward-auth-application"
   base_domain    = var.BASE_DOMAIN
@@ -100,7 +105,7 @@ module "grocy" {
   description    = "https://github.com/grocy/grocy"
   launch_url     = format("https://grocy.%s/", var.BASE_DOMAIN)
   k8s_connection = authentik_service_connection_kubernetes.local.id
-  group          = authentik_group.cluster_admins.id
+  group          = authentik_group.grocy_users.id
 }
 
 data "pass_password" "grafana_client_secret" {
