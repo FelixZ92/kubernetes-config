@@ -8,9 +8,6 @@ spec:
   interval: 10m0s
   path: services/grocy/overlays/${ENVIRONMENT}
   prune: true
-  dependsOn:
-    - name: ingress
-      namespace: traefik
   sourceRef:
     kind: GitRepository
     name: k8s-dev
