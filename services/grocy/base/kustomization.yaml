@@ -2,7 +2,7 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - service.yaml
-
+namespace: grocy
 configMapGenerator:
   - name: grocy-env
     literals:
