@@ -32,6 +32,7 @@ spec:
               name: tmpfs2
             - name: nginx-common-conf
               mountPath: /etc/nginx/
+              subPath: common.conf
         - image: grocy/backend:v3.2.0-0
           name: backend
           ports:
