@@ -16,14 +16,17 @@ spec:
       labels:
         app.kubernetes.io/name: grocy
     spec:
+      securityContext:
+        fsGroup: 82
+        runAsNonRoot: true
       initContainers:
         - name: cp-config-dist
           image: grocy/backend:v3.2.0-0
           command:
-            - cp
+            - sh
           args:
-            - /var/www/config-dist.php
-            - /var/www/data/config.php
+            - -c
+            - 'ls -la /var/www/ && whoami'
           volumeMounts:
             - mountPath: /var/www/data
               name: grocy-data
