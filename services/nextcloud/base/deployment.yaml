@@ -33,18 +33,18 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - name: POSTGRES_HOST
-          value: "nextcloud-pg"
+          value: "nextcloud-pg-clone"
         - name: POSTGRES_DB
           value: "nextcloud"
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: nextcloud-user.nextcloud-pg.credentials.postgresql.acid.zalan.do
+              name: nextcloud-user.nextcloud-pg-clone.credentials.postgresql.acid.zalan.do
               key: username
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: nextcloud-user.nextcloud-pg.credentials.postgresql.acid.zalan.do
+              name: nextcloud-user.nextcloud-pg-clone.credentials.postgresql.acid.zalan.do
               key: password
         - name: NEXTCLOUD_ADMIN_USER
           valueFrom:
@@ -209,12 +209,12 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: nextcloud-user.nextcloud-pg.credentials.postgresql.acid.zalan.do
+                name: nextcloud-user.nextcloud-pg-clone.credentials.postgresql.acid.zalan.do
                 key: username
         command:
           - "sh"
           - "-c"
-          - until pg_isready -h nextcloud-pg -U $POSTGRES_USER ; do sleep 2 ; done
+          - until pg_isready -h nextcloud-pg-clone -U $POSTGRES_USER ; do sleep 2 ; done
       volumes:
       - name: nextcloud-main
         persistentVolumeClaim:
