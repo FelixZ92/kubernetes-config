@@ -1,0 +1,18 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: grocy-daily
+spec:
+  schedule: @every 24h
+  template:
+    ttl: 168h
+    includedNamespaces:
+      - grocy
+    includedResources:
+      - deployments
+      - replicasets
+      - pods
+      - pvc
+      - pv
+      - secrets
+      - configmaps
