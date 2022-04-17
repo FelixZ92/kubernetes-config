@@ -4,6 +4,7 @@ resources:
   - service.yaml
   - ingress.yaml
   - backup.yaml
+
 namespace: grocy
 configMapGenerator:
   - name: config-php

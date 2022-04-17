@@ -3,7 +3,7 @@ kind: Schedule
 metadata:
   name: nextcloud-daily
 spec:
-  schedule: @every 24h
+  schedule: '@every 24h'
   template:
     ttl: 168h
     includedNamespaces:
