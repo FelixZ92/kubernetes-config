@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: backups
+  namespace: velero
+spec:
+  interval: 10m0s
+  path: services/backups/overlays/${ENVIRONMENT}
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: k8s-dev
+    namespace: flux-system
+  validation: server
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-env

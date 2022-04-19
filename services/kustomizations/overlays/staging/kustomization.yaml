@@ -3,3 +3,4 @@ resources:
   - ../../base/minio.yaml
   - ../../base/nextcloud.yaml
   - ../../base/grocy.yaml
+  - ../../base/backups.yaml

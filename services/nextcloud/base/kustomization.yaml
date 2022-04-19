@@ -7,6 +7,5 @@ resources:
   - nextcloud-pvc.yaml
   - service.yaml
   - ingress.yaml
-  - backup.yaml
 
 namespace: nextcloud
