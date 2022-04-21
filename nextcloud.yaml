@@ -1,12 +1,68 @@
 ---
-apiVersion: secrets.doppler.com/v1alpha1
-kind: DopplerSecret
+apiVersion: v1
+kind: ServiceAccount
 metadata:
-  name: dopplersecret-default
-  namespace: doppler-operator-system
-spec:
-  tokenSecret:
-    name: doppler-token-secret
-  managedSecret:
-    name: doppler-default-secret
-    namespace: default
+  name: backstage
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: backstage
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - statefulsets
+      - replicasets
+    verbs:
+      - get
+      - watch
+      - list
+  - apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - traefik.containo.us
+    resources:
+      - ingressroutes
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+      - cronjobs
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: backstage
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: backstage
+subjects:
+  - kind: ServiceAccount
+    name: backstage
+    namespace: backstage
