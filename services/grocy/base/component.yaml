@@ -4,7 +4,7 @@ metadata:
   name: grocy
   annotations:
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=grocy'
-    backstage.io/kubernetes-namespace: grocy
+#    backstage.io/kubernetes-namespace: grocy
   description: erp beyond your fridge
   tags:
     - data
