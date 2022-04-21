@@ -12,6 +12,8 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: grocy
+  labels:
+    app.kubernetes.io/name: grocy
 spec:
   entryPoints:
     - web
@@ -28,6 +30,8 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: grocy-tls
+  labels:
+    app.kubernetes.io/name: grocy
 spec:
   entryPoints:
     - websecure
@@ -53,6 +57,8 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: grocy-tls-certificate
+  labels:
+    app.kubernetes.io/name: grocy
 spec:
   secretName: tls-grocy-ingress
   issuerRef:
