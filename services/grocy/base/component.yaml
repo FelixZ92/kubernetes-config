@@ -30,7 +30,7 @@ metadata:
       title: Alerts
       icon: alert
 spec:
-  type: website
+  type: service
   lifecycle: production
   owner: team-a
   system: artist-engagement-portal
