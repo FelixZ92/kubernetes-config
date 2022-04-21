@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: artist-lookup
+  name: grocy
   annotations:
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/name=grocy'
-  description: Artist Lookup
+  description: erp beyond your fridge
   tags:
     - data
   links:
