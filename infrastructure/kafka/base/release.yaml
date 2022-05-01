@@ -1,0 +1,29 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: strimzi
+  namespace: kafka
+spec:
+  interval: 10m
+  url: https://strimzi.io/charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kafka-operator
+  namespace: kafka
+spec:
+  interval: 5m
+  dependsOn:
+    - name: kube-prometheus-stack
+      namespace: monitoring
+  chart:
+    spec:
+      chart: strimzi-kafka-operator
+      version: '0.28.0'
+      sourceRef:
+        kind: HelmRepository
+        name: strimzi
+        namespace: kafka
+      interval: 10m

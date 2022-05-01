@@ -5,6 +5,7 @@ resources:
   - doppler.yaml
   - flux-system.yaml
   - grocy.yaml
+  - kafka.yaml
   - istio-system.yaml
   - keycloak.yaml
   - local-path-storage.yaml

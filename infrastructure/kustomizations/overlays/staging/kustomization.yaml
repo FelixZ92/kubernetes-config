@@ -3,6 +3,7 @@ resources:
   - ../../base/database.yaml
   - ../../base/identity.yaml
   - ../../base/ingress.yaml
+  - ../../base/kafka.yaml
   - ../../base/logging.yaml
   - ../../base/observability.yaml
   - ../../base/security.yaml
