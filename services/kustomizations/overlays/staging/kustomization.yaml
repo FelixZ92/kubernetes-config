@@ -5,3 +5,5 @@ resources:
   - ../../base/grocy.yaml
   - ../../base/kafka.yaml
   - ../../base/backups.yaml
+  - ../../base/backstage.yaml
+  - ../../base/sonarqube.yaml
