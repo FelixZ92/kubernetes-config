@@ -1,5 +1,6 @@
 resources:
   - authentik.yaml
+  - backstage.yaml
   - cert-manager.yaml
   - dashboard.yaml
   - doppler.yaml
@@ -16,6 +17,7 @@ resources:
   - ocis.yaml
   - postgres-operator.yaml
   - redis-operator.yaml
+  - sonarqube.yaml
   - starboard.yaml
   - traefik.yaml
   - velero.yaml
