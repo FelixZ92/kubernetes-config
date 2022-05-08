@@ -1,0 +1,27 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: sonarqube
+spec:
+  interval: 10m
+  url: https://SonarSource.github.io/helm-chart-sonarqube
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarqube
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: sonarqube
+      version: '3.0.0+296'
+      sourceRef:
+        kind: HelmRepository
+        name: strimzi
+        namespace: kafka
+      interval: 10m
+  valuesFrom:
+    - kind: ConfigMap
+      name: sonarqube-values

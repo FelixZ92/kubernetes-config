@@ -1,4 +1,13 @@
 resources:
   - postgres.yaml
+  - release.yaml
 
 namespace: sonarqube
+
+configMapGenerator:
+  - name: sonarqube-values
+    files:
+      - values.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true

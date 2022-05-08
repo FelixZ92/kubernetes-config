@@ -1,0 +1,11 @@
+persistence:
+  enabled: false
+jdbcOverwrite:
+  enable: true
+  jdbcUrl: "jdbc:postgresql://infra-sonarqube-pg:5432/sonarqube?socketTimeout=1500"
+  jdbcUsername: "sonarqube"
+  jdbcPassword: "sonarPass"
+  jdbcSecretName: "sonarqube.infra-sonarqube-pg.credentials.postgresql.acid.zalan.do"
+  jdbcSecretPasswordKey: "password"
+postgresql:
+  enabled: false
