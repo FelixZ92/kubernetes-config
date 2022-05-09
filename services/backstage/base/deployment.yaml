@@ -3,22 +3,25 @@ kind: Deployment
 metadata:
   name: backstage
   namespace: backstage
+  labels:
+    app.kubernetes.io/name: backstage
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backstage
+      app.kubernetes.io/name: backstage
   template:
     metadata:
       labels:
-        app: backstage
+        app.kubernetes.io/name: backstage
     spec:
+      serviceAccountName: backstage
       imagePullSecrets:
         - name: ghcr.io
       containers:
         - name: backstage
           image: ghcr.io/felixz92/backstage-demo/backstage:main
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 7007
@@ -39,6 +42,24 @@ spec:
               value: "5432"
             - name: PGSSLMODE
               value: require
+            - name: KUBERNETES_API_SERVER
+              value: https://kubernetes.default.svc
+#            - name: PGSSLCERT
+#            - name: KUBERNETES_CA_DATA
+#              valueFrom:
+#                secretKeyRef:
+#                  key: ca.crt
+#                  name: backstage-kubernetes-token
+            - name: KUBERNETES_SERVICE_ACCOUNT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: backstage-kubernetes-token
+          #              value: /tls/tls.crt
+#            - name: PGSSLKEY
+#              value: /tls/tls.key
+#            - name: PGSSLROOTCERT
+#              value: /tls/ca.crt
           envFrom:
             - secretRef:
                 name: backstage-secrets
@@ -50,3 +71,12 @@ spec:
             httpGet:
               port: 7007
               path: /healthcheck
+          volumeMounts:
+            - mountPath: /tls
+              name: tls
+      volumes:
+        - name: tls
+          secret:
+            secretName: backstage-postgres-tls
+
+"curl -v $KUBERNETES_API_SERVER/api -H "Authorization: Bearer $KUBERNETES_SERVICE_ACCOUNT_TOKEN" --cacert $KUBERNETES_CA_DATA"
