@@ -42,7 +42,7 @@ spec:
         - name: sonarqube-sonarqube
           port: 9000
   tls:
-    secretName: tls-sonar-ingress
+    secretName: tls-sonar-ingress-prod
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -51,7 +51,7 @@ metadata:
   labels:
     app.kubernetes.io/name: sonar
 spec:
-  secretName: tls-sonar-ingress
+  secretName: tls-sonar-ingress-prod
   issuerRef:
     name: ca-clusterissuer-prod
     kind: ClusterIssuer
