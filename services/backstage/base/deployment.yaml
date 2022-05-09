@@ -44,22 +44,11 @@ spec:
               value: require
             - name: KUBERNETES_API_SERVER
               value: https://kubernetes.default.svc
-#            - name: PGSSLCERT
-#            - name: KUBERNETES_CA_DATA
-#              valueFrom:
-#                secretKeyRef:
-#                  key: ca.crt
-#                  name: backstage-kubernetes-token
             - name: KUBERNETES_SERVICE_ACCOUNT_TOKEN
               valueFrom:
                 secretKeyRef:
                   key: token
                   name: backstage-kubernetes-token
-          #              value: /tls/tls.crt
-#            - name: PGSSLKEY
-#              value: /tls/tls.key
-#            - name: PGSSLROOTCERT
-#              value: /tls/ca.crt
           envFrom:
             - secretRef:
                 name: backstage-secrets
@@ -78,5 +67,3 @@ spec:
         - name: tls
           secret:
             secretName: backstage-postgres-tls
-
-"curl -v $KUBERNETES_API_SERVER/api -H "Authorization: Bearer $KUBERNETES_SERVICE_ACCOUNT_TOKEN" --cacert $KUBERNETES_CA_DATA"
