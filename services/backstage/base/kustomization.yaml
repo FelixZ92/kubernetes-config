@@ -1,11 +1,11 @@
 resources:
-#  - postgres.yaml
+  - postgres.yaml
 
 namespace: backstage
-
-secretGenerator:
-  - name: backstage-secrets
-    env: .env
+#
+#secretGenerator:
+#  - name: backstage-secrets
+#    env: .env
 
 generatorOptions:
   disableNameSuffixHash: true
