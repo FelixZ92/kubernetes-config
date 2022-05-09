@@ -9,3 +9,5 @@ jdbcOverwrite:
   jdbcSecretPasswordKey: "password"
 postgresql:
   enabled: false
+nodeSelector:
+  sonarqube: "true"
