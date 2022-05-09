@@ -1,3 +1,4 @@
+---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -8,6 +9,22 @@ spec:
       name: lets-encrypt-account-key
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     email: zerdus9999@gmail.com
+    solvers:
+      - http01:
+          ingress:
+            class: traefik
+            serviceType: ClusterIP
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: ca-clusterissuer-prod
+spec:
+  acme:
+    privateKeySecretRef:
+      name: lets-encrypt-account-key-prod
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: contact@zippelf.com
     solvers:
       - http01:
           ingress:
