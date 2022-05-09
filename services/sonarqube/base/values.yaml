@@ -11,3 +11,10 @@ postgresql:
   enabled: false
 nodeSelector:
   sonarqube: "true"
+resources:
+  limits:
+    cpu: 800m
+    memory: 2Gi
+  requests:
+    cpu: 400m
+    memory: 1Gi
