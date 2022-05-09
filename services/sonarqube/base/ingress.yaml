@@ -1,0 +1,59 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sonar
+  labels:
+    app.kubernetes.io/name: sonar
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`sonar.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: sonarqube-sonarqube
+          port: 9000
+      middlewares:
+        - name: redirect-https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sonar-tls
+  labels:
+    app.kubernetes.io/name: sonar
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sonar.${BASE_DOMAIN}`)
+      kind: Rule
+      services:
+        - name: sonarqube-sonarqube
+          port: 9000
+  tls:
+    secretName: tls-sonar-ingress
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sonar-tls-certificate
+  labels:
+    app.kubernetes.io/name: sonar
+spec:
+  secretName: tls-sonar-ingress
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+  dnsNames:
+    - sonar.${BASE_DOMAIN}
