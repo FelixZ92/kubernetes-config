@@ -1,6 +1,6 @@
 resources:
   - postgres.yaml
-#  - release.yaml
+  - release.yaml
 
 namespace: sonarqube
 
