@@ -51,7 +51,7 @@ metadata:
   labels:
     app.kubernetes.io/name: backstage
 spec:
-  secretName: tls-backstage-ingress
+  secretName: tls-backstage-ingress-prod
   issuerRef:
     name: ca-clusterissuer-prod
     kind: ClusterIssuer
