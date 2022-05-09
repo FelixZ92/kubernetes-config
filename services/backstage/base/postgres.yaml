@@ -1,3 +1,21 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: backstage-postgres-tls
+  labels:
+    app.kubernetes.io/name: backstage
+spec:
+  secretName: backstage-postgres-tls
+  issuerRef:
+    name: selfsigned-ca-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - infra-backstage-pg
+    - infra-backstage-pg.backstage
+    - infra-backstage-pg.backstage.svc
+    - infra-backstage-pg.backstage.svc.cluster.local
+---
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
@@ -21,6 +39,9 @@ spec:
       memory: 200M
   postgresql:
     version: "12"
+
+  tls:
+    secretName: backstage-postgres-tls
 
 # TODO: update with new pg operator version
   spiloRunAsUser: 101

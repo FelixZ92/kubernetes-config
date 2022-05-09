@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backstage
+  namespace: backstage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backstage
+  template:
+    metadata:
+      labels:
+        app: backstage
+    spec:
+      imagePullSecrets:
+        - name: ghcr.io
+      containers:
+        - name: backstage
+          image: ghcr.io/felixz92/backstage-demo/backstage:main
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 7007
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: postgres.infra-backstage-pg.credentials.postgresql.acid.zalan.do
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: postgres.infra-backstage-pg.credentials.postgresql.acid.zalan.do
+            - name: POSTGRES_HOST
+              value: infra-backstage-pg
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: PGSSLMODE
+              value: require
+          envFrom:
+            - secretRef:
+                name: backstage-secrets
+          readinessProbe:
+            httpGet:
+              port: 7007
+              path: /healthcheck
+          livenessProbe:
+            httpGet:
+              port: 7007
+              path: /healthcheck
