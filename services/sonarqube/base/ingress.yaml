@@ -11,14 +11,14 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: sonar
+  name: sonar-prod
   labels:
     app.kubernetes.io/name: sonar
 spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`sonar.${BASE_DOMAIN}`)
+    - match: Host(`sonar.dev.zippelf.com`)
       kind: Rule
       services:
         - name: sonarqube-sonarqube
@@ -29,31 +29,31 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: sonar-tls
+  name: sonar-tls-prod
   labels:
     app.kubernetes.io/name: sonar
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`sonar.${BASE_DOMAIN}`)
+    - match: Host(`sonar.dev.zippelf.com`)
       kind: Rule
       services:
         - name: sonarqube-sonarqube
           port: 9000
   tls:
-    secretName: tls-sonar-ingress
+    secretName: tls-sonar-ingress-prod
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: sonar-tls-certificate
+  name: sonar-tls-certificate-prod
   labels:
     app.kubernetes.io/name: sonar
 spec:
   secretName: tls-sonar-ingress
   issuerRef:
-    name: ca-clusterissuer
+    name: ca-clusterissuer-prod
     kind: ClusterIssuer
   dnsNames:
-    - sonar.${BASE_DOMAIN}
+    - sonar.dev.zippelf.com
