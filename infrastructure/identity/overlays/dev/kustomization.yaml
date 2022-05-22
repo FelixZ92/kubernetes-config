@@ -1,39 +1,39 @@
 resources:
   - ../../base
 
-namespace: keycloak
+namespace: authentik
 
 patches:
   - target:
       kind: Certificate
-      name: keycloak-tls-certificate
+      name: authentik-tls-certificate
     patch: |-
       - op: add
         path: /spec/dnsNames/-
-        value: keycloak.host.k3d.internal
+        value: authentik.host.k3d.internal
   - target:
       kind: IngressRoute
-      name: keycloak
+      name: authentik
     patch: |-
       - op: add
         path: /spec/routes/-
         value:
-          match: Host(`keycloak.host.k3d.internal`)
+          match: Host(`authentik.host.k3d.internal`)
           kind: Rule
           services:
-            - name: keycloak-http
+            - name: authentik-http
               port: 80
           middlewares:
             - name: redirect-https
   - target:
       kind: IngressRoute
-      name: keycloak-tls
+      name: authentik-tls
     patch: |-
       - op: add
         path: /spec/routes/-
         value:
-          match: Host(`keycloak.host.k3d.internal`)
+          match: Host(`authentik.host.k3d.internal`)
           kind: Rule
           services:
-            - name: keycloak-http
+            - name: authentik-http
               port: 80
