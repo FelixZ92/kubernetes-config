@@ -6,7 +6,7 @@ metadata:
     velero.io/exclude-from-backup: "true"
 spec:
   kubernetesConfig:
-    image: quay.io/opstree/redis:v6.2.5
+    image: quay.io/opstree/redis:v7.0.5
     imagePullPolicy: Always
     redisSecret:
       name: redis-password
@@ -20,7 +20,7 @@ spec:
         memory: 128Mi
   redisExporter:
     enabled: true
-    image: quay.io/opstree/redis-exporter:1.0
+    image: quay.io/opstree/redis-exporter:v1.44.0
     imagePullPolicy: Always
     resources:
       requests:
