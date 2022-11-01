@@ -1,3 +1,2 @@
 resources:
-  - starboard-release.yaml
-  - trivy-release.yaml
+  - trivy-operator.yaml
