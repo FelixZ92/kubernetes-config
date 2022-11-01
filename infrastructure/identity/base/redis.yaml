@@ -4,7 +4,7 @@ metadata:
   name: authentik-redis
 spec:
   kubernetesConfig:
-    image: quay.io/opstree/redis:v7.0.5
+    image: quay.io/opstree/redis:v6.2.5
     imagePullPolicy: Always
     redisSecret:
       name: redis-password
