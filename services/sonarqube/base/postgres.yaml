@@ -39,7 +39,7 @@ spec:
 
   sidecars:
     - name: "exporter"
-      image: "wrouesnel/postgres_exporter:v0.8.0"
+      image: "quay.io/prometheuscommunity/postgres-exporter:v0.11.1"
       securityContext:
         capabilities:
           drop:

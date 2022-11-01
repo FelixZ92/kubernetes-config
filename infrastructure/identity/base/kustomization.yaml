@@ -12,6 +12,10 @@ commonLabels:
   app.kubernetes.io/name: authentik
   app.kubernetes.io/instance: authentik
 
+images:
+  - name: ghcr.io/goauthentik/server
+    newTag: 2022.10.1
+
 configurations:
   - configurations/servicemonitor.yaml
 
