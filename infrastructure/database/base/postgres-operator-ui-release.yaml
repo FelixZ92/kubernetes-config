@@ -17,7 +17,7 @@ spec:
   chart:
     spec:
       chart: postgres-operator-ui
-      version: '1.6.3'
+      version: '1.8.2'
       sourceRef:
         kind: HelmRepository
         name: postgres-operator-ui

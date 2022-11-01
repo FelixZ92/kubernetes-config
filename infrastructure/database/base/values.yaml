@@ -1,6 +1,5 @@
 configGeneral:
   enable_crd_registration: false
-  enable_crd_validation: false
 
 configKubernetes:
   spilo_runasuser: 101
