@@ -1,0 +1,3 @@
+resources:
+  - https://github.com/rancher/system-upgrade-controller/releases/download/v0.9.1/crd.yaml
+  - https://github.com/rancher/system-upgrade-controller/releases/download/v0.9.1/system-upgrade-controller.yaml
