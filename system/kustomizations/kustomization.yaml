@@ -4,6 +4,7 @@ resources:
   - controller/cert-manager.yaml
   - controller/kubernetes-replicator.yaml
   - controller/secret-generator.yaml
+  - controller/system-upgrade.yaml
   - certificate-authority.yaml
   - global.yaml
   - gitrepos.yaml
