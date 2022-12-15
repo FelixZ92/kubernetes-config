@@ -23,24 +23,22 @@ provider "registry.terraform.io/goauthentik/authentik" {
 }
 
 provider "registry.terraform.io/mecodia/pass" {
-  version     = "3.0.1"
-  constraints = "~> 3.0.1"
+  version     = "3.1.0"
+  constraints = "~> 3.1.0"
   hashes = [
-    "h1:r2LODegLgN1t9CpZHYgAh4O7l8qEiDokVcxZ4dPcDXU=",
-    "zh:035d6e9899352e0d8ad8b4ed0fbfafb17a8745a2bd65eab311717a730eeb648c",
-    "zh:241f79c317e834acba4d7c028a6336ec0a0216d3c5a550e9ad4e6c025824a6c7",
-    "zh:2c4b838b2b2ce9ba03f84bd12d0496229fe145e1ef36e6624da72935c7cf3934",
-    "zh:3f9c9a828b5180b05c48e70aeebfb8f659cf4783fe09111585276e2cf2961801",
-    "zh:75eaf19f1cec3de1c2a7d2dece6847d537c3c9034b0ba5c29b405c8890bb6b94",
-    "zh:828c4ee03cb5a26f17cbe7d66fcdfa75d8fb9b21559998a8e27a3f33d453da0d",
-    "zh:8ec74fbc27800ea93f78c97e1892ce3f83dd0365ebd50d4465a0ee840a5da796",
-    "zh:9b12af85486a96aedd8d7984b0ff811a4b42e3d88dad1a3fb4c0b580d04fa425",
-    "zh:a9f6c80c68086f1a273942a924d8a8b45ae3992625ac1e0edbca13dc958cf3a8",
-    "zh:b9707f69a976041cfc530f9459463752972487aa76b21c78aad2b6f7305d08a5",
-    "zh:bd4f925674c67915b4a1927b5600e12c38c4d675388026e80d46f318793c8deb",
-    "zh:c0be37798e146f3edd0391731f76ce6cca128eeb1e524c2d1a83b4b772b996ee",
-    "zh:e2d7cf87be9d376c7c3ad134353213b3d0e5ce005a55a19c4dbcaad43b7e5040",
-    "zh:eceb8b5bd1259e16c44f086b7c371b6a94607d6a61f94082dfeaf1645733f2a8",
-    "zh:f5b097850ee14e1aa10df044a0100495407ecae838d944314bfc112a042d242b",
+    "h1:+0oRe15olc4yP68aTWNhz2IvwD5Nq2oRJm9EtxTwWDQ=",
+    "h1:91E0qTCPnfSTzTtTN8DB1KkcGGB5os6yVMek4gIKTpM=",
+    "h1:BLNegEFp06pH96+u3dDhLf/yGpPY2WzZgeEFosLzP8A=",
+    "h1:FDaDd/vfO3oSzHbMcjtpTKOAzwl/57axN5WeVQFRVvo=",
+    "h1:OIUkqAE0Dm1iOJvDv8KV6pPpna1jZJxaNaqS+Bcp1lk=",
+    "h1:OZlZKuaewaJ2T7OXEcnw1P84S1V9VBd19eNJTaXTQpA=",
+    "h1:SndizOErglJn4jnUPBmcXSR9+J6aKMhi5pl9T/d0INY=",
+    "h1:aWjAmEGZEydC8f4iduMwuFhuj8IDMvidiQfbeNOfMRw=",
+    "h1:kyFSE+h7PVSvQXWmEdw6KTQP29JF+t+oJgNx0YUJhB0=",
+    "h1:nyhB33xNAQrTGL3SVYX6dLmf6oSgl71CatZ0+cLgE/k=",
+    "h1:ozoN0+nmuHM64VfQOkhKOaKqbxR8LQKMAIC0m9LU4iI=",
+    "h1:terX+GcDAGsJ7zty46lVTpaCb6V4jkHfON/pCDBI9CY=",
+    "h1:x7I66NWbYQ3N/0TfOX/pb73o6qk6jWbJbYGWxeCeMMA=",
+    "h1:xJBWLuyHUrhbwJcjJ4RsCMGUHqJndfi4YNVCVaHKvzw=",
   ]
 }
