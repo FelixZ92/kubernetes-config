@@ -2,23 +2,23 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/goauthentik/authentik" {
-  version     = "2022.3.1"
-  constraints = "~> 2022.3.1"
+  version     = "2022.12.0"
+  constraints = "~> 2022.12.0"
   hashes = [
-    "h1:e2u0e9PLBVAo1lpBLAWHJM6Brb0HT72ZLmuUF97LHA4=",
-    "zh:006dab890486019e28a371b4a48f985baa2e545c316bcd0727cad355eb8f029f",
-    "zh:0a8b9e58f80c5d5f2d30a255ed230622592fd9299f0a113f9a2bc683830b5c06",
-    "zh:0f0321b373a457b07be329ec24eb4198e4a65757d5f4671c733a8267cc8022a5",
-    "zh:108412f18fa86530bd734c4fadb4b30f06eb6d4012a577ac013d9f17aaacd017",
-    "zh:2496d92e69a0d74db0248d61c33ea8689ad6b04cd1d476063eb99aa4ac434852",
-    "zh:3d759783b658816fa4f3879f457b3f0606ac261943589fb9516e73c3e0d4059c",
-    "zh:40d70241ed1f2f44240e764ed21c173c82443afb8cd54bd7dc14567e4293bc92",
-    "zh:692490e1e475cb135d46d65a2d767ec469e23b340e0d1d423980e58160724efa",
-    "zh:7076272643465277b4fb09c4366dbbca891354d8f2161c1a1c80741e2572b9c4",
-    "zh:76e9a873f8e147013b7e5488533e97ef19afd394d00a656fc22589c0a36c981f",
-    "zh:91a7bda6178a1be2afdef17d455c6846ac1600d982a267f6222c6014a57163b8",
-    "zh:99fd1e4d83df8f5eac6571bf17b405fb030652474af3bd66d808257189da82a9",
-    "zh:ea3ea8d5b247fb1dfaeabe9faa0d6bd065feab9b5e62297b7485d5f983c0829f",
+    "h1:/gZLHcFGYA9+53doiBOn/SkfC9wzbqnjR/AKdVK5oOs=",
+    "h1:7gGhl3Gzi3dX/IRLKBWsIThsC3EfGH7JupGrtpTrmg0=",
+    "h1:B3iMsCVKZeQHJofuv+7d3ehlTCC7WtGyuQmrTeVCqAM=",
+    "h1:CG1P/OcTPdgruvXDDNDjSTzuCp+DdhtsIxE3iVPks5Q=",
+    "h1:DfBlpy2+HlajnBwqvc9+8qtCetZspARogM4P9dccqfo=",
+    "h1:K/9WDa1EIlLRbvJtxEeh4lu/HXatPI23Dv4TcgzXKEU=",
+    "h1:Moa51cC5YS+DybC6/yepvQZkWBR1Je9SCz2hcTcNxgI=",
+    "h1:QKQpLRCvckqoCYddQ1+m0puwXEqIrIiBA9Zunyh9r4Y=",
+    "h1:Tlb1yqC91x9P3j+0kzAoq90h0iblp14r8v1Visf3+PU=",
+    "h1:UU2uR1nHsPwGNhvgGZbHN2QsUoOpyqj6hbeWY4kinMM=",
+    "h1:YqGaQq5I0rJOsHEGdJxzVRRiJMUIX86ilADq65HblYw=",
+    "h1:ib/p7of1qxo6TK2qw+LsCkpYVKX83IRfilfrakb20zU=",
+    "h1:lWXLWhAEkPMCCIJLyK+1rznUdNltwDpdXp+dg5HUDPw=",
+    "h1:xTERsz1+8una58/y56+Q6XblwUMMduQKC2b9GuApDHg=",
   ]
 }
 
