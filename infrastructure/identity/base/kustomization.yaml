@@ -14,7 +14,7 @@ commonLabels:
 
 images:
   - name: ghcr.io/goauthentik/server
-    newTag: 2022.10.1
+    newTag: 2023.10.7
 
 configurations:
   - configurations/servicemonitor.yaml
